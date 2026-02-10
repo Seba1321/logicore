@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="container-tight">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <p className="text-xl font-bold mb-1">Logicore</p>
+            <p className="text-xl font-bold mb-1">Methodical</p>
             <p className="text-sm opacity-70">
               Automatización y soluciones digitales
             </p>
@@ -30,7 +30,7 @@ export const Footer = () => {
               <Instagram size={18} />
             </a>
             <a
-              href="mailto:hola@logicore.cl"
+              href="mailto:hola@methodical.cl"
               className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
               aria-label="Email"
             >
@@ -41,7 +41,7 @@ export const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-background/10 text-center">
           <p className="text-sm opacity-70">
-            © {currentYear} Logicore. Todos los derechos reservados.
+            © {currentYear} Methodical. Todos los derechos reservados.
           </p>
         </div>
       </div>

@@ -40,7 +40,7 @@ export const WhyUsSection = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="heading-section text-foreground mb-6">
-              ¿Por qué elegir Logicore?
+              ¿Por qué elegir Methodical?
             </h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               No somos una agencia más. Somos un equipo que entiende que cada

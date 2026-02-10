@@ -83,7 +83,7 @@ export const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-medium text-foreground">Email</p>
-                  <p className="text-muted-foreground">hola@logicore.cl</p>
+                  <p className="text-muted-foreground">hola@methodical.cl</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">

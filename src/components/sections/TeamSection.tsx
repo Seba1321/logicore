@@ -15,10 +15,10 @@ interface TeamMember {
 const team: TeamMember[] = [
   {
     id: 1,
-    name: "Sebastián Morales",
+    name: "José Tomás Robert",
     role: "Fundador & Director de Tecnología",
-    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    specialty: "Arquitectura de sistemas y automatización",
+    photo: "/team/Robert.jpeg",
+    specialty: "BA Filosofía Política y Economía por la Universidad de Navarra",
     bio: "Ingeniero informático con más de 10 años optimizando operaciones en empresas de distintos rubros. Cree firmemente que la tecnología debe simplificar, no complicar.",
     experience: [
       "Ex-Lead Engineer en empresa de retail",
@@ -28,41 +28,28 @@ const team: TeamMember[] = [
   },
   {
     id: 2,
-    name: "Catalina Fernández",
-    role: "Directora de Proyectos",
-    photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    name: "Benjamín Castro",
+    role: "Director de Proyectos",
+    photo: "/team/Benja.jpeg",
     specialty: "Gestión de proyectos y análisis de procesos",
-    bio: "Experta en entender lo que las empresas realmente necesitan y traducirlo en soluciones que funcionan. Su foco está en que cada proyecto entregue valor real.",
+    bio: "Experto en entender lo que las empresas realmente necesitan y traducirlo en soluciones que funcionan. Su foco está en que cada proyecto entregue valor real.",
     experience: [
-      "PMP Certificada",
+      "PMP Certificado",
       "10+ años en consultoría de procesos",
       "Especialista en metodologías ágiles",
     ],
   },
   {
     id: 3,
-    name: "Diego Soto",
+    name: "Sebastián Azocar",
     role: "Desarrollador Senior",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    photo: "/team/Azocar.png",
     specialty: "Desarrollo web y aplicaciones",
     bio: "Full-stack developer con pasión por crear interfaces limpias y código mantenible. Siempre buscando la solución más elegante para cada problema.",
     experience: [
       "5+ años en desarrollo web",
       "Especialista en React y Node.js",
       "Experiencia en startups y corporaciones",
-    ],
-  },
-  {
-    id: 4,
-    name: "Andrea Muñoz",
-    role: "Analista de Datos",
-    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
-    specialty: "Business Intelligence y visualización",
-    bio: "Transforma datos caóticos en información clara y accionable. Especialista en encontrar las historias que los números cuentan.",
-    experience: [
-      "Magíster en Data Science",
-      "Certificada en Power BI y Tableau",
-      "Ex-analista en banca",
     ],
   },
 ];
@@ -88,7 +75,7 @@ export const TeamSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {team.map((member, index) => (
             <motion.div
               key={member.id}

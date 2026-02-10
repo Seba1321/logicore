@@ -7,7 +7,7 @@ const navLinks = [
   { name: "Servicios", href: "#servicios" },
   { name: "Proyectos", href: "#proyectos" },
   { name: "Equipo", href: "#equipo" },
-  { name: "Por qué Logicore", href: "#porque" },
+  { name: "Por qué Methodical", href: "#porque" },
 ];
 
 export const Header = () => {
@@ -49,7 +49,7 @@ export const Header = () => {
             }}
             className="text-xl md:text-2xl font-bold text-primary tracking-tight"
           >
-            Logicore
+            Methodical
           </a>
 
           {/* Desktop Navigation */}
