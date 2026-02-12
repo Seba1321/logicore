@@ -39,8 +39,8 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="heading-display text-foreground mb-6"
           >
-            Tecnología clara para empresas que quieren
-            <span className="text-primary"> trabajar mejor</span>
+            Impulsa tu productividad con tecnología
+            <span className="text-primary"> inteligente</span>
           </motion.h1>
 
           <motion.p

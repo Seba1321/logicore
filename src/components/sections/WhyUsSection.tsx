@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, Lightbulb, Briefcase, Users } from "lucide-react";
+import { Building2, Lightbulb, Briefcase, Users, Brain } from "lucide-react";
 
 const reasons = [
   {
@@ -49,13 +49,17 @@ export const WhyUsSection = () => {
               entender tu negocio.
             </p>
             <div className="flex items-center gap-4 p-6 bg-secondary rounded-xl">
-              <div className="text-4xl font-bold text-primary">+50</div>
+              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Brain className="w-10 h-10 text-primary" />
+              </div>
+
               <div>
                 <p className="font-semibold text-foreground">
-                  Proyectos completados
+                  Somos un equipo joven que combina innovación
+
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  en empresas de diversos rubros
+                <p className="text-base font-medium text-foreground">
+                  con conocimiento sólido y formación de alto nivel
                 </p>
               </div>
             </div>

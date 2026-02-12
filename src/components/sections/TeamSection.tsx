@@ -29,7 +29,7 @@ const team: TeamMember[] = [
   {
     id: 2,
     name: "Benjamín Castro",
-    role: "Director de Proyectos",
+    role: "Director de Proyectos Sr.",
     photo: "/team/Benja.jpeg",
     specialty: "Gestión de proyectos y análisis de procesos",
     bio: "Experto en entender lo que las empresas realmente necesitan y traducirlo en soluciones que funcionan. Su foco está en que cada proyecto entregue valor real.",
