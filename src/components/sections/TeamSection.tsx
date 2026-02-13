@@ -10,6 +10,7 @@ interface TeamMember {
   specialty: string;
   bio: string;
   experience: string[];
+  linkedin?: string;
 }
 
 const team: TeamMember[] = [
@@ -19,18 +20,19 @@ const team: TeamMember[] = [
     role: "Fundador & Director de Tecnología",
     photo: "/team/Robert.jpeg",
     specialty: "Automatización de procesos organizacionales - Análisis estratégico de datos - Diseño de soluciones tecnológicas para optimización operativa",
-    bio: "Profesional con formación interdisciplinaria en Filosofía, Política y Economía (PPE), especializado en la intersección entre tecnología, ciencias sociales y economía aplicada",
+    bio: "Profesional con formación interdisciplinaria en Filosofía, Política y Economía (PPE), especializado en la intersección entre tecnología, ciencias sociales y economía aplicada.",
     experience: [
-      "Ex-Lead Engineer en empresa de retail",
-      "Especialista en integraciones empresariales",
-      "Consultor de transformación digital",
+      "Automatización y optimización de procesos organizacionales",
+      "Integración de herramientas tecnológicas para análisis y toma de decisiones",
+      "Diseño de soluciones digitales orientadas a eficiencia operativa y coordinación estratégica",
     ],
+    linkedin: "https://www.linkedin.com/in/joserobertpalma",
   },
   {
     id: 2,
     name: "Benjamín Castro",
     role: "Especialista en Proyectos y Tecnología",
-    photo: "/team/Benja.jpeg",
+    photo: "/team/Benja.png",
     specialty: "Gestión de proyectos, optimización de procesos y transformación digital",
     bio: "Ingeniero Civil Industrial con diploma en Tecnologías de la Información de la Pontificia Universidad Católica de Chile. Combina visión estratégica de negocios con capacidades técnicas para transformar datos y procesos en decisiones inteligentes. Su enfoque está en diseñar soluciones eficientes, escalables y orientadas a generar impacto real en las organizaciones.",
     experience: [
@@ -39,20 +41,22 @@ const team: TeamMember[] = [
       "Análisis de datos y automatización",
       "Desarrollo de soluciones tecnológicas y Web",
     ],
+    linkedin: "https://www.linkedin.com/in/benjamíncastrom",
   },
   {
     id: 3,
-    name: "Sebastián Azocar",
+    name: "Sebastián Azócar",
     role: "Especialista en Procesos y Finanzas",
     photo: "/team/Azocar.jpeg",
     specialty: "Transformación digital, desarrollo de soluciones tecnológicas y optimización de procesos basada en datos.",
-    bio: "Ingeniero Civil Industrial con diplomado en Tecnologías de la Información y Magíster en Ingeniería Industrial de la pontificia universidad católica de Chile . Especializado en el desarrollo de soluciones tecnológicas orientadas al negocio, combinando conocimientos en ingeniería, análisis de datos y desarrollo de software",
+    bio: "Ingeniero Civil Industrial con diplomado en Tecnologías de la Información y Magíster en Ingeniería Industrial de la Pontificia Universidad Católica de Chile. Especializado en el desarrollo de soluciones tecnológicas orientadas al negocio, combinando conocimientos en ingeniería, análisis de datos y desarrollo de software.",
     experience: [
       "Desarrollo de aplicaciones y plataformas web",
       "Análisis de datos y modelamiento avanzado",
       "Levantamiento, rediseño y optimización de procesos",
       "Process Mining",
     ],
+    linkedin: "https://www.linkedin.com/in/sebastian-azocar-24207b20b?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
   },
 ];
 
