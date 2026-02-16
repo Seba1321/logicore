@@ -16,26 +16,27 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    name: "Sistema de Reportes Automatizados",
-    client: "Distribuidora Nacional",
+    name: "Diagnóstico y Rediseño de Procesos Operacionales",
+    client: "Organización del sector público",
     problem:
-      "El equipo comercial perdía 10 horas semanales generando reportes manuales en Excel.",
+      "La organización presentaba procesos operativos con baja estandarización, tiempos de ejecución elevados y limitada visibilidad sobre el desempeño de las operaciones, dificultando la toma de decisiones y la eficiencia en la gestión.",
     solution:
-      "Implementamos un dashboard automático que extrae datos de su ERP y genera reportes diarios sin intervención manual.",
-    technologies: ["Python", "Power BI", "API REST"],
-    result: "Reducción del 90% en tiempo de reportería. Datos siempre actualizados.",
+      "Se realizó el levantamiento y modelamiento de procesos críticos mediante BPMN, análisis de flujos operacionales y evaluación de métricas de desempeño. Se identificaron cuellos de botella, se analizaron rutas operacionales y se propuso el rediseño de procesos orientado a mejorar eficiencia, trazabilidad y gestión institucional.",
+    technologies: ["BPMN", "Modelamiento de Procesos", "Análisis Operacional", "Optimización de Procesos"]
+    result: "Diagnóstico completo de procesos clave y propuesta de mejoras orientadas a eficiencia operativa y toma de decisiones basada en datos.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
   },
   {
     id: 2,
-    name: "Portal de Clientes",
-    client: "Consultora de Seguros",
+    name: "Plataforma Inteligente de Gestión",
+    client: "Cliente Sector Food Service",
     problem:
-      "Los clientes llamaban constantemente para consultar estado de sus pólizas y pagos.",
+      "Empresas del sector gastronómico enfrentaban baja visibilidad en su cadena de abastecimiento, dificultades en la gestión de inventarios y procesos manuales en compras y producción, generando pérdidas operativas y falta de trazabilidad.
     solution:
-      "Desarrollamos un portal web donde los clientes acceden a su información en tiempo real.",
-    technologies: ["React", "Node.js", "PostgreSQL"],
-    result: "Reducción del 60% en llamadas de consulta. Mayor satisfacción del cliente.",
+      "Se desarrolló una plataforma SaaS que centraliza la gestión de compras, inventarios y producción, conectando proveedores con restaurantes en un entorno digital integrado. La solución incorpora inteligencia artificial para predicción de demanda de insumos, detección de anomalías y asistencia mediante chatbot, además de control en tiempo real de stock, gestión de recetas y administración de roles jerárquicos. La plataforma permite integración con sistemas ERP y automatiza procesos críticos de abastecimiento.",
+
+    technologies: ["Inteligencia Artificial", "Integración ERP", "Base de Datos", "Desarrollo Web"],
+    result: "Optimización del proceso de abastecimiento, mayor trazabilidad operacional y reducción de pérdidas mediante automatización y analítica predictiva.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
   },
   {
