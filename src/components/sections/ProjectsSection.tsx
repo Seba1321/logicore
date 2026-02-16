@@ -41,18 +41,30 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    name: "Integración CRM + Facturación",
-    client: "Empresa de Servicios",
+    name: "Sistema de IA para Vinculación Académica",
+    client: "Sector Educativo",
     problem:
-      "Ventas y finanzas trabajaban con datos duplicados y desactualizados entre sistemas.",
+      "Instituciones académicas presentaban baja visibilidad sobre líneas de investigación y dificultades para conectar estudiantes de postgrado con profesores afines a sus intereses. La información se encontraba dispersa en múltiples fuentes y los procesos de vinculación eran manuales, lentos y poco eficientes.",
     solution:
-      "Creamos una integración bidireccional entre HubSpot y su sistema de facturación.",
-    technologies: ["Zapier", "APIs", "Webhooks"],
-    result: "Cero duplicación de datos. Procesos de venta 40% más rápidos.",
+      "Se desarrolló una plataforma digital que centraliza información académica mediante técnicas de web scraping para recopilar publicaciones científicas y áreas de investigación. La solución utiliza analítica de datos e inteligencia artificial para facilitar la identificación de afinidad entre estudiantes y profesores según intereses de investigación. Además, incorpora mensajería en tiempo real y herramientas de seguimiento del progreso de tesis, optimizando la colaboración académica.",
+    technologies: ["Inteligencia Artificial", "APIs", "Python", "Chat en Tiempo Real", "Web Scraping"],
+    result: "Más de 500 nuevas conexiones generadas entre estudiantes y académicos, optimizando el proceso de vinculación y mejorando la eficiencia en la gestión de proyectos de investigación.",
     image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop",
   },
   {
     id: 4,
+    name: "Plataforma de Tecnología Jurídica",
+    client: "Empresa de Consultoría Legal",
+    problem:
+      "profesionales enfrentaban procesos fragmentados para la gestión documental, certificación y validación de información. La trazabilidad era limitada, los flujos eran manuales y existía baja integración entre sistemas, lo que generaba ineficiencias, riesgo operativo y dificultades para garantizar cumplimiento normativo y transparencia.",
+    solution:
+      "Desarrollamos una plataforma inteligente que centraliza la gestión, validación y certificación digital de información y documentos. La solución integra automatización de procesos, analítica avanzada e inteligencia artificial para estructurar datos, optimizar flujos de trabajo y asegurar trazabilidad en tiempo real.",
+    technologies: ["JavaScript", "n8n", "Automatización de procesos", "Modelamiento de procesos"],
+    result: "Optimización significativa de tiempos operativos, mejora en la trazabilidad documental y fortalecimiento del control y la transparencia en los procesos digitales, consolidando un ecosistema eficiente, escalable y orientado a cumplimiento.",
+    image: "https://images.unsplash.com/photo-1731955418581-5ba6827ca5ff?w=600&h=400&fit=crop",
+  },
+  {
+    id: 5,
     name: "Dashboard de Gestión",
     client: "Cadena de Retail",
     problem:
@@ -62,6 +74,18 @@ const projects: Project[] = [
     technologies: ["Tableau", "SQL", "ETL"],
     result: "Visibilidad completa del negocio. Decisiones basadas en datos reales.",
     image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop",
+  },
+  {
+    id: 6,
+    name: "Modelización Computacional Aplicada a Entornos Económicos y Organizacionales",
+    client: "Sector Público",
+    problem:
+      "Los modelos económicos tradicionales no capturan adecuadamente la complejidad real de organizaciones y sistemas descentralizados. Esto limita la capacidad de anticipar comportamientos estratégicos, dinámicas emergentes y mecanismos eficientes de coordinación.",
+    solution:
+      "Se desarrollaron modelos basados en agentes para simular interacciones económicas y organizacionales en entornos complejos. Las simulaciones permitieron representar actores heterogéneos, analizar dinámicas estratégicas mediante teoría de juegos y evaluar distintos mecanismos de coordinación bajo escenarios alternativos.",
+    technologies: ["Julia", "Teoría de Juegos", "Modelización basada en agentes (ABM)", "Simulación"],
+    result: "Desarrollo de entornos de simulación que permiten evaluar estructuras económicas y organizacionales antes de su implementación, apoyando la toma de decisiones basada en evidencia cuantitativa.",
+    image: "https://images.unsplash.com/photo-1645684922842-87793d0b25df?w=600&h=400&fit=crop",
   },
 ];
 

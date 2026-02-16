@@ -20,7 +20,7 @@ const team: TeamMember[] = [
     role: "Fundador & Director de Tecnología",
     photo: "/team/Robert.jpeg",
     specialty: "Automatización de procesos organizacionales - Análisis estratégico de datos - Diseño de soluciones tecnológicas para optimización operativa",
-    bio: "Profesional con formación interdisciplinaria en Filosofía, Política y Economía (PPE), especializado en la intersección entre tecnología, ciencias sociales y economía aplicada.",
+    bio: "Titulado en Filosofía, Política y Economía (PPE) por la Universidad de Navarra, especializado en la intersección entre tecnología, ciencias sociales y economía aplicada. Me enfoco en diseñar soluciones tecnológicas para comprender y optimizar sistemas complejos, integrando modelización computacional, simulación estratégica y automatización para mejorar procesos y apoyar la toma de decisiones basada en datos.",
     experience: [
       "Automatización y optimización de procesos organizacionales",
       "Integración de herramientas tecnológicas para análisis y toma de decisiones",
@@ -33,7 +33,7 @@ const team: TeamMember[] = [
     name: "Benjamín Castro",
     role: "Especialista en Proyectos y Tecnología",
     photo: "/team/Benja.png",
-    specialty: "Gestión de proyectos, optimización de procesos y transformación digital",
+    specialty: "Gestión de proyectos - Optimización de procesos - Transformación digital",
     bio: "Ingeniero Civil Industrial con diploma en Tecnologías de la Información de la Pontificia Universidad Católica de Chile. Combina visión estratégica de negocios con capacidades técnicas para transformar datos y procesos en decisiones inteligentes. Su enfoque está en diseñar soluciones eficientes, escalables y orientadas a generar impacto real en las organizaciones.",
     experience: [
       "Formación en Gestión y Evaluación de Proyectos",
@@ -48,7 +48,7 @@ const team: TeamMember[] = [
     name: "Sebastián Azócar",
     role: "Especialista en Procesos y Finanzas",
     photo: "/team/Azocar.jpeg",
-    specialty: "Transformación digital, desarrollo de soluciones tecnológicas y optimización de procesos basada en datos.",
+    specialty: "Transformación digital - Desarrollo de soluciones tecnológicas - Optimización de procesos basada en datos.",
     bio: "Ingeniero Civil Industrial con diplomado en Tecnologías de la Información y Magíster en Ingeniería Industrial de la Pontificia Universidad Católica de Chile. Especializado en el desarrollo de soluciones tecnológicas orientadas al negocio, combinando conocimientos en ingeniería, análisis de datos y desarrollo de software.",
     experience: [
       "Desarrollo de aplicaciones y plataformas web",

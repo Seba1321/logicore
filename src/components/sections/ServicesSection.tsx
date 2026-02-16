@@ -3,6 +3,12 @@ import { Workflow, Globe, BarChart3, Puzzle } from "lucide-react";
 
 const services = [
   {
+    icon: BarChart3,
+    title: "Análisis de datos",
+    description:
+      "Transformamos tus datos en información útil para tomar mejores decisiones de negocio.",
+  },
+  {
     icon: Workflow,
     title: "Automatización de procesos",
     description:
@@ -12,13 +18,7 @@ const services = [
     icon: Globe,
     title: "Soluciones Web para tu empresa",
     description:
-      "Sitios web modernos, rápidos y optimizados que representan la profesionalidad de tu empresa.",
-  },
-  {
-    icon: BarChart3,
-    title: "Análisis de datos",
-    description:
-      "Transformamos tus datos en información útil para tomar mejores decisiones de negocio.",
+      "Plataformas web modernas, rápidas y optimizadas que representan la profesionalidad de tu empresa.",
   },
   {
     icon: Puzzle,
