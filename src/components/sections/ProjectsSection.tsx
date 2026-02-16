@@ -22,7 +22,7 @@ const projects: Project[] = [
       "La organización presentaba procesos operativos con baja estandarización, tiempos de ejecución elevados y limitada visibilidad sobre el desempeño de las operaciones, dificultando la toma de decisiones y la eficiencia en la gestión.",
     solution:
       "Se realizó el levantamiento y modelamiento de procesos críticos mediante BPMN, análisis de flujos operacionales y evaluación de métricas de desempeño. Se identificaron cuellos de botella, se analizaron rutas operacionales y se propuso el rediseño de procesos orientado a mejorar eficiencia, trazabilidad y gestión institucional.",
-    technologies: ["BPMN", "Modelamiento de Procesos", "Análisis Operacional", "Optimización de Procesos"]
+    technologies: ["BPMN", "Modelamiento de Procesos", "Análisis Operacional", "Optimización de Procesos"],
     result: "Diagnóstico completo de procesos clave y propuesta de mejoras orientadas a eficiencia operativa y toma de decisiones basada en datos.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
   },
@@ -31,7 +31,7 @@ const projects: Project[] = [
     name: "Plataforma Inteligente de Gestión",
     client: "Cliente Sector Food Service",
     problem:
-      "Empresas del sector gastronómico enfrentaban baja visibilidad en su cadena de abastecimiento, dificultades en la gestión de inventarios y procesos manuales en compras y producción, generando pérdidas operativas y falta de trazabilidad.
+      "Empresas del sector gastronómico enfrentaban baja visibilidad en su cadena de abastecimiento, dificultades en la gestión de inventarios y procesos manuales en compras y producción, generando pérdidas operativas y falta de trazabilidad.",
     solution:
       "Se desarrolló una plataforma SaaS que centraliza la gestión de compras, inventarios y producción, conectando proveedores con restaurantes en un entorno digital integrado. La solución incorpora inteligencia artificial para predicción de demanda de insumos, detección de anomalías y asistencia mediante chatbot, además de control en tiempo real de stock, gestión de recetas y administración de roles jerárquicos. La plataforma permite integración con sistemas ERP y automatiza procesos críticos de abastecimiento.",
 
