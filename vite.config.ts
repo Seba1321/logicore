@@ -4,10 +4,9 @@ import path from "path"
 
 export default defineConfig({
   plugins: [react()],
-  base: "/",
+  base: "./",
+  build: { outDir: "docs", emptyOutDir: true },
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+    alias: { "@": path.resolve(__dirname, "./src") },
   },
 })
