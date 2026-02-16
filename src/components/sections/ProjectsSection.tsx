@@ -56,7 +56,7 @@ const projects: Project[] = [
     name: "Plataforma de Tecnología Jurídica",
     client: "Empresa de Consultoría Legal",
     problem:
-      "profesionales enfrentaban procesos fragmentados para la gestión documental, certificación y validación de información. La trazabilidad era limitada, los flujos eran manuales y existía baja integración entre sistemas, lo que generaba ineficiencias, riesgo operativo y dificultades para garantizar cumplimiento normativo y transparencia.",
+      "Profesionales enfrentaban procesos fragmentados para la gestión documental, certificación y validación de información. La trazabilidad era limitada, los flujos eran manuales y existía baja integración entre sistemas, lo que generaba ineficiencias, riesgo operativo y dificultades para garantizar cumplimiento normativo y transparencia.",
     solution:
       "Desarrollamos una plataforma inteligente que centraliza la gestión, validación y certificación digital de información y documentos. La solución integra automatización de procesos, analítica avanzada e inteligencia artificial para estructurar datos, optimizar flujos de trabajo y asegurar trazabilidad en tiempo real.",
     technologies: ["JavaScript", "n8n", "Automatización de procesos", "Modelamiento de procesos"],
