@@ -10,7 +10,7 @@ const services = [
   },
   {
     icon: Globe,
-    title: "Desarrollo de páginas web",
+    title: "Soluciones Web para tu empresa",
     description:
       "Sitios web modernos, rápidos y optimizados que representan la profesionalidad de tu empresa.",
   },
