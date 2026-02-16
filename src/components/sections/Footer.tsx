@@ -16,7 +16,7 @@ export const Footer = () => {
 
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/methodicalchile/"
               className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
               aria-label="LinkedIn"
             >

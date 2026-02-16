@@ -32,11 +32,7 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-md shadow-sm"
     >
       <div className="container-tight">
         <nav className="flex items-center justify-between h-16 md:h-20">
@@ -47,9 +43,13 @@ export const Header = () => {
               e.preventDefault();
               scrollToSection("#inicio");
             }}
-            className="text-xl md:text-2xl font-bold text-primary tracking-tight"
+            className="flex items-center"
           >
-            Methodical
+            <img
+              src="/logo-transparente.png"
+              alt="Methodical"
+              className="h-10 w-auto object-contain"
+            />
           </a>
 
           {/* Desktop Navigation */}
