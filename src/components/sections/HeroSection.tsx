@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { ParticleNetwork } from "../ui/ParticleNetwork";
 
 export const HeroSection = () => {
   const scrollToContact = () => {
@@ -19,9 +20,11 @@ export const HeroSection = () => {
   return (
     <section
       id="inicio"
-      className="min-h-screen flex items-center justify-center pt-20 pb-16 bg-gradient-to-br from-primary via-primary/95 to-black text-white"
+      className="relative min-h-screen flex items-center justify-center pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-950 to-black text-white overflow-hidden"
     >
-      <div className="container-tight">
+      <ParticleNetwork className="opacity-70" particleCount={120} speed={0.4} />
+      
+      <div className="container-tight relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
