@@ -17,7 +17,7 @@ const team: TeamMember[] = [
   {
     id: 1,
     name: "José Tomás Robert",
-    role: "Fundador & Director de Tecnología",
+    role: "Cofounder & Director de Tecnología",
     photo: "/team/Robert.jpeg",
     specialty: "Automatización de procesos organizacionales - Análisis estratégico de datos - Diseño de soluciones tecnológicas para optimización operativa",
     bio: "Titulado en Filosofía, Política y Economía (PPE) por la Universidad de Navarra, especializado en la intersección entre tecnología, ciencias sociales y economía aplicada. Me enfoco en diseñar soluciones tecnológicas para comprender y optimizar sistemas complejos, integrando modelización computacional, simulación estratégica y automatización para mejorar procesos y apoyar la toma de decisiones basada en datos.",
@@ -31,7 +31,7 @@ const team: TeamMember[] = [
   {
     id: 2,
     name: "Benjamín Castro",
-    role: "Especialista en Proyectos y Tecnología",
+    role: "Cofounder Especialista en Proyectos y Tecnología",
     photo: "/team/Benja.png",
     specialty: "Gestión de proyectos - Optimización de procesos - Transformación digital",
     bio: "Ingeniero Civil Industrial con diploma en Tecnologías de la Información de la Pontificia Universidad Católica de Chile. Combina visión estratégica de negocios con capacidades técnicas para transformar datos y procesos en decisiones inteligentes. Su enfoque está en diseñar soluciones eficientes, escalables y orientadas a generar impacto real en las organizaciones.",
@@ -46,7 +46,7 @@ const team: TeamMember[] = [
   {
     id: 3,
     name: "Sebastián Azócar",
-    role: "Especialista en Procesos y Finanzas",
+    role: "Cofounder Especialista en Procesos y Finanzas",
     photo: "/team/Azocar.jpeg",
     specialty: "Transformación digital - Desarrollo de soluciones tecnológicas - Optimización de procesos basada en datos.",
     bio: "Ingeniero Civil Industrial con diplomado en Tecnologías de la Información y Magíster en Ingeniería Industrial de la Pontificia Universidad Católica de Chile. Especializado en el desarrollo de soluciones tecnológicas orientadas al negocio, combinando conocimientos en ingeniería, análisis de datos y desarrollo de software.",
