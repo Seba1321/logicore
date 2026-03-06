@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Send, CheckCircle, Mail, MapPin } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "El nombre es requerido").max(100),
@@ -35,7 +36,7 @@ export const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-
+  
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -47,15 +48,29 @@ export const ContactSection = () => {
       setErrors(fieldErrors);
       return;
     }
-
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast.success("¡Mensaje enviado! Te contactaremos pronto.");
+  
+    try {
+      setIsSubmitting(true);
+  
+      await emailjs.send(
+        "service_ewjy8v4",
+        "template_5oeim7f",
+        {
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          message: formData.message,
+        },
+        "1hwX9roA229eqVHMh"
+      );
+  
+      setIsSubmitted(true);
+      toast.success("¡Mensaje enviado! Te contactaremos pronto");
+    } catch (error) {
+      toast.error("Error enviando el mensaje");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
