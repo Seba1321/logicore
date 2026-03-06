@@ -192,9 +192,14 @@ export const TeamSection = () => {
                       </div>
 
                       <div className="flex gap-3 pt-2">
-                        <button className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors">
+                        <a
+                          href={selectedMember.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors"
+                        >
                           <Linkedin size={18} className="text-primary" />
-                        </button>
+                        </a>
                         <button className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors">
                           <Mail size={18} className="text-primary" />
                         </button>
