@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, Lightbulb, Briefcase, Users, Brain } from "lucide-react";
+import { Building2, Lightbulb, Briefcase, Users, Rocket } from "lucide-react";
 
 const reasons = [
   {
@@ -48,18 +48,13 @@ export const WhyUsSection = () => {
               antes de proponer cualquier solución, nos tomamos el tiempo de
               entender tu negocio.
             </p>
-            <div className="flex items-center gap-4 p-6 bg-secondary rounded-xl">
-              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Brain className="w-10 h-10 text-primary" />
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-6 sm:p-8 bg-secondary rounded-xl text-center sm:text-left">
+              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Rocket className="w-8 h-8 text-primary" />
               </div>
-
               <div>
-                <p className="font-semibold text-foreground">
-                  Somos un equipo joven que combina innovación
-
-                </p>
-                <p className="text-base font-medium text-foreground">
-                  con conocimiento sólido y formación de alto nivel
+                <p className="font-semibold text-foreground leading-relaxed sm:leading-snug">
+                  Un equipo joven que combina innovación con conocimiento sólido y formación de alto nivel.
                 </p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle, Mail, MapPin } from "lucide-react";
+import { Send, CheckCircle, Mail, MapPin, MessageCircle, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
@@ -11,6 +11,10 @@ const contactSchema = z.object({
   email: z.string().trim().email("Por favor ingresa un correo válido").max(255),
   message: z.string().trim().min(1, "El mensaje es requerido").max(1000),
 });
+
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "service_ewjy8v4";
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "template_5oeim7f";
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "1hwX9roA229eqVHMh";
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +40,7 @@ export const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-  
+
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -48,22 +52,22 @@ export const ContactSection = () => {
       setErrors(fieldErrors);
       return;
     }
-  
+
     try {
       setIsSubmitting(true);
-  
+
       await emailjs.send(
-        "service_ewjy8v4",
-        "template_5oeim7f",
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         {
           name: formData.name,
           company: formData.company,
           email: formData.email,
           message: formData.message,
         },
-        "1hwX9roA229eqVHMh"
+        EMAILJS_PUBLIC_KEY
       );
-  
+
       setIsSubmitted(true);
       toast.success("¡Mensaje enviado! Te contactaremos pronto");
     } catch (error) {
@@ -91,14 +95,32 @@ export const ContactSection = () => {
               tu empresa? Escríbenos y te responderemos lo antes posible.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-4 mb-8">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                   <Mail className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <p className="font-medium text-foreground">Email</p>
-                  <p className="text-muted-foreground">hola@methodical.cl</p>
+                  <a href="mailto:hola@methodical.cl" className="text-muted-foreground hover:text-primary transition-colors">
+                    hola@methodical.cl
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <MessageCircle className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="font-medium text-foreground">WhatsApp</p>
+                  <a
+                    href="https://wa.me/56912345678?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    +56 9 1234 5678
+                  </a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -111,6 +133,12 @@ export const ContactSection = () => {
                 </div>
               </div>
             </div>
+
+            {/* Trust badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="text-sm font-medium text-accent">Respondemos en menos de 24 horas</span>
+            </div>
           </motion.div>
 
           <motion.div
@@ -120,7 +148,7 @@ export const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             {isSubmitted ? (
-              <div className="bg-card rounded-xl p-8 text-center">
+              <div className="bg-card rounded-xl p-6 sm:p-8 text-center">
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
                   <CheckCircle className="w-8 h-8 text-accent" />
                 </div>
@@ -144,7 +172,7 @@ export const ContactSection = () => {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="bg-card rounded-xl p-8 space-y-6"
+                className="bg-card rounded-xl p-6 sm:p-8 space-y-5 sm:space-y-6"
               >
                 <div>
                   <label
@@ -241,7 +269,10 @@ export const ContactSection = () => {
                   className="w-full btn-hero inline-flex items-center justify-center gap-2 disabled:opacity-70"
                 >
                   {isSubmitting ? (
-                    "Enviando..."
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Enviando...
+                    </>
                   ) : (
                     <>
                       Enviar mensaje

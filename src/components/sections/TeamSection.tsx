@@ -7,6 +7,7 @@ interface TeamMember {
   name: string;
   role: string;
   photo: string;
+  email: string;
   specialty: string;
   bio: string;
   experience: string[];
@@ -18,6 +19,7 @@ const team: TeamMember[] = [
     id: 1,
     name: "José Tomás Robert",
     role: "Cofounder & Director de Tecnología",
+    email: "jt@methodical.cl",
     photo: "/team/Robert.jpeg",
     specialty: "Automatización de procesos organizacionales - Análisis estratégico de datos - Diseño de soluciones tecnológicas para optimización operativa",
     bio: "Titulado en Filosofía, Política y Economía (PPE) por la Universidad de Navarra, especializado en la intersección entre tecnología, ciencias sociales y economía aplicada. Me enfoco en diseñar soluciones tecnológicas para comprender y optimizar sistemas complejos, integrando modelización computacional, simulación estratégica y automatización para mejorar procesos y apoyar la toma de decisiones basada en datos.",
@@ -32,6 +34,7 @@ const team: TeamMember[] = [
     id: 2,
     name: "Benjamín Castro",
     role: "Cofounder Especialista en Proyectos y Tecnología",
+    email: "benja@methodical.cl",
     photo: "/team/Benja.png",
     specialty: "Gestión de proyectos - Optimización de procesos - Transformación digital",
     bio: "Ingeniero Civil Industrial con diploma en Tecnologías de la Información de la Pontificia Universidad Católica de Chile. Combina visión estratégica de negocios con capacidades técnicas para transformar datos y procesos en decisiones inteligentes. Su enfoque está en diseñar soluciones eficientes, escalables y orientadas a generar impacto real en las organizaciones.",
@@ -47,6 +50,7 @@ const team: TeamMember[] = [
     id: 3,
     name: "Sebastián Azócar",
     role: "Cofounder Especialista en Procesos y Finanzas",
+    email: "seba@methodical.cl",
     photo: "/team/Azocar.jpeg",
     specialty: "Transformación digital - Desarrollo de soluciones tecnológicas - Optimización de procesos basada en datos.",
     bio: "Ingeniero Civil Industrial con diplomado en Tecnologías de la Información y Magíster en Ingeniería Industrial de la Pontificia Universidad Católica de Chile. Especializado en el desarrollo de soluciones tecnológicas orientadas al negocio, combinando conocimientos en ingeniería, análisis de datos y desarrollo de software.",
@@ -97,6 +101,7 @@ export const TeamSection = () => {
                   <img
                     src={member.photo}
                     alt={member.name}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -127,29 +132,30 @@ export const TeamSection = () => {
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.3 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-card rounded-2xl max-w-lg w-full overflow-hidden"
+                className="bg-card rounded-2xl max-w-3xl w-full overflow-hidden max-h-[90vh] overflow-y-auto"
               >
-                <div className="flex flex-col sm:flex-row">
-                  <div className="sm:w-2/5">
+                <div className="flex flex-col md:flex-row h-full">
+                  <div className="w-full md:w-5/12 flex-shrink-0 aspect-[4/3] sm:aspect-square md:aspect-auto md:min-h-[500px]">
                     <img
                       src={selectedMember.photo}
                       alt={selectedMember.name}
-                      className="w-full h-full object-cover aspect-square sm:aspect-auto"
+                      loading="lazy"
+                      className="w-full h-full object-cover object-center"
                     />
                   </div>
-                  <div className="sm:w-3/5 p-6">
+                  <div className="w-full md:w-7/12 p-6 sm:p-8 flex flex-col justify-center">
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="text-xl font-bold text-foreground">
                           {selectedMember.name}
                         </h3>
-                        <p className="text-primary font-medium">
+                        <p className="text-primary font-medium text-sm">
                           {selectedMember.role}
                         </p>
                       </div>
                       <button
                         onClick={() => setSelectedMember(null)}
-                        className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                        className="p-2 hover:bg-secondary rounded-lg transition-colors flex-shrink-0"
                       >
                         <X size={20} className="text-muted-foreground" />
                       </button>
@@ -160,7 +166,7 @@ export const TeamSection = () => {
                         <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">
                           Especialidad
                         </p>
-                        <p className="text-foreground">
+                        <p className="text-foreground text-sm">
                           {selectedMember.specialty}
                         </p>
                       </div>
@@ -182,9 +188,9 @@ export const TeamSection = () => {
                           {selectedMember.experience.map((exp, i) => (
                             <li
                               key={i}
-                              className="text-sm text-muted-foreground flex items-center gap-2"
+                              className="text-sm text-muted-foreground flex items-start gap-2"
                             >
-                              <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                              <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0" />
                               {exp}
                             </li>
                           ))}
@@ -192,17 +198,24 @@ export const TeamSection = () => {
                       </div>
 
                       <div className="flex gap-3 pt-2">
+                        {selectedMember.linkedin && (
+                          <a
+                            href={selectedMember.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors"
+                            aria-label="LinkedIn"
+                          >
+                            <Linkedin size={18} className="text-primary" />
+                          </a>
+                        )}
                         <a
-                          href={selectedMember.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          href={`mailto:${selectedMember.email}`}
                           className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors"
+                          aria-label="Enviar email"
                         >
-                          <Linkedin size={18} className="text-primary" />
-                        </a>
-                        <button className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors">
                           <Mail size={18} className="text-primary" />
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>

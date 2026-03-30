@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { ParticleNetwork } from "../ui/ParticleNetwork";
 
 export const HeroSection = () => {
@@ -23,7 +23,7 @@ export const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-950 to-black text-white overflow-hidden"
     >
       <ParticleNetwork className="opacity-70" particleCount={120} speed={0.4} />
-      
+
       <div className="container-tight relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
@@ -32,7 +32,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-sm font-medium text-white/90 mb-6 backdrop-blur-sm border border-white/10">
-              Automatización & Soluciones Digitales
+              Automatización &amp; Soluciones Digitales
             </span>
           </motion.div>
 
@@ -62,8 +62,8 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <button 
-              onClick={scrollToContact} 
+            <button
+              onClick={scrollToContact}
               className="bg-white text-primary hover:bg-blue-50 px-8 py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 inline-flex items-center justify-center gap-2 group"
             >
               Contáctanos
@@ -79,8 +79,26 @@ export const HeroSection = () => {
               Conoce nuestros servicios
             </button>
           </motion.div>
+
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
+        onClick={scrollToServices}
+      >
+        <span className="text-xs text-white/40 uppercase tracking-widest">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown size={22} className="text-white/40" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
