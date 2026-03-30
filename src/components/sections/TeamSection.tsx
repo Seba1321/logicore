@@ -96,7 +96,7 @@ export const TeamSection = () => {
               onClick={() => setSelectedMember(member)}
               className="group cursor-pointer"
             >
-              <div className="bg-card rounded-xl overflow-hidden card-hover">
+              <div className="bg-card rounded-xl overflow-hidden card-hover h-full flex flex-col">
                 <div className="aspect-square overflow-hidden">
                   <img
                     src={member.photo}
@@ -105,7 +105,7 @@ export const TeamSection = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-5 text-center">
+                <div className="p-5 text-center flex-grow flex flex-col justify-center">
                   <h3 className="font-semibold text-foreground mb-1">
                     {member.name}
                   </h3>
