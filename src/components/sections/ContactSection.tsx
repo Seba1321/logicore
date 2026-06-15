@@ -102,8 +102,8 @@ export const ContactSection = () => {
                 </div>
                 <div>
                   <p className="font-medium text-foreground">Email</p>
-                  <a href="mailto:hola@methodical.cl" className="text-muted-foreground hover:text-primary transition-colors">
-                    hola@methodical.cl
+                  <a href="mailto:contacto@methodical.cl" className="text-muted-foreground hover:text-primary transition-colors">
+                    contacto@methodical.cl
                   </a>
                 </div>
               </div>
@@ -114,12 +114,12 @@ export const ContactSection = () => {
                 <div>
                   <p className="font-medium text-foreground">WhatsApp</p>
                   <a
-                    href="https://wa.me/56912345678?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios."
+                    href="https://wa.me/56961950578?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20sus%20servicios."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    +56 9 1234 5678
+                    +56 9 6195 0578
                   </a>
                 </div>
               </div>

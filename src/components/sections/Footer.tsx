@@ -49,7 +49,7 @@ export const Footer = () => {
                 <Instagram size={16} />
               </a>
               <a
-                href="mailto:hola@methodical.cl"
+                href="mailto:contacto@methodical.cl"
                 className="w-9 h-9 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
                 aria-label="Email"
               >
@@ -86,7 +86,7 @@ export const Footer = () => {
             <p className="text-sm font-semibold uppercase tracking-widest opacity-50 mb-4">
               Contacto
             </p>
-            <p className="text-sm opacity-70">hola@methodical.cl</p>
+            <p className="text-sm opacity-70">contacto@methodical.cl</p>
             <p className="text-sm opacity-70 mt-1">Santiago, Chile</p>
           </div>
         </div>
