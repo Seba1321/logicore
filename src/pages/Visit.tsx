@@ -1,25 +1,16 @@
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  MessageCircle,
-  Mail,
-  CalendarCheck,
-  Globe,
-  Layers,
-  Briefcase,
-  Linkedin,
-  Instagram,
-} from "lucide-react";
+import { useEffect } from "react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 /**
  * methodical.cl/visit
  *
- * Hub de enlaces con la identidad de los reels de marca: azul tinta,
- * Space Grotesk + JetBrains Mono, nodos color hueso y un recorrido teal
- * (eco del reel "El problema del viajante"). Página independiente: no se
- * enlaza desde el home ni el menú, sólo accesible escribiendo la URL.
+ * Hub de enlaces editorial: tipografía como protagonista, fondo negro
+ * con textura grain, animaciones táctiles (transform + opacity only),
+ * mobile-first. Página independiente, sólo accesible escribiendo la URL.
  */
+
+/* ─── Data ─────────────────────────────────────────────────── */
 
 const WHATSAPP_NUMBER = "56961950578";
 const wa = (text: string) =>
@@ -34,7 +25,6 @@ type LinkItem = {
   label: string;
   description: string;
   href: string;
-  icon: typeof MessageCircle;
   external?: boolean;
   featured?: boolean;
 };
@@ -52,7 +42,6 @@ const groups: LinkGroup[] = [
         label: "Agenda una reunión",
         description: "Coordinemos por WhatsApp",
         href: WHATSAPP_REUNION,
-        icon: CalendarCheck,
         external: true,
         featured: true,
       },
@@ -60,14 +49,12 @@ const groups: LinkGroup[] = [
         label: "WhatsApp",
         description: "+56 9 6195 0578",
         href: WHATSAPP_DIRECTO,
-        icon: MessageCircle,
         external: true,
       },
       {
         label: "Escríbenos",
         description: "contacto@methodical.cl",
         href: EMAIL,
-        icon: Mail,
       },
     ],
   },
@@ -78,19 +65,16 @@ const groups: LinkGroup[] = [
         label: "Sitio web",
         description: "methodical.cl",
         href: "https://methodical.cl",
-        icon: Globe,
       },
       {
         label: "Servicios",
         description: "Automatización, datos e integraciones",
         href: "https://methodical.cl/#servicios",
-        icon: Layers,
       },
       {
         label: "Proyectos",
         description: "Lo que hemos construido",
         href: "https://methodical.cl/#proyectos",
-        icon: Briefcase,
       },
     ],
   },
@@ -101,303 +85,381 @@ const groups: LinkGroup[] = [
         label: "LinkedIn",
         description: "Methodical Chile",
         href: "https://www.linkedin.com/company/methodicalchile/",
-        icon: Linkedin,
         external: true,
       },
       {
         label: "Instagram",
         description: "@methodicalchile",
         href: "https://www.instagram.com/methodicalchile",
-        icon: Instagram,
         external: true,
       },
     ],
   },
 ];
 
+/* ─── Colors ───────────────────────────────────────────────── */
+
+const C = {
+  bg: "#071226",
+  blue: "rgb(96,165,250)",
+  blueSoft: "rgba(96,165,250,0.26)",
+  blueHover: "rgba(96,165,250,0.09)",
+  blueBorderHover: "rgba(96,165,250,0.52)",
+  white90: "rgba(255,255,255,0.90)",
+  white50: "rgba(255,255,255,0.50)",
+  white30: "rgba(255,255,255,0.30)",
+  white20: "rgba(255,255,255,0.20)",
+  white06: "rgba(255,255,255,0.06)",
+  white04: "rgba(255,255,255,0.04)",
+} as const;
+
+/* ─── CSS injected once ────────────────────────────────────── */
+
+const injectedCSS = `
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+`;
+
+/* ─── Framer Motion Variants ───────────────────────────────── */
+
+const smoothEase: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+const sectionVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+  },
+};
+
+const linkVariants: Variants = {
+  hidden: { opacity: 0, x: -8 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.45, ease: smoothEase },
+  },
+};
+
+const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: smoothEase },
+  },
+};
+
+const letterVariants: Variants = {
+  hidden: { opacity: 0, y: 4 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+};
+
+/* ─── Main Component ───────────────────────────────────────── */
+
 const Visit = () => {
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = "Methodical — Del caos al método";
+    document.title = "Methodical — Enlaces";
+    const styleEl = document.createElement("style");
+    styleEl.textContent = injectedCSS;
+    document.head.appendChild(styleEl);
     return () => {
       document.title = prevTitle;
+      document.head.removeChild(styleEl);
     };
   }, []);
 
   return (
     <div
       className="relative min-h-screen overflow-hidden font-['Space_Grotesk',sans-serif]"
-      style={{ backgroundColor: "#0B1A2B", color: "rgb(237,234,226)" }}
+      style={{ backgroundColor: C.bg, color: C.white90 }}
     >
-      <NodeNetwork />
+      {/* Noise texture */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none fixed inset-0"
         style={{
-          background:
-            "radial-gradient(70% 55% at 50% 0%, rgba(38,226,206,0.10) 0%, rgba(11,26,43,0) 65%)",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px 128px",
         }}
       />
 
-      <main className="relative z-10 mx-auto flex max-w-xl flex-col px-5 py-16 sm:py-20">
-        {/* Hero */}
+      {/* Very subtle blue glow at top */}
+      <div
+        className="pointer-events-none fixed inset-0"
+        style={{
+          background:
+            "radial-gradient(50% 30% at 50% -2%, rgba(96,165,250,0.08) 0%, transparent 100%)",
+        }}
+      />
+
+      <main className="relative z-10 mx-auto flex max-w-[480px] flex-col px-6 py-14 sm:py-20">
+        {/* ─── Hero: Logo ─── */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="flex flex-col items-center"
         >
           <img
             src="/logo-transparente.png"
             alt="Methodical"
-            className="h-20 w-auto object-contain brightness-0 invert"
+            className="h-14 w-auto object-contain brightness-0 invert sm:h-16"
           />
         </motion.div>
 
-        {/* Grupos de enlaces */}
-        <div className="mt-12 space-y-10">
+        {/* Decorative separator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="mx-auto mt-6 mb-12 flex items-center gap-3"
+        >
+          <span
+            className="h-px w-10"
+            style={{
+              background: `linear-gradient(90deg, transparent, ${C.white20})`,
+            }}
+          />
+          <span
+            className="block h-[5px] w-[5px] rounded-full"
+            style={{
+              backgroundColor: C.blue,
+              animation: "dotPulse 4s ease-in-out infinite",
+            }}
+          />
+          <span
+            className="h-px w-10"
+            style={{
+              background: `linear-gradient(90deg, ${C.white20}, transparent)`,
+            }}
+          />
+        </motion.div>
+
+        {/* ─── Link Groups ─── */}
+        <div className="space-y-10">
           {groups.map((group, gi) => (
-            <section key={group.kicker}>
-              <p className="mb-4 font-['JetBrains_Mono',monospace] text-[11px] uppercase tracking-[0.22em] text-white/35">
-                {group.kicker}
-              </p>
+            <motion.section
+              key={group.kicker}
+              variants={sectionVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+            >
+              {/* Section Kicker — letter by letter */}
+              <KickerText text={group.kicker} />
+
+              {/* Links */}
               <div>
-                {group.items.map((item, ii) => (
-                  <LinkNode
-                    key={item.label}
-                    item={item}
-                    delay={0.15 + gi * 0.08 + ii * 0.05}
-                    isFirst={ii === 0}
-                    isLast={ii === group.items.length - 1}
-                  />
-                ))}
+                {group.items.map((item, ii) =>
+                  item.featured ? (
+                    <motion.div key={item.label} variants={fadeUpVariants}>
+                      <FeaturedLink item={item} />
+                    </motion.div>
+                  ) : (
+                    <motion.div key={item.label} variants={linkVariants}>
+                      <TextLink
+                        item={item}
+                        showSeparator={ii < group.items.length - 1}
+                      />
+                    </motion.div>
+                  )
+                )}
               </div>
-            </section>
+            </motion.section>
           ))}
         </div>
 
-        {/* Footer */}
-        <footer className="mt-16 text-center">
-          <p className="font-['JetBrains_Mono',monospace] text-[10px] uppercase tracking-[0.2em] text-white/30">
+        {/* ─── Footer ─── */}
+        <motion.footer
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 flex flex-col items-center"
+        >
+          {/* Decorative separator (mirrors hero) */}
+          <div className="mb-5 flex items-center gap-3">
+            <span
+              className="h-px w-8"
+              style={{
+                background: `linear-gradient(90deg, transparent, ${C.white06})`,
+              }}
+            />
+            <span
+              className="block h-[4px] w-[4px] rounded-full"
+              style={{
+                backgroundColor: C.blue,
+                opacity: 0.4,
+                animation: "dotPulse 4s ease-in-out 2s infinite",
+              }}
+            />
+            <span
+              className="h-px w-8"
+              style={{
+                background: `linear-gradient(90deg, ${C.white06}, transparent)`,
+              }}
+            />
+          </div>
+          <p
+            className="font-['JetBrains_Mono',monospace] text-[10px] uppercase tracking-[0.2em]"
+            style={{ color: C.white20 }}
+          >
             Santiago, Chile · © {new Date().getFullYear()} Methodical
           </p>
-        </footer>
+        </motion.footer>
       </main>
     </div>
   );
 };
 
-const LinkNode = ({
-  item,
-  delay,
-  isFirst,
-  isLast,
-}: {
-  item: LinkItem;
-  delay: number;
-  isFirst: boolean;
-  isLast: boolean;
-}) => {
+/* ─── Kicker Text (letter-by-letter reveal) ────────────────── */
+
+const KickerText = ({ text }: { text: string }) => {
+  const letters = text.split("");
   return (
-    <motion.a
-      href={item.href}
-      target={item.external ? "_blank" : undefined}
-      rel={item.external ? "noopener noreferrer" : undefined}
-      initial={{ opacity: 0, x: -8 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, delay }}
-      className="group relative flex items-center gap-3 py-3"
+    <motion.p
+      className="mb-5 flex font-['Space_Grotesk',sans-serif] text-[13px] font-semibold uppercase tracking-[0.3em]"
+      style={{ color: C.white30 }}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.03 } },
+      }}
     >
-      {/* Nodo + conectores verticales del grafo */}
-      <span className="relative flex w-4 flex-shrink-0 items-center justify-center self-stretch">
-        {!isFirst && (
-          <span className="absolute left-1/2 top-0 h-1/2 w-px -translate-x-1/2 bg-white/15" />
-        )}
-        {!isLast && (
-          <span className="absolute bottom-0 left-1/2 h-1/2 w-px -translate-x-1/2 bg-white/15" />
-        )}
-        <span
-          className={`relative z-10 rounded-full transition-all duration-300 ${
-            item.featured
-              ? "h-3 w-3 bg-[rgb(38,226,206)] shadow-[0_0_12px_rgba(38,226,206,0.7)]"
-              : "h-2 w-2 bg-[rgb(38,226,206)]/60 group-hover:h-3 group-hover:w-3 group-hover:bg-[rgb(38,226,206)]"
-          }`}
-        />
-      </span>
-
-      {/* Arista horizontal hacia la etiqueta */}
-      <span className="h-px w-6 flex-shrink-0 bg-white/15 transition-colors duration-300 group-hover:bg-[rgb(38,226,206)]/50" />
-
-      {/* Contenido */}
-      <span className="min-w-0 flex-1">
-        <span
-          className={`block font-medium transition-colors duration-300 ${
-            item.featured
-              ? "text-[rgb(38,226,206)]"
-              : "text-[rgb(237,234,226)]"
-          }`}
+      {letters.map((char, i) => (
+        <motion.span
+          key={`${char}-${i}`}
+          variants={letterVariants}
+          className="inline-block"
+          style={{ minWidth: char === " " ? "0.35em" : undefined }}
         >
-          {item.label}
-        </span>
-        <span className="block truncate text-sm text-white/40">
-          {item.description}
-        </span>
-      </span>
-
-      <ArrowUpRight className="h-4 w-4 flex-shrink-0 -translate-x-1 text-white/25 transition-all duration-300 group-hover:translate-x-0 group-hover:text-[rgb(38,226,206)]" />
-    </motion.a>
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.p>
   );
 };
 
-/**
- * Red de nodos sobre azul tinta, con un recorrido teal que viaja de nodo
- * en nodo — guiño al reel "El problema del viajante" de Methodical.
- */
-const NodeNetwork = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+/* ─── Featured Link (CTA with border) ─────────────────────── */
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const BONE = "237,234,226";
-    const TEAL = "38,226,206";
-    const LINK = 120; // distancia máx. para dibujar aristas
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-
-    let w = 0;
-    let h = 0;
-    let nodes: { x: number; y: number; vx: number; vy: number; r: number }[] =
-      [];
-    let tour: number[] = []; // subconjunto de nodos que recorre el "viajante"
-    let raf = 0;
-    let prev = performance.now();
-    let travel = 0; // posición a lo largo del recorrido
-
-    const init = () => {
-      const count = Math.max(18, Math.min(46, Math.round((w * h) / 26000)));
-      nodes = Array.from({ length: count }, () => {
-        const ang = Math.random() * Math.PI * 2;
-        const sp = 0.18 + Math.random() * 0.32; // velocidad perceptible
-        return {
-          x: Math.random() * w,
-          y: Math.random() * h,
-          vx: Math.cos(ang) * sp,
-          vy: Math.sin(ang) * sp,
-          r: Math.random() * 1.4 + 1.4,
-        };
-      });
-      // recorrido: ~9 nodos repartidos, en orden de índice
-      const step = Math.max(1, Math.floor(count / 9));
-      tour = [];
-      for (let i = 0; i < count && tour.length < 9; i += step) tour.push(i);
-    };
-
-    const resize = () => {
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = Math.floor(w * DPR);
-      canvas.height = Math.floor(h * DPR);
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      init();
-    };
-
-    const frame = (now: number) => {
-      const dt = Math.min(50, now - prev) / 16.67;
-      prev = now;
-      ctx.clearRect(0, 0, w, h);
-
-      // mover nodos (deriva lenta, rebotan en los bordes)
-      for (const n of nodes) {
-        n.x += n.vx * dt;
-        n.y += n.vy * dt;
-        if (n.x < 0 || n.x > w) n.vx *= -1;
-        if (n.y < 0 || n.y > h) n.vy *= -1;
-        n.x = Math.max(0, Math.min(w, n.x));
-        n.y = Math.max(0, Math.min(h, n.y));
-      }
-
-      // aristas de proximidad (hueso, muy tenue)
-      ctx.lineWidth = 1;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < LINK * LINK) {
-            const a = (1 - Math.sqrt(d2) / LINK) * 0.1;
-            ctx.strokeStyle = `rgba(${BONE},${a.toFixed(3)})`;
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // recorrido del "viajante" (línea teal entre nodos del tour)
-      if (tour.length > 1) {
-        ctx.strokeStyle = `rgba(${TEAL},0.28)`;
-        ctx.lineWidth = 1.4;
-        ctx.lineJoin = "round";
-        ctx.beginPath();
-        ctx.moveTo(nodes[tour[0]].x, nodes[tour[0]].y);
-        for (let i = 1; i < tour.length; i++)
-          ctx.lineTo(nodes[tour[i]].x, nodes[tour[i]].y);
-        ctx.stroke();
-
-        // punto que viaja a lo largo del recorrido
-        const segs = tour.length - 1;
-        travel += 0.0022 * dt;
-        if (travel >= 1) travel -= 1;
-        const f = travel * segs;
-        const si = Math.min(segs - 1, Math.floor(f));
-        const fr = f - si;
-        const a = nodes[tour[si]];
-        const b = nodes[tour[si + 1]];
-        const px = a.x + (b.x - a.x) * fr;
-        const py = a.y + (b.y - a.y) * fr;
-        ctx.fillStyle = `rgba(${TEAL},0.9)`;
-        ctx.beginPath();
-        ctx.arc(px, py, 3, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = `rgba(${TEAL},0.18)`;
-        ctx.beginPath();
-        ctx.arc(px, py, 8, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // nodos (hueso; los del recorrido en teal)
-      const tourSet = new Set(tour);
-      nodes.forEach((n, i) => {
-        const isTour = tourSet.has(i);
-        ctx.fillStyle = isTour
-          ? `rgba(${TEAL},0.85)`
-          : `rgba(${BONE},0.6)`;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, isTour ? n.r + 1.2 : n.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      raf = requestAnimationFrame(frame);
-    };
-
-    resize();
-    window.addEventListener("resize", resize);
-    raf = requestAnimationFrame(frame);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
+const FeaturedLink = ({ item }: { item: LinkItem }) => {
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 h-full w-full"
-    />
+    <a
+      href={item.href}
+      target={item.external ? "_blank" : undefined}
+      rel={item.external ? "noopener noreferrer" : undefined}
+      className="group mb-4 block"
+    >
+      <div
+        className="relative overflow-hidden rounded-[14px] px-5 py-4 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+        style={{
+          border: `1px solid ${C.blueSoft}`,
+          background: "transparent",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = C.blueHover;
+          e.currentTarget.style.borderColor = C.blueBorderHover;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = "transparent";
+          e.currentTarget.style.borderColor = C.blueSoft;
+        }}
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <span
+              className="block text-[18px] font-medium transition-colors duration-300 sm:text-[20px]"
+              style={{ color: C.white90 }}
+            >
+              <span className="transition-colors duration-300 group-hover:text-[rgb(96,165,250)]">
+                {item.label}
+              </span>
+            </span>
+            <span
+              className="mt-0.5 block font-['JetBrains_Mono',monospace] text-[12px]"
+              style={{ color: C.white30 }}
+            >
+              {item.description}
+            </span>
+          </div>
+          <ArrowUpRight
+            size={18}
+            className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
+            style={{ color: C.white50 }}
+          />
+        </div>
+      </div>
+    </a>
+  );
+};
+
+/* ─── Text Link (minimal, no box) ──────────────────────────── */
+
+const TextLink = ({
+  item,
+  showSeparator,
+}: {
+  item: LinkItem;
+  showSeparator: boolean;
+}) => {
+  return (
+    <>
+      <a
+        href={item.href}
+        target={item.external ? "_blank" : undefined}
+        rel={item.external ? "noopener noreferrer" : undefined}
+        className="group block py-3"
+      >
+        <div className="flex items-center justify-between">
+          <div className="min-w-0 flex-1">
+            <span className="relative inline-block">
+              <span
+                className="block text-[17px] font-medium text-white/90 transition-colors duration-300 group-hover:text-[rgb(96,165,250)] sm:text-[18px]"
+              >
+                {item.label}
+              </span>
+              {/* Animated underline */}
+              <span
+                className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-x-100"
+                style={{ backgroundColor: C.blue }}
+              />
+            </span>
+            <span
+              className="mt-0.5 block font-['JetBrains_Mono',monospace] text-[11px]"
+              style={{ color: C.white30 }}
+            >
+              {item.description}
+            </span>
+          </div>
+          <ArrowUpRight
+            size={16}
+            className="flex-shrink-0 text-white/20 transition-all duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-hover:text-[rgb(96,165,250)]"
+          />
+        </div>
+      </a>
+      {showSeparator && (
+        <div
+          className="h-px w-full"
+          style={{
+            backgroundImage: `repeating-linear-gradient(90deg, ${C.white06} 0, ${C.white06} 4px, transparent 4px, transparent 10px)`,
+          }}
+        />
+      )}
+    </>
   );
 };
 
