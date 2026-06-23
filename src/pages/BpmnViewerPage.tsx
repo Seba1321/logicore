@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { BpmnViewer } from "@/components/portal/BpmnViewer";
+import { BpmnViewer, type BpmnStats } from "@/components/portal/BpmnViewer";
 import { Button } from "@/components/ui/button";
+import { CornerTicks } from "@/components/portal/technical";
 import { getPortalSession } from "@/lib/portal-session";
 import { supabase, type EmpresaLogin, type PortalBpmn, type PortalData, type PortalProcess } from "@/lib/supabase";
 
@@ -12,6 +13,7 @@ const BpmnViewerPage = () => {
   const [portalData, setPortalData] = useState<PortalData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showDetails, setShowDetails] = useState(true);
+  const [stats, setStats] = useState<BpmnStats | null>(null);
 
   useEffect(() => {
     const savedSession = getPortalSession();
@@ -62,7 +64,7 @@ const BpmnViewerPage = () => {
 
   return (
     <main className="flex min-h-screen flex-col bg-slate-100 text-slate-950">
-      <header className="border-b border-white/10 bg-slate-950 text-white">
+      <header className="border-b border-white/10 bg-[linear-gradient(135deg,#071330_0%,#123a8a_100%)] text-white">
         <div className="flex min-h-16 flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div className="flex items-center gap-4">
             <Link to="/portal" aria-label="Volver al portal">
@@ -96,34 +98,46 @@ const BpmnViewerPage = () => {
       </header>
 
       <div className={`grid flex-1 gap-4 p-4 sm:p-6 lg:p-8 ${showDetails ? "xl:grid-cols-[minmax(0,1fr)_360px]" : "xl:grid-cols-1"}`}>
-        <section className="min-h-[calc(100vh-132px)] rounded-3xl bg-white p-3 shadow-sm ring-1 ring-slate-200">
+        <section className="min-h-[calc(100vh-132px)] rounded-sm bg-white p-3 border border-slate-200">
           <BpmnViewer
             xmlUrl={diagram.archivo_url}
             title={diagram.nombre}
             heightClassName="h-[calc(100vh-220px)] min-h-[680px]"
-            className="h-full rounded-2xl"
+            className="h-full rounded-sm"
             initialZoom={0.85}
+            onStats={setStats}
           />
         </section>
 
         {showDetails && (
-          <aside className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200 xl:max-h-[calc(100vh-132px)] xl:overflow-y-auto">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Proceso</p>
-            <h2 className="mt-3 text-2xl font-semibold tracking-tight">{process?.nombre ?? diagram.nombre}</h2>
+          <aside className="relative rounded-sm border border-slate-200 bg-white p-5 xl:max-h-[calc(100vh-132px)] xl:overflow-y-auto">
+            <CornerTicks className="text-slate-200" />
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-400">Proceso</p>
+            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">{process?.nombre ?? diagram.nombre}</h2>
             {process?.area && <p className="mt-2 text-sm text-slate-500">Área: {process.area}</p>}
             {process?.descripcion && <p className="mt-4 text-sm leading-relaxed text-slate-600">{process.descripcion}</p>}
 
-            <div className="mt-6 space-y-3 text-sm">
+            <div className="mt-6">
+              <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-400">Elementos del diagrama</p>
+              <div className="grid grid-cols-2 gap-2">
+                <StatTile label="Tareas" value={stats?.tareas} />
+                <StatTile label="Compuertas" value={stats?.compuertas} />
+                <StatTile label="Eventos" value={stats?.eventos} />
+                <StatTile label="Flujos" value={stats?.flujos} />
+              </div>
+            </div>
+
+            <div className="mt-6">
               <InfoRow label="Estado" value={process?.estado ?? "Publicado"} />
               <InfoRow label="Responsable Methodical" value={process?.responsable_methodical ?? "Methodical"} />
               <InfoRow label="Responsable cliente" value={process?.responsable_cliente ?? session.empresa} />
               <InfoRow label="Archivo" value={diagram.archivo_path ?? "BPMN publicado"} />
             </div>
 
-            <div className="mt-6 rounded-2xl bg-slate-950 p-4 text-white">
-              <p className="text-sm font-semibold">Controles de revisión</p>
-              <p className="mt-2 text-sm leading-relaxed text-blue-50/70">
-                Si necesitas ver el proceso completo, usa “Ajustar”. Si quieres leer tareas y compuertas, usa 100% o 115% y desplázate moviendo el canvas.
+            <div className="mt-6 rounded-sm border border-blue-900/40 bg-[#071330] p-4 text-white">
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-blue-200/70">Atajos</p>
+              <p className="mt-2 font-mono text-xs leading-relaxed text-blue-50/70">
+                + / −&nbsp; zoom · 0&nbsp; ajustar · F&nbsp; pantalla completa · arrastra para mover.
               </p>
             </div>
           </aside>
@@ -145,16 +159,23 @@ const findProcessForDiagram = (data: PortalData | null, diagram: PortalBpmn | nu
   return null;
 };
 
+const StatTile = ({ label, value }: { label: string; value?: number }) => (
+  <div className="rounded-sm border border-slate-200 bg-slate-50 px-3 py-2.5">
+    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">{label}</p>
+    <p className="mt-1 font-display text-2xl font-semibold tabular-nums text-slate-900">{value ?? "—"}</p>
+  </div>
+);
+
 const InfoRow = ({ label, value }: { label: string; value: string }) => (
-  <div className="rounded-2xl bg-slate-50 p-3">
-    <p className="text-xs font-medium uppercase tracking-widest text-slate-400">{label}</p>
-    <p className="mt-1 font-medium text-slate-800">{value.replace(/_/g, " ")}</p>
+  <div className="flex items-center justify-between gap-3 border-b border-slate-100 py-2 last:border-b-0">
+    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">{label}</span>
+    <span className="text-right text-sm font-medium text-slate-800">{value.replace(/_/g, " ")}</span>
   </div>
 );
 
 const FullPageState = ({ text, action }: { text: string; action?: React.ReactNode }) => (
-  <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-white">
-    <div className="max-w-md rounded-3xl border border-white/10 bg-white/10 p-8 text-center backdrop-blur-sm">
+  <main className="flex min-h-screen items-center justify-center bg-[#071330] p-6 text-white">
+    <div className="max-w-md rounded-sm border border-white/10 bg-white/10 p-8 text-center backdrop-blur-sm">
       <img src="/logo-transparente.png" alt="Methodical" className="mx-auto h-10 w-auto object-contain brightness-0 invert" />
       <p className="mt-6 text-lg font-semibold">{text}</p>
       {action && <div className="mt-6">{action}</div>}

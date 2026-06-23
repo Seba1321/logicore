@@ -1,104 +1,87 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { ParticleNetwork } from "../ui/ParticleNetwork";
 
 export const HeroSection = () => {
-  const scrollToContact = () => {
-    const element = document.querySelector("#contacto");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const scrollToServices = () => {
-    const element = document.querySelector("#servicios");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const scrollTo = (id: string) => {
+    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-16 bg-gradient-to-br from-slate-900 via-blue-950 to-black text-white overflow-hidden"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#03060f] text-white"
     >
-      <ParticleNetwork className="opacity-70" particleCount={120} speed={0.4} />
+      {/* Vertical gradient: near-black top -> vivid blue bottom (Sui-style) */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#03060f_0%,#06112e_32%,#103183_70%,#1e50d6_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(70%_55%_at_50%_40%,rgba(96,150,255,0.32),transparent_62%)]" />
+      </div>
+
+      {/* Crisp particle field */}
+      <ParticleNetwork className="opacity-90" particleCount={120} speed={0.3} />
 
       <div className="container-tight relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-sm font-medium text-white/90 mb-6 backdrop-blur-sm border border-white/10">
-              Automatización &amp; Soluciones Digitales
-            </span>
-          </motion.div>
-
+        <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="heading-display mb-6"
+            transition={{ duration: 0.7 }}
+            className="text-balance font-display text-[clamp(2.6rem,8vw,7rem)] font-semibold leading-[0.98] tracking-tight text-white [text-shadow:0_0_45px_rgba(130,175,255,0.3)]"
           >
-            Impulsa tu productividad con tecnología
-            <span className="text-blue-200"> inteligente</span>
+            Impulsa tu productividad con tecnología inteligente
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-blue-50/80 mb-10 max-w-2xl mx-auto leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.18 }}
+            className="mt-8 max-w-lg text-base leading-relaxed text-blue-100/70 sm:text-lg"
           >
-            Ayudamos a pequeñas y medianas empresas a ordenar, automatizar y
-            escalar su operación con soluciones digitales simples y efectivas.
+            Ordena, automatiza y escala la operación de tu empresa con soluciones
+            digitales simples y efectivas.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="mt-11 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-0 sm:overflow-hidden sm:rounded-md"
           >
             <button
-              onClick={scrollToContact}
-              className="bg-white text-primary hover:bg-blue-50 px-8 py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 inline-flex items-center justify-center gap-2 group"
+              onClick={() => scrollTo("#contacto")}
+              className="w-full rounded-md bg-slate-900 px-8 py-3.5 font-medium text-white transition-colors duration-300 hover:bg-slate-800 sm:w-auto sm:rounded-none"
             >
               Contáctanos
-              <ArrowRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform"
-              />
             </button>
             <button
-              onClick={scrollToServices}
-              className="border-2 border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-lg font-medium transition-all duration-300"
+              onClick={() => scrollTo("#servicios")}
+              className="w-full rounded-md bg-white px-8 py-3.5 font-medium text-slate-900 transition-colors duration-300 hover:bg-blue-50 sm:w-auto sm:rounded-none"
             >
               Conoce nuestros servicios
             </button>
           </motion.div>
-
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer"
-        onClick={scrollToServices}
+        transition={{ delay: 1, duration: 0.6 }}
+        onClick={() => scrollTo("#servicios")}
+        aria-label="Bajar a servicios"
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center text-white/70 transition-colors hover:text-white"
       >
-        <span className="text-xs text-white/40 uppercase tracking-widest">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown size={22} className="text-white/40" />
-        </motion.div>
-      </motion.div>
+        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30">
+          <motion.span
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ArrowDown size={16} />
+          </motion.span>
+        </span>
+      </motion.button>
     </section>
   );
 };

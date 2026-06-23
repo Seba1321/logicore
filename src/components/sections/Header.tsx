@@ -51,16 +51,19 @@ export const Header = () => {
     }
   };
 
+  // Transparent over the dark hero; solidifies once the user scrolls (or opens the menu).
+  const onHero = !isScrolled && !isMobileMenuOpen;
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md ${
-        isScrolled
-          ? "bg-background/98 shadow-md"
-          : "bg-background/95 shadow-sm"
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        onHero
+          ? "border-b border-white/10 bg-[#05070f]/60 backdrop-blur-md"
+          : "border-b border-border bg-background/85 shadow-sm backdrop-blur-md"
       }`}
     >
       <div className="container-tight">
-        <nav className="flex items-center justify-between h-16 md:h-20">
+        <nav className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
           <a
             href="#inicio"
@@ -73,12 +76,12 @@ export const Header = () => {
             <img
               src="/logo-transparente.png"
               alt="Methodical"
-              className="h-10 w-auto object-contain"
+              className={`h-10 w-auto object-contain transition ${onHero ? "brightness-0 invert" : ""}`}
             />
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-8">
+          <div className="hidden items-center gap-5 lg:flex xl:gap-8">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.slice(1);
               return (
@@ -91,8 +94,12 @@ export const Header = () => {
                   }}
                   className={`text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? "text-foreground font-semibold border-b-2 border-primary pb-0.5"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? onHero
+                        ? "border-b-2 border-blue-400 pb-0.5 text-white"
+                        : "border-b-2 border-blue-600 pb-0.5 font-semibold text-foreground"
+                      : onHero
+                        ? "text-white/70 hover:text-white"
+                        : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {link.name}
@@ -101,7 +108,11 @@ export const Header = () => {
             })}
             <Link
               to="/portal"
-              className="rounded-lg border border-primary/20 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/5"
+              className={`rounded-md border px-4 py-2 text-sm font-medium transition-colors ${
+                onHero
+                  ? "border-white/20 text-white/90 hover:bg-white/10"
+                  : "border-border text-foreground/80 hover:bg-secondary"
+              }`}
             >
               Acceso empresas
             </Link>
@@ -111,7 +122,7 @@ export const Header = () => {
                 e.preventDefault();
                 scrollToSection("#contacto");
               }}
-              className="btn-hero text-sm py-2 px-5"
+              className="rounded-md bg-blue-600 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-500"
             >
               Contáctanos
             </a>
@@ -120,7 +131,7 @@ export const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-3 -mr-3 text-foreground"
+            className={`-mr-3 p-3 lg:hidden ${onHero ? "text-white" : "text-foreground"}`}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -135,9 +146,9 @@ export const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-t border-border"
+            className="border-t border-border bg-background lg:hidden"
           >
-            <div className="container-tight py-4 flex flex-col gap-4">
+            <div className="container-tight flex flex-col gap-4 py-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -146,7 +157,7 @@ export const Header = () => {
                     e.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                  className="py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {link.name}
                 </a>
@@ -154,7 +165,7 @@ export const Header = () => {
               <Link
                 to="/portal"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="rounded-lg border border-primary/20 px-6 py-3 text-center font-medium text-primary transition-colors hover:bg-primary/5"
+                className="rounded-md border border-border px-6 py-3 text-center font-medium text-foreground/80 transition-colors hover:bg-secondary"
               >
                 Acceso empresas
               </Link>
@@ -164,7 +175,7 @@ export const Header = () => {
                   e.preventDefault();
                   scrollToSection("#contacto");
                 }}
-                className="btn-hero text-center mt-2"
+                className="mt-2 rounded-md bg-blue-600 px-6 py-3 text-center font-medium text-white transition-colors hover:bg-blue-500"
               >
                 Contáctanos
               </a>
