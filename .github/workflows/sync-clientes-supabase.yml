@@ -25,20 +25,36 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Validate Supabase secrets
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "::error::Missing GitHub secret SUPABASE_URL. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::error::Missing GitHub secret SUPABASE_SERVICE_ROLE_KEY. Add the Supabase service_role key as a repository secret, never in code."
+            exit 1
+          fi
 
       - name: Sync client data
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SUPABASE_BPMN_BUCKET: bpmn
+          CLIENTE: ${{ github.event.inputs.cliente || '' }}
         run: |
-          if [ -n "${{ github.event.inputs.cliente }}" ]; then
-            npm run sync:clientes -- "${{ github.event.inputs.cliente }}"
+          if [ -n "$CLIENTE" ]; then
+            npm run sync:clientes -- "$CLIENTE"
           else
             npm run sync:clientes
           fi

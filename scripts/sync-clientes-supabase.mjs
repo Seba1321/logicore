@@ -10,11 +10,13 @@ const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const bucketName = process.env.SUPABASE_BPMN_BUCKET ?? "bpmn";
 
 if (!supabaseUrl) {
-  throw new Error("Missing SUPABASE_URL");
+  throw new Error("Missing SUPABASE_URL. Add it as a GitHub secret or pass it as a local environment variable.");
 }
 
 if (!serviceRoleKey) {
-  throw new Error("Missing SUPABASE_SERVICE_ROLE_KEY");
+  throw new Error(
+    "Missing SUPABASE_SERVICE_ROLE_KEY. Add the Supabase service_role key as a GitHub secret. Never expose it in frontend code."
+  );
 }
 
 const supabase = createClient(supabaseUrl, serviceRoleKey, {
