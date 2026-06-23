@@ -22,12 +22,15 @@ const BpmnViewerPage = () => {
       return;
     }
 
-    supabase
-      .rpc("get_portal_empresa", { p_session_token: savedSession.session_token })
-      .then(({ data }) => {
-        if (data) setPortalData(data as PortalData);
-      })
-      .finally(() => setIsLoading(false));
+    const loadDiagrams = async () => {
+      const { data } = await supabase.rpc("get_portal_empresa", {
+        p_session_token: savedSession.session_token,
+      });
+      if (data) setPortalData(data as PortalData);
+      setIsLoading(false);
+    };
+
+    loadDiagrams();
   }, []);
 
   const diagram = portalData?.proyectos
