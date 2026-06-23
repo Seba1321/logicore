@@ -1,11 +1,23 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
-import { BpmnViewer } from "@/components/portal/BpmnViewer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import { clearPortalSession, getPortalSession, savePortalSession } from "@/lib/portal-session";
 import {
   isSupabaseConfigured,
   supabase,
@@ -20,6 +32,7 @@ import {
 } from "@/lib/supabase";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
+const CHART_COLORS = ["#0f172a", "#2563eb", "#14b8a6", "#f59e0b", "#ef4444", "#7c3aed"];
 
 const formatDate = (value: string | null) => {
   if (!value) return "Por definir";
@@ -36,8 +49,12 @@ const formatStatus = (value: string) =>
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 
 const clampProgress = (value: number) => Math.max(0, Math.min(100, value));
-
 const getTaskProgress = (task: PortalTask) => clampProgress(Number(task.progreso) || 0);
+
+const isClosedStatus = (status: string) =>
+  ["aprobado", "aprobada", "cerrado", "cerrada", "completada", "finalizada", "validado", "validada", "done"].includes(
+    status.toLowerCase()
+  );
 
 const getProjectProgress = (project: PortalProject) => {
   const tasks = project.tareas ?? [];
@@ -75,10 +92,7 @@ const getGanttRange = (tasks: PortalTask[]) => {
   const start = Math.min(...dates);
   const end = Math.max(...dates);
 
-  return {
-    start,
-    end: end === start ? start + DAY_MS : end,
-  };
+  return { start, end: end === start ? start + DAY_MS : end };
 };
 
 const getGanttPosition = (task: PortalTask, range: { start: number; end: number }) => {
@@ -98,7 +112,7 @@ const getStatusClassName = (status: string) => {
     return "bg-emerald-50 text-emerald-700 ring-emerald-200";
   }
 
-  if (["en_desarrollo", "en progreso", "en_progreso", "desarrollo"].includes(normalized)) {
+  if (["en_desarrollo", "en progreso", "en_progreso", "desarrollo", "modelado"].includes(normalized)) {
     return "bg-blue-50 text-blue-700 ring-blue-200";
   }
 
@@ -111,16 +125,19 @@ const getStatusClassName = (status: string) => {
 
 const getPriorityClassName = (priority: string) => {
   const normalized = priority.toLowerCase();
-
   if (normalized === "alta") return "bg-red-50 text-red-700 ring-red-200";
   if (normalized === "media") return "bg-amber-50 text-amber-700 ring-amber-200";
   return "bg-slate-50 text-slate-700 ring-slate-200";
 };
 
-const isClosedStatus = (status: string) =>
-  ["aprobado", "aprobada", "cerrado", "cerrada", "completada", "finalizada", "validado", "validada", "done"].includes(
-    status.toLowerCase()
-  );
+const countBy = <T,>(items: T[], getKey: (item: T) => string | null | undefined) => {
+  const map = new Map<string, number>();
+  items.forEach((item) => {
+    const key = getKey(item) || "Sin definir";
+    map.set(key, (map.get(key) ?? 0) + 1);
+  });
+  return Array.from(map.entries()).map(([name, value]) => ({ name: formatStatus(name), value }));
+};
 
 const Portal = () => {
   const [username, setUsername] = useState("");
@@ -142,9 +159,10 @@ const Portal = () => {
     setIsLoadingPortal(false);
 
     if (error || !data) {
+      clearPortalSession();
       toast({
         title: "No se pudo cargar el portal",
-        description: "Ejecuta el SQL actualizado del portal en Supabase e intenta nuevamente.",
+        description: "La sesión expiró o falta ejecutar el SQL actualizado del portal.",
         variant: "destructive",
       });
       return null;
@@ -155,14 +173,20 @@ const Portal = () => {
     return nextPortalData;
   };
 
+  useEffect(() => {
+    const savedSession = getPortalSession();
+    if (!savedSession) return;
+    setEmpresaSession(savedSession);
+    loadPortalData(savedSession.session_token);
+  }, []);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!isSupabaseConfigured || !supabase) {
       toast({
         title: "Supabase no configurado",
-        description:
-          "Agrega VITE_SUPABASE_URL y VITE_SUPABASE_PUBLISHABLE_KEY en tu archivo .env.",
+        description: "Agrega VITE_SUPABASE_URL y VITE_SUPABASE_PUBLISHABLE_KEY en tu archivo .env.",
         variant: "destructive",
       });
       return;
@@ -189,7 +213,7 @@ const Portal = () => {
 
     const empresa = Array.isArray(data) ? data[0] : null;
 
-    if (!empresa) {
+    if (!empresa?.session_token) {
       setIsSubmitting(false);
       toast({
         title: "Credenciales inválidas",
@@ -199,17 +223,8 @@ const Portal = () => {
       return;
     }
 
-    if (!empresa.session_token) {
-      setIsSubmitting(false);
-      toast({
-        title: "Portal pendiente de actualizar",
-        description: "Ejecuta el SQL actualizado para habilitar sesiones y dashboard.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     const nextSession = empresa as EmpresaLogin;
+    savePortalSession(nextSession);
     setEmpresaSession(nextSession);
     await loadPortalData(nextSession.session_token);
     setIsSubmitting(false);
@@ -222,140 +237,50 @@ const Portal = () => {
 
   const handleLogout = async () => {
     if (supabase && empresaSession?.session_token) {
-      await supabase.rpc("logout_empresa", {
-        p_session_token: empresaSession.session_token,
-      });
+      await supabase.rpc("logout_empresa", { p_session_token: empresaSession.session_token });
     }
 
+    clearPortalSession();
     setEmpresaSession(null);
     setPortalData(null);
   };
 
-  const projects = portalData?.proyectos ?? [];
-  const processes = projects.flatMap((project) => project.procesos ?? []);
-  const bpmnCount = projects.reduce((total, project) => total + (project.bpmn?.length ?? 0), 0);
-  const pendingCount = processes.reduce(
-    (total, process) => total + (process.pendientes ?? []).filter((pending) => !isClosedStatus(pending.estado)).length,
-    0
-  );
-  const findingsCount = processes.reduce((total, process) => total + (process.hallazgos?.length ?? 0), 0);
-  const validatedProcesses = processes.filter((process) => isClosedStatus(process.estado)).length;
-  const overallProgress = getOverallProgress(projects);
-
-  return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-black text-white">
-      <div className="absolute left-[-10%] top-[-10%] h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
-      <div className="absolute bottom-[-15%] right-[-10%] h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl" />
-
-      <div className="container-tight relative z-10 flex min-h-screen flex-col py-6 md:py-8">
-        <nav className="flex items-center justify-between gap-4">
-          <Link to="/" aria-label="Volver al inicio de Methodical">
-            <img
-              src="/logo-transparente.png"
-              alt="Methodical"
-              className="h-9 w-auto object-contain brightness-0 invert"
-            />
-          </Link>
-          <Link
-            to="/"
-            className="rounded-lg border border-white/15 px-4 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-          >
-            Volver al sitio
-          </Link>
-        </nav>
-
-        {empresaSession ? (
-          <section className="flex-1 py-10 md:py-14">
-            <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-sm font-medium text-blue-100/70">Portal de cliente</p>
-                <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">
-                  {empresaSession.empresa}
-                </h1>
-                <p className="mt-2 text-sm text-blue-50/70">
-                  Sesión iniciada como {empresaSession.usuario}
-                </p>
-              </div>
-              <Button type="button" variant="secondary" onClick={handleLogout}>
-                Cerrar sesión
-              </Button>
-            </div>
-
-            {isLoadingPortal ? (
-              <div className="rounded-2xl bg-white p-8 text-center text-foreground shadow-2xl">
-                Cargando información del portal...
-              </div>
-            ) : (
-              <div className="space-y-6">
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-                  <div className="rounded-2xl bg-white p-5 text-foreground shadow-xl">
-                    <p className="text-sm font-medium text-muted-foreground">Avance total</p>
-                    <p className="mt-3 text-4xl font-bold tracking-tight">{overallProgress}%</p>
-                    <div className="mt-4 h-2 rounded-full bg-secondary">
-                      <div
-                        className="h-2 rounded-full bg-primary transition-all"
-                        style={{ width: `${overallProgress}%` }}
-                      />
-                    </div>
-                  </div>
-                  <div className="rounded-2xl bg-white p-5 text-foreground shadow-xl">
-                    <p className="text-sm font-medium text-muted-foreground">Procesos identificados</p>
-                    <p className="mt-3 text-4xl font-bold tracking-tight">{processes.length}</p>
-                    <p className="mt-2 text-sm text-muted-foreground">{validatedProcesses} validados</p>
-                  </div>
-                  <div className="rounded-2xl bg-white p-5 text-foreground shadow-xl">
-                    <p className="text-sm font-medium text-muted-foreground">BPMN disponibles</p>
-                    <p className="mt-3 text-4xl font-bold tracking-tight">{bpmnCount}</p>
-                  </div>
-                  <div className="rounded-2xl bg-white p-5 text-foreground shadow-xl">
-                    <p className="text-sm font-medium text-muted-foreground">Pendientes cliente</p>
-                    <p className="mt-3 text-4xl font-bold tracking-tight">{pendingCount}</p>
-                  </div>
-                  <div className="rounded-2xl bg-white p-5 text-foreground shadow-xl">
-                    <p className="text-sm font-medium text-muted-foreground">Hallazgos</p>
-                    <p className="mt-3 text-4xl font-bold tracking-tight">{findingsCount}</p>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Versionados en Git y publicados al portal.
-                    </p>
-                  </div>
-                </div>
-
-                {projects.length ? (
-                  projects.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
-                  ))
-                ) : (
-                  <div className="rounded-2xl bg-white p-8 text-center text-foreground shadow-2xl">
-                    <h2 className="text-2xl font-semibold tracking-tight">Sin proyectos publicados</h2>
-                    <p className="mt-3 text-sm text-muted-foreground">
-                      Cuando publiques datos desde la organización Git del cliente, aparecerán aquí.
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-          </section>
-        ) : (
-          <section className="grid flex-1 items-center gap-10 py-16 lg:grid-cols-[1fr_430px] lg:py-20">
-            <div className="max-w-2xl">
-              <p className="mb-4 inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-sm font-medium text-blue-50 backdrop-blur-sm">
+  if (!empresaSession) {
+    return (
+      <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.35),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(20,184,166,0.2),transparent_30%)]" />
+        <div className="container-tight relative z-10 flex min-h-screen flex-col py-6 md:py-8">
+          <PortalPublicHeader />
+          <section className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1fr_440px] lg:py-20">
+            <div className="max-w-3xl">
+              <p className="mb-5 inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-sm font-medium text-blue-50 backdrop-blur-sm">
                 Portal privado para clientes
               </p>
-              <h1 className="heading-display mb-6">
-                Acceso para empresas que trabajan con Methodical
+              <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+                Seguimiento vivo del levantamiento de procesos
               </h1>
-              <p className="max-w-xl text-lg leading-relaxed text-blue-50/75">
-                Ingresa con las credenciales entregadas por nuestro equipo para acceder a tu espacio de trabajo y seguimiento.
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-blue-50/75">
+                Revisa avance, procesos modelados, pendientes, hallazgos y BPMN publicados por Methodical en un solo lugar.
               </p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {[
+                  "Carta Gantt",
+                  "BPMN interactivos",
+                  "Hallazgos y pendientes",
+                ].map((item) => (
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/10 p-4 text-sm font-medium text-white/85 backdrop-blur-sm">
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white p-6 text-foreground shadow-2xl md:p-8">
+            <div className="rounded-3xl border border-white/10 bg-white p-6 text-foreground shadow-2xl md:p-8">
               <form onSubmit={handleSubmit}>
                 <div className="mb-8">
-                  <h2 className="text-2xl font-semibold tracking-tight">Ingresar al portal</h2>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    Usa el nombre de tu empresa o tu usuario asignado.
-                  </p>
+                  <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">Acceso clientes</p>
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight">Ingresar al portal</h2>
+                  <p className="mt-2 text-sm text-muted-foreground">Usa el nombre de tu empresa o tu usuario asignado.</p>
                 </div>
 
                 <div className="space-y-5">
@@ -371,7 +296,6 @@ const Portal = () => {
                       required
                     />
                   </div>
-
                   <div className="space-y-2">
                     <Label htmlFor="portal-contrasena">Contraseña</Label>
                     <Input
@@ -389,285 +313,460 @@ const Portal = () => {
                 <Button type="submit" className="mt-7 w-full" disabled={isSubmitting}>
                   {isSubmitting ? "Validando..." : "Ingresar"}
                 </Button>
-
                 <p className="mt-5 text-center text-xs leading-relaxed text-muted-foreground">
-                  Si todavía no tienes credenciales, solicítalas a tu contacto Methodical o escribe a contacto@methodical.cl.
+                  Si todavía no tienes credenciales, solicítalas a tu contacto Methodical.
                 </p>
               </form>
             </div>
           </section>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <PortalDashboard
+      session={empresaSession}
+      data={portalData}
+      isLoading={isLoadingPortal}
+      onLogout={handleLogout}
+    />
+  );
+};
+
+const PortalPublicHeader = () => (
+  <nav className="flex items-center justify-between gap-4">
+    <Link to="/" aria-label="Volver al inicio de Methodical">
+      <img src="/logo-transparente.png" alt="Methodical" className="h-9 w-auto object-contain brightness-0 invert" />
+    </Link>
+    <Link
+      to="/"
+      className="rounded-lg border border-white/15 px-4 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+    >
+      Volver al sitio
+    </Link>
+  </nav>
+);
+
+const PortalDashboard = ({
+  session,
+  data,
+  isLoading,
+  onLogout,
+}: {
+  session: EmpresaLogin;
+  data: PortalData | null;
+  isLoading: boolean;
+  onLogout: () => void;
+}) => {
+  const projects = data?.proyectos ?? [];
+  const processes = projects.flatMap((project) => project.procesos ?? []);
+  const diagrams = projects.flatMap((project) => project.bpmn ?? []);
+  const tasks = projects.flatMap((project) => project.tareas ?? []);
+  const findings = processes.flatMap((process) => process.hallazgos ?? []);
+  const pendings = processes.flatMap((process) => process.pendientes ?? []);
+  const openPendings = pendings.filter((pending) => !isClosedStatus(pending.estado));
+  const overallProgress = getOverallProgress(projects);
+  const validatedProcesses = processes.filter((process) => isClosedStatus(process.estado)).length;
+
+  return (
+    <main className="min-h-screen bg-slate-100 text-slate-950">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/95 text-white backdrop-blur">
+        <div className="container-tight flex h-16 items-center justify-between gap-4">
+          <Link to="/" aria-label="Volver al inicio de Methodical">
+            <img src="/logo-transparente.png" alt="Methodical" className="h-8 w-auto object-contain brightness-0 invert" />
+          </Link>
+          <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white/75 md:flex">
+            {session.empresa} · {session.usuario}
+          </div>
+          <Button type="button" variant="secondary" size="sm" onClick={onLogout}>
+            Cerrar sesión
+          </Button>
+        </div>
+      </header>
+
+      <section className="bg-slate-950 text-white">
+        <div className="container-tight py-10 md:py-14">
+          <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-end">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.25em] text-blue-200/70">Portal de cliente</p>
+              <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">{session.empresa}</h1>
+              <p className="mt-4 max-w-2xl text-blue-50/70">
+                Estado del levantamiento, BPMN publicados, hallazgos y pendientes para seguimiento ejecutivo.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+              <p className="text-sm text-blue-50/70">Avance general</p>
+              <div className="mt-3 flex items-end gap-3">
+                <span className="text-5xl font-bold">{overallProgress}%</span>
+                <span className="pb-2 text-sm text-blue-50/60">promedio ponderado</span>
+              </div>
+              <div className="mt-5 h-2 rounded-full bg-white/15">
+                <div className="h-2 rounded-full bg-gradient-to-r from-cyan-300 to-blue-400" style={{ width: `${overallProgress}%` }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="container-tight -mt-6 space-y-6 pb-16">
+        {isLoading ? (
+          <div className="rounded-3xl bg-white p-8 text-center shadow-xl">Cargando información del portal...</div>
+        ) : (
+          <>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
+              <MetricCard label="Proyectos" value={projects.length} helper="activos" />
+              <MetricCard label="Procesos" value={processes.length} helper={`${validatedProcesses} validados`} />
+              <MetricCard label="BPMN" value={diagrams.length} helper="disponibles" />
+              <MetricCard label="Pendientes" value={openPendings.length} helper="cliente" emphasis={openPendings.length > 0} />
+              <MetricCard label="Hallazgos" value={findings.length} helper="detectados" />
+              <MetricCard label="Tareas" value={tasks.length} helper="Gantt" />
+            </div>
+
+            <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+              <ChartsPanel processes={processes} tasks={tasks} findings={findings} progress={overallProgress} />
+              <BpmnLibrary projects={projects} diagrams={diagrams} />
+            </div>
+
+            {projects.length ? (
+              projects.map((project) => <ProjectSection key={project.id} project={project} />)
+            ) : (
+              <EmptyPanel title="Sin proyectos publicados" text="Cuando el sync de Git suba datos del cliente, aparecerán aquí." />
+            )}
+          </>
         )}
       </div>
     </main>
   );
 };
 
-const ProjectCard = ({ project }: { project: PortalProject }) => {
-  const progress = getProjectProgress(project);
-  const processes = project.procesos ?? [];
-  const diagrams = project.bpmn ?? [];
-  const openPendings = processes.flatMap((process) => process.pendientes ?? []).filter((pending) => !isClosedStatus(pending.estado));
-  const findings = processes.flatMap((process) => process.hallazgos ?? []);
-  const [selectedDiagramId, setSelectedDiagramId] = useState<number | null>(diagrams[0]?.id ?? null);
-  const selectedDiagram = diagrams.find((diagram) => diagram.id === selectedDiagramId) ?? diagrams[0] ?? null;
+const MetricCard = ({ label, value, helper, emphasis = false }: { label: string; value: number | string; helper: string; emphasis?: boolean }) => (
+  <div className={`rounded-3xl bg-white p-5 shadow-sm ring-1 ${emphasis ? "ring-amber-200" : "ring-slate-200"}`}>
+    <p className="text-sm font-medium text-slate-500">{label}</p>
+    <p className="mt-3 text-4xl font-bold tracking-tight text-slate-950">{value}</p>
+    <p className="mt-2 text-sm text-slate-500">{helper}</p>
+  </div>
+);
+
+const ChartsPanel = ({
+  processes,
+  tasks,
+  findings,
+  progress,
+}: {
+  processes: PortalProcess[];
+  tasks: PortalTask[];
+  findings: PortalFinding[];
+  progress: number;
+}) => {
+  const processStatusData = countBy(processes, (process) => process.estado);
+  const taskPhaseData = countBy(tasks, (task) => task.fase);
+  const findingPriorityData = countBy(findings, (finding) => finding.prioridad);
+  const donutData = [
+    { name: "Completado", value: progress },
+    { name: "Pendiente", value: Math.max(0, 100 - progress) },
+  ];
 
   return (
-    <article className="overflow-hidden rounded-2xl bg-white text-foreground shadow-2xl">
-      <div className="border-b border-border p-6 md:p-8">
-        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">Levantamiento de procesos</p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight">{project.nombre}</h2>
-            {project.descripcion && (
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{project.descripcion}</p>
-            )}
+    <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+      <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Analítica</p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight">Pulso del levantamiento</h2>
+        </div>
+        <p className="text-sm text-slate-500">Datos sincronizados desde Git y Supabase</p>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
+        <div className="rounded-2xl bg-slate-50 p-4">
+          <div className="h-56">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie data={donutData} dataKey="value" innerRadius={64} outerRadius={88} strokeWidth={0}>
+                  <Cell fill="#2563eb" />
+                  <Cell fill="#e2e8f0" />
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
-          <span
-            className={`inline-flex w-fit rounded-full px-3 py-1 text-xs font-semibold ring-1 ${getStatusClassName(
-              project.estado
-            )}`}
-          >
-            {formatStatus(project.estado)}
-          </span>
+          <p className="-mt-32 text-center text-4xl font-bold">{progress}%</p>
+          <p className="mt-24 text-center text-sm text-slate-500">avance ponderado</p>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-5">
-          <ProjectStat label="Avance" value={`${progress}%`} />
-          <ProjectStat label="Procesos" value={processes.length.toString()} />
-          <ProjectStat label="BPMN" value={diagrams.length.toString()} />
-          <ProjectStat label="Pendientes" value={openPendings.length.toString()} />
-          <ProjectStat label="Cierre estimado" value={formatDate(project.fecha_fin)} small />
+        <div className="grid gap-4 md:grid-cols-2">
+          <MiniBarChart title="Procesos por estado" data={processStatusData} />
+          <MiniBarChart title="Tareas por fase" data={taskPhaseData} />
+          <MiniBarChart title="Hallazgos por prioridad" data={findingPriorityData} />
+          <div className="rounded-2xl bg-slate-950 p-5 text-white">
+            <p className="text-sm text-blue-100/70">Siguiente foco</p>
+            <p className="mt-3 text-xl font-semibold">Validar BPMN y cerrar pendientes críticos</p>
+            <p className="mt-2 text-sm leading-relaxed text-blue-50/65">
+              El avance sube actualizando `progreso` en `gantt.json` y haciendo push al repo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const MiniBarChart = ({ title, data }: { title: string; data: Array<{ name: string; value: number }> }) => (
+  <div className="rounded-2xl bg-slate-50 p-4">
+    <p className="mb-3 text-sm font-semibold text-slate-700">{title}</p>
+    {data.length ? (
+      <div className="h-44">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data} margin={{ top: 8, right: 8, left: -24, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+            <YAxis allowDecimals={false} tick={{ fontSize: 10 }} />
+            <Tooltip />
+            <Bar dataKey="value" radius={[8, 8, 0, 0]} fill="#2563eb" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    ) : (
+      <div className="flex h-44 items-center justify-center text-center text-sm text-slate-400">Sin datos publicados</div>
+    )}
+  </div>
+);
+
+const BpmnLibrary = ({ projects, diagrams }: { projects: PortalProject[]; diagrams: PortalBpmn[] }) => {
+  const processByDiagram = new Map<number, PortalProcess>();
+  projects.forEach((project) => {
+    project.procesos?.forEach((process) => {
+      process.bpmn?.forEach((diagram) => processByDiagram.set(diagram.id, process));
+    });
+  });
+
+  return (
+    <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+      <div className="mb-6">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">BPMN</p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight">Biblioteca de procesos</h2>
+        <p className="mt-2 text-sm text-slate-500">Abre cada diagrama en una pantalla amplia para revisarlo con comodidad.</p>
+      </div>
+      {diagrams.length ? (
+        <div className="space-y-3">
+          {diagrams.map((diagram) => {
+            const process = processByDiagram.get(diagram.id);
+            return (
+              <div key={diagram.id} className="rounded-2xl border border-slate-200 p-4 transition hover:border-blue-200 hover:bg-blue-50/40">
+                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p className="font-semibold text-slate-950">{diagram.nombre}</p>
+                    <p className="mt-1 text-sm text-slate-500">{process?.area ?? "Proceso"} · {process ? formatStatus(process.estado) : "Publicado"}</p>
+                  </div>
+                  <Button asChild size="sm">
+                    <Link to={`/portal/bpmn/${diagram.id}`} target="_blank" rel="noreferrer">
+                      Ver pantalla completa
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <EmptyPanel title="Sin BPMN publicados" text="Cuando subas BPMN por Git, aparecerán en esta biblioteca." compact />
+      )}
+    </section>
+  );
+};
+
+const ProjectSection = ({ project }: { project: PortalProject }) => {
+  const progress = getProjectProgress(project);
+  const openPendings = (project.procesos ?? [])
+    .flatMap((process) => process.pendientes ?? [])
+    .filter((pending) => !isClosedStatus(pending.estado));
+  const findings = (project.procesos ?? []).flatMap((process) => process.hallazgos ?? []);
+
+  return (
+    <section className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
+      <div className="border-b border-slate-200 p-6 md:p-8">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Proyecto</p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight">{project.nombre}</h2>
+            {project.descripcion && <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-500">{project.descripcion}</p>}
+          </div>
+          <div className="rounded-2xl bg-slate-950 p-5 text-white lg:min-w-56">
+            <p className="text-sm text-blue-100/70">Avance proyecto</p>
+            <p className="mt-2 text-4xl font-bold">{progress}%</p>
+            <div className="mt-4 h-2 rounded-full bg-white/15">
+              <div className="h-2 rounded-full bg-blue-400" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="grid gap-0 xl:grid-cols-[360px_1fr]">
-        <aside className="border-b border-border p-6 md:p-8 xl:border-b-0 xl:border-r">
-          <ProcessMap processes={processes} />
+        <aside className="border-b border-slate-200 p-6 md:p-8 xl:border-b-0 xl:border-r">
+          <ProcessList processes={project.procesos ?? []} />
           <PendingList pendings={openPendings} />
           <FindingList findings={findings} />
         </aside>
-
-        <div className="space-y-0">
-          <BpmnSection
-            diagrams={diagrams}
-            selectedDiagram={selectedDiagram}
-            onSelectDiagram={setSelectedDiagramId}
-          />
-          <GanttSection tasks={project.tareas ?? []} />
+        <div>
+          <PortalGantt tasks={project.tareas ?? []} />
         </div>
       </div>
-    </article>
+    </section>
   );
 };
 
-const ProjectStat = ({ label, value, small = false }: { label: string; value: string; small?: boolean }) => (
-  <div className="rounded-xl bg-secondary p-4">
-    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">{label}</p>
-    <p className={`mt-2 font-bold ${small ? "text-lg" : "text-3xl"}`}>{value}</p>
-  </div>
-);
-
-const ProcessMap = ({ processes }: { processes: PortalProcess[] }) => (
+const ProcessList = ({ processes }: { processes: PortalProcess[] }) => (
   <section>
-    <h3 className="text-lg font-semibold tracking-tight">Mapa de procesos</h3>
-    <p className="mt-1 text-sm text-muted-foreground">Estado de cada proceso identificado en el levantamiento.</p>
-
-    {processes.length ? (
-      <div className="mt-5 space-y-3">
-        {processes.map((process) => (
-          <div key={process.id} className="rounded-xl border border-border p-4">
+    <h3 className="text-lg font-semibold tracking-tight">Procesos levantados</h3>
+    <div className="mt-4 space-y-3">
+      {processes.length ? (
+        processes.map((process) => (
+          <div key={process.id} className="rounded-2xl border border-slate-200 p-4">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="font-medium">{process.nombre}</p>
-                {process.area && <p className="mt-1 text-xs text-muted-foreground">{process.area}</p>}
+                <p className="font-semibold">{process.nombre}</p>
+                <p className="mt-1 text-xs text-slate-500">{process.area ?? "Sin área"}</p>
               </div>
-              <span
-                className={`inline-flex w-fit shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${getStatusClassName(
-                  process.estado
-                )}`}
-              >
-                {formatStatus(process.estado)}
-              </span>
+              <StatusPill status={process.estado} />
             </div>
-            {process.descripcion && (
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{process.descripcion}</p>
-            )}
           </div>
-        ))}
-      </div>
-    ) : (
-      <EmptyBlock text="Sin procesos publicados todavía." />
-    )}
+        ))
+      ) : (
+        <EmptyPanel title="Sin procesos" text="No hay procesos publicados." compact />
+      )}
+    </div>
   </section>
 );
 
 const PendingList = ({ pendings }: { pendings: PortalPending[] }) => (
   <section className="mt-8">
-    <h3 className="text-lg font-semibold tracking-tight">Pendientes del cliente</h3>
-    <p className="mt-1 text-sm text-muted-foreground">Validaciones o información necesaria para avanzar.</p>
-
-    {pendings.length ? (
-      <div className="mt-5 space-y-3">
-        {pendings.slice(0, 4).map((pending) => (
-          <div key={pending.id} className="rounded-xl border border-border p-4">
-            <p className="font-medium">{pending.titulo}</p>
-            <p className="mt-1 text-xs text-muted-foreground">Vence: {formatDate(pending.fecha_limite)}</p>
-            {pending.descripcion && <p className="mt-2 text-sm text-muted-foreground">{pending.descripcion}</p>}
+    <h3 className="text-lg font-semibold tracking-tight">Pendientes cliente</h3>
+    <div className="mt-4 space-y-3">
+      {pendings.length ? (
+        pendings.slice(0, 5).map((pending) => (
+          <div key={pending.id} className="rounded-2xl border border-amber-200 bg-amber-50/60 p-4">
+            <p className="font-semibold text-amber-950">{pending.titulo}</p>
+            <p className="mt-1 text-xs text-amber-700">Vence: {formatDate(pending.fecha_limite)}</p>
           </div>
-        ))}
-      </div>
-    ) : (
-      <EmptyBlock text="No hay pendientes abiertos." />
-    )}
+        ))
+      ) : (
+        <EmptyPanel title="Sin pendientes" text="No hay acciones abiertas para el cliente." compact />
+      )}
+    </div>
   </section>
 );
 
 const FindingList = ({ findings }: { findings: PortalFinding[] }) => (
   <section className="mt-8">
     <h3 className="text-lg font-semibold tracking-tight">Hallazgos</h3>
-    <p className="mt-1 text-sm text-muted-foreground">Oportunidades o riesgos detectados en los procesos.</p>
-
-    {findings.length ? (
-      <div className="mt-5 space-y-3">
-        {findings.slice(0, 4).map((finding) => (
-          <div key={finding.id} className="rounded-xl border border-border p-4">
+    <div className="mt-4 space-y-3">
+      {findings.length ? (
+        findings.slice(0, 5).map((finding) => (
+          <div key={finding.id} className="rounded-2xl border border-slate-200 p-4">
             <div className="flex items-start justify-between gap-3">
-              <p className="font-medium">{finding.titulo}</p>
-              <span
-                className={`inline-flex w-fit shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${getPriorityClassName(
-                  finding.prioridad
-                )}`}
-              >
+              <p className="font-semibold">{finding.titulo}</p>
+              <span className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${getPriorityClassName(finding.prioridad)}`}>
                 {formatStatus(finding.prioridad)}
               </span>
             </div>
-            {finding.impacto && <p className="mt-2 text-sm text-muted-foreground">Impacto: {finding.impacto}</p>}
+            {finding.impacto && <p className="mt-2 text-sm text-slate-500">{finding.impacto}</p>}
           </div>
-        ))}
-      </div>
-    ) : (
-      <EmptyBlock text="Sin hallazgos publicados todavía." />
-    )}
-  </section>
-);
-
-const BpmnSection = ({
-  diagrams,
-  selectedDiagram,
-  onSelectDiagram,
-}: {
-  diagrams: PortalBpmn[];
-  selectedDiagram: PortalBpmn | null;
-  onSelectDiagram: (id: number) => void;
-}) => (
-  <section className="border-b border-border p-6 md:p-8">
-    <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-      <div>
-        <h3 className="text-lg font-semibold tracking-tight">Visualizador BPMN</h3>
-        <p className="mt-1 text-sm text-muted-foreground">Selecciona un proceso publicado para revisar su diagrama.</p>
-      </div>
-      {diagrams.length > 0 && (
-        <select
-          value={selectedDiagram?.id ?? ""}
-          onChange={(event) => onSelectDiagram(Number(event.target.value))}
-          className="h-10 rounded-lg border border-input bg-background px-3 text-sm text-foreground"
-        >
-          {diagrams.map((diagram) => (
-            <option key={diagram.id} value={diagram.id}>
-              {diagram.nombre}
-            </option>
-          ))}
-        </select>
+        ))
+      ) : (
+        <EmptyPanel title="Sin hallazgos" text="Todavía no hay hallazgos publicados." compact />
       )}
     </div>
-
-    {selectedDiagram ? (
-      <div className="grid gap-5 lg:grid-cols-[260px_1fr]">
-        <div className="rounded-xl border border-border p-4">
-          <p className="font-medium">{selectedDiagram.nombre}</p>
-          {selectedDiagram.descripcion && (
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{selectedDiagram.descripcion}</p>
-          )}
-          {selectedDiagram.archivo_path && (
-            <p className="mt-3 rounded-lg bg-secondary px-3 py-2 font-mono text-xs text-muted-foreground">
-              {selectedDiagram.archivo_path}
-            </p>
-          )}
-          {selectedDiagram.archivo_url && (
-            <a
-              href={selectedDiagram.archivo_url}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex text-sm font-medium text-primary hover:underline"
-            >
-              Abrir archivo fuente
-            </a>
-          )}
-        </div>
-        <BpmnViewer xmlUrl={selectedDiagram.archivo_url} title={selectedDiagram.nombre} />
-      </div>
-    ) : (
-      <EmptyBlock text="Sin BPMN publicados todavía." />
-    )}
   </section>
 );
 
-const GanttSection = ({ tasks }: { tasks: PortalTask[] }) => {
+const PortalGantt = ({ tasks }: { tasks: PortalTask[] }) => {
   const range = getGanttRange(tasks);
+  const today = Date.now();
+  const todayPosition = range && today >= range.start && today <= range.end ? ((today - range.start) / (range.end - range.start)) * 100 : null;
+  const groupedTasks = tasks.reduce<Record<string, PortalTask[]>>((groups, task) => {
+    const phase = task.fase || "General";
+    groups[phase] = [...(groups[phase] ?? []), task];
+    return groups;
+  }, {});
 
   return (
     <section className="p-6 md:p-8">
-      <div className="mb-5">
-        <h3 className="text-lg font-semibold tracking-tight">Carta Gantt</h3>
-        <p className="mt-1 text-sm text-muted-foreground">Hitos y tareas publicados para este levantamiento.</p>
+      <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Carta Gantt</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Plan de trabajo</h3>
+        </div>
+        {range && (
+          <p className="text-sm text-slate-500">
+            {formatDate(new Date(range.start).toISOString())} - {formatDate(new Date(range.end).toISOString())}
+          </p>
+        )}
       </div>
 
-      {tasks.length ? (
-        <div className="space-y-4">
-          {tasks.map((task) => {
-            const position = range ? getGanttPosition(task, range) : { left: 0, width: getTaskProgress(task) };
-
-            return (
-              <div key={task.id} className="rounded-xl border border-border p-4">
-                <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <p className="font-medium">{task.titulo}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {task.fase ? `${task.fase} · ` : ""}
-                      {formatDate(task.fecha_inicio)} - {formatDate(task.fecha_fin)}
-                    </p>
-                  </div>
-                  <span
-                    className={`inline-flex w-fit rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${getStatusClassName(
-                      task.estado
-                    )}`}
-                  >
-                    {formatStatus(task.estado)} · {getTaskProgress(task)}%
-                  </span>
+      {tasks.length && range ? (
+        <div className="overflow-x-auto rounded-2xl border border-slate-200">
+          <div className="min-w-[920px] bg-white">
+            <div className="grid grid-cols-[260px_1fr] border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-widest text-slate-500">
+              <div className="p-4">Tarea</div>
+              <div className="relative p-4">
+                <div className="flex justify-between">
+                  <span>{formatDate(new Date(range.start).toISOString())}</span>
+                  <span>{formatDate(new Date(range.end).toISOString())}</span>
                 </div>
-
-                <div className="relative h-3 overflow-hidden rounded-full bg-secondary">
-                  <div
-                    className="absolute inset-y-0 rounded-full bg-primary"
-                    style={{ left: `${position.left}%`, width: `${position.width}%` }}
-                  />
-                </div>
-
-                {task.descripcion && <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{task.descripcion}</p>}
               </div>
-            );
-          })}
+            </div>
+            {Object.entries(groupedTasks).map(([phase, phaseTasks]) => (
+              <div key={phase}>
+                <div className="border-b border-slate-200 bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white">
+                  {phase}
+                </div>
+                {phaseTasks.map((task) => {
+                  const position = getGanttPosition(task, range);
+                  return (
+                    <div key={task.id} className="grid grid-cols-[260px_1fr] border-b border-slate-100 last:border-b-0">
+                      <div className="p-4">
+                        <p className="font-semibold text-slate-950">{task.titulo}</p>
+                        <p className="mt-1 text-xs text-slate-500">
+                          {formatDate(task.fecha_inicio)} - {formatDate(task.fecha_fin)}
+                        </p>
+                      </div>
+                      <div className="relative p-4">
+                        {todayPosition !== null && (
+                          <div className="absolute inset-y-0 w-px bg-red-400" style={{ left: `${todayPosition}%` }} />
+                        )}
+                        <div className="relative h-9 rounded-full bg-slate-100">
+                          <div
+                            className="absolute inset-y-1 overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 shadow-sm"
+                            style={{ left: `${position.left}%`, width: `${position.width}%` }}
+                          >
+                            <div className="h-full bg-white/20" style={{ width: `${getTaskProgress(task)}%` }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
-        <EmptyBlock text="Sin tareas publicadas todavía." />
+        <EmptyPanel title="Sin tareas" text="No hay tareas publicadas para esta Gantt." />
       )}
     </section>
   );
 };
 
-const EmptyBlock = ({ text }: { text: string }) => (
-  <div className="mt-5 rounded-xl border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
-    {text}
+const StatusPill = ({ status }: { status: string }) => (
+  <span className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${getStatusClassName(status)}`}>
+    {formatStatus(status)}
+  </span>
+);
+
+const EmptyPanel = ({ title, text, compact = false }: { title: string; text: string; compact?: boolean }) => (
+  <div className={`rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center ${compact ? "p-4" : "p-8"}`}>
+    <p className="font-semibold text-slate-700">{title}</p>
+    <p className="mt-1 text-sm text-slate-500">{text}</p>
   </div>
 );
 
