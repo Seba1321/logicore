@@ -34,13 +34,28 @@ import {
 const DAY_MS = 24 * 60 * 60 * 1000;
 const CHART_COLORS = ["#0f172a", "#2563eb", "#14b8a6", "#f59e0b", "#ef4444", "#7c3aed"];
 
-const formatDate = (value: string | null) => {
+const parsePortalDate = (value: string | number | null) => {
   if (!value) return "Por definir";
+
+  if (typeof value === "number") return new Date(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    const [year, month, day] = value.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  return new Date(value);
+};
+
+const formatDate = (value: string | number | null) => {
+  const date = parsePortalDate(value);
+  if (date === "Por definir") return date;
+
   return new Intl.DateTimeFormat("es-CL", {
     day: "2-digit",
     month: "short",
     year: "numeric",
-  }).format(new Date(value));
+  }).format(date);
 };
 
 const formatStatus = (value: string) =>
@@ -78,7 +93,9 @@ const getOverallProgress = (projects: PortalProject[]) => {
 
 const toTime = (value: string | null) => {
   if (!value) return null;
-  const time = new Date(value).getTime();
+  const parsedDate = parsePortalDate(value);
+  if (parsedDate === "Por definir") return null;
+  const time = parsedDate.getTime();
   return Number.isNaN(time) ? null : time;
 };
 
@@ -90,14 +107,14 @@ const getGanttRange = (tasks: PortalTask[]) => {
   if (!dates.length) return null;
 
   const start = Math.min(...dates);
-  const end = Math.max(...dates);
+  const end = Math.max(...dates) + DAY_MS;
 
   return { start, end: end === start ? start + DAY_MS : end };
 };
 
 const getGanttPosition = (task: PortalTask, range: { start: number; end: number }) => {
   const taskStart = toTime(task.fecha_inicio) ?? range.start;
-  const taskEnd = toTime(task.fecha_fin) ?? taskStart + DAY_MS;
+  const taskEnd = (toTime(task.fecha_fin) ?? taskStart) + DAY_MS;
   const total = Math.max(range.end - range.start, DAY_MS);
   const left = clampProgress(((taskStart - range.start) / total) * 100);
   const width = Math.max(4, clampProgress(((taskEnd - taskStart) / total) * 100));
@@ -372,7 +389,7 @@ const PortalDashboard = ({
   return (
     <main className="min-h-screen bg-slate-100 text-slate-950">
       <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/95 text-white backdrop-blur">
-        <div className="container-tight flex h-16 items-center justify-between gap-4">
+        <div className="mx-auto flex h-16 max-w-[1500px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <Link to="/" aria-label="Volver al inicio de Methodical">
             <img src="/logo-transparente.png" alt="Methodical" className="h-8 w-auto object-contain brightness-0 invert" />
           </Link>
@@ -386,7 +403,7 @@ const PortalDashboard = ({
       </header>
 
       <section className="bg-slate-950 text-white">
-        <div className="container-tight py-10 md:py-14">
+        <div className="mx-auto max-w-[1500px] px-4 py-10 sm:px-6 md:py-14 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-end">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.25em] text-blue-200/70">Portal de cliente</p>
@@ -409,7 +426,7 @@ const PortalDashboard = ({
         </div>
       </section>
 
-      <div className="container-tight -mt-6 space-y-6 pb-16">
+      <div className="mx-auto -mt-6 max-w-[1500px] space-y-6 px-4 pb-16 sm:px-6 lg:px-8">
         {isLoading ? (
           <div className="rounded-3xl bg-white p-8 text-center shadow-xl">Cargando información del portal...</div>
         ) : (
@@ -423,10 +440,8 @@ const PortalDashboard = ({
               <MetricCard label="Tareas" value={tasks.length} helper="Gantt" />
             </div>
 
-            <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-              <ChartsPanel processes={processes} tasks={tasks} findings={findings} progress={overallProgress} />
-              <BpmnLibrary projects={projects} diagrams={diagrams} />
-            </div>
+            <ChartsPanel processes={processes} tasks={tasks} findings={findings} progress={overallProgress} />
+            <BpmnLibrary projects={projects} diagrams={diagrams} />
 
             {projects.length ? (
               projects.map((project) => <ProjectSection key={project.id} project={project} />)
@@ -477,30 +492,32 @@ const ChartsPanel = ({
         <p className="text-sm text-slate-500">Datos sincronizados desde Git y Supabase</p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
-        <div className="rounded-2xl bg-slate-50 p-4">
-          <div className="h-56">
+      <div className="grid gap-6 xl:grid-cols-[320px_1fr]">
+        <div className="rounded-2xl bg-slate-50 p-6">
+          <div className="relative h-72">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={donutData} dataKey="value" innerRadius={64} outerRadius={88} strokeWidth={0}>
+                <Pie data={donutData} dataKey="value" innerRadius="68%" outerRadius="88%" strokeWidth={0}>
                   <Cell fill="#2563eb" />
                   <Cell fill="#e2e8f0" />
                 </Pie>
                 <Tooltip />
               </PieChart>
             </ResponsiveContainer>
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+              <p className="text-5xl font-bold tracking-tight">{progress}%</p>
+              <p className="mt-2 text-sm text-slate-500">avance ponderado</p>
+            </div>
           </div>
-          <p className="-mt-32 text-center text-4xl font-bold">{progress}%</p>
-          <p className="mt-24 text-center text-sm text-slate-500">avance ponderado</p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-3">
           <MiniBarChart title="Procesos por estado" data={processStatusData} />
           <MiniBarChart title="Tareas por fase" data={taskPhaseData} />
           <MiniBarChart title="Hallazgos por prioridad" data={findingPriorityData} />
-          <div className="rounded-2xl bg-slate-950 p-5 text-white">
+          <div className="rounded-2xl bg-slate-950 p-5 text-white lg:col-span-3">
             <p className="text-sm text-blue-100/70">Siguiente foco</p>
-            <p className="mt-3 text-xl font-semibold">Validar BPMN y cerrar pendientes críticos</p>
+            <p className="mt-3 text-2xl font-semibold tracking-tight">Validar BPMN y cerrar pendientes críticos</p>
             <p className="mt-2 text-sm leading-relaxed text-blue-50/65">
               El avance sube actualizando `progreso` en `gantt.json` y haciendo push al repo.
             </p>
@@ -512,22 +529,22 @@ const ChartsPanel = ({
 };
 
 const MiniBarChart = ({ title, data }: { title: string; data: Array<{ name: string; value: number }> }) => (
-  <div className="rounded-2xl bg-slate-50 p-4">
-    <p className="mb-3 text-sm font-semibold text-slate-700">{title}</p>
+  <div className="rounded-2xl bg-slate-50 p-5">
+    <p className="mb-4 text-sm font-semibold text-slate-700">{title}</p>
     {data.length ? (
-      <div className="h-44">
+      <div className="h-56">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 8, right: 8, left: -24, bottom: 0 }}>
+          <BarChart data={data} layout="vertical" margin={{ top: 8, right: 16, left: 24, bottom: 8 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
-            <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-            <YAxis allowDecimals={false} tick={{ fontSize: 10 }} />
+            <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
+            <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={92} />
             <Tooltip />
-            <Bar dataKey="value" radius={[8, 8, 0, 0]} fill="#2563eb" />
+            <Bar dataKey="value" radius={[0, 8, 8, 0]} fill="#2563eb" barSize={20} />
           </BarChart>
         </ResponsiveContainer>
       </div>
     ) : (
-      <div className="flex h-44 items-center justify-center text-center text-sm text-slate-400">Sin datos publicados</div>
+      <div className="flex h-56 items-center justify-center text-center text-sm text-slate-400">Sin datos publicados</div>
     )}
   </div>
 );
@@ -548,17 +565,22 @@ const BpmnLibrary = ({ projects, diagrams }: { projects: PortalProject[]; diagra
         <p className="mt-2 text-sm text-slate-500">Abre cada diagrama en una pantalla amplia para revisarlo con comodidad.</p>
       </div>
       {diagrams.length ? (
-        <div className="space-y-3">
+        <div className="grid gap-4 lg:grid-cols-2">
           {diagrams.map((diagram) => {
             const process = processByDiagram.get(diagram.id);
             return (
-              <div key={diagram.id} className="rounded-2xl border border-slate-200 p-4 transition hover:border-blue-200 hover:bg-blue-50/40">
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div key={diagram.id} className="rounded-2xl border border-slate-200 p-5 transition hover:border-blue-200 hover:bg-blue-50/40">
+                <div className="flex h-full flex-col justify-between gap-5">
                   <div>
-                    <p className="font-semibold text-slate-950">{diagram.nombre}</p>
-                    <p className="mt-1 text-sm text-slate-500">{process?.area ?? "Proceso"} · {process ? formatStatus(process.estado) : "Publicado"}</p>
+                    <p className="text-lg font-semibold leading-tight text-slate-950">{diagram.nombre}</p>
+                    <p className="mt-2 text-sm text-slate-500">
+                      {process?.area ?? "Proceso"} · {process ? formatStatus(process.estado) : "Publicado"}
+                    </p>
+                    {diagram.descripcion && (
+                      <p className="mt-3 text-sm leading-relaxed text-slate-500">{diagram.descripcion}</p>
+                    )}
                   </div>
-                  <Button asChild size="sm">
+                  <Button asChild className="w-full sm:w-fit">
                     <Link to={`/portal/bpmn/${diagram.id}`} target="_blank" rel="noreferrer">
                       Ver pantalla completa
                     </Link>
@@ -601,16 +623,15 @@ const ProjectSection = ({ project }: { project: PortalProject }) => {
         </div>
       </div>
 
-      <div className="grid gap-0 xl:grid-cols-[360px_1fr]">
-        <aside className="border-b border-slate-200 p-6 md:p-8 xl:border-b-0 xl:border-r">
+      <div className="border-b border-slate-200 p-6 md:p-8">
+        <div className="grid gap-6 xl:grid-cols-3">
           <ProcessList processes={project.procesos ?? []} />
           <PendingList pendings={openPendings} />
           <FindingList findings={findings} />
-        </aside>
-        <div>
-          <PortalGantt tasks={project.tareas ?? []} />
         </div>
       </div>
+
+      <PortalGantt tasks={project.tareas ?? []} />
     </section>
   );
 };
@@ -639,7 +660,7 @@ const ProcessList = ({ processes }: { processes: PortalProcess[] }) => (
 );
 
 const PendingList = ({ pendings }: { pendings: PortalPending[] }) => (
-  <section className="mt-8">
+  <section>
     <h3 className="text-lg font-semibold tracking-tight">Pendientes cliente</h3>
     <div className="mt-4 space-y-3">
       {pendings.length ? (
@@ -657,7 +678,7 @@ const PendingList = ({ pendings }: { pendings: PortalPending[] }) => (
 );
 
 const FindingList = ({ findings }: { findings: PortalFinding[] }) => (
-  <section className="mt-8">
+  <section>
     <h3 className="text-lg font-semibold tracking-tight">Hallazgos</h3>
     <div className="mt-4 space-y-3">
       {findings.length ? (
@@ -698,21 +719,26 @@ const PortalGantt = ({ tasks }: { tasks: PortalTask[] }) => {
         </div>
         {range && (
           <p className="text-sm text-slate-500">
-            {formatDate(new Date(range.start).toISOString())} - {formatDate(new Date(range.end).toISOString())}
+            {formatDate(range.start)} - {formatDate(range.end - DAY_MS)}
           </p>
         )}
       </div>
 
       {tasks.length && range ? (
-        <div className="overflow-x-auto rounded-2xl border border-slate-200">
-          <div className="min-w-[920px] bg-white">
-            <div className="grid grid-cols-[260px_1fr] border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-widest text-slate-500">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+          <div className="min-w-[1180px]">
+            <div className="grid grid-cols-[340px_1fr] border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-widest text-slate-500">
               <div className="p-4">Tarea</div>
               <div className="relative p-4">
-                <div className="flex justify-between">
-                  <span>{formatDate(new Date(range.start).toISOString())}</span>
-                  <span>{formatDate(new Date(range.end).toISOString())}</span>
+                <div className="flex justify-between pr-2">
+                  <span>{formatDate(range.start)}</span>
+                  <span>{formatDate(range.end - DAY_MS)}</span>
                 </div>
+                {todayPosition !== null && (
+                  <span className="absolute top-3 -translate-x-1/2 rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-semibold text-red-600" style={{ left: `${todayPosition}%` }}>
+                    Hoy
+                  </span>
+                )}
               </div>
             </div>
             {Object.entries(groupedTasks).map(([phase, phaseTasks]) => (
@@ -722,24 +748,29 @@ const PortalGantt = ({ tasks }: { tasks: PortalTask[] }) => {
                 </div>
                 {phaseTasks.map((task) => {
                   const position = getGanttPosition(task, range);
+                  const progress = getTaskProgress(task);
                   return (
-                    <div key={task.id} className="grid grid-cols-[260px_1fr] border-b border-slate-100 last:border-b-0">
+                    <div key={task.id} className="grid grid-cols-[340px_1fr] border-b border-slate-100 last:border-b-0">
                       <div className="p-4">
                         <p className="font-semibold text-slate-950">{task.titulo}</p>
                         <p className="mt-1 text-xs text-slate-500">
                           {formatDate(task.fecha_inicio)} - {formatDate(task.fecha_fin)}
                         </p>
+                        <div className="mt-2 flex items-center gap-2">
+                          <StatusPill status={task.estado} />
+                          <span className="text-xs font-medium text-slate-500">{progress}%</span>
+                        </div>
                       </div>
                       <div className="relative p-4">
                         {todayPosition !== null && (
                           <div className="absolute inset-y-0 w-px bg-red-400" style={{ left: `${todayPosition}%` }} />
                         )}
-                        <div className="relative h-9 rounded-full bg-slate-100">
+                        <div className="relative h-10 rounded-full bg-slate-100">
                           <div
-                            className="absolute inset-y-1 overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 shadow-sm"
+                            className="absolute inset-y-1 overflow-hidden rounded-full border border-blue-200 bg-blue-50 shadow-sm"
                             style={{ left: `${position.left}%`, width: `${position.width}%` }}
                           >
-                            <div className="h-full bg-white/20" style={{ width: `${getTaskProgress(task)}%` }} />
+                            <div className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500" style={{ width: `${progress}%` }} />
                           </div>
                         </div>
                       </div>
