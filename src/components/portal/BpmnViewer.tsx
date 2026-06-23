@@ -14,6 +14,7 @@ type BpmnViewerProps = {
   className?: string;
   heightClassName?: string;
   showHeader?: boolean;
+  initialZoom?: "fit-viewport" | number;
 };
 
 export const BpmnViewer = ({
@@ -22,6 +23,7 @@ export const BpmnViewer = ({
   className,
   heightClassName = "h-[420px]",
   showHeader = true,
+  initialZoom = "fit-viewport",
 }: BpmnViewerProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const viewerRef = useRef<BpmnViewerInstance | null>(null);
@@ -56,7 +58,7 @@ export const BpmnViewer = ({
       })
       .then(() => {
         if (!viewerRef.current || !isMounted) return;
-        viewerRef.current.get("canvas").zoom("fit-viewport");
+        viewerRef.current.get("canvas").zoom(initialZoom, "auto");
         setStatus("ready");
       })
       .catch((error) => {
@@ -71,7 +73,7 @@ export const BpmnViewer = ({
       viewerRef.current?.destroy();
       viewerRef.current = null;
     };
-  }, [xmlUrl]);
+  }, [initialZoom, xmlUrl]);
 
   const zoom = (value: "fit-viewport" | number) => {
     viewerRef.current?.get("canvas").zoom(value);
@@ -102,8 +104,14 @@ export const BpmnViewer = ({
             <Button type="button" variant="outline" size="sm" onClick={() => zoom("fit-viewport")}>
               Ajustar
             </Button>
+            <Button type="button" variant="outline" size="sm" onClick={() => zoom(0.5)}>
+              50%
+            </Button>
             <Button type="button" variant="outline" size="sm" onClick={() => zoom(0.8)}>
               80%
+            </Button>
+            <Button type="button" variant="outline" size="sm" onClick={() => zoom(1)}>
+              100%
             </Button>
             <Button type="button" variant="outline" size="sm" onClick={() => zoom(1.15)}>
               115%

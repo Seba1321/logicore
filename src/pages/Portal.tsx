@@ -268,35 +268,24 @@ const Portal = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.35),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(20,184,166,0.2),transparent_30%)]" />
         <div className="container-tight relative z-10 flex min-h-screen flex-col py-6 md:py-8">
           <PortalPublicHeader />
-          <section className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1fr_440px] lg:py-20">
-            <div className="max-w-3xl">
+          <section className="grid flex-1 items-center gap-10 py-16 lg:grid-cols-[1fr_430px] lg:py-20">
+            <div className="max-w-2xl">
               <p className="mb-5 inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-sm font-medium text-blue-50 backdrop-blur-sm">
                 Portal privado para clientes
               </p>
-              <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
-                Seguimiento vivo del levantamiento de procesos
+              <h1 className="heading-display mb-6">
+                Acceso para empresas que trabajan con Methodical
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-blue-50/75">
-                Revisa avance, procesos modelados, pendientes, hallazgos y BPMN publicados por Methodical en un solo lugar.
+              <p className="max-w-xl text-lg leading-relaxed text-blue-50/75">
+                Ingresa con las credenciales entregadas por nuestro equipo para revisar avance, BPMN, pendientes y hallazgos del levantamiento.
               </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {[
-                  "Carta Gantt",
-                  "BPMN interactivos",
-                  "Hallazgos y pendientes",
-                ].map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/10 p-4 text-sm font-medium text-white/85 backdrop-blur-sm">
-                    {item}
-                  </div>
-                ))}
-              </div>
             </div>
 
             <div className="rounded-3xl border border-white/10 bg-white p-6 text-foreground shadow-2xl md:p-8">
               <form onSubmit={handleSubmit}>
                 <div className="mb-8">
                   <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">Acceso clientes</p>
-                  <h2 className="mt-3 text-3xl font-semibold tracking-tight">Ingresar al portal</h2>
+                  <h2 className="mt-3 text-2xl font-semibold tracking-tight">Ingresar al portal</h2>
                   <p className="mt-2 text-sm text-muted-foreground">Usa el nombre de tu empresa o tu usuario asignado.</p>
                 </div>
 
@@ -734,11 +723,6 @@ const PortalGantt = ({ tasks }: { tasks: PortalTask[] }) => {
                   <span>{formatDate(range.start)}</span>
                   <span>{formatDate(range.end - DAY_MS)}</span>
                 </div>
-                {todayPosition !== null && (
-                  <span className="absolute top-3 -translate-x-1/2 rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-semibold text-red-600" style={{ left: `${todayPosition}%` }}>
-                    Hoy
-                  </span>
-                )}
               </div>
             </div>
             {Object.entries(groupedTasks).map(([phase, phaseTasks]) => (
@@ -765,12 +749,16 @@ const PortalGantt = ({ tasks }: { tasks: PortalTask[] }) => {
                         {todayPosition !== null && (
                           <div className="absolute inset-y-0 w-px bg-red-400" style={{ left: `${todayPosition}%` }} />
                         )}
-                        <div className="relative h-10 rounded-full bg-slate-100">
+                        <div className="relative h-10 rounded-full bg-slate-50">
                           <div
-                            className="absolute inset-y-1 overflow-hidden rounded-full border border-blue-200 bg-blue-50 shadow-sm"
+                            className="absolute inset-y-1 overflow-hidden rounded-full border border-blue-200 bg-gradient-to-r from-blue-100 to-cyan-100 shadow-sm"
                             style={{ left: `${position.left}%`, width: `${position.width}%` }}
                           >
-                            <div className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500" style={{ width: `${progress}%` }} />
+                            {progress > 0 ? (
+                              <div className="h-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500" style={{ width: `${progress}%` }} />
+                            ) : (
+                              <div className="h-full w-2 rounded-full bg-blue-300/70" />
+                            )}
                           </div>
                         </div>
                       </div>

@@ -11,6 +11,7 @@ const BpmnViewerPage = () => {
   const [session, setSession] = useState<EmpresaLogin | null>(null);
   const [portalData, setPortalData] = useState<PortalData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showDetails, setShowDetails] = useState(true);
 
   useEffect(() => {
     const savedSession = getPortalSession();
@@ -59,7 +60,7 @@ const BpmnViewerPage = () => {
   return (
     <main className="flex min-h-screen flex-col bg-slate-100 text-slate-950">
       <header className="border-b border-white/10 bg-slate-950 text-white">
-        <div className="container-tight flex min-h-16 flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex min-h-16 flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div className="flex items-center gap-4">
             <Link to="/portal" aria-label="Volver al portal">
               <img src="/logo-transparente.png" alt="Methodical" className="h-8 w-auto object-contain brightness-0 invert" />
@@ -70,6 +71,15 @@ const BpmnViewerPage = () => {
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white"
+              onClick={() => setShowDetails((current) => !current)}
+            >
+              {showDetails ? "Ocultar detalle" : "Mostrar detalle"}
+            </Button>
             {diagram.archivo_url && (
               <Button asChild variant="secondary" size="sm">
                 <a href={diagram.archivo_url} target="_blank" rel="noreferrer">Descargar fuente</a>
@@ -82,36 +92,39 @@ const BpmnViewerPage = () => {
         </div>
       </header>
 
-      <div className="container-tight grid flex-1 gap-5 py-5 xl:grid-cols-[320px_1fr]">
-        <aside className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Proceso</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight">{process?.nombre ?? diagram.nombre}</h2>
-          {process?.area && <p className="mt-2 text-sm text-slate-500">Área: {process.area}</p>}
-          {process?.descripcion && <p className="mt-4 text-sm leading-relaxed text-slate-600">{process.descripcion}</p>}
-
-          <div className="mt-6 space-y-3 text-sm">
-            <InfoRow label="Estado" value={process?.estado ?? "Publicado"} />
-            <InfoRow label="Responsable Methodical" value={process?.responsable_methodical ?? "Methodical"} />
-            <InfoRow label="Responsable cliente" value={process?.responsable_cliente ?? session.empresa} />
-            <InfoRow label="Archivo" value={diagram.archivo_path ?? "BPMN publicado"} />
-          </div>
-
-          <div className="mt-6 rounded-2xl bg-slate-950 p-4 text-white">
-            <p className="text-sm font-semibold">Revisión cómoda</p>
-            <p className="mt-2 text-sm leading-relaxed text-blue-50/70">
-              Usa los controles del visor para ajustar el diagrama. Esta pantalla está pensada para revisión en desktop o tablet horizontal.
-            </p>
-          </div>
-        </aside>
-
-        <section className="min-h-[calc(100vh-120px)] rounded-3xl bg-white p-3 shadow-sm ring-1 ring-slate-200">
+      <div className={`grid flex-1 gap-4 p-4 sm:p-6 lg:p-8 ${showDetails ? "xl:grid-cols-[minmax(0,1fr)_360px]" : "xl:grid-cols-1"}`}>
+        <section className="min-h-[calc(100vh-132px)] rounded-3xl bg-white p-3 shadow-sm ring-1 ring-slate-200">
           <BpmnViewer
             xmlUrl={diagram.archivo_url}
             title={diagram.nombre}
-            heightClassName="h-[calc(100vh-210px)] min-h-[620px]"
+            heightClassName="h-[calc(100vh-220px)] min-h-[680px]"
             className="h-full rounded-2xl"
+            initialZoom={0.85}
           />
         </section>
+
+        {showDetails && (
+          <aside className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200 xl:max-h-[calc(100vh-132px)] xl:overflow-y-auto">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-slate-400">Proceso</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight">{process?.nombre ?? diagram.nombre}</h2>
+            {process?.area && <p className="mt-2 text-sm text-slate-500">Área: {process.area}</p>}
+            {process?.descripcion && <p className="mt-4 text-sm leading-relaxed text-slate-600">{process.descripcion}</p>}
+
+            <div className="mt-6 space-y-3 text-sm">
+              <InfoRow label="Estado" value={process?.estado ?? "Publicado"} />
+              <InfoRow label="Responsable Methodical" value={process?.responsable_methodical ?? "Methodical"} />
+              <InfoRow label="Responsable cliente" value={process?.responsable_cliente ?? session.empresa} />
+              <InfoRow label="Archivo" value={diagram.archivo_path ?? "BPMN publicado"} />
+            </div>
+
+            <div className="mt-6 rounded-2xl bg-slate-950 p-4 text-white">
+              <p className="text-sm font-semibold">Controles de revisión</p>
+              <p className="mt-2 text-sm leading-relaxed text-blue-50/70">
+                Si necesitas ver el proceso completo, usa “Ajustar”. Si quieres leer tareas y compuertas, usa 100% o 115% y desplázate moviendo el canvas.
+              </p>
+            </div>
+          </aside>
+        )}
       </div>
     </main>
   );
