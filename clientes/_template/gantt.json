@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "periodo": {
+    "fecha_inicio": "2026-01-01",
+    "fecha_fin": "2026-03-31",
+    "zona_horaria": "America/Santiago"
+  },
+  "calculo_avance": {
+    "metodo": "promedio_ponderado",
+    "formula": "sum(tarea.progreso * tarea.peso) / sum(tarea.peso)",
+    "nota": "Actualiza progreso de 0 a 100 por tarea. El portal usa peso para calcular el porcentaje total."
+  },
+  "tareas": [
+    {
+      "id_git": "levantamiento-inicial",
+      "fase": "Levantamiento",
+      "titulo": "Levantamiento inicial",
+      "descripcion": "Reuniones y recopilación de información base.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-01-01",
+      "fecha_fin": "2026-01-10",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 1,
+      "dependencias": []
+    },
+    {
+      "id_git": "modelamiento-bpmn",
+      "fase": "Modelamiento",
+      "titulo": "Modelamiento BPMN",
+      "descripcion": "Diseño y validación del flujo operativo.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-01-11",
+      "fecha_fin": "2026-01-25",
+      "progreso": 0,
+      "peso": 2,
+      "orden": 2,
+      "dependencias": ["levantamiento-inicial"]
+    }
+  ]
+}

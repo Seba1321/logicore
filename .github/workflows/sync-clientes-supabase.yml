@@ -1,0 +1,44 @@
+name: Sync Clientes To Supabase
+
+on:
+  workflow_dispatch:
+    inputs:
+      cliente:
+        description: "Cliente slug opcional, ejemplo: maulemed-2026"
+        required: false
+        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - "clientes/**"
+      - "scripts/sync-clientes-supabase.mjs"
+      - "supabase-empresas-login.sql"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync client data
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_BPMN_BUCKET: bpmn
+        run: |
+          if [ -n "${{ github.event.inputs.cliente }}" ]; then
+            npm run sync:clientes -- "${{ github.event.inputs.cliente }}"
+          else
+            npm run sync:clientes
+          fi

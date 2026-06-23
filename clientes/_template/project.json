@@ -1,0 +1,11 @@
+{
+  "empresa": "Nombre de la empresa",
+  "usuario": "Usuario de acceso",
+  "proyecto": {
+    "nombre": "Nombre del proyecto",
+    "descripcion": "Descripción breve del alcance del proyecto.",
+    "estado": "planificacion",
+    "fecha_inicio": "2026-01-01",
+    "fecha_fin": "2026-03-31"
+  }
+}

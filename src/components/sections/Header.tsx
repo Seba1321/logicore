@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { name: "Inicio", href: "#inicio" },
@@ -77,7 +78,7 @@ export const Header = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-8">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.slice(1);
               return (
@@ -98,13 +99,19 @@ export const Header = () => {
                 </a>
               );
             })}
+            <Link
+              to="/portal"
+              className="rounded-lg border border-primary/20 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/5"
+            >
+              Acceso empresas
+            </Link>
             <a
               href="#contacto"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection("#contacto");
               }}
-              className="btn-hero text-sm py-2 px-6"
+              className="btn-hero text-sm py-2 px-5"
             >
               Contáctanos
             </a>
@@ -113,7 +120,7 @@ export const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-3 -mr-3 text-foreground"
+            className="lg:hidden p-3 -mr-3 text-foreground"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -128,7 +135,7 @@ export const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-t border-border"
+            className="lg:hidden bg-background border-t border-border"
           >
             <div className="container-tight py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -144,6 +151,13 @@ export const Header = () => {
                   {link.name}
                 </a>
               ))}
+              <Link
+                to="/portal"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-lg border border-primary/20 px-6 py-3 text-center font-medium text-primary transition-colors hover:bg-primary/5"
+              >
+                Acceso empresas
+              </Link>
               <a
                 href="#contacto"
                 onClick={(e) => {

@@ -1,0 +1,40 @@
+{
+  "procesos": [
+    {
+      "slug": "planificacion-control-financiero",
+      "nombre": "Planificación y Control Financiero",
+      "area": "Administración y Finanzas",
+      "estado": "modelado",
+      "responsable_methodical": "Methodical",
+      "responsable_cliente": "MauleMed",
+      "descripcion": "Flujos de caja diario, compras, pagos y control financiero levantados para revisión.",
+      "orden": 1,
+      "bpmn": [
+        {
+          "nombre": "Planificación y Control Financiero",
+          "descripcion": "Diagrama BPMN del proceso financiero de MauleMed.",
+          "archivo_path": "bpmn/Planificacion-y-Control-Financiero.bpmn",
+          "archivo_url": null
+        }
+      ]
+    },
+    {
+      "slug": "ciclo-vida-personal",
+      "nombre": "Ciclo de Vida del Personal",
+      "area": "Recursos Humanos",
+      "estado": "modelado",
+      "responsable_methodical": "Methodical",
+      "responsable_cliente": "MauleMed",
+      "descripcion": "Gestión del ciclo de vida del personal y cierre mensual de asistencia como insumo de remuneraciones.",
+      "orden": 2,
+      "bpmn": [
+        {
+          "nombre": "Ciclo de Vida del Personal",
+          "descripcion": "Diagrama BPMN del proceso de personas de MauleMed.",
+          "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal.bpmn",
+          "archivo_url": null
+        }
+      ]
+    }
+  ]
+}

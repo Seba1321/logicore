@@ -1,0 +1,22 @@
+{
+  "procesos": [
+    {
+      "slug": "proceso-principal",
+      "nombre": "Proceso principal",
+      "area": "Operaciones",
+      "estado": "identificado",
+      "responsable_methodical": "Methodical",
+      "responsable_cliente": "Cliente",
+      "descripcion": "Proceso levantado durante la primera etapa.",
+      "orden": 1,
+      "bpmn": [
+        {
+          "nombre": "Proceso principal",
+          "descripcion": "Diagrama BPMN del proceso principal.",
+          "archivo_path": "bpmn/proceso-principal.bpmn",
+          "archivo_url": null
+        }
+      ]
+    }
+  ]
+}

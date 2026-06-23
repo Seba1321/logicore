@@ -1,0 +1,14 @@
+{
+  "hallazgos": [
+    {
+      "proceso_slug": "proceso-principal",
+      "titulo": "Hallazgo de ejemplo",
+      "descripcion": "Describe el problema, riesgo u oportunidad observada.",
+      "impacto": "Impacto operativo esperado.",
+      "recomendacion": "Acción recomendada por Methodical.",
+      "prioridad": "media",
+      "estado": "abierto",
+      "orden": 1
+    }
+  ]
+}

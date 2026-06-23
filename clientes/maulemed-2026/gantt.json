@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "periodo": {
+    "fecha_inicio": "2026-06-22",
+    "fecha_fin": "2026-07-24",
+    "zona_horaria": "America/Santiago"
+  },
+  "calculo_avance": {
+    "metodo": "promedio_ponderado",
+    "formula": "sum(tarea.progreso * tarea.peso) / sum(tarea.peso)",
+    "nota": "Actualiza progreso de 0 a 100 por tarea. El portal calcula el avance total con el peso relativo de cada tarea."
+  },
+  "tareas": [
+    {
+      "id_git": "bpmn-iniciales",
+      "fase": "BPMN",
+      "titulo": "Modelamiento BPMN inicial",
+      "descripcion": "Construcción de los primeros diagramas BPMN del levantamiento para alinear flujo actual y puntos de decisión.",
+      "estado": "en_desarrollo",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-06-22",
+      "fecha_fin": "2026-06-26",
+      "progreso": 0,
+      "peso": 2,
+      "orden": 1,
+      "dependencias": []
+    },
+    {
+      "id_git": "feedback-bpmn",
+      "fase": "BPMN",
+      "titulo": "Recepción y revisión de feedback BPMN",
+      "descripcion": "Recepción de comentarios del cliente sobre los BPMN iniciales y registro de ajustes requeridos.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2026-06-26",
+      "fecha_fin": "2026-06-28",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 2,
+      "dependencias": ["bpmn-iniciales"]
+    },
+    {
+      "id_git": "analisis-hammer",
+      "fase": "Hammer",
+      "titulo": "Análisis Hammer del proceso",
+      "descripcion": "Aplicación de enfoque Hammer de reingeniería: cuestionar supuestos, identificar quiebres, actividades sin valor y oportunidades de rediseño radical o simplificación.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-06-29",
+      "fecha_fin": "2026-07-05",
+      "progreso": 0,
+      "peso": 2,
+      "orden": 3,
+      "dependencias": ["feedback-bpmn"]
+    },
+    {
+      "id_git": "modelamiento-procesos",
+      "fase": "Modelamiento",
+      "titulo": "Modelamiento de procesos priorizados",
+      "descripcion": "Modelamiento detallado de los procesos priorizados, incorporando hallazgos del levantamiento y criterios del análisis Hammer.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-07-03",
+      "fecha_fin": "2026-07-17",
+      "progreso": 0,
+      "peso": 3,
+      "orden": 4,
+      "dependencias": ["bpmn-iniciales", "analisis-hammer"]
+    },
+    {
+      "id_git": "feedback-hammer",
+      "fase": "Hammer",
+      "titulo": "Feedback del análisis Hammer",
+      "descripcion": "Presentación de hallazgos Hammer, recepción de feedback y priorización de ajustes al modelamiento.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2026-07-06",
+      "fecha_fin": "2026-07-12",
+      "progreso": 0,
+      "peso": 1.5,
+      "orden": 5,
+      "dependencias": ["analisis-hammer"]
+    },
+    {
+      "id_git": "ajustes-consolidacion",
+      "fase": "Cierre",
+      "titulo": "Ajustes y consolidación del levantamiento",
+      "descripcion": "Incorporación de feedback, cierre de pendientes y preparación de insumos para el informe final.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-07-18",
+      "fecha_fin": "2026-07-23",
+      "progreso": 0,
+      "peso": 1.5,
+      "orden": 6,
+      "dependencias": ["modelamiento-procesos", "feedback-hammer"]
+    },
+    {
+      "id_git": "entrega-informe-final",
+      "fase": "Cierre",
+      "titulo": "Entrega de informe final",
+      "descripcion": "Entrega del informe final de levantamiento, modelamiento y oportunidades detectadas.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-07-24",
+      "fecha_fin": "2026-07-24",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 7,
+      "dependencias": ["ajustes-consolidacion"]
+    }
+  ]
+}
