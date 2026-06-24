@@ -61,6 +61,9 @@ const formatDate = (value: string | number | null) => {
   }).format(date);
 };
 
+const formatDayMonth = (value: number) =>
+  new Intl.DateTimeFormat("es-CL", { day: "2-digit", month: "short" }).format(new Date(value));
+
 const formatStatus = (value: string) =>
   value
     .replace(/_/g, " ")
@@ -192,16 +195,6 @@ const getExpectedTaskProgress = (task: PortalTask, today: number) => {
   if (today <= start) return 0;
   if (today >= endExclusive) return 100;
   return clampProgress(((today - start) / (endExclusive - start)) * 100);
-};
-
-const getExpectedProgress = (tasks: PortalTask[], today: number) => {
-  const totalWeight = tasks.reduce((total, task) => total + (Number(task.peso) || 1), 0);
-  if (!tasks.length || !totalWeight) return 0;
-  const weighted = tasks.reduce(
-    (total, task) => total + getExpectedTaskProgress(task, today) * (Number(task.peso) || 1),
-    0
-  );
-  return Math.round(weighted / totalWeight);
 };
 
 const TIMING_META: Record<TaskTiming, { label: string; bar: string; pill: string; dot: string }> = {
@@ -543,8 +536,6 @@ const ChartsPanel = ({
   progress: number;
 }) => {
   const today = getTodayTime();
-  const expected = getExpectedProgress(tasks, today);
-  const onTrack = progress >= expected;
   const counts: Record<TaskTiming, number> = { en_curso: 0, proxima: 0, atrasada: 0, completada: 0 };
   tasks.forEach((task) => {
     counts[getTaskTiming(task, today)]++;
@@ -579,36 +570,19 @@ const ChartsPanel = ({
               <p className="font-display text-5xl font-bold tracking-tight tabular-nums">
                 <CountUp value={progress} suffix="%" />
               </p>
-              <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">avance real</p>
+              <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">avance</p>
             </div>
           </div>
-          <div className="mt-4 flex items-center justify-between rounded-sm border border-slate-200 bg-white px-3 py-2">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Esperado hoy</span>
-            <span className="font-semibold tabular-nums text-slate-800">{expected}%</span>
-          </div>
-          <p className={`mt-2 text-center text-xs font-medium ${onTrack ? "text-emerald-600" : "text-amber-600"}`}>
-            {onTrack ? "Al día con el calendario" : `${expected - progress} pts bajo lo esperado`}
-          </p>
         </div>
 
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="grid grid-cols-3 gap-3">
             <PlanTile timing="en_curso" value={counts.en_curso} />
             <PlanTile timing="proxima" value={counts.proxima} />
-            <PlanTile timing="atrasada" value={counts.atrasada} />
             <PlanTile timing="completada" value={counts.completada} />
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <div className="rounded-sm border border-slate-200 bg-slate-50 p-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">Avance vs calendario</p>
-              <div className="mt-5 space-y-4">
-                <CompareBar label="Real" value={progress} color="bg-blue-600" />
-                <CompareBar label="Esperado hoy" value={expected} color="bg-slate-400" />
-              </div>
-            </div>
-            <MiniBarChart title="Procesos por estado" data={processStatusData} />
-          </div>
+          <MiniBarChart title="Procesos por estado" data={processStatusData} />
 
           <div className="rounded-sm border border-white/10 bg-[#071330] p-5 text-white">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-blue-100/70">Foco actual</p>
@@ -648,24 +622,6 @@ const PlanTile = ({ timing, value }: { timing: TaskTiming; value: number }) => {
     </div>
   );
 };
-
-const CompareBar = ({ label, value, color }: { label: string; value: number; color: string }) => (
-  <div>
-    <div className="mb-1.5 flex items-center justify-between text-xs">
-      <span className="font-mono uppercase tracking-wider text-slate-500">{label}</span>
-      <span className="font-semibold tabular-nums text-slate-700">{value}%</span>
-    </div>
-    <div className="h-2 rounded-sm bg-slate-200">
-      <motion.div
-        className={`h-2 rounded-sm ${color}`}
-        initial={{ width: 0 }}
-        whileInView={{ width: `${value}%` }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      />
-    </div>
-  </div>
-);
 
 const MiniBarChart = ({ title, data }: { title: string; data: Array<{ name: string; value: number }> }) => (
   <div className="rounded-sm bg-slate-50 p-5">
@@ -885,17 +841,20 @@ const PortalGantt = ({ tasks }: { tasks: PortalTask[] }) => {
           <div className="min-w-[1180px]">
             <div className="grid grid-cols-[340px_1fr] border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-widest text-slate-500">
               <div className="p-4">Tarea</div>
-              <div className="relative p-4">
+              <div className="relative px-4 pt-4 pb-9">
                 <div className="flex justify-between pr-2">
                   <span>{formatDate(range.start)}</span>
                   <span>{formatDate(range.end - DAY_MS)}</span>
                 </div>
                 {todayPosition !== null && (
                   <span
-                    className="absolute bottom-1 -translate-x-1/2 font-mono text-[9px] font-semibold uppercase tracking-wider text-red-500"
+                    className={`absolute bottom-1.5 inline-flex items-center gap-1 whitespace-nowrap rounded-sm bg-red-500 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-white shadow-sm ${
+                      todayPosition > 80 ? "-translate-x-full" : todayPosition < 8 ? "translate-x-0" : "-translate-x-1/2"
+                    }`}
                     style={{ left: `${todayPosition}%` }}
                   >
-                    hoy
+                    <span className="h-1 w-1 rounded-full bg-white" />
+                    Hoy · {formatDayMonth(today)}
                   </span>
                 )}
               </div>
@@ -976,9 +935,11 @@ const TimingPill = ({ timing }: { timing: TaskTiming }) => {
 };
 
 const EmptyPanel = ({ title, text, compact = false }: { title: string; text: string; compact?: boolean }) => (
-  <div className={`rounded-sm border border-dashed border-slate-300 bg-slate-50 text-center ${compact ? "p-4" : "p-8"}`}>
-    <p className="font-semibold text-slate-700">{title}</p>
-    <p className="mt-1 text-sm text-slate-500">{text}</p>
+  <div className={`relative rounded-sm border border-dashed border-slate-300 bg-slate-50 text-center ${compact ? "p-5" : "p-10"}`}>
+    <CornerTicks className="text-slate-300" />
+    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-400">— Sin datos</p>
+    <p className="mt-3 font-display text-base font-semibold tracking-tight text-slate-800">{title}</p>
+    <p className="mt-2 text-sm leading-relaxed text-slate-500">{text}</p>
   </div>
 );
 

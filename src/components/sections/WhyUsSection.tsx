@@ -1,26 +1,32 @@
-import { motion } from "framer-motion";
-import { Building2, Lightbulb, Briefcase, Users, Rocket } from "lucide-react";
+import { Briefcase, Building2, Lightbulb, Users } from "lucide-react";
+
+import { CornerTicks, Reveal } from "@/components/portal/technical";
+import { SectionHeader } from "./shared";
 
 const reasons = [
   {
+    number: "01",
     icon: Building2,
     title: "Enfoque en PYMEs",
     description:
       "Entendemos los desafíos de empresas en crecimiento. Soluciones a tu medida, no paquetes genéricos.",
   },
   {
+    number: "02",
     icon: Lightbulb,
     title: "Soluciones simples",
     description:
       "Tecnología que resuelve problemas reales sin agregar complejidad innecesaria a tu operación.",
   },
   {
+    number: "03",
     icon: Briefcase,
     title: "Criterio de negocio",
     description:
       "No solo implementamos herramientas. Pensamos en el impacto real que tendrán en tu empresa.",
   },
   {
+    number: "04",
     icon: Users,
     title: "Acompañamiento cercano",
     description:
@@ -30,65 +36,48 @@ const reasons = [
 
 export const WhyUsSection = () => {
   return (
-    <section id="porque" className="section-padding">
-      <div className="container-tight">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="heading-section text-foreground mb-6">
-              ¿Por qué elegir Methodical?
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              No somos una agencia más. Somos un equipo que entiende que cada
-              peso invertido en tecnología debe generar retorno real. Por eso,
-              antes de proponer cualquier solución, nos tomamos el tiempo de
-              entender tu negocio.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-6 sm:p-8 bg-secondary rounded-xl text-center sm:text-left">
-              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Rocket className="w-8 h-8 text-primary" />
-              </div>
-              <div>
-                <p className="font-semibold text-foreground leading-relaxed sm:leading-snug">
-                  Un equipo joven que combina innovación con conocimiento sólido y formación de alto nivel.
-                </p>
-              </div>
-            </div>
-          </motion.div>
+    <section
+      id="porque"
+      className="relative overflow-hidden bg-[#03060f] py-24 text-white md:py-32"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#03060f_0%,#071330_55%,#0c2a78_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-grid-dark opacity-40" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_45%_at_50%_30%,rgba(96,150,255,0.18),transparent_65%)]" />
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid sm:grid-cols-2 gap-6"
-          >
-            {reasons.map((reason, index) => (
-              <motion.div
-                key={reason.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 bg-card rounded-xl border border-border hover:border-primary/20 transition-colors"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <reason.icon className="w-5 h-5 text-primary" />
+      <div className="container-tight relative">
+        <SectionHeader
+          index="04"
+          eyebrow="Por qué Methodical"
+          title="Tecnología con criterio de negocio"
+          lead="No somos una agencia más. Antes de proponer cualquier solución nos tomamos el tiempo de entender tu operación, tus objetivos y los recursos con los que cuentas."
+          tone="dark"
+        />
+
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {reasons.map((reason, index) => (
+            <Reveal key={reason.title} delay={index * 0.06}>
+              <article className="group relative h-full rounded-sm border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-colors hover:border-blue-400/50">
+                <CornerTicks className="text-white/15 transition-colors group-hover:text-blue-300/60" />
+
+                <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-blue-200/70">
+                  {reason.number}
+                </span>
+
+                <div className="mt-6 inline-flex h-11 w-11 items-center justify-center rounded-sm border border-white/15 text-blue-100 transition-colors group-hover:border-blue-300/60 group-hover:text-white">
+                  <reason.icon size={20} strokeWidth={1.6} />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">
+
+                <h3 className="mt-6 font-display text-lg font-semibold tracking-tight text-white">
                   {reason.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="mt-3 text-sm leading-relaxed text-blue-50/65">
                   {reason.description}
                 </p>
-              </motion.div>
-            ))}
-          </motion.div>
+              </article>
+            </Reveal>
+          ))}
         </div>
+
       </div>
     </section>
   );

@@ -21,13 +21,13 @@ export const HeroSection = () => {
       {/* Crisp particle field */}
       <ParticleNetwork className="opacity-90" particleCount={120} speed={0.3} />
 
-      <div className="container-tight relative z-10">
-        <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
+      <div className="container-tight relative z-10 w-full px-4 py-24 sm:py-28 lg:py-32">
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-balance font-display text-[clamp(2.6rem,8vw,7rem)] font-semibold leading-[0.98] tracking-tight text-white [text-shadow:0_0_45px_rgba(130,175,255,0.3)]"
+            className="text-balance font-display text-[clamp(2.25rem,5.5vw,4.75rem)] font-semibold leading-[1.02] tracking-tight text-white [text-shadow:0_0_45px_rgba(130,175,255,0.3)]"
           >
             Impulsa tu productividad con tecnología inteligente
           </motion.h1>
@@ -36,7 +36,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18 }}
-            className="mt-8 max-w-lg text-base leading-relaxed text-blue-100/70 sm:text-lg"
+            className="mt-6 max-w-lg text-base leading-relaxed text-blue-100/70 sm:mt-8 sm:text-lg"
           >
             Ordena, automatiza y escala la operación de tu empresa con soluciones
             digitales simples y efectivas.
@@ -46,7 +46,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-11 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row sm:gap-0 sm:overflow-hidden sm:rounded-md"
+            className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:gap-0 sm:overflow-hidden sm:rounded-md"
           >
             <button
               onClick={() => scrollTo("#contacto")}

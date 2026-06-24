@@ -1,22 +1,27 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const navLinks = [
+type NavLink = { name: string; href: string; route?: boolean };
+
+const navLinks: NavLink[] = [
   { name: "Inicio", href: "#inicio" },
   { name: "Servicios", href: "#servicios" },
-  { name: "Proyectos", href: "#proyectos" },
-  { name: "Equipo", href: "#equipo" },
+  { name: "Proyectos", href: "/proyectos", route: true },
+  { name: "Equipo", href: "/equipo", route: true },
   { name: "Por qué Methodical", href: "#porque" },
 ];
 
-const sectionIds = navLinks.map((l) => l.href.slice(1));
+const sectionIds = navLinks.filter((l) => !l.route).map((l) => l.href.slice(1));
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +50,10 @@ export const Header = () => {
 
   const scrollToSection = (href: string) => {
     setIsMobileMenuOpen(false);
+    if (!isHome) {
+      navigate(`/${href}`);
+      return;
+    }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -83,7 +92,23 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-5 lg:flex xl:gap-8">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.slice(1);
+              const isActive = !link.route && activeSection === link.href.slice(1);
+              const linkClass = `text-sm font-medium transition-colors duration-200 ${
+                isActive
+                  ? onHero
+                    ? "border-b-2 border-blue-400 pb-0.5 text-white"
+                    : "border-b-2 border-blue-600 pb-0.5 font-semibold text-foreground"
+                  : onHero
+                    ? "text-white/70 hover:text-white"
+                    : "text-muted-foreground hover:text-foreground"
+              }`;
+              if (link.route) {
+                return (
+                  <Link key={link.name} to={link.href} className={linkClass}>
+                    {link.name}
+                  </Link>
+                );
+              }
               return (
                 <a
                   key={link.name}
@@ -92,15 +117,7 @@ export const Header = () => {
                     e.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className={`text-sm font-medium transition-colors duration-200 ${
-                    isActive
-                      ? onHero
-                        ? "border-b-2 border-blue-400 pb-0.5 text-white"
-                        : "border-b-2 border-blue-600 pb-0.5 font-semibold text-foreground"
-                      : onHero
-                        ? "text-white/70 hover:text-white"
-                        : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={linkClass}
                 >
                   {link.name}
                 </a>
@@ -149,19 +166,30 @@ export const Header = () => {
             className="border-t border-border bg-background lg:hidden"
           >
             <div className="container-tight flex flex-col gap-4 py-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(link.href);
-                  }}
-                  className="py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.route ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.href);
+                    }}
+                    className="py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
               <Link
                 to="/portal"
                 onClick={() => setIsMobileMenuOpen(false)}

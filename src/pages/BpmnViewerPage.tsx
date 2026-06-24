@@ -174,10 +174,14 @@ const InfoRow = ({ label, value }: { label: string; value: string }) => (
 );
 
 const FullPageState = ({ text, action }: { text: string; action?: React.ReactNode }) => (
-  <main className="flex min-h-screen items-center justify-center bg-[#071330] p-6 text-white">
-    <div className="max-w-md rounded-sm border border-white/10 bg-white/10 p-8 text-center backdrop-blur-sm">
+  <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#03060f] p-6 text-white">
+    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#03060f_0%,#071330_60%,#0c2a78_100%)]" />
+    <div className="pointer-events-none absolute inset-0 bg-grid-dark opacity-40" />
+    <div className="relative max-w-md rounded-sm border border-white/15 bg-white/[0.04] p-8 text-center backdrop-blur-sm">
+      <CornerTicks className="text-white/20" />
       <img src="/logo-transparente.png" alt="Methodical" className="mx-auto h-10 w-auto object-contain brightness-0 invert" />
-      <p className="mt-6 text-lg font-semibold">{text}</p>
+      <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.3em] text-blue-200/60">— Visor BPMN</p>
+      <p className="mt-3 font-display text-lg font-semibold tracking-tight text-white">{text}</p>
       {action && <div className="mt-6">{action}</div>}
     </div>
   </main>

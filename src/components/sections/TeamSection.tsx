@@ -1,229 +1,91 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-interface TeamMember {
-  id: number;
-  name: string;
-  role: string;
-  photo: string;
-  email: string;
-  specialty: string;
-  bio: string;
-  experience: string[];
-  linkedin?: string;
-}
+import { CornerTicks, Reveal } from "@/components/portal/technical";
+import { team } from "@/data/team";
+import { SectionHeader } from "./shared";
 
-const team: TeamMember[] = [
-  {
-    id: 1,
-    name: "José Tomás Robert",
-    role: "Cofounder & Director de Tecnología",
-    email: "jt@methodical.cl",
-    photo: "/team/Robert.jpeg",
-    specialty: "Automatización de procesos organizacionales - Análisis estratégico de datos - Diseño de soluciones tecnológicas para optimización operativa",
-    bio: "Titulado en Filosofía, Política y Economía (PPE) por la Universidad de Navarra, especializado en la intersección entre tecnología, ciencias sociales y economía aplicada. Me enfoco en diseñar soluciones tecnológicas para comprender y optimizar sistemas complejos, integrando modelización computacional, simulación estratégica y automatización para mejorar procesos y apoyar la toma de decisiones basada en datos.",
-    experience: [
-      "Automatización y optimización de procesos organizacionales",
-      "Integración de herramientas tecnológicas para análisis y toma de decisiones",
-      "Diseño de soluciones digitales orientadas a eficiencia operativa y coordinación estratégica",
-    ],
-    linkedin: "https://www.linkedin.com/in/joserobertpalma",
-  },
-  {
-    id: 2,
-    name: "Benjamín Castro",
-    role: "Cofounder Especialista en Proyectos y Tecnología",
-    email: "benja@methodical.cl",
-    photo: "/team/Benja.png",
-    specialty: "Gestión de proyectos - Optimización de procesos - Transformación digital",
-    bio: "Ingeniero Civil Industrial con diploma en Tecnologías de la Información de la Pontificia Universidad Católica de Chile. Combina visión estratégica de negocios con capacidades técnicas para transformar datos y procesos en decisiones inteligentes. Su enfoque está en diseñar soluciones eficientes, escalables y orientadas a generar impacto real en las organizaciones.",
-    experience: [
-      "Formación en Gestión y Evaluación de Proyectos",
-      "Optimización y modelamiento de procesos",
-      "Análisis de datos y automatización",
-      "Desarrollo de soluciones tecnológicas y Web",
-    ],
-    linkedin: "https://www.linkedin.com/in/benjamíncastrom",
-  },
-  {
-    id: 3,
-    name: "Sebastián Azócar",
-    role: "Cofounder Especialista en Procesos y Finanzas",
-    email: "seba@methodical.cl",
-    photo: "/team/Azocar.jpeg",
-    specialty: "Transformación digital - Desarrollo de soluciones tecnológicas - Optimización de procesos basada en datos.",
-    bio: "Ingeniero Civil Industrial con diplomado en Tecnologías de la Información y Magíster en Ingeniería Industrial de la Pontificia Universidad Católica de Chile. Especializado en el desarrollo de soluciones tecnológicas orientadas al negocio, combinando conocimientos en ingeniería, análisis de datos y desarrollo de software.",
-    experience: [
-      "Desarrollo de aplicaciones y plataformas web",
-      "Análisis de datos y modelamiento avanzado",
-      "Levantamiento, rediseño y optimización de procesos",
-      "Process Mining",
-    ],
-    linkedin: "https://www.linkedin.com/in/sebastian-azocar-24207b20b?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
-  },
-];
+const previewSize = 4;
 
 export const TeamSection = () => {
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const preview = team.slice(0, previewSize);
 
   return (
-    <section id="equipo" className="section-padding bg-secondary">
+    <section id="equipo" className="relative bg-slate-50 py-24 md:py-32">
       <div className="container-tight">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="heading-section text-foreground mb-4">
-            Quiénes somos
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Un equipo cercano, con experiencia real en empresas como la tuya.
-          </p>
-        </motion.div>
+        <SectionHeader
+          index="03"
+          eyebrow="Equipo"
+          title="Quiénes somos"
+          lead="Somos un equipo joven con formación de alto nivel y experiencia real resolviendo problemas en empresas y organizaciones. Combinamos energía, criterio técnico y mirada de negocio."
+        />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {team.map((member, index) => (
-            <motion.div
-              key={member.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onClick={() => setSelectedMember(member)}
-              className="group cursor-pointer"
-            >
-              <div className="bg-card rounded-xl overflow-hidden card-hover h-full flex flex-col">
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-5 text-center flex-grow flex flex-col justify-center">
-                  <h3 className="font-semibold text-foreground mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{member.role}</p>
-                </div>
+        <div className="mt-14 grid items-stretch gap-8 lg:grid-cols-[1.05fr_1fr]">
+          <Reveal>
+            <div className="relative flex h-full flex-col justify-between rounded-sm border border-slate-200 bg-white p-8 md:p-10">
+              <CornerTicks className="text-slate-200" />
+
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-blue-600">
+                  — Nuestro enfoque
+                </p>
+                <p className="mt-5 font-display text-2xl font-semibold leading-snug tracking-tight text-slate-950 md:text-3xl">
+                  Equipo joven, formación sólida y obsesión por resolver problemas reales.
+                </p>
+                <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-500">
+                  Cada proyecto lo lideran personas con experiencia técnica y criterio de
+                  negocio. Trabajamos contigo, no para ti.
+                </p>
               </div>
-            </motion.div>
-          ))}
-        </div>
 
-        {/* Team Member Modal */}
-        <AnimatePresence>
-          {selectedMember && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-foreground/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setSelectedMember(null)}
+              <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-slate-100 pt-6">
+                <Link
+                  to="/equipo"
+                  className="group inline-flex items-center gap-2 rounded-sm bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-500"
+                >
+                  Conoce al equipo
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </Link>
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400">
+                  {team.length.toString().padStart(2, "0")} personas · Santiago, Chile
+                </span>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <Link
+              to="/equipo"
+              className="group relative block h-full overflow-hidden rounded-sm border border-slate-200 bg-white"
             >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ duration: 0.3 }}
-                onClick={(e) => e.stopPropagation()}
-                className="bg-card rounded-2xl max-w-3xl w-full overflow-hidden max-h-[90vh] overflow-y-auto"
-              >
-                <div className="flex flex-col md:flex-row h-full">
-                  <div className="w-full md:w-5/12 flex-shrink-0 aspect-[4/3] sm:aspect-square md:aspect-auto md:min-h-[500px]">
+              <CornerTicks className="z-10 text-slate-200 transition-colors group-hover:text-blue-500" />
+
+              <div className="grid h-full grid-cols-2 gap-px bg-slate-200">
+                {preview.map((member) => (
+                  <div key={member.id} className="relative aspect-square overflow-hidden bg-slate-100">
                     <img
-                      src={selectedMember.photo}
-                      alt={selectedMember.name}
+                      src={member.photo}
+                      alt={member.name}
                       loading="lazy"
-                      className="w-full h-full object-cover object-center"
+                      className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:scale-[1.03] group-hover:grayscale-0"
                     />
+                    <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3">
+                      <span className="block font-mono text-[9px] uppercase tracking-[0.2em] text-white/70">
+                        {String(member.id).padStart(2, "0")} · {member.tag}
+                      </span>
+                      <span className="mt-1 block font-display text-sm font-semibold text-white">
+                        {member.name}
+                      </span>
+                    </span>
                   </div>
-                  <div className="w-full md:w-7/12 p-6 sm:p-8 flex flex-col justify-center">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground">
-                          {selectedMember.name}
-                        </h3>
-                        <p className="text-primary font-medium text-sm">
-                          {selectedMember.role}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => setSelectedMember(null)}
-                        className="p-2 hover:bg-secondary rounded-lg transition-colors flex-shrink-0"
-                      >
-                        <X size={20} className="text-muted-foreground" />
-                      </button>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-                          Especialidad
-                        </p>
-                        <p className="text-foreground text-sm">
-                          {selectedMember.specialty}
-                        </p>
-                      </div>
-
-                      <div>
-                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-                          Sobre mí
-                        </p>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {selectedMember.bio}
-                        </p>
-                      </div>
-
-                      <div>
-                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                          Experiencia
-                        </p>
-                        <ul className="space-y-1">
-                          {selectedMember.experience.map((exp, i) => (
-                            <li
-                              key={i}
-                              className="text-sm text-muted-foreground flex items-start gap-2"
-                            >
-                              <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 flex-shrink-0" />
-                              {exp}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="flex gap-3 pt-2">
-                        {selectedMember.linkedin && (
-                          <a
-                            href={selectedMember.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors"
-                            aria-label="LinkedIn"
-                          >
-                            <Linkedin size={18} className="text-primary" />
-                          </a>
-                        )}
-                        <a
-                          href={`mailto:${selectedMember.email}`}
-                          className="p-2 bg-secondary rounded-lg hover:bg-primary/10 transition-colors"
-                          aria-label="Enviar email"
-                        >
-                          <Mail size={18} className="text-primary" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                ))}
+              </div>
+            </Link>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
