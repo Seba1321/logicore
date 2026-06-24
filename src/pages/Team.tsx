@@ -259,12 +259,6 @@ const MemberCard = ({ member, onClick }: { member: TeamMember; onClick: () => vo
         <span className="h-1 w-1 rounded-full bg-blue-500" />
         {String(member.id).padStart(2, "0")} · {member.tag}
       </span>
-      {member.available && (
-        <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-sm border border-emerald-300/50 bg-emerald-400/15 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-50 backdrop-blur-sm">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-300" />
-          Disponible
-        </span>
-      )}
     </div>
 
     <div className="relative border-t border-slate-200 p-5">
