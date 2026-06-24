@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Linkedin, X } from "lucide-react";
 
@@ -18,13 +18,6 @@ const Team = () => {
   });
 
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-  const [activeTab, setActiveTab] = useState<"Todos" | "Cofounders" | "Equipo">("Todos");
-
-  const cofounders = useMemo(() => team.filter((member) => member.tag === "Cofounder"), []);
-  const others = useMemo(() => team.filter((member) => member.tag !== "Cofounder"), []);
-
-  const showCofounders = activeTab === "Todos" || activeTab === "Cofounders";
-  const showOthers = activeTab === "Todos" || activeTab === "Equipo";
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-950">
@@ -45,78 +38,14 @@ const Team = () => {
         </div>
       </section>
 
-      <main className="container-tight space-y-20 py-12 md:space-y-24 md:py-16">
-        <Reveal>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-b border-slate-200 pb-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-400">
-              Filtrar
-            </span>
-            {(["Todos", "Cofounders", "Equipo"] as const).map((tab) => {
-              const active = activeTab === tab;
-              return (
-                <button
-                  key={tab}
-                  type="button"
-                  onClick={() => setActiveTab(tab)}
-                  className={`relative font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
-                    active ? "text-blue-700" : "text-slate-500 hover:text-slate-900"
-                  }`}
-                >
-                  {tab}
-                  {active && (
-                    <motion.span
-                      layoutId="team-filter-underline"
-                      className="absolute -bottom-4 left-0 right-0 h-px bg-blue-600"
-                    />
-                  )}
-                </button>
-              );
-            })}
-            <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">
-              {team.length.toString().padStart(2, "0")} personas
-            </span>
-          </div>
-        </Reveal>
-
-        {showCofounders && (
-          <section className="pt-12">
-            <SubsectionHeader
-              index="02"
-              eyebrow="Cofounders"
-              title="Los fundadores"
-              lead="Tres perfiles complementarios: tecnología, gestión de proyectos y procesos."
-              count={`${cofounders.length.toString().padStart(2, "0")} / ${team.length.toString().padStart(2, "0")}`}
-            />
-
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {cofounders.map((member, index) => (
-                <Reveal key={member.id} delay={index * 0.08}>
-                  <MemberCard member={member} onClick={() => setSelectedMember(member)} />
-                </Reveal>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {showOthers && others.length > 0 && (
-          <section>
-            <SubsectionHeader
-              index="03"
-              eyebrow="Equipo"
-              title="Quienes hacen las cosas posibles"
-              lead="Ingeniería, desarrollo y operación. El equipo técnico que ejecuta cada proyecto."
-              count={`${others.length.toString().padStart(2, "0")} / ${team.length.toString().padStart(2, "0")}`}
-            />
-
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {others.map((member, index) => (
-                <Reveal key={member.id} delay={index * 0.08}>
-                  <MemberCard member={member} onClick={() => setSelectedMember(member)} />
-                </Reveal>
-              ))}
-            </div>
-          </section>
-        )}
+      <main className="container-tight py-12 md:py-16">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {team.map((member, index) => (
+            <Reveal key={member.id} delay={index * 0.08}>
+              <MemberCard member={member} onClick={() => setSelectedMember(member)} />
+            </Reveal>
+          ))}
+        </div>
       </main>
 
       <Footer />
@@ -207,38 +136,6 @@ const Team = () => {
     </div>
   );
 };
-
-const SubsectionHeader = ({
-  index,
-  eyebrow,
-  title,
-  lead,
-  count,
-}: {
-  index: string;
-  eyebrow: string;
-  title: string;
-  lead: string;
-  count: string;
-}) => (
-  <Reveal>
-    <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-      <div className="flex flex-col gap-4">
-        <p className="inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.3em] text-slate-400">
-          <span className="h-1 w-1 rounded-full bg-blue-500" />
-          {index} — {eyebrow}
-        </p>
-        <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[1.05] tracking-tight text-slate-950">
-          {title}
-        </h2>
-        <p className="max-w-xl text-sm leading-relaxed text-slate-500 sm:text-base">{lead}</p>
-      </div>
-      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">
-        {count}
-      </span>
-    </div>
-  </Reveal>
-);
 
 const MemberCard = ({ member, onClick }: { member: TeamMember; onClick: () => void }) => (
   <button

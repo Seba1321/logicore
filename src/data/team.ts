@@ -9,7 +9,6 @@ export interface TeamMember {
   bio: string;
   experience: string[];
   linkedin?: string;
-  available?: boolean;
 }
 
 export const team: TeamMember[] = [
@@ -29,7 +28,6 @@ export const team: TeamMember[] = [
       "Diseño de soluciones digitales orientadas a eficiencia operativa y coordinación estratégica",
     ],
     linkedin: "https://www.linkedin.com/in/joserobertpalma",
-    available: true,
   },
   {
     id: 2,
@@ -47,7 +45,6 @@ export const team: TeamMember[] = [
       "Desarrollo de soluciones tecnológicas y Web",
     ],
     linkedin: "https://www.linkedin.com/in/benjamíncastrom",
-    available: true,
   },
   {
     id: 3,
@@ -67,7 +64,6 @@ export const team: TeamMember[] = [
     ],
     linkedin:
       "https://www.linkedin.com/in/sebastian-azocar-24207b20b?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
-    available: true,
   },
   {
     id: 4,
@@ -85,6 +81,5 @@ export const team: TeamMember[] = [
       "Inteligencia artificial y análisis de datos aplicado al negocio",
       "Infraestructura cloud y automatización",
     ],
-    available: true,
   },
 ];
