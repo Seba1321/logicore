@@ -1,26 +1,26 @@
 {
   "procesos": [
     {
-      "slug": "planificacion-control-financiero",
-      "nombre": "Planificación y Control Financiero",
-      "area": "Administración y Finanzas",
+      "slug": "gestion-abastecimiento-inventario",
+      "nombre": "Gestión de Abastecimiento e Inventario",
+      "area": "Operaciones",
       "estado": "modelado",
-      "responsable_methodical": "José Tomás Robert",
-      "responsable_cliente": "Liz Bravo",
-      "descripcion": "Flujos de caja diario, compras, pagos y control financiero levantados para revisión.",
+      "responsable_methodical": "Sebastián Azócar",
+      "responsable_cliente": "Gabriela Morales",
+      "descripcion": "Compras, abastecimiento y control de inventario entre Casa Matriz, sucursales y gerencia.",
       "orden": 1,
       "bpmn": [
         {
-          "nombre": "Planificación y Control Financiero",
-          "descripcion": "Diagrama BPMN del proceso financiero de MauleMed.",
-          "archivo_path": "bpmn/Planificacion-y-Control-Financiero.bpmn",
+          "nombre": "Gestión de Abastecimiento e Inventario",
+          "descripcion": "Diagrama BPMN del proceso de abastecimiento e inventario de MauleMed.",
+          "archivo_path": "bpmn/Gestion-de-Inventario.bpmn",
           "archivo_url": null
         }
       ]
     },
     {
-      "slug": "ciclo-vida-personal",
-      "nombre": "Ciclo de Vida del Personal",
+      "slug": "gestion-ciclo-vida-personal",
+      "nombre": "Gestión Integral del Ciclo de Vida del Personal",
       "area": "Recursos Humanos",
       "estado": "modelado",
       "responsable_methodical": "José Tomás Robert",
@@ -29,7 +29,7 @@
       "orden": 2,
       "bpmn": [
         {
-          "nombre": "Ciclo de Vida del Personal",
+          "nombre": "Gestión Integral del Ciclo de Vida del Personal",
           "descripcion": "Diagrama BPMN del proceso de personas de MauleMed.",
           "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal.bpmn",
           "archivo_url": null
@@ -37,19 +37,41 @@
       ]
     },
     {
-      "slug": "gestion-inventario",
-      "nombre": "Gestión de Inventario",
-      "area": "Operaciones",
-      "estado": "modelado",
-      "responsable_methodical": "Sebastián Azócar",
-      "responsable_cliente": "Gabriela Morales",
-      "descripcion": "Compras, abastecimiento y control de inventario entre Casa Matriz, sucursales y gerencia.",
+      "slug": "gestion-comercial-marketing-digital",
+      "nombre": "Gestión Comercial y Marketing Digital",
+      "area": "Comercial y Marketing",
+      "estado": "identificado",
+      "responsable_methodical": null,
+      "responsable_cliente": null,
+      "descripcion": "Proceso comercial y de marketing digital. Pendiente de levantamiento.",
       "orden": 3,
+      "bpmn": []
+    },
+    {
+      "slug": "control-informes-gestion-clinica",
+      "nombre": "Control e Informes de Gestión Clínica",
+      "area": "Gestión Clínica",
+      "estado": "identificado",
+      "responsable_methodical": null,
+      "responsable_cliente": null,
+      "descripcion": "Control e informes de gestión clínica. Pendiente de levantamiento.",
+      "orden": 4,
+      "bpmn": []
+    },
+    {
+      "slug": "planificacion-control-financiero-diario",
+      "nombre": "Planificación y Control Financiero Diario",
+      "area": "Administración y Finanzas",
+      "estado": "modelado",
+      "responsable_methodical": "José Tomás Robert",
+      "responsable_cliente": "Liz Bravo",
+      "descripcion": "Flujos de caja diario, compras, pagos y control financiero levantados para revisión.",
+      "orden": 5,
       "bpmn": [
         {
-          "nombre": "Gestión de Inventario",
-          "descripcion": "Diagrama BPMN del proceso de inventario de MauleMed.",
-          "archivo_path": "bpmn/Gestion-de-Inventario.bpmn",
+          "nombre": "Planificación y Control Financiero Diario",
+          "descripcion": "Diagrama BPMN del proceso financiero de MauleMed.",
+          "archivo_path": "bpmn/Planificacion-y-Control-Financiero.bpmn",
           "archivo_url": null
         }
       ]

@@ -12,9 +12,12 @@ clientes/<cliente-slug>/
   gantt.json
   procesos.json
   hallazgos.json
-  pendientes.json
   bpmn/
     proceso-principal.bpmn
+  hammer/
+    proceso-principal-1.png
+  informes/
+    proceso-principal.pdf
 ```
 
 ## Flujo Recomendado
@@ -23,10 +26,11 @@ clientes/<cliente-slug>/
 2. Edita `project.json` con los datos generales del proyecto.
 3. Edita `procesos.json` con el mapa de procesos levantados.
 4. Edita `gantt.json` con tareas, fechas, estados, pesos y avances.
-5. Edita `hallazgos.json` y `pendientes.json` según corresponda.
-6. Guarda diagramas BPMN en `bpmn/`.
-7. Haz commit y push.
-8. Sincroniza esos datos hacia Supabase para que aparezcan en el portal.
+5. Guarda diagramas BPMN en `bpmn/` y refiérelos en `procesos.json`.
+6. Publica los hallazgos HAMMER (imágenes en `hammer/`) en `hallazgos.json`.
+7. Publica los informes finales (PDF en `informes/`) en `procesos.json`.
+8. Haz commit y push.
+9. Sincroniza esos datos hacia Supabase para que aparezcan en el portal.
 
 ## Crear Un Nuevo Cliente
 
@@ -37,7 +41,7 @@ clientes/<cliente-slug>/
 5. Completa `procesos.json` cuando existan procesos levantados.
 6. Agrega archivos `.bpmn` dentro de `bpmn/`.
 7. Deja `archivo_url` como `null`; el script de sync lo sube a Supabase Storage y genera la URL pública.
-8. Mantén `hallazgos.json` y `pendientes.json` actualizados durante el levantamiento.
+8. Mantén `hallazgos.json` actualizado con las imágenes HAMMER durante el levantamiento.
 
 ## Estandar BPMN
 
@@ -75,18 +79,103 @@ Ejemplo:
 }
 ```
 
-## Estados Sugeridos
+## Etapa Del Proceso (Embudo)
 
-Usa nombres simples y consistentes:
+La etapa de cada proceso en el portal **no se escribe a mano**: se deriva de los entregables
+que ya subiste a `procesos.json`. El proceso asciende solo a medida que publicas entregables:
 
 ```txt
-planificacion
-pendiente
-en_desarrollo
-en_revision
-bloqueada
-completada
+¿tiene informe final?  -> "Informe final"      (proceso terminado)
+¿tiene >=1 hallazgo?   -> "Análisis HAMMER"     (BPMN dado por concluido)
+¿tiene BPMN?           -> "Construyendo BPMN"
+si no                  -> "Por levantar"
 ```
+
+En la práctica: subes el BPMN y el proceso pasa a "Construyendo BPMN". Cargas el primer
+hallazgo (output del HAMMER) y pasa a "Análisis HAMMER". Subes el informe final en PDF y
+pasa a "Informe final". El campo `estado` de `procesos.json` ya no afecta al portal.
+
+### Agregar Un BPMN A Un Proceso
+
+Un proceso "Por levantar" pasa solo a "Construyendo BPMN" cuando queda **ligado** a un BPMN.
+No basta con dejar el archivo en la carpeta: hay que referenciarlo en `procesos.json`.
+
+1. Deja el archivo en `clientes/<cliente-slug>/bpmn/<Nombre-Del-Proceso>.bpmn`.
+2. En `procesos.json`, llena el array `bpmn` de ese proceso (no lo dejes en `[]`):
+   ```json
+   "bpmn": [
+     {
+       "nombre": "Nombre del proceso",
+       "descripcion": "Diagrama BPMN del proceso.",
+       "archivo_path": "bpmn/Nombre-Del-Proceso.bpmn",
+       "archivo_url": null
+     }
+   ]
+   ```
+3. Haz commit y push a `main`. La GitHub Action sincroniza a Supabase y el portal muestra
+   el proceso en "Construyendo BPMN".
+
+Notas:
+
+- El portal lee de Supabase, no del JSON. El cambio se ve **después del sync** (push a `main`,
+  o `npm run sync:clientes` local con credenciales), no al guardar el archivo.
+- El embudo se fija en el vínculo proceso↔BPMN (`proyecto_bpmn.proceso_id`), no en que exista
+  un `.bpmn` suelto. Un archivo sin referenciar en `procesos.json` no cambia la etapa.
+
+## Informe Final Por Proceso
+
+Cada proceso puede tener su informe final en PDF, guardado en `informes/` y declarado en
+`procesos.json` con un array `informes` (mismo patrón que `bpmn`):
+
+```json
+{
+  "slug": "ciclo-vida-personal",
+  "nombre": "Ciclo de Vida del Personal",
+  "informes": [
+    {
+      "nombre": "Informe final",
+      "descripcion": "Informe final del proceso de personas.",
+      "archivo_path": "informes/ciclo-vida-personal.pdf",
+      "archivo_url": null
+    }
+  ]
+}
+```
+
+Reglas:
+
+- Usa extensión `.pdf`.
+- `archivo_path` es relativo a la carpeta del cliente.
+- Deja `archivo_url` en `null`; el sync sube el PDF al Storage y genera la URL pública.
+- Subir un informe lleva el proceso a la etapa "Informe final".
+
+## Hallazgos HAMMER (Imágenes)
+
+Los hallazgos son el **output del análisis HAMMER** y se publican como **imágenes** (capturas
+del análisis). Se guardan en `hammer/` y se declaran en `hallazgos.json`, asociados por
+`proceso_slug`:
+
+```json
+{
+  "hallazgos": [
+    {
+      "proceso_slug": "ciclo-vida-personal",
+      "titulo": "Reproceso en aprobación de asistencia",
+      "archivo_path": "hammer/ciclo-vida-personal-1.png",
+      "archivo_url": null,
+      "orden": 1
+    }
+  ]
+}
+```
+
+Reglas:
+
+- Usa imágenes `.png`, `.jpg` o `.webp`.
+- `titulo` se muestra como pie de foto; `archivo_path` es relativo a la carpeta del cliente.
+- Deja `archivo_url` en `null`; el sync sube la imagen al Storage y genera la URL pública.
+- El primer hallazgo de un proceso lo lleva de "Construyendo BPMN" a "Análisis HAMMER".
+- El portal muestra cada hallazgo como imagen clickeable (se abre en grande).
 
 ## Estandar Gantt
 
@@ -176,7 +265,9 @@ La sincronización hace lo siguiente:
 - Carga procesos desde `procesos.json`.
 - Sube BPMN a Supabase Storage en el bucket `bpmn`.
 - Guarda la URL pública del BPMN en `public.proyecto_bpmn.archivo_url`.
-- Carga hallazgos y pendientes asociados por `proceso_slug`.
+- Sube las imágenes HAMMER al Storage y carga los hallazgos en `public.proceso_hallazgos`.
+- Sube los informes finales en PDF al Storage y los carga en `public.proceso_informes`.
+- Asocia hallazgos por `proceso_slug`.
 
 Antes del primer sync, ejecuta `supabase-empresas-login.sql` en Supabase.
 

@@ -6,10 +6,11 @@ Cliente de prueba para el portal de levantamiento de procesos.
 
 - `project.json`: datos generales del proyecto.
 - `gantt.json`: carta Gantt de junio a julio 2026.
-- `procesos.json`: procesos identificados y BPMN asociados.
-- `hallazgos.json`: hallazgos del levantamiento.
-- `pendientes.json`: pendientes del cliente.
+- `procesos.json`: procesos identificados, BPMN e informes asociados.
+- `hallazgos.json`: hallazgos del análisis HAMMER (imágenes).
 - `bpmn/`: archivos fuente BPMN.
+- `hammer/`: imágenes del análisis HAMMER.
+- `informes/`: informes finales en PDF.
 
 ## BPMN Integrados
 

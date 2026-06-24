@@ -28,7 +28,6 @@ import {
   type PortalBpmn,
   type PortalData,
   type PortalFinding,
-  type PortalPending,
   type PortalProcess,
   type PortalProject,
   type PortalTask,
@@ -64,11 +63,6 @@ const formatDate = (value: string | number | null) => {
 const formatDayMonth = (value: number) =>
   new Intl.DateTimeFormat("es-CL", { day: "2-digit", month: "short" }).format(new Date(value));
 
-const formatStatus = (value: string) =>
-  value
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
-
 const clampProgress = (value: number) => Math.max(0, Math.min(100, value));
 // El avance crece solo con el tiempo: una tarea terminada cuenta 100, una futura 0,
 // y una en curso avanza según los días transcurridos de su ventana.
@@ -81,6 +75,26 @@ const isClosedStatus = (status: string) =>
   ["aprobado", "aprobada", "cerrado", "cerrada", "completada", "finalizada", "validado", "validada", "done"].includes(
     status.toLowerCase()
   );
+
+// El estado de un proceso es un embudo derivado de sus entregables: cada vez que se
+// publica uno, el proceso asciende de etapa. No se escribe a mano.
+type ProcessStage = "por_levantar" | "construyendo_bpmn" | "analisis_hammer" | "informe_final";
+
+const PROCESS_STAGE_ORDER: ProcessStage[] = ["por_levantar", "construyendo_bpmn", "analisis_hammer", "informe_final"];
+
+const PROCESS_STAGE_META: Record<ProcessStage, { label: string; pill: string; dot: string }> = {
+  por_levantar: { label: "Por levantar", pill: "bg-slate-50 text-slate-700 ring-slate-200", dot: "bg-slate-400" },
+  construyendo_bpmn: { label: "Construyendo BPMN", pill: "bg-blue-50 text-blue-700 ring-blue-200", dot: "bg-blue-500" },
+  analisis_hammer: { label: "Análisis HAMMER", pill: "bg-amber-50 text-amber-700 ring-amber-200", dot: "bg-amber-500" },
+  informe_final: { label: "Informe final", pill: "bg-emerald-50 text-emerald-700 ring-emerald-200", dot: "bg-emerald-500" },
+};
+
+const deriveProcessStage = (process: PortalProcess): ProcessStage => {
+  if ((process.informes ?? []).length) return "informe_final";
+  if ((process.hallazgos ?? []).length) return "analisis_hammer";
+  if ((process.bpmn ?? []).length) return "construyendo_bpmn";
+  return "por_levantar";
+};
 
 const getProjectProgress = (project: PortalProject) => {
   const tasks = project.tareas ?? [];
@@ -131,40 +145,6 @@ const getGanttPosition = (task: PortalTask, range: { start: number; end: number 
   const width = Math.max(4, clampProgress(((taskEnd - taskStart) / total) * 100));
 
   return { left, width: Math.min(width, 100 - left) };
-};
-
-const getStatusClassName = (status: string) => {
-  const normalized = status.toLowerCase();
-
-  if (["aprobado", "aprobada", "completada", "finalizada", "validado", "validada", "done"].includes(normalized)) {
-    return "bg-emerald-50 text-emerald-700 ring-emerald-200";
-  }
-
-  if (["en_desarrollo", "en progreso", "en_progreso", "desarrollo", "modelado"].includes(normalized)) {
-    return "bg-blue-50 text-blue-700 ring-blue-200";
-  }
-
-  if (["bloqueada", "bloqueado"].includes(normalized)) {
-    return "bg-red-50 text-red-700 ring-red-200";
-  }
-
-  return "bg-slate-50 text-slate-700 ring-slate-200";
-};
-
-const getPriorityClassName = (priority: string) => {
-  const normalized = priority.toLowerCase();
-  if (normalized === "alta") return "bg-red-50 text-red-700 ring-red-200";
-  if (normalized === "media") return "bg-amber-50 text-amber-700 ring-amber-200";
-  return "bg-slate-50 text-slate-700 ring-slate-200";
-};
-
-const countBy = <T,>(items: T[], getKey: (item: T) => string | null | undefined) => {
-  const map = new Map<string, number>();
-  items.forEach((item) => {
-    const key = getKey(item) || "Sin definir";
-    map.set(key, (map.get(key) ?? 0) + 1);
-  });
-  return Array.from(map.entries()).map(([name, value]) => ({ name: formatStatus(name), value }));
 };
 
 // Midnight of the real current day — drives all the date-aware visuals.
@@ -330,7 +310,7 @@ const Portal = () => {
                 Acceso para empresas que trabajan con Methodical
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-blue-100/65">
-                Ingresa con las credenciales entregadas por nuestro equipo para revisar avance, BPMN, pendientes y hallazgos del levantamiento.
+                Ingresa con las credenciales entregadas por nuestro equipo para revisar avance, BPMN, hallazgos e informes del levantamiento.
               </p>
             </div>
 
@@ -423,10 +403,9 @@ const PortalDashboard = ({
   const diagrams = projects.flatMap((project) => project.bpmn ?? []);
   const tasks = projects.flatMap((project) => project.tareas ?? []);
   const findings = processes.flatMap((process) => process.hallazgos ?? []);
-  const pendings = processes.flatMap((process) => process.pendientes ?? []);
-  const openPendings = pendings.filter((pending) => !isClosedStatus(pending.estado));
+  const informes = processes.flatMap((process) => process.informes ?? []);
   const overallProgress = getOverallProgress(projects);
-  const validatedProcesses = processes.filter((process) => isClosedStatus(process.estado)).length;
+  const closedProcesses = processes.filter((process) => deriveProcessStage(process) === "informe_final").length;
 
   return (
     <main className="min-h-screen bg-slate-100 text-slate-950">
@@ -452,7 +431,7 @@ const PortalDashboard = ({
               <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-blue-200/70">Portal de cliente</p>
               <h1 className="mt-4 font-display text-4xl font-bold tracking-tight md:text-5xl">{session.empresa}</h1>
               <p className="mt-4 max-w-2xl text-blue-50/70">
-                Estado del levantamiento, BPMN publicados, hallazgos y pendientes para seguimiento ejecutivo.
+                Estado del levantamiento, BPMN, hallazgos del análisis HAMMER e informes para seguimiento ejecutivo.
               </p>
             </div>
             <div className="relative rounded-sm border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
@@ -485,10 +464,10 @@ const PortalDashboard = ({
           <>
             <Reveal className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
               <MetricCard label="Proyectos" value={projects.length} helper="activos" />
-              <MetricCard label="Procesos" value={processes.length} helper={`${validatedProcesses} validados`} />
+              <MetricCard label="Procesos" value={processes.length} helper={`${closedProcesses} con informe`} />
               <MetricCard label="BPMN" value={diagrams.length} helper="disponibles" />
-              <MetricCard label="Pendientes" value={openPendings.length} helper="cliente" emphasis={openPendings.length > 0} />
-              <MetricCard label="Hallazgos" value={findings.length} helper="detectados" />
+              <MetricCard label="Hallazgos" value={findings.length} helper="HAMMER" />
+              <MetricCard label="Informes" value={informes.length} helper="publicados" />
               <MetricCard label="Tareas" value={tasks.length} helper="Gantt" />
             </Reveal>
 
@@ -497,6 +476,9 @@ const PortalDashboard = ({
             </Reveal>
             <Reveal>
               <BpmnLibrary projects={projects} diagrams={diagrams} />
+            </Reveal>
+            <Reveal>
+              <InformeLibrary processes={processes} />
             </Reveal>
 
             {projects.length ? (
@@ -541,7 +523,10 @@ const ChartsPanel = ({
     counts[getTaskTiming(task, today)]++;
   });
   const activeTasks = tasks.filter((task) => getTaskTiming(task, today) === "en_curso");
-  const processStatusData = countBy(processes, (process) => process.estado);
+  const processStatusData = PROCESS_STAGE_ORDER.map((stage) => ({
+    name: PROCESS_STAGE_META[stage].label,
+    value: processes.filter((process) => deriveProcessStage(process) === stage).length,
+  }));
   const donutData = [
     { name: "Completado", value: progress },
     { name: "Pendiente", value: Math.max(0, 100 - progress) },
@@ -582,7 +567,7 @@ const ChartsPanel = ({
             <PlanTile timing="completada" value={counts.completada} />
           </div>
 
-          <MiniBarChart title="Procesos por estado" data={processStatusData} />
+          <MiniBarChart title="Procesos por etapa" data={processStatusData} />
 
           <div className="rounded-sm border border-white/10 bg-[#071330] p-5 text-white">
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-blue-100/70">Foco actual</p>
@@ -669,7 +654,7 @@ const BpmnLibrary = ({ projects, diagrams }: { projects: PortalProject[]; diagra
                   <div>
                     <p className="text-lg font-semibold leading-tight text-slate-950">{diagram.nombre}</p>
                     <p className="mt-2 text-sm text-slate-500">
-                      {process?.area ?? "Proceso"} · {process ? formatStatus(process.estado) : "Publicado"}
+                      {process?.area ?? "Proceso"} · {process ? PROCESS_STAGE_META[deriveProcessStage(process)].label : "Publicado"}
                     </p>
                     {diagram.descripcion && (
                       <p className="mt-3 text-sm leading-relaxed text-slate-500">{diagram.descripcion}</p>
@@ -692,11 +677,61 @@ const BpmnLibrary = ({ projects, diagrams }: { projects: PortalProject[]; diagra
   );
 };
 
+const InformeLibrary = ({ processes }: { processes: PortalProcess[] }) => {
+  const entries = processes.flatMap((process) =>
+    (process.informes ?? []).map((informe) => ({ process, informe }))
+  );
+
+  return (
+    <section className="rounded-sm bg-white p-6 border border-slate-200">
+      <div className="mb-6">
+        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-400">Informes</p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-tight">Informes por proceso</h2>
+        <p className="mt-2 text-sm text-slate-500">Descarga o visualiza el informe final en PDF de cada proceso.</p>
+      </div>
+      {entries.length ? (
+        <div className="grid gap-4 lg:grid-cols-2">
+          {entries.map(({ process, informe }) => (
+            <div key={informe.id} className="rounded-sm border border-slate-200 p-5 transition hover:border-blue-200 hover:bg-blue-50/40">
+              <div className="flex h-full flex-col justify-between gap-5">
+                <div>
+                  <p className="text-lg font-semibold leading-tight text-slate-950">{informe.nombre}</p>
+                  <p className="mt-2 text-sm text-slate-500">
+                    {process.nombre} · {process.area ?? "Proceso"}
+                  </p>
+                  {informe.descripcion && (
+                    <p className="mt-3 text-sm leading-relaxed text-slate-500">{informe.descripcion}</p>
+                  )}
+                </div>
+                {informe.archivo_url ? (
+                  <div className="flex flex-wrap gap-3">
+                    <Button asChild className="w-full sm:w-fit">
+                      <a href={informe.archivo_url} target="_blank" rel="noreferrer">
+                        Ver PDF
+                      </a>
+                    </Button>
+                    <Button asChild variant="secondary" className="w-full sm:w-fit">
+                      <a href={informe.archivo_url} download>
+                        Descargar
+                      </a>
+                    </Button>
+                  </div>
+                ) : (
+                  <p className="text-sm text-slate-400">PDF no disponible.</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <EmptyPanel title="Sin informes publicados" text="Aquí verás los informes finales en PDF de cada proceso en cuanto estén disponibles." compact />
+      )}
+    </section>
+  );
+};
+
 const ProjectSection = ({ project }: { project: PortalProject }) => {
   const progress = getProjectProgress(project);
-  const openPendings = (project.procesos ?? [])
-    .flatMap((process) => process.pendientes ?? [])
-    .filter((pending) => !isClosedStatus(pending.estado));
   const findings = (project.procesos ?? []).flatMap((process) => process.hallazgos ?? []);
 
   return (
@@ -728,9 +763,8 @@ const ProjectSection = ({ project }: { project: PortalProject }) => {
       </div>
 
       <div className="border-b border-slate-200 p-6 md:p-8">
-        <div className="grid gap-6 xl:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-2">
           <ProcessList processes={project.procesos ?? []} />
-          <PendingList pendings={openPendings} />
           <FindingList findings={findings} />
         </div>
       </div>
@@ -752,7 +786,7 @@ const ProcessList = ({ processes }: { processes: PortalProcess[] }) => (
                 <p className="font-semibold">{process.nombre}</p>
                 <p className="mt-1 text-xs text-slate-500">{process.area ?? "Sin área"}</p>
               </div>
-              <StatusPill status={process.estado} />
+              <ProcessStagePill stage={deriveProcessStage(process)} />
             </div>
           </div>
         ))
@@ -763,42 +797,32 @@ const ProcessList = ({ processes }: { processes: PortalProcess[] }) => (
   </section>
 );
 
-const PendingList = ({ pendings }: { pendings: PortalPending[] }) => (
-  <section>
-    <h3 className="text-lg font-semibold tracking-tight">Pendientes cliente</h3>
-    <div className="mt-4 space-y-3">
-      {pendings.length ? (
-        pendings.slice(0, 5).map((pending) => (
-          <div key={pending.id} className="rounded-sm border border-amber-200 bg-amber-50/60 p-4">
-            <p className="font-semibold text-amber-950">{pending.titulo}</p>
-            <p className="mt-1 text-xs text-amber-700">Vence: {formatDate(pending.fecha_limite)}</p>
-          </div>
-        ))
-      ) : (
-        <EmptyPanel title="Sin pendientes" text="No hay acciones abiertas para el cliente." compact />
-      )}
-    </div>
-  </section>
-);
-
 const FindingList = ({ findings }: { findings: PortalFinding[] }) => (
   <section>
-    <h3 className="text-lg font-semibold tracking-tight">Hallazgos</h3>
-    <div className="mt-4 space-y-3">
+    <h3 className="text-lg font-semibold tracking-tight">Hallazgos del análisis HAMMER</h3>
+    <div className="mt-4 space-y-4">
       {findings.length ? (
-        findings.slice(0, 5).map((finding) => (
-          <div key={finding.id} className="rounded-sm border border-slate-200 p-4">
-            <div className="flex items-start justify-between gap-3">
-              <p className="font-semibold">{finding.titulo}</p>
-              <span className={`inline-flex shrink-0 rounded-sm px-2.5 py-1 text-xs font-semibold ring-1 ${getPriorityClassName(finding.prioridad)}`}>
-                {formatStatus(finding.prioridad)}
-              </span>
-            </div>
-            {finding.impacto && <p className="mt-2 text-sm text-slate-500">{finding.impacto}</p>}
-          </div>
+        findings.map((finding) => (
+          <figure key={finding.id} className="overflow-hidden rounded-sm border border-slate-200">
+            {finding.archivo_url ? (
+              <a href={finding.archivo_url} target="_blank" rel="noreferrer" className="block bg-slate-50">
+                <img
+                  src={finding.archivo_url}
+                  alt={finding.titulo}
+                  loading="lazy"
+                  className="max-h-80 w-full object-contain transition hover:opacity-90"
+                />
+              </a>
+            ) : (
+              <div className="flex h-32 items-center justify-center bg-slate-50 text-xs text-slate-400">Sin imagen</div>
+            )}
+            <figcaption className="border-t border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-700">
+              {finding.titulo}
+            </figcaption>
+          </figure>
         ))
       ) : (
-        <EmptyPanel title="Sin hallazgos" text="Todavía no hay hallazgos publicados." compact />
+        <EmptyPanel title="Sin hallazgos" text="Aquí verás las imágenes del análisis HAMMER cuando se publiquen." compact />
       )}
     </div>
   </section>
@@ -918,11 +942,15 @@ const PortalGantt = ({ tasks }: { tasks: PortalTask[] }) => {
   );
 };
 
-const StatusPill = ({ status }: { status: string }) => (
-  <span className={`inline-flex shrink-0 rounded-sm px-2.5 py-1 text-xs font-semibold ring-1 ${getStatusClassName(status)}`}>
-    {formatStatus(status)}
-  </span>
-);
+const ProcessStagePill = ({ stage }: { stage: ProcessStage }) => {
+  const meta = PROCESS_STAGE_META[stage];
+  return (
+    <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-sm px-2.5 py-1 text-xs font-semibold ring-1 ${meta.pill}`}>
+      <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
+      {meta.label}
+    </span>
+  );
+};
 
 const TimingPill = ({ timing }: { timing: TaskTiming }) => {
   const meta = TIMING_META[timing];

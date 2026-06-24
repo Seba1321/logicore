@@ -47,17 +47,19 @@ export type PortalFinding = {
   recomendacion: string | null;
   prioridad: string;
   estado: string;
+  archivo_path: string | null;
+  archivo_url: string | null;
   orden: number;
 };
 
-export type PortalPending = {
+export type PortalInforme = {
   id: number;
-  titulo: string;
+  nombre: string;
   descripcion: string | null;
-  responsable: string | null;
-  fecha_limite: string | null;
-  estado: string;
+  archivo_path: string | null;
+  archivo_url: string | null;
   orden: number;
+  updated_at: string | null;
 };
 
 export type PortalProcess = {
@@ -73,7 +75,7 @@ export type PortalProcess = {
   updated_at: string | null;
   bpmn: PortalBpmn[];
   hallazgos: PortalFinding[];
-  pendientes: PortalPending[];
+  informes: PortalInforme[];
 };
 
 export type PortalProject = {

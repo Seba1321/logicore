@@ -16,6 +16,14 @@
           "archivo_path": "bpmn/proceso-principal.bpmn",
           "archivo_url": null
         }
+      ],
+      "informes": [
+        {
+          "nombre": "Informe final",
+          "descripcion": "Informe final del proceso principal.",
+          "archivo_path": "informes/proceso-principal.pdf",
+          "archivo_url": null
+        }
       ]
     }
   ]

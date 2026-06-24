@@ -66,10 +66,14 @@ const listClientSlugs = async () => {
 
 const getContentType = (filePath) => {
   if (filePath.endsWith(".bpmn") || filePath.endsWith(".xml")) return "application/xml";
+  if (filePath.endsWith(".pdf")) return "application/pdf";
+  if (filePath.endsWith(".png")) return "image/png";
+  if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) return "image/jpeg";
+  if (filePath.endsWith(".webp")) return "image/webp";
   return "application/octet-stream";
 };
 
-const uploadBpmn = async (clientSlug, clientDir, archivoPath) => {
+const uploadFile = async (clientSlug, clientDir, archivoPath) => {
   const localPath = path.join(clientDir, archivoPath);
   const storagePath = `${clientSlug}/${archivoPath}`.replaceAll("\\", "/");
   const fileBuffer = await fs.readFile(localPath);
@@ -112,7 +116,6 @@ const syncClient = async (clientSlug) => {
   const ganttConfig = await readJson(path.join(clientDir, "gantt.json"), { tareas: [] });
   const procesosConfig = await readJson(path.join(clientDir, "procesos.json"), { procesos: [] });
   const hallazgosConfig = await readJson(path.join(clientDir, "hallazgos.json"), { hallazgos: [] });
-  const pendientesConfig = await readJson(path.join(clientDir, "pendientes.json"), { pendientes: [] });
 
   if (!projectConfig.empresa || !projectConfig.proyecto?.nombre) {
     throw new Error(`Invalid project.json for ${clientSlug}`);
@@ -190,7 +193,7 @@ const syncClient = async (clientSlug) => {
 
     for (const bpmn of processConfig.bpmn ?? []) {
       const archivoUrl = bpmn.archivo_path
-        ? await uploadBpmn(clientSlug, clientDir, bpmn.archivo_path)
+        ? await uploadFile(clientSlug, clientDir, bpmn.archivo_path)
         : bpmn.archivo_url ?? null;
 
       await insertRows("proyecto_bpmn", [
@@ -204,44 +207,49 @@ const syncClient = async (clientSlug) => {
         },
       ]);
     }
+
+    for (const [index, informe] of (processConfig.informes ?? []).entries()) {
+      const archivoUrl = informe.archivo_path
+        ? await uploadFile(clientSlug, clientDir, informe.archivo_path)
+        : informe.archivo_url ?? null;
+
+      await insertRows("proceso_informes", [
+        {
+          proceso_id: insertedProcess.id,
+          nombre: informe.nombre ?? "Informe final",
+          descripcion: informe.descripcion ?? null,
+          archivo_path: informe.archivo_path ?? null,
+          archivo_url: archivoUrl,
+          orden: informe.orden ?? index,
+        },
+      ]);
+    }
   }
 
-  await insertRows(
-    "proceso_hallazgos",
-    (hallazgosConfig.hallazgos ?? []).map((finding) => {
-      const procesoId = processMap.get(finding.proceso_slug);
-      if (!procesoId) throw new Error(`Unknown proceso_slug in hallazgos.json: ${finding.proceso_slug}`);
+  const hallazgoRows = [];
+  for (const finding of hallazgosConfig.hallazgos ?? []) {
+    const procesoId = processMap.get(finding.proceso_slug);
+    if (!procesoId) throw new Error(`Unknown proceso_slug in hallazgos.json: ${finding.proceso_slug}`);
 
-      return {
-        proceso_id: procesoId,
-        titulo: finding.titulo,
-        descripcion: finding.descripcion ?? null,
-        impacto: finding.impacto ?? null,
-        recomendacion: finding.recomendacion ?? null,
-        prioridad: finding.prioridad ?? "media",
-        estado: finding.estado ?? "abierto",
-        orden: finding.orden ?? 0,
-      };
-    })
-  );
+    const archivoUrl = finding.archivo_path
+      ? await uploadFile(clientSlug, clientDir, finding.archivo_path)
+      : finding.archivo_url ?? null;
 
-  await insertRows(
-    "proceso_pendientes",
-    (pendientesConfig.pendientes ?? []).map((pending) => {
-      const procesoId = processMap.get(pending.proceso_slug);
-      if (!procesoId) throw new Error(`Unknown proceso_slug in pendientes.json: ${pending.proceso_slug}`);
+    hallazgoRows.push({
+      proceso_id: procesoId,
+      titulo: finding.titulo,
+      descripcion: finding.descripcion ?? null,
+      impacto: finding.impacto ?? null,
+      recomendacion: finding.recomendacion ?? null,
+      prioridad: finding.prioridad ?? "media",
+      estado: finding.estado ?? "abierto",
+      archivo_path: finding.archivo_path ?? null,
+      archivo_url: archivoUrl,
+      orden: finding.orden ?? 0,
+    });
+  }
 
-      return {
-        proceso_id: procesoId,
-        titulo: pending.titulo,
-        descripcion: pending.descripcion ?? null,
-        responsable: pending.responsable ?? null,
-        fecha_limite: pending.fecha_limite ?? null,
-        estado: pending.estado ?? "pendiente",
-        orden: pending.orden ?? 0,
-      };
-    })
-  );
+  await insertRows("proceso_hallazgos", hallazgoRows);
 
   console.log(`Synced ${clientSlug}: ${proyecto.nombre}`);
 };
