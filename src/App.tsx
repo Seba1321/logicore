@@ -7,13 +7,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+// Visit es un hub de enlaces que se abre escribiendo la URL directamente.
+// Lo cargamos eagerly (sin lazy) para evitar el flash de "Cargando…" del
+// chunk diferido al hacer deep-link a /visit.
+import Visit from "./pages/Visit";
 
 const Portal = lazy(() => import("./pages/Portal"));
 const Team = lazy(() => import("./pages/Team"));
 const Projects = lazy(() => import("./pages/Projects"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const BpmnViewerPage = lazy(() => import("./pages/BpmnViewerPage"));
-const Visit = lazy(() => import("./pages/Visit"));
 
 const queryClient = new QueryClient();
 
