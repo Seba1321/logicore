@@ -15,6 +15,7 @@ Cliente de prueba para el portal de levantamiento de procesos.
 
 - `bpmn/Planificacion-y-Control-Financiero.bpmn`
 - `bpmn/Ciclo-de-Vida-del-Personal.bpmn`
+- `bpmn/Gestion-de-Inventario.bpmn`
 
 ## Publicación
 

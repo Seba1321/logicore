@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Linkedin, Mail, X } from "lucide-react";
+import { Linkedin, X } from "lucide-react";
 
 import { CornerTicks, Reveal } from "@/components/portal/technical";
 import { Footer } from "@/components/sections/Footer";
@@ -185,8 +185,8 @@ const Team = () => {
                       </ul>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-6">
-                      {selectedMember.linkedin && (
+                    {selectedMember.linkedin && (
+                      <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-6">
                         <a
                           href={selectedMember.linkedin}
                           target="_blank"
@@ -195,14 +195,8 @@ const Team = () => {
                         >
                           <Linkedin size={14} strokeWidth={1.6} /> LinkedIn
                         </a>
-                      )}
-                      <a
-                        href={`mailto:${selectedMember.email}`}
-                        className="inline-flex items-center gap-2 rounded-sm border border-slate-200 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-700 transition-colors hover:border-blue-600 hover:text-blue-700"
-                      >
-                        <Mail size={14} strokeWidth={1.6} /> {selectedMember.email}
-                      </a>
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

@@ -5,8 +5,8 @@
       "nombre": "Planificación y Control Financiero",
       "area": "Administración y Finanzas",
       "estado": "modelado",
-      "responsable_methodical": "Methodical",
-      "responsable_cliente": "MauleMed",
+      "responsable_methodical": "José Tomás Robert",
+      "responsable_cliente": "Liz Bravo",
       "descripcion": "Flujos de caja diario, compras, pagos y control financiero levantados para revisión.",
       "orden": 1,
       "bpmn": [
@@ -23,8 +23,8 @@
       "nombre": "Ciclo de Vida del Personal",
       "area": "Recursos Humanos",
       "estado": "modelado",
-      "responsable_methodical": "Methodical",
-      "responsable_cliente": "MauleMed",
+      "responsable_methodical": "José Tomás Robert",
+      "responsable_cliente": "Patricia Lobos",
       "descripcion": "Gestión del ciclo de vida del personal y cierre mensual de asistencia como insumo de remuneraciones.",
       "orden": 2,
       "bpmn": [
@@ -32,6 +32,24 @@
           "nombre": "Ciclo de Vida del Personal",
           "descripcion": "Diagrama BPMN del proceso de personas de MauleMed.",
           "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal.bpmn",
+          "archivo_url": null
+        }
+      ]
+    },
+    {
+      "slug": "gestion-inventario",
+      "nombre": "Gestión de Inventario",
+      "area": "Operaciones",
+      "estado": "modelado",
+      "responsable_methodical": "Sebastián Azócar",
+      "responsable_cliente": "Gabriela Morales",
+      "descripcion": "Compras, abastecimiento y control de inventario entre Casa Matriz, sucursales y gerencia.",
+      "orden": 3,
+      "bpmn": [
+        {
+          "nombre": "Gestión de Inventario",
+          "descripcion": "Diagrama BPMN del proceso de inventario de MauleMed.",
+          "archivo_path": "bpmn/Gestion-de-Inventario.bpmn",
           "archivo_url": null
         }
       ]
