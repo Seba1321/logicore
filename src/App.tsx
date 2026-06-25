@@ -15,6 +15,7 @@ import Visit from "./pages/Visit";
 const Portal = lazy(() => import("./pages/Portal"));
 const Team = lazy(() => import("./pages/Team"));
 const Projects = lazy(() => import("./pages/Projects"));
+const Research = lazy(() => import("./pages/Research"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const BpmnViewerPage = lazy(() => import("./pages/BpmnViewerPage"));
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/equipo" element={<Team />} />
             <Route path="/proyectos" element={<Projects />} />
+            <Route path="/research" element={<Research />} />
             <Route path="/privacidad" element={<Privacy />} />
             <Route path="/portal" element={<Portal />} />
             <Route path="/portal/bpmn/:diagramId" element={<BpmnViewerPage />} />

@@ -11,9 +11,13 @@ const navLinks: NavLink[] = [
   { name: "Proyectos", href: "/proyectos", route: true },
   { name: "Equipo", href: "/equipo", route: true },
   { name: "Por qué Methodical", href: "#porque" },
+  { name: "Investigación", href: "/research", route: true },
 ];
 
 const sectionIds = navLinks.filter((l) => !l.route).map((l) => l.href.slice(1));
+// También observamos #contacto para que el subrayado se libere al llegar ahí
+// (no hay link de nav para contacto, así que ninguno queda activo).
+const observedSectionIds = [...sectionIds, "contacto"];
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +37,7 @@ export const Header = () => {
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
-    sectionIds.forEach((id) => {
+    observedSectionIds.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
       const observer = new IntersectionObserver(
@@ -90,10 +94,12 @@ export const Header = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center gap-5 lg:flex xl:gap-8">
+          <div className="hidden items-center gap-4 lg:flex xl:gap-6">
             {navLinks.map((link) => {
-              const isActive = !link.route && activeSection === link.href.slice(1);
-              const linkClass = `text-sm font-medium transition-colors duration-200 ${
+              const isActive = link.route
+                ? location.pathname === link.href || location.pathname.startsWith(`${link.href}/`)
+                : isHome && activeSection === link.href.slice(1);
+              const linkClass = `whitespace-nowrap text-sm font-medium transition-colors duration-200 ${
                 isActive
                   ? onHero
                     ? "border-b-2 border-blue-400 pb-0.5 text-white"
@@ -166,13 +172,21 @@ export const Header = () => {
             className="border-t border-border bg-background lg:hidden"
           >
             <div className="container-tight flex flex-col gap-4 py-4">
-              {navLinks.map((link) =>
-                link.route ? (
+              {navLinks.map((link) => {
+                const isActive = link.route
+                  ? location.pathname === link.href || location.pathname.startsWith(`${link.href}/`)
+                  : isHome && activeSection === link.href.slice(1);
+                const mobileClass = `py-2 text-base font-medium transition-colors ${
+                  isActive
+                    ? "border-l-2 border-blue-600 pl-3 font-semibold text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`;
+                return link.route ? (
                   <Link
                     key={link.name}
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    className={mobileClass}
                   >
                     {link.name}
                   </Link>
@@ -184,12 +198,12 @@ export const Header = () => {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    className={mobileClass}
                   >
                     {link.name}
                   </a>
-                )
-              )}
+                );
+              })}
               <Link
                 to="/portal"
                 onClick={() => setIsMobileMenuOpen(false)}
