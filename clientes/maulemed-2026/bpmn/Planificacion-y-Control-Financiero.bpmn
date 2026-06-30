@@ -11,7 +11,7 @@
       <bpmn:text>Ingresos se controlan principalmente vía RIS/PACS (por sucursal y prestación). La facturación es cruzada, una factura puede incluir varias sucursales / razones sociales. RIS/PACS no siempre refleja descuentos, migración a nuevo sistema (codesud)</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="Ann_cob">
-      <bpmn:text>Fonasa: sin mayor problema. Instituciones: cobran con bono / orden manual y lógica propia. Si los bonos del sistema no cuadran con los físicos, se corrigen y corroboran.</bpmn:text>
+      <bpmn:text>Isapres, cobran con bono / orden manual y lógica propia. Si los bonos del sistema no cuadran con los físicos, se corrigen y corroboran.</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="Ann_comp">
       <bpmn:text>Compras a veces decididas sin verificación de presupuesto (decisión médica). No hay iconocimiento de inventario, insumos se reciben y despachan centralizadamente.</bpmn:text>
@@ -21,7 +21,8 @@
     </bpmn:textAnnotation>
     <bpmn:association id="As_Ann_cob" associationDirection="None" sourceRef="T_verificarBonos" targetRef="Ann_cob" />
     <bpmn:association id="As_Ann_flujo" associationDirection="None" sourceRef="J_construirFlujo" targetRef="Ann_flujo" />
-    <bpmn:association id="As_Ann_comp" associationDirection="None" sourceRef="T_recibFact" targetRef="Ann_comp" />
+    <bpmn:association id="As_Ann_comp" associationDirection="None" sourceRef="Part_main" targetRef="Ann_comp" />
+    <bpmn:association id="As_Ann_ing" associationDirection="None" sourceRef="T_facturacion" targetRef="Ann_ing" />
   </bpmn:collaboration>
   <bpmn:process id="Process_main" isExecutable="false">
     <bpmn:laneSet id="LaneSet_main">
@@ -29,7 +30,6 @@
         <bpmn:flowNodeRef>C_regVentas</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>C_regPago</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>C_concBancaria</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>M_egresos</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_jef" name="Jefatura de Administración y Finanzas (Liz Bravo)">
         <bpmn:flowNodeRef>J_revisarFact</bpmn:flowNodeRef>
@@ -48,7 +48,6 @@
         <bpmn:flowNodeRef>T_cerrarCaja</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gw_cobranza</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>T_verificarBonos</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>M_cobranza</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>T_recibFact</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gw_vistoBueno</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>T_gestCorr</bpmn:flowNodeRef>
@@ -70,15 +69,11 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_verificarBonos" name="Verificar bonos manuales (sistema vs. físico)">
       <bpmn:incoming>f08</bpmn:incoming>
-      <bpmn:outgoing>f09</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0fkamaa</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="M_cobranza">
-      <bpmn:incoming>f07</bpmn:incoming>
-      <bpmn:incoming>f09</bpmn:incoming>
-      <bpmn:outgoing>f10</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:userTask id="J_revisarFact" name="Revisar facturación y cobranza">
-      <bpmn:incoming>f10</bpmn:incoming>
+      <bpmn:incoming>f07</bpmn:incoming>
+      <bpmn:incoming>Flow_0fkamaa</bpmn:incoming>
       <bpmn:outgoing>f11</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:exclusiveGateway id="Gw_revVentas" name="¿Facturación y cobranza correctas?">
@@ -92,7 +87,6 @@
     </bpmn:userTask>
     <bpmn:userTask id="T_recibFact" name="Recibir requerimiento / factura de compra">
       <bpmn:incoming>f03</bpmn:incoming>
-      <bpmn:incoming>f18</bpmn:incoming>
       <bpmn:outgoing>f15</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:exclusiveGateway id="Gw_vistoBueno" name="¿Factura con visto bueno de Tesorería?">
@@ -102,7 +96,6 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_gestCorr" name="Gestionar corrección / rechazo">
       <bpmn:incoming>f17</bpmn:incoming>
-      <bpmn:outgoing>f18</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_aprobarPago" name="Aprobar pago (Tesorería + Contabilidad)">
       <bpmn:incoming>f16</bpmn:incoming>
@@ -123,11 +116,9 @@
     </bpmn:userTask>
     <bpmn:userTask id="C_concBancaria" name="Realizar conciliación bancaria">
       <bpmn:incoming>f23</bpmn:incoming>
-      <bpmn:outgoing>f24</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:parallelGateway id="Gw_join">
       <bpmn:incoming>f14</bpmn:incoming>
-      <bpmn:incoming>f26</bpmn:incoming>
       <bpmn:outgoing>f27</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:userTask id="J_consolIngresos" name="Consolidar ingresos desde RIS/PACS">
@@ -146,7 +137,7 @@
       <bpmn:incoming>f30</bpmn:incoming>
       <bpmn:outgoing>f31</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="J_construirFlujo" name="Construir flujo de caja (Excel)">
+    <bpmn:userTask id="J_construirFlujo" name="Construir flujo de caja">
       <bpmn:incoming>f31</bpmn:incoming>
       <bpmn:outgoing>f32</bpmn:outgoing>
     </bpmn:userTask>
@@ -163,26 +154,17 @@
     </bpmn:startEvent>
     <bpmn:userTask id="T_retenerPago" name="Retener pago">
       <bpmn:incoming>f21</bpmn:incoming>
-      <bpmn:outgoing>f25</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="M_egresos">
-      <bpmn:incoming>f24</bpmn:incoming>
-      <bpmn:incoming>f25</bpmn:incoming>
-      <bpmn:outgoing>f26</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="f02" sourceRef="Gw_split" targetRef="T_cerrarCaja" />
     <bpmn:sequenceFlow id="f04" sourceRef="T_cerrarCaja" targetRef="T_facturacion" />
     <bpmn:sequenceFlow id="f13" name="No" sourceRef="Gw_revVentas" targetRef="T_facturacion" />
     <bpmn:sequenceFlow id="f06" sourceRef="T_facturacion" targetRef="Gw_cobranza" />
-    <bpmn:sequenceFlow id="f07" name="Fonasa" sourceRef="Gw_cobranza" targetRef="M_cobranza" />
+    <bpmn:sequenceFlow id="f07" name="Fonasa" sourceRef="Gw_cobranza" targetRef="J_revisarFact" />
     <bpmn:sequenceFlow id="f08" name="Isapre" sourceRef="Gw_cobranza" targetRef="T_verificarBonos" />
-    <bpmn:sequenceFlow id="f09" sourceRef="T_verificarBonos" targetRef="M_cobranza" />
-    <bpmn:sequenceFlow id="f10" sourceRef="M_cobranza" targetRef="J_revisarFact" />
     <bpmn:sequenceFlow id="f11" sourceRef="J_revisarFact" targetRef="Gw_revVentas" />
     <bpmn:sequenceFlow id="f12" name="Sí" sourceRef="Gw_revVentas" targetRef="C_regVentas" />
     <bpmn:sequenceFlow id="f14" sourceRef="C_regVentas" targetRef="Gw_join" />
     <bpmn:sequenceFlow id="f03" sourceRef="Gw_split" targetRef="T_recibFact" />
-    <bpmn:sequenceFlow id="f18" sourceRef="T_gestCorr" targetRef="T_recibFact" />
     <bpmn:sequenceFlow id="f15" sourceRef="T_recibFact" targetRef="Gw_vistoBueno" />
     <bpmn:sequenceFlow id="f16" name="Sí" sourceRef="Gw_vistoBueno" targetRef="T_aprobarPago" />
     <bpmn:sequenceFlow id="f17" name="No" sourceRef="Gw_vistoBueno" targetRef="T_gestCorr" />
@@ -191,8 +173,6 @@
     <bpmn:sequenceFlow id="f21" name="No" sourceRef="Gw_pagoAprob" targetRef="T_retenerPago" />
     <bpmn:sequenceFlow id="f22" sourceRef="T_emitirCheque" targetRef="C_regPago" />
     <bpmn:sequenceFlow id="f23" sourceRef="C_regPago" targetRef="C_concBancaria" />
-    <bpmn:sequenceFlow id="f24" sourceRef="C_concBancaria" targetRef="M_egresos" />
-    <bpmn:sequenceFlow id="f26" sourceRef="M_egresos" targetRef="Gw_join" />
     <bpmn:sequenceFlow id="f27" sourceRef="Gw_join" targetRef="J_consolIngresos" />
     <bpmn:sequenceFlow id="f28" sourceRef="J_consolIngresos" targetRef="J_revObligaciones" />
     <bpmn:sequenceFlow id="f29" sourceRef="J_revObligaciones" targetRef="J_costosFijos" />
@@ -200,13 +180,12 @@
     <bpmn:sequenceFlow id="f31" sourceRef="J_gastosVar" targetRef="J_construirFlujo" />
     <bpmn:sequenceFlow id="f32" sourceRef="J_construirFlujo" targetRef="EndEvt" />
     <bpmn:sequenceFlow id="f01" sourceRef="StartEvt" targetRef="Gw_split" />
-    <bpmn:sequenceFlow id="f25" sourceRef="T_retenerPago" targetRef="M_egresos" />
     <bpmn:userTask id="T_facturacion" name="Realizar facturación según nómina Fonasa">
       <bpmn:incoming>f13</bpmn:incoming>
       <bpmn:incoming>f04</bpmn:incoming>
       <bpmn:outgoing>f06</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:association id="As_Ann_ing" associationDirection="None" sourceRef="T_facturacion" targetRef="Ann_ing" />
+    <bpmn:sequenceFlow id="Flow_0fkamaa" sourceRef="T_verificarBonos" targetRef="J_revisarFact" />
   </bpmn:process>
   <bpmn:process id="Process_ris" />
   <bpmn:process id="Process_banco" />
@@ -239,9 +218,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="T_verificarBonos_di" bpmnElement="T_verificarBonos">
         <dc:Bounds x="1070" y="550" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="M_cobranza_di" bpmnElement="M_cobranza" isMarkerVisible="true">
-        <dc:Bounds x="1245" y="455" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="J_revisarFact_di" bpmnElement="J_revisarFact">
         <dc:Bounds x="1370" y="890" width="100" height="80" />
@@ -304,6 +280,7 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="J_construirFlujo_di" bpmnElement="J_construirFlujo">
         <dc:Bounds x="2650" y="890" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvt_di" bpmnElement="EndEvt">
         <dc:Bounds x="2842" y="912" width="36" height="36" />
@@ -323,17 +300,9 @@
       <bpmndi:BPMNShape id="T_retenerPago_di" bpmnElement="T_retenerPago">
         <dc:Bounds x="920" y="730" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="M_egresos_di" bpmnElement="M_egresos" isMarkerVisible="true">
-        <dc:Bounds x="1605" y="1075" width="50" height="50" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="T_facturacion_di" bpmnElement="T_facturacion">
         <dc:Bounds x="680" y="440" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="As_Ann_ing_di" bpmnElement="As_Ann_ing">
-        <di:waypoint x="730" y="440" />
-        <di:waypoint x="655" y="360" />
-        <di:waypoint x="656" y="166" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
         <di:waypoint x="350" y="905" />
         <di:waypoint x="350" y="480" />
@@ -358,9 +327,11 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
         <di:waypoint x="995" y="480" />
-        <di:waypoint x="1245" y="480" />
+        <di:waypoint x="1270" y="480" />
+        <di:waypoint x="1270" y="930" />
+        <di:waypoint x="1370" y="930" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1103" y="458" width="37" height="14" />
+          <dc:Bounds x="1011" y="458" width="37" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
@@ -368,19 +339,8 @@
         <di:waypoint x="970" y="590" />
         <di:waypoint x="1070" y="590" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1005" y="526" width="31" height="14" />
+          <dc:Bounds x="924" y="513" width="31" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
-        <di:waypoint x="1170" y="590" />
-        <di:waypoint x="1220" y="590" />
-        <di:waypoint x="1220" y="480" />
-        <di:waypoint x="1245" y="480" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
-        <di:waypoint x="1270" y="505" />
-        <di:waypoint x="1270" y="930" />
-        <di:waypoint x="1370" y="930" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
         <di:waypoint x="1470" y="930" />
@@ -402,12 +362,6 @@
       <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
         <di:waypoint x="350" y="905" />
         <di:waypoint x="350" y="680" />
-        <di:waypoint x="420" y="680" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f18_di" bpmnElement="f18">
-        <di:waypoint x="590" y="776" />
-        <di:waypoint x="400" y="776" />
-        <di:waypoint x="400" y="680" />
         <di:waypoint x="420" y="680" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
@@ -455,17 +409,6 @@
         <di:waypoint x="1320" y="1150" />
         <di:waypoint x="1420" y="1150" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f24_di" bpmnElement="f24">
-        <di:waypoint x="1520" y="1150" />
-        <di:waypoint x="1553" y="1150" />
-        <di:waypoint x="1553" y="1100" />
-        <di:waypoint x="1605" y="1100" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f26_di" bpmnElement="f26">
-        <di:waypoint x="1630" y="1075" />
-        <di:waypoint x="1630" y="930" />
-        <di:waypoint x="1845" y="930" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="f27_di" bpmnElement="f27">
         <di:waypoint x="1895" y="930" />
         <di:waypoint x="1970" y="930" />
@@ -494,10 +437,11 @@
         <di:waypoint x="308" y="930" />
         <di:waypoint x="325" y="930" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="f25_di" bpmnElement="f25">
-        <di:waypoint x="970" y="810" />
-        <di:waypoint x="970" y="1100" />
-        <di:waypoint x="1605" y="1100" />
+      <bpmndi:BPMNEdge id="Flow_0fkamaa_di" bpmnElement="Flow_0fkamaa">
+        <di:waypoint x="1170" y="590" />
+        <di:waypoint x="1270" y="590" />
+        <di:waypoint x="1270" y="930" />
+        <di:waypoint x="1370" y="930" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Part_ris_di" bpmnElement="Part_ris" isHorizontal="true">
         <dc:Bounds x="160" y="210" width="2800" height="90" />
@@ -507,16 +451,17 @@
         <dc:Bounds x="160" y="1280" width="2800" height="90" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Ann_ing_di" bpmnElement="Ann_ing">
-        <dc:Bounds x="500" y="80" width="312.9633061527057" height="86" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="As_Ann_comp_di" bpmnElement="As_Ann_comp">
+        <di:waypoint x="540" y="1260" />
+        <di:waypoint x="540" y="1400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="As_Ann_ing_di" bpmnElement="As_Ann_ing">
+        <di:waypoint x="730" y="440" />
+        <di:waypoint x="655" y="360" />
+        <di:waypoint x="654" y="156" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Ann_cob_di" bpmnElement="Ann_cob">
-        <dc:Bounds x="995" y="77" width="250" height="95" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Ann_comp_di" bpmnElement="Ann_comp">
-        <dc:Bounds x="327" y="1400" width="305.3981147797001" height="72" />
+        <dc:Bounds x="995" y="77" width="251.48257968865826" height="72" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Ann_flujo_di" bpmnElement="Ann_flujo">
@@ -546,16 +491,20 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="As_Ann_cob_di" bpmnElement="As_Ann_cob">
         <di:waypoint x="1120" y="550" />
-        <di:waypoint x="1120" y="193" />
+        <di:waypoint x="1120" y="149" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="As_Ann_flujo_di" bpmnElement="As_Ann_flujo">
         <di:waypoint x="2702" y="970" />
         <di:waypoint x="2702" y="1410" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="As_Ann_comp_di" bpmnElement="As_Ann_comp">
-        <di:waypoint x="473" y="720" />
-        <di:waypoint x="473" y="1400" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Ann_comp_di" bpmnElement="Ann_comp">
+        <dc:Bounds x="394" y="1400" width="305" height="72" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Ann_ing_di" bpmnElement="Ann_ing">
+        <dc:Bounds x="498" y="70" width="313" height="86" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
