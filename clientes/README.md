@@ -232,13 +232,12 @@ El primer cliente de prueba queda en:
 clientes/maulemed-2026/
 ```
 
-Su Gantt cubre desde `2026-06-22` hasta `2026-07-24`:
+Su Gantt cubre desde `2026-06-08` hasta `2026-08-14`:
 
-- Semana del 22 de junio: BPMN iniciales y feedback.
-- Semana del 29 de junio: análisis Hammer.
-- Semana del 6 de julio: feedback de Hammer.
-- Del 3 al 17 de julio: modelamiento de procesos.
-- 24 de julio: entrega del informe final.
+- Semana 1: reunión inicial y acuerdo de agenda de trabajo.
+- Semanas 2 a 6: sesiones de levantamiento con cada dueño de proceso.
+- Semanas 5 a 9: modelamiento BPMN, análisis Hammer, diagnóstico y consolidación de procesos.
+- Semana 10: elaboración y entrega del informe final, con cierre el viernes 14 de agosto.
 
 Para cargar esta Gantt manualmente en Supabase, ejecuta:
 

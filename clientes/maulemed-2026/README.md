@@ -5,7 +5,7 @@ Cliente de prueba para el portal de levantamiento de procesos.
 ## Archivos
 
 - `project.json`: datos generales del proyecto.
-- `gantt.json`: carta Gantt de junio a julio 2026.
+- `gantt.json`: carta Gantt de 10 semanas, desde el lunes 8 de junio hasta el viernes 14 de agosto de 2026.
 - `procesos.json`: procesos identificados, BPMN e informes asociados.
 - `hallazgos.json`: hallazgos del análisis HAMMER (imágenes).
 - `bpmn/`: archivos fuente BPMN.

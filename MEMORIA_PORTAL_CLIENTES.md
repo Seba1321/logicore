@@ -107,16 +107,15 @@ clientes/maulemed-2026/gantt.json
 
 Periodo:
 
-- Inicio: `2026-06-22`
-- Fin: `2026-07-24`
+- Inicio: `2026-06-08`
+- Fin: `2026-08-14`
 
 Hitos:
 
-- Semana del 22 de junio: BPMN iniciales y feedback.
-- Semana del 29 de junio: análisis Hammer.
-- Semana del 6 de julio: feedback Hammer.
-- Del 3 al 17 de julio: modelamiento de procesos.
-- 24 de julio: entrega del informe final.
+- Semana 1: reunión inicial y acuerdo de agenda de trabajo.
+- Semanas 2 a 6: sesiones de levantamiento con cada dueño de proceso.
+- Semanas 5 a 9: modelamiento BPMN, análisis Hammer, diagnóstico y consolidación de procesos.
+- Semana 10: elaboración y entrega del informe final, con cierre el viernes 14 de agosto.
 
 ## Estandar Git Para Clientes
 
