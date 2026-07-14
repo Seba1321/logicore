@@ -1,0 +1,37 @@
+{
+  "procesos": [
+    {
+      "slug": "informe-de-obra",
+      "nombre": "Informe de Obra",
+      "area": "Operaciones",
+      "estado": "identificado",
+      "responsable_methodical": null,
+      "responsable_cliente": null,
+      "descripcion": "Elaboración y entrega del informe de obra. Pendiente de levantamiento.",
+      "orden": 1,
+      "bpmn": []
+    },
+    {
+      "slug": "informe-de-prevencion",
+      "nombre": "Informe de Prevención",
+      "area": "Prevención de Riesgos",
+      "estado": "identificado",
+      "responsable_methodical": null,
+      "responsable_cliente": null,
+      "descripcion": "Elaboración y entrega del informe de prevención de riesgos. Pendiente de levantamiento.",
+      "orden": 2,
+      "bpmn": []
+    },
+    {
+      "slug": "contratacion-personal",
+      "nombre": "Contratación Personal",
+      "area": "Recursos Humanos",
+      "estado": "identificado",
+      "responsable_methodical": null,
+      "responsable_cliente": null,
+      "descripcion": "Proceso de contratación de personal. Pendiente de levantamiento.",
+      "orden": 3,
+      "bpmn": []
+    }
+  ]
+}
