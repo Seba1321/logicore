@@ -99,6 +99,22 @@ create table if not exists public.proceso_hallazgos (
   updated_at timestamptz not null default now()
 );
 
+alter table public.proceso_hallazgos
+add column if not exists archivo_path text,
+add column if not exists archivo_url text;
+
+create table if not exists public.proceso_informes (
+  id bigint generated always as identity primary key,
+  proceso_id bigint not null references public.procesos(id) on delete cascade,
+  nombre varchar(255) not null,
+  descripcion text,
+  archivo_path text,
+  archivo_url text,
+  orden integer not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.proceso_pendientes (
   id bigint generated always as identity primary key,
   proceso_id bigint not null references public.procesos(id) on delete cascade,
@@ -118,6 +134,7 @@ alter table public.proyecto_tareas enable row level security;
 alter table public.procesos enable row level security;
 alter table public.proyecto_bpmn enable row level security;
 alter table public.proceso_hallazgos enable row level security;
+alter table public.proceso_informes enable row level security;
 alter table public.proceso_pendientes enable row level security;
 
 create index if not exists empresa_sessions_empresa_id_idx on public.empresa_sessions(empresa_id);
@@ -130,6 +147,7 @@ create unique index if not exists procesos_proyecto_id_slug_uidx on public.proce
 create index if not exists proyecto_bpmn_proyecto_id_idx on public.proyecto_bpmn(proyecto_id);
 create index if not exists proyecto_bpmn_proceso_id_idx on public.proyecto_bpmn(proceso_id);
 create index if not exists proceso_hallazgos_proceso_id_idx on public.proceso_hallazgos(proceso_id);
+create index if not exists proceso_informes_proceso_id_idx on public.proceso_informes(proceso_id);
 create index if not exists proceso_pendientes_proceso_id_idx on public.proceso_pendientes(proceso_id);
 
 -- Required because login_empresa changed its return shape to include a session.
@@ -288,6 +306,8 @@ begin
                       'recomendacion', h.recomendacion,
                       'prioridad', h.prioridad,
                       'estado', h.estado,
+                      'archivo_path', h.archivo_path,
+                      'archivo_url', h.archivo_url,
                       'orden', h.orden
                     )
                     order by h.orden, h.id
@@ -295,21 +315,21 @@ begin
                   from public.proceso_hallazgos h
                   where h.proceso_id = pr.id
                 ), '[]'::jsonb),
-                'pendientes', coalesce((
+                'informes', coalesce((
                   select jsonb_agg(
                     jsonb_build_object(
-                      'id', pe.id,
-                      'titulo', pe.titulo,
-                      'descripcion', pe.descripcion,
-                      'responsable', pe.responsable,
-                      'fecha_limite', pe.fecha_limite,
-                      'estado', pe.estado,
-                      'orden', pe.orden
+                      'id', inf.id,
+                      'nombre', inf.nombre,
+                      'descripcion', inf.descripcion,
+                      'archivo_path', inf.archivo_path,
+                      'archivo_url', inf.archivo_url,
+                      'orden', inf.orden,
+                      'updated_at', inf.updated_at
                     )
-                    order by pe.orden, pe.fecha_limite nulls last, pe.id
+                    order by inf.orden, inf.id
                   )
-                  from public.proceso_pendientes pe
-                  where pe.proceso_id = pr.id
+                  from public.proceso_informes inf
+                  where inf.proceso_id = pr.id
                 ), '[]'::jsonb)
               )
               order by pr.orden, pr.nombre, pr.id

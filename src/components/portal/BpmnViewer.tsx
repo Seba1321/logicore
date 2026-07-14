@@ -193,14 +193,14 @@ export const BpmnViewer = ({
       {showHeader && (
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-slate-50 px-3 py-2">
           <div className="flex items-center gap-2.5">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">BPMN</span>
+            <span className="font-display text-[11px] font-medium uppercase tracking-[0.1em] text-slate-500">BPMN</span>
             <span className="text-sm font-semibold text-slate-800">{title ?? "Visor"}</span>
           </div>
           <div className="flex items-center gap-1">
             <ToolButton label="Alejar" onClick={() => zoomBy(1 / 1.2)}>
               <Minus size={15} />
             </ToolButton>
-            <span className="w-12 text-center font-mono text-xs tabular-nums text-slate-600">{zoomPct}%</span>
+            <span className="w-12 text-center font-display text-xs tabular-nums text-slate-600">{zoomPct}%</span>
             <ToolButton label="Acercar" onClick={() => zoomBy(1.2)}>
               <Plus size={15} />
             </ToolButton>
@@ -235,7 +235,7 @@ export const BpmnViewer = ({
               <span className="h-px w-8 bg-slate-300" />
               <span className="h-9 w-9 rotate-45 animate-pulse bg-slate-200 [animation-delay:320ms]" />
             </div>
-            <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-slate-400">
+            <span className="font-display text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
               Cargando diagrama
             </span>
           </div>
@@ -251,7 +251,7 @@ export const BpmnViewer = ({
         )}
 
         {status === "ready" && (
-          <span className="pointer-events-none absolute bottom-2 right-3 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">
+          <span className="pointer-events-none absolute bottom-2 right-3 font-display text-[11px] font-medium uppercase tracking-[0.1em] text-slate-500">
             arrastra para mover · rueda para zoom
           </span>
         )}

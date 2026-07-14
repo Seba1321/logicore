@@ -72,7 +72,7 @@ const BpmnViewerPage = () => {
             </Link>
             <div>
               <p className="text-sm text-blue-100/60">{session.empresa}</p>
-              <h1 className="text-xl font-semibold tracking-tight md:text-2xl">{diagram.nombre}</h1>
+              <h1 className="font-display text-xl font-semibold tracking-tight md:text-2xl">{diagram.nombre}</h1>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -112,13 +112,13 @@ const BpmnViewerPage = () => {
         {showDetails && (
           <aside className="relative rounded-sm border border-slate-200 bg-white p-5 xl:max-h-[calc(100vh-132px)] xl:overflow-y-auto">
             <CornerTicks className="text-slate-200" />
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-400">Proceso</p>
-            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight">{process?.nombre ?? diagram.nombre}</h2>
-            {process?.area && <p className="mt-2 text-sm text-slate-500">Área: {process.area}</p>}
+            <p className="font-display text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">Proceso</p>
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">{process?.nombre ?? diagram.nombre}</h2>
+            {process?.area && <p className="mt-2 text-sm text-slate-600">Área: {process.area}</p>}
             {process?.descripcion && <p className="mt-4 text-sm leading-relaxed text-slate-600">{process.descripcion}</p>}
 
             <div className="mt-6">
-              <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-400">Elementos del diagrama</p>
+              <p className="mb-3 font-display text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">Elementos del diagrama</p>
               <div className="grid grid-cols-2 gap-2">
                 <StatTile label="Tareas" value={stats?.tareas} />
                 <StatTile label="Compuertas" value={stats?.compuertas} />
@@ -135,8 +135,8 @@ const BpmnViewerPage = () => {
             </div>
 
             <div className="mt-6 rounded-sm border border-blue-900/40 bg-[#071330] p-4 text-white">
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-blue-200/70">Atajos</p>
-              <p className="mt-2 font-mono text-xs leading-relaxed text-blue-50/70">
+              <p className="font-display text-[11px] font-medium uppercase tracking-[0.12em] text-blue-200/70">Atajos</p>
+              <p className="mt-2 font-display text-xs leading-relaxed text-blue-50/70">
                 + / −&nbsp; zoom · 0&nbsp; ajustar · F&nbsp; pantalla completa · arrastra para mover.
               </p>
             </div>
@@ -161,14 +161,14 @@ const findProcessForDiagram = (data: PortalData | null, diagram: PortalBpmn | nu
 
 const StatTile = ({ label, value }: { label: string; value?: number }) => (
   <div className="rounded-sm border border-slate-200 bg-slate-50 px-3 py-2.5">
-    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">{label}</p>
+    <p className="font-display text-[11px] font-medium uppercase tracking-[0.1em] text-slate-500">{label}</p>
     <p className="mt-1 font-display text-2xl font-semibold tabular-nums text-slate-900">{value ?? "—"}</p>
   </div>
 );
 
 const InfoRow = ({ label, value }: { label: string; value: string }) => (
   <div className="flex items-center justify-between gap-3 border-b border-slate-100 py-2 last:border-b-0">
-    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">{label}</span>
+    <span className="font-display text-[11px] font-medium uppercase tracking-[0.1em] text-slate-500">{label}</span>
     <span className="text-right text-sm font-medium text-slate-800">{value.replace(/_/g, " ")}</span>
   </div>
 );
@@ -180,7 +180,7 @@ const FullPageState = ({ text, action }: { text: string; action?: React.ReactNod
     <div className="relative max-w-md rounded-sm border border-white/15 bg-white/[0.04] p-8 text-center backdrop-blur-sm">
       <CornerTicks className="text-white/20" />
       <img src="/logo-transparente.png" alt="Methodical" className="mx-auto h-10 w-auto object-contain brightness-0 invert" />
-      <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.3em] text-blue-200/60">— Visor BPMN</p>
+      <p className="mt-6 font-display text-[11px] font-medium uppercase tracking-[0.14em] text-blue-200/60">— Visor BPMN</p>
       <p className="mt-3 font-display text-lg font-semibold tracking-tight text-white">{text}</p>
       {action && <div className="mt-6">{action}</div>}
     </div>
