@@ -1,3 +1,18 @@
 {
-  "hallazgos": []
+  "hallazgos": [
+    {
+      "proceso_slug": "gestion-ciclo-vida-personal",
+      "titulo": "Matriz de madurez del proceso — Ciclo de Vida del Personal",
+      "archivo_path": "hammer/gestion-ciclo-vida-personal-madurez.png",
+      "archivo_url": null,
+      "orden": 1
+    },
+    {
+      "proceso_slug": "planificacion-control-financiero-diario",
+      "titulo": "Matriz de madurez del proceso — Planificación y Control Financiero",
+      "archivo_path": "hammer/planificacion-control-financiero-madurez.png",
+      "archivo_url": null,
+      "orden": 2
+    }
+  ]
 }
