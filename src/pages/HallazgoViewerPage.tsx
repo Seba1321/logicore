@@ -115,7 +115,7 @@ const HallazgoViewerPage = () => {
           <div className="mt-6 rounded-sm border border-blue-900/40 bg-[#071330] p-4 text-white">
             <p className="font-display text-[11px] font-medium uppercase tracking-[0.12em] text-blue-200/70">Atajos</p>
             <p className="mt-2 font-display text-xs leading-relaxed text-blue-50/70">
-              + / −&nbsp; zoom · 0&nbsp; ajustar · F&nbsp; pantalla completa · arrastra para mover.
+              + / −&nbsp; zoom · 0&nbsp; ajustar al ancho · F&nbsp; pantalla completa · rueda para desplazar · Ctrl + rueda para zoom.
             </p>
           </div>
         </aside>
