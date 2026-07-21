@@ -80,6 +80,7 @@ const uploadFile = async (clientSlug, clientDir, archivoPath) => {
 
   const { error } = await supabase.storage.from(bucketName).upload(storagePath, fileBuffer, {
     contentType: getContentType(archivoPath),
+    cacheControl: "60",
     upsert: true,
   });
 

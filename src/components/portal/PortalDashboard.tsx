@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/portal/technical";
+import { SectionHeader } from "@/components/sections/shared";
 import { BpmnLibrary } from "@/components/portal/BpmnLibrary";
+import { HallazgoLibrary } from "@/components/portal/HallazgoLibrary";
 import { InformeLibrary } from "@/components/portal/InformeLibrary";
 import { PlanTimeline } from "@/components/portal/PlanTimeline";
 import { ProjectSection } from "@/components/portal/ProjectSection";
@@ -35,6 +37,7 @@ export const PortalDashboard = ({
   const processesWithDeliverables = processes.filter(
     (process) => deriveProcessStage(process) !== "por_levantar"
   ).length;
+  const hasDeliverables = diagrams.length > 0 || findings.length > 0 || informeEntries.length > 0;
 
   // Solo métricas con algo que contar: los entregables aparecen cuando existen.
   const metrics = [
@@ -94,31 +97,54 @@ export const PortalDashboard = ({
       </section>
 
       {/* Zona clara: los documentos — bibliotecas, proyecto y Gantt sobre papel */}
-      <div className="mx-auto max-w-[1500px] space-y-8 px-4 py-10 pb-20 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1500px] space-y-14 px-4 py-12 pb-20 sm:px-6 lg:px-8">
         {isLoading ? (
           <div className="rounded-sm border border-slate-200 bg-white p-8 text-center">Cargando información del portal...</div>
         ) : (
           <>
-            {diagrams.length > 0 && (
-              <Reveal>
-                <BpmnLibrary projects={projects} diagrams={diagrams} />
-              </Reveal>
-            )}
-            {informeEntries.length > 0 && (
-              <Reveal>
-                <InformeLibrary entries={informeEntries} />
-              </Reveal>
+            {hasDeliverables && (
+              <div className="space-y-8">
+                <SectionHeader
+                  index="01"
+                  eyebrow="Entregables"
+                  title="Documentos del levantamiento"
+                  lead="BPMN, matrices del análisis HAMMER e informes finales, listos para revisar en pantalla completa y descargar."
+                />
+                {diagrams.length > 0 && (
+                  <Reveal>
+                    <BpmnLibrary projects={projects} diagrams={diagrams} />
+                  </Reveal>
+                )}
+                {findings.length > 0 && (
+                  <Reveal>
+                    <HallazgoLibrary projects={projects} findings={findings} />
+                  </Reveal>
+                )}
+                {informeEntries.length > 0 && (
+                  <Reveal>
+                    <InformeLibrary entries={informeEntries} />
+                  </Reveal>
+                )}
+              </div>
             )}
 
-            {projects.length ? (
-              projects.map((project, index) => (
-                <Reveal key={project.id} delay={index * 0.05}>
-                  <ProjectSection project={project} today={today} />
-                </Reveal>
-              ))
-            ) : (
-              <EmptyPanel title="Sin proyectos publicados" text="Aquí verás tus proyectos en cuanto estén disponibles." />
-            )}
+            <div className="space-y-8">
+              <SectionHeader
+                index={hasDeliverables ? "02" : "01"}
+                eyebrow="Proyecto"
+                title="Estado del proyecto"
+                lead="Procesos levantados y carta Gantt del plan de trabajo."
+              />
+              {projects.length ? (
+                projects.map((project, index) => (
+                  <Reveal key={project.id} delay={index * 0.05}>
+                    <ProjectSection project={project} today={today} />
+                  </Reveal>
+                ))
+              ) : (
+                <EmptyPanel title="Sin proyectos publicados" text="Aquí verás tus proyectos en cuanto estén disponibles." />
+              )}
+            </div>
           </>
         )}
       </div>

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CornerTicks } from "@/components/portal/technical";
 import { getPortalSession } from "@/lib/portal-session";
 import { supabase, type EmpresaLogin, type PortalBpmn, type PortalData, type PortalProcess } from "@/lib/supabase";
+import { withVersion } from "@/lib/utils";
 
 const BpmnViewerPage = () => {
   const { diagramId } = useParams();
@@ -39,6 +40,7 @@ const BpmnViewerPage = () => {
     ?.flatMap((project) => project.bpmn ?? [])
     .find((item) => String(item.id) === diagramId) ?? null;
   const process = findProcessForDiagram(portalData, diagram);
+  const diagramUrl = diagram ? withVersion(diagram.archivo_url, diagram.updated_at ?? diagram.id) : null;
 
   if (isLoading) {
     return <FullPageState text="Cargando BPMN..." />;
@@ -85,9 +87,9 @@ const BpmnViewerPage = () => {
             >
               {showDetails ? "Ocultar detalle" : "Mostrar detalle"}
             </Button>
-            {diagram.archivo_url && (
+            {diagramUrl && (
               <Button asChild variant="secondary" size="sm">
-                <a href={diagram.archivo_url} target="_blank" rel="noreferrer">Descargar fuente</a>
+                <a href={diagramUrl} target="_blank" rel="noreferrer">Descargar fuente</a>
               </Button>
             )}
             <Button asChild variant="outline" size="sm" className="border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white">
@@ -100,7 +102,7 @@ const BpmnViewerPage = () => {
       <div className={`grid flex-1 gap-4 p-4 sm:p-6 lg:p-8 ${showDetails ? "xl:grid-cols-[minmax(0,1fr)_360px]" : "xl:grid-cols-1"}`}>
         <section className="min-h-[calc(100vh-132px)] rounded-sm bg-white p-3 border border-slate-200">
           <BpmnViewer
-            xmlUrl={diagram.archivo_url}
+            xmlUrl={diagramUrl}
             title={diagram.nombre}
             heightClassName="h-[calc(100vh-220px)] min-h-[680px]"
             className="h-full rounded-sm"

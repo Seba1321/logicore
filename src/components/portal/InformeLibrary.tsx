@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { withVersion } from "@/lib/utils";
 import type { PortalInforme, PortalProcess } from "@/lib/supabase";
 
 export const InformeLibrary = ({
@@ -13,7 +14,9 @@ export const InformeLibrary = ({
       <p className="mt-2 text-sm text-slate-600">Descarga o visualiza el informe final en PDF de cada proceso.</p>
     </div>
     <div className="grid gap-4 lg:grid-cols-2">
-      {entries.map(({ process, informe }, index) => (
+      {entries.map(({ process, informe }, index) => {
+        const informeUrl = withVersion(informe.archivo_url, informe.updated_at ?? informe.id);
+        return (
         <div key={informe.id} className="rounded-sm border border-slate-200 p-5 transition hover:border-blue-300">
           <div className="flex h-full flex-col justify-between gap-5">
             <div>
@@ -26,15 +29,15 @@ export const InformeLibrary = ({
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">{informe.descripcion}</p>
               )}
             </div>
-            {informe.archivo_url ? (
+            {informeUrl ? (
               <div className="flex flex-wrap gap-3">
                 <Button asChild className="w-full sm:w-fit">
-                  <a href={informe.archivo_url} target="_blank" rel="noreferrer">
+                  <a href={informeUrl} target="_blank" rel="noreferrer">
                     Ver PDF
                   </a>
                 </Button>
                 <Button asChild variant="secondary" className="w-full sm:w-fit">
-                  <a href={informe.archivo_url} download>
+                  <a href={informeUrl} download>
                     Descargar
                   </a>
                 </Button>
@@ -44,7 +47,8 @@ export const InformeLibrary = ({
             )}
           </div>
         </div>
-      ))}
+        );
+      })}
     </div>
   </section>
 );

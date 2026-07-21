@@ -18,6 +18,7 @@ const Projects = lazy(() => import("./pages/Projects"));
 const Research = lazy(() => import("./pages/Research"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const BpmnViewerPage = lazy(() => import("./pages/BpmnViewerPage"));
+const HallazgoViewerPage = lazy(() => import("./pages/HallazgoViewerPage"));
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="/privacidad" element={<Privacy />} />
             <Route path="/portal" element={<Portal />} />
             <Route path="/portal/bpmn/:diagramId" element={<BpmnViewerPage />} />
+            <Route path="/portal/hallazgo/:findingId" element={<HallazgoViewerPage />} />
             <Route path="/visit" element={<Visit />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
