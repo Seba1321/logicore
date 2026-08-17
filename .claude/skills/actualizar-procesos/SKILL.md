@@ -20,7 +20,7 @@ Archivo: `clientes/<cliente-slug>/procesos.json`. Los archivos van en `bpmn/` (`
   "descripcion": "…",
   "orden": 1,
   "bpmn": [
-    { "nombre": "…", "descripcion": "…", "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal.bpmn", "archivo_url": null }
+    { "nombre": "…", "descripcion": "…", "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal.bpmn", "archivo_url": null, "preview_path": "bpmn/Ciclo-de-Vida-del-Personal-preview.svg", "preview_url": null }
   ],
   "informes": [
     { "nombre": "Informe final", "descripcion": "…", "archivo_path": "informes/ciclo-vida-personal.pdf", "archivo_url": null }
@@ -42,8 +42,9 @@ El campo `estado` de `procesos.json` **ya no afecta** al portal. El embudo se fi
 ## Agregar un BPMN
 
 1. Guardar el archivo en `bpmn/<Nombre-Del-Proceso>.bpmn` (ASCII, kebab-case o Pascal-Con-Guiones; nunca subir visualizadores HTML — el portal ya tiene visor bpmn-js).
-2. Agregar la entrada al array `bpmn` del proceso (no dejarlo `[]`), con `archivo_url: null`.
-3. Commit + push a `main` → el sync sube el archivo al bucket `bpmn` de Storage y genera la URL pública.
+2. Generar su miniatura con `python3 audit_bpmn.py <archivo.bpmn> --svg-dir <destino>` y dejarla como `bpmn/<Nombre>-preview.svg`. Es opcional: sin ella el portal muestra una tarjeta de texto en vez del diagrama en chico.
+3. Agregar la entrada al array `bpmn` del proceso (no dejarlo `[]`), con `archivo_url` y `preview_url` en `null`.
+4. Commit + push a `main` → el sync sube ambos archivos al bucket `bpmn` de Storage y genera las URL públicas.
 
 ## Agregar un informe final
 

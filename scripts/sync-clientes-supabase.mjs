@@ -70,6 +70,9 @@ const getContentType = (filePath) => {
   if (filePath.endsWith(".png")) return "image/png";
   if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) return "image/jpeg";
   if (filePath.endsWith(".webp")) return "image/webp";
+  // Sin esto el SVG saldría como octet-stream y el navegador lo descargaría en
+  // vez de pintarlo en un <img>.
+  if (filePath.endsWith(".svg")) return "image/svg+xml";
   return "application/octet-stream";
 };
 
@@ -197,6 +200,11 @@ const syncClient = async (clientSlug) => {
         ? await uploadFile(clientSlug, clientDir, bpmn.archivo_path)
         : bpmn.archivo_url ?? null;
 
+      // La miniatura es opcional: sin ella el portal cae a una tarjeta de texto.
+      const previewUrl = bpmn.preview_path
+        ? await uploadFile(clientSlug, clientDir, bpmn.preview_path)
+        : bpmn.preview_url ?? null;
+
       await insertRows("proyecto_bpmn", [
         {
           proyecto_id: proyectoId,
@@ -205,6 +213,8 @@ const syncClient = async (clientSlug) => {
           descripcion: bpmn.descripcion ?? null,
           archivo_path: bpmn.archivo_path ?? null,
           archivo_url: archivoUrl,
+          preview_path: bpmn.preview_path ?? null,
+          preview_url: previewUrl,
         },
       ]);
     }

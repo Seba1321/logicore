@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2750" height="900" viewBox="0 0 2750 900">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#111"/></marker><marker id="mf" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0.5,0.5 L10,4.5 L0.5,8.5 z" fill="#fff" stroke="#555" stroke-width="1"/></marker></defs>
+<rect x="30.0" y="30.0" width="2690.0" height="720.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="30.0" width="30" height="720.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,390.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Proceso Control e Informes de Gestión Clínica</text></g>
+<rect x="30.0" y="770.0" width="2690.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="770.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,820.0) rotate(-90)"><text x="0.0" y="-2.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Soporte externo</text><text x="0.0" y="9.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">RISPAC</text></g>
+<rect x="60.0" y="30.0" width="2660.0" height="140.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="30.0" width="30" height="140.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,100.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Jefatura</text></g>
+<rect x="60.0" y="560.0" width="2660.0" height="190.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="560.0" width="30" height="190.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,655.0) rotate(-90)"><text x="0.0" y="-2.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Gabriela - Asistente</text><text x="0.0" y="9.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Administrativa</text></g>
+<rect x="60.0" y="170.0" width="2660.0" height="390.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="170.0" width="30" height="390.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,365.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Liz Bravo - Jefe de Administración</text></g>
+<polyline points="1670.0,280.0 1670.0,260.0" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="3,3"/>
+<polyline points="923.0,280.0 923.0,267.0" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="3,3"/>
+<polyline points="1083.0,360.0 1083.0,385.0" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#mf)"/>
+<polyline points="2540.0,100.0 2592.0,100.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2240.0,100.0 2290.0,100.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1820.0,459.0 1820.0,604.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1820.0,360.0 1820.0,423.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="720.0,320.0 775.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1133.0,320.0 1198.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2370.0,490.0 2410.0,490.0 2410.0,710.0 1950.0,710.0 1950.0,669.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2390.0,100.0 2440.0,100.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="590.0,441.0 650.0,441.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="700.0,481.0 700.0,520.0 430.0,520.0 430.0,345.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1720.0,320.0 1770.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="565.0,320.0 620.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="582.1" y="301.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="592.5" y="313.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
+<polyline points="1870.0,644.0 1925.0,644.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1570.0,320.0 1620.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="455.0,320.0 515.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1223.0,345.0 1223.0,460.0 800.0,460.0 800.0,345.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1165.1" y="362.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1175.5" y="374.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
+<polyline points="540.0,481.0 540.0,770.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="1248.0,320.0 1320.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1274.1" y="301.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1284.5" y="313.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">NO</text>
+<polyline points="2190.0,280.0 2190.0,140.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="198.0,320.0 250.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2090.0,320.0 2140.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2040.0,619.0 2040.0,360.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2045.1" y="487.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="2055.5" y="499.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
+<polyline points="973.0,320.0 1033.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="540.0,345.0 540.0,401.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2230.0,490.0 2270.0,490.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2065.0,644.0 2090.0,644.0 2090.0,490.0 2130.0,490.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2067.1" y="625.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="2077.5" y="637.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">NO</text>
+<polyline points="1420.0,320.0 1470.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1975.0,644.0 2015.0,644.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="825.0,320.0 873.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="350.0,320.0 405.0,320.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2270.0" y="450.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="2320.0" y="482.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Ajustar</text><text x="2320.0" y="494.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información en</text><text x="2320.0" y="506.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Excel</text>
+<rect x="2440.0" y="60.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="2490.0" y="74.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Evaluar</text><text x="2490.0" y="86.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">posibles</text><text x="2490.0" y="98.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">acciones a</text><text x="2490.0" y="110.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">partir de</text><text x="2490.0" y="122.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">informes</text><text x="2490.0" y="134.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">recibidos</text>
+<rect x="1033.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="1083.0" y="312.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Descargar</text><text x="1083.0" y="324.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">reportes desde</text><text x="1083.0" y="336.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">RISPAC</text>
+<rect x="1770.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="1820.0" y="306.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Enviar</text><text x="1820.0" y="318.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información de</text><text x="1820.0" y="330.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">caja para</text><text x="1820.0" y="342.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">validación</text>
+<rect x="620.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="670.0" y="306.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Acceder a</text><text x="670.0" y="318.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">módulo</text><text x="670.0" y="330.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">administrativo</text><text x="670.0" y="342.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de reportes</text>
+<rect x="2130.0" y="450.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="2180.0" y="482.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar</text><text x="2180.0" y="494.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">diferencias de</text><text x="2180.0" y="506.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">caja</text>
+<rect x="490.0" y="401.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="540.0" y="439.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Reportar falla</text><text x="540.0" y="451.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">a soporte</text>
+<rect x="2140.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="2190.0" y="312.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Entregar</text><text x="2190.0" y="324.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">informe a</text><text x="2190.0" y="336.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">jefatura</text>
+<rect x="250.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="300.0" y="312.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Ingresar a</text><text x="300.0" y="324.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">RISPAC con</text><text x="300.0" y="336.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">credenciales</text>
+<rect x="2290.0" y="60.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="2340.0" y="92.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar</text><text x="2340.0" y="104.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">proyección de</text><text x="2340.0" y="116.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">ventas</text>
+<rect x="1470.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="1520.0" y="306.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Consolidar</text><text x="1520.0" y="318.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información de</text><text x="1520.0" y="330.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">sucursales en</text><text x="1520.0" y="342.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Excel general</text>
+<rect x="873.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="923.0" y="306.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Aplicar los</text><text x="923.0" y="318.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">filtros de</text><text x="923.0" y="330.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">consulta en</text><text x="923.0" y="342.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">RISPAC</text>
+<rect x="1620.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="1670.0" y="306.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Clasificar</text><text x="1670.0" y="318.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información por</text><text x="1670.0" y="330.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">criterios de</text><text x="1670.0" y="342.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">gestión</text>
+<rect x="1770.0" y="604.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="1820.0" y="636.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Validar</text><text x="1820.0" y="648.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información de</text><text x="1820.0" y="660.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">pagos y caja</text>
+<rect x="1320.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="1370.0" y="312.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Traspasar</text><text x="1370.0" y="324.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información a</text><text x="1370.0" y="336.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Excel</text>
+<rect x="2140.0" y="60.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="2190.0" y="92.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recibir informe</text><text x="2190.0" y="104.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de gestión</text><text x="2190.0" y="116.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">clínica</text>
+<rect x="650.0" y="401.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="700.0" y="433.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Esperar</text><text x="700.0" y="445.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">restablecimiento</text><text x="700.0" y="457.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">del sistema</text>
+<rect x="1990.0" y="280.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="2040.0" y="306.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Generar</text><text x="2040.0" y="318.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">reportes</text><text x="2040.0" y="330.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">finales de caja</text><text x="2040.0" y="342.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">y de producción</text>
+<path d="M1065.0,385.0 L1091.0,385.0 L1101.0,395.0 L1101.0,435.0 L1065.0,435.0 Z" fill="#fff" stroke="#111" stroke-width="1.4"/>
+<path d="M1091.0,385.0 L1091.0,395.0 L1101.0,395.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="180.0" cy="320.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="180.5" y="351.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Necesidad de</text><text x="180.5" y="363.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">preparar</text><text x="180.5" y="375.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información</text><text x="180.5" y="387.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de gestión</text><text x="180.5" y="399.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">clínica</text>
+<circle cx="2610.0" cy="100.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="2610.5" y="131.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Información de</text><text x="2610.5" y="143.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">gestión</text><text x="2610.5" y="155.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">utilizada para</text><text x="2610.5" y="167.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">análisis</text>
+<circle cx="1820.0" cy="441.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1820.0" cy="441.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<rect x="1814.0" y="437.0" width="12" height="8" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M1814.0,437.0 L1820.0,442.0 L1826.0,437.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<polygon points="1950.0,619.0 1975.0,644.0 1950.0,669.0 1925.0,644.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1942.0,636.0 L1958.0,652.0 M1958.0,636.0 L1942.0,652.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="1223.0,295.0 1248.0,320.0 1223.0,345.0 1198.0,320.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1215.0,312.0 L1231.0,328.0 M1231.0,312.0 L1215.0,328.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1222.5" y="257.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Faltan</text><text x="1222.5" y="269.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">reportes por</text><text x="1222.5" y="281.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">descargar?</text>
+<polygon points="540.0,295.0 565.0,320.0 540.0,345.0 515.0,320.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M532.0,312.0 L548.0,328.0 M548.0,312.0 L532.0,328.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="540.0" y="269.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿RISPAC</text><text x="540.0" y="281.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">disponible?</text>
+<polygon points="800.0,295.0 825.0,320.0 800.0,345.0 775.0,320.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M792.0,312.0 L808.0,328.0 M808.0,312.0 L792.0,328.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="430.0,295.0 455.0,320.0 430.0,345.0 405.0,320.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M422.0,312.0 L438.0,328.0 M438.0,312.0 L422.0,328.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="2040.0,619.0 2065.0,644.0 2040.0,669.0 2015.0,644.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M2032.0,636.0 L2048.0,652.0 M2048.0,636.0 L2032.0,652.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="2040.5" y="681.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Caja</text><text x="2040.5" y="693.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">correcta?</text>
+<path d="M813.0,210.0 L803.0,210.0 L803.0,267.0 L813.0,267.0" fill="none" stroke="#666" stroke-width="1.4"/>
+<text x="811.0" y="231.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">Filtros utilizados: fecha, sucursal, prestación,</text><text x="811.0" y="242.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">médico/prestador, sociedad, monto, forma de pago e</text><text x="811.0" y="253.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">institución.</text>
+<path d="M1630.0,217.0 L1620.0,217.0 L1620.0,260.0 L1630.0,260.0" fill="none" stroke="#666" stroke-width="1.4"/>
+<text x="1628.0" y="236.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">Clasificación por sucursal, prestación, sociedad, prestador,</text><text x="1628.0" y="247.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">institución, convenio, Fonasa/Isapre, monto y forma de pago.</text>
+</svg>

@@ -35,6 +35,9 @@ export type PortalBpmn = {
   descripcion: string | null;
   archivo_path: string | null;
   archivo_url: string | null;
+  /** Miniatura SVG del diagrama. Opcional: sin ella el portal muestra una tarjeta de texto. */
+  preview_path: string | null;
+  preview_url: string | null;
   proceso_id?: number | null;
   updated_at: string | null;
 };

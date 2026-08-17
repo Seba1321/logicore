@@ -14,7 +14,9 @@
           "nombre": "Gestión de Abastecimiento e Inventario",
           "descripcion": "Diagrama BPMN del proceso de abastecimiento e inventario, desde el requerimiento de la sucursal hasta la recepción del insumo.",
           "archivo_path": "bpmn/Gestion-de-Inventario.bpmn",
-          "archivo_url": null
+          "archivo_url": null,
+          "preview_path": "bpmn/Gestion-de-Inventario-preview.svg",
+          "preview_url": null
         }
       ],
       "informes": [
@@ -61,19 +63,25 @@
           "nombre": "Gestión General y Marketing Digital",
           "descripcion": "Diagrama BPMN de la campaña digital, desde la necesidad de difusión hasta la revisión de métricas.",
           "archivo_path": "bpmn/Marketing-Digital.bpmn",
-          "archivo_url": null
+          "archivo_url": null,
+          "preview_path": "bpmn/Marketing-Digital-preview.svg",
+          "preview_url": null
         },
         {
           "nombre": "Gestión de Encuestas de Satisfacción",
           "descripcion": "Diagrama BPMN de la aplicación de encuestas, desde la fecha seleccionada por randomizador hasta la acción correctiva.",
           "archivo_path": "bpmn/Encuestas-de-Satisfaccion.bpmn",
-          "archivo_url": null
+          "archivo_url": null,
+          "preview_path": "bpmn/Encuestas-de-Satisfaccion-preview.svg",
+          "preview_url": null
         },
         {
           "nombre": "Gestión de Reclamos",
           "descripcion": "Diagrama BPMN del ciclo formal de reclamos, desde el ingreso por cualquier canal hasta el archivo del expediente.",
           "archivo_path": "bpmn/Gestion-de-Reclamos.bpmn",
-          "archivo_url": null
+          "archivo_url": null,
+          "preview_path": "bpmn/Gestion-de-Reclamos-preview.svg",
+          "preview_url": null
         }
       ],
       "informes": [
@@ -100,7 +108,9 @@
           "nombre": "Control e Informes de Gestión Clínica",
           "descripcion": "Diagrama BPMN del proceso de reportería, desde la necesidad de información hasta la entrega a jefatura.",
           "archivo_path": "bpmn/Control-e-Informes-de-Gestion-Clinica.bpmn",
-          "archivo_url": null
+          "archivo_url": null,
+          "preview_path": "bpmn/Control-e-Informes-de-Gestion-Clinica-preview.svg",
+          "preview_url": null
         }
       ],
       "informes": [

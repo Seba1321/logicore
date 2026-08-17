@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2940" height="1590" viewBox="0 0 2940 1590">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#111"/></marker><marker id="mf" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0.5,0.5 L10,4.5 L0.5,8.5 z" fill="#fff" stroke="#555" stroke-width="1"/></marker></defs>
+<rect x="30.0" y="190.0" width="2880.0" height="1180.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="190.0" width="30" height="1180.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,780.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Casa Matriz</text></g>
+<rect x="30.0" y="30.0" width="2880.0" height="140.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="30.0" width="30" height="140.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,100.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Sucursal</text></g>
+<rect x="40.0" y="1420.0" width="2870.0" height="140.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="40.0" y="1420.0" width="30" height="140.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(55.0,1490.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Gerencia</text></g>
+<polyline points="1559.0,290.0 1554.0,274.0" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="3,3"/>
+<polyline points="1210.0,1160.0 1250.0,1160.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1400.0,900.0 1100.0,900.0 1100.0,700.0 1160.0,700.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1200.0,285.0 1200.0,385.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1204.6" y="331.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1215.0" y="343.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="2240.0,345.0 2240.0,268.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2244.6" y="305.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="2255.0" y="317.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="1595.0,790.0 1670.0,790.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1190.0,170.0 1190.0,552.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="640.0,740.0 685.0,740.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2030.0,170.0 2030.0,312.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="1300.0,385.0 1300.0,330.0 1380.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1330.1" y="311.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1340.5" y="323.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="435.0,330.0 690.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="552.6" y="311.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="563.0" y="323.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="2010.0,460.0 2060.0,460.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1860.0,460.0 1910.0,460.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2135.0,370.0 2215.0,370.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1570.0,815.0 1570.0,1030.0 410.0,1030.0 410.0,770.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1770.0,790.0 1852.0,790.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2110.0,420.0 2110.0,395.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1620.0,330.0 1665.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1350.0,1160.0 1400.0,1160.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1690.0,355.0 1690.0,460.0 1760.0,460.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1695.1" y="404.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1705.5" y="416.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="410.0,355.0 410.0,715.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1090.0,570.0 1172.0,570.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1138.0,260.0 1175.0,260.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1380.0,790.0 1425.0,790.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="940.0,1160.0 1015.0,1160.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1120.0,170.0 1120.0,242.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="2048.0,330.0 2110.0,330.0 2110.0,345.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1040.0,1135.0 1040.0,640.0 735.0,640.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1045.1" y="883.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1055.5" y="895.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="1215.0,700.0 1312.0,700.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1253.6" y="681.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1264.0" y="693.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="1040.0,530.0 1040.0,170.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="710.0,715.0 710.0,665.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="714.6" y="686.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="725.0" y="698.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="1225.0,410.0 1275.0,410.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1940.0,330.0 2012.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1715.0,330.0 1840.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1768.6" y="311.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1779.0" y="323.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="1890.0,290.0 1890.0,170.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="870.0,305.0 870.0,260.0 950.0,260.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="874.6" y="278.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="885.0" y="290.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="1190.0,725.0 1190.0,790.0 1280.0,790.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1219.1" y="770.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1229.5" y="782.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="218.0,330.0 385.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="790.0,330.0 845.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1500.0,1160.0 1552.0,1160.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1000.0,220.0 1000.0,170.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="1065.0,1160.0 1110.0,1160.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1069.6" y="1158.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1080.0" y="1170.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="710.0,765.0 710.0,1160.0 840.0,1160.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="715.1" y="966.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="725.5" y="978.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="1190.0,588.0 1190.0,675.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1475.0,790.0 1545.0,790.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1500.1" y="771.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1510.5" y="783.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="1050.0,260.0 1102.0,260.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="710.0,615.0 710.0,570.0 830.0,570.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="435.0,740.0 540.0,740.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1520.0,540.0 1520.0,1420.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="1225.0,260.0 1282.0,260.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1243.1" y="241.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1253.5" y="253.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="870.0,355.0 870.0,410.0 1175.0,410.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="875.1" y="376.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="885.5" y="388.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="2430.0,370.0 2502.0,370.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1300.0,435.0 1300.0,500.0 1470.0,500.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1304.6" y="463.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1315.0" y="475.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="930.0,570.0 990.0,570.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1450.0,815.0 1450.0,860.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1454.6" y="833.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1465.0" y="845.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Si</text>
+<polyline points="2265.0,370.0 2330.0,370.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2287.1" y="351.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="2297.5" y="363.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="1570.0,500.0 1622.0,500.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="200.0,170.0 200.0,312.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<polyline points="1480.0,330.0 1520.0,330.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2060.0" y="420.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="2071.0" cy="429.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M2066.6,436.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="2110.0" y="458.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Emitir orden de</text><text x="2110.0" y="470.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">despacho</text>
+<rect x="1400.0" y="1120.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="1405.5" y="1127.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M1405.5,1127.0 L1411.0,1132.0 L1416.5,1127.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="1450.0" y="1158.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Informar a</text><text x="1450.0" y="1170.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">sucursal</text>
+<rect x="1400.0" y="860.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1411.0" cy="869.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1406.6,876.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1450.0" y="898.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Gestionar</text><text x="1450.0" y="910.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">reemplazo</text>
+<rect x="690.0" y="290.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="701.0" cy="299.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M696.6,306.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="740.0" y="328.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar</text><text x="740.0" y="340.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Solicitudes</text>
+<rect x="540.0" y="700.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="551.0" cy="709.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M546.6,716.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="590.0" y="738.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Seleccionar</text><text x="590.0" y="750.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">proveedor</text>
+<rect x="830.0" y="530.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="841.0" cy="539.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M836.6,546.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="880.0" y="568.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Gestionar</text><text x="880.0" y="580.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">compra</text>
+<rect x="1110.0" y="1120.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1121.0" cy="1129.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1116.6,1136.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1160.0" y="1158.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Emitir orden de</text><text x="1160.0" y="1170.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">despacho</text>
+<rect x="1520.0" y="290.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1531.0" cy="299.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1526.6,306.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1570.0" y="322.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Gestionar</text><text x="1570.0" y="334.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">compra por cada</text><text x="1570.0" y="346.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">proveedor</text>
+<rect x="1250.0" y="1120.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1261.0" cy="1129.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1256.6,1136.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1300.0" y="1158.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Gestionar</text><text x="1300.0" y="1170.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">traspaso</text>
+<rect x="1910.0" y="420.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1921.0" cy="429.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1916.6,436.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1960.0" y="458.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Gestionar</text><text x="1960.0" y="470.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">traslado</text>
+<rect x="950.0" y="220.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="955.5" y="227.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M955.5,227.0 L961.0,232.0 L966.5,227.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="1000.0" y="252.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Solicitar</text><text x="1000.0" y="264.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">información</text><text x="1000.0" y="276.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">adicional</text>
+<rect x="1470.0" y="460.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="1475.5" y="467.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M1475.5,467.0 L1481.0,472.0 L1486.5,467.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="1520.0" y="498.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Derivar a</text><text x="1520.0" y="510.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">gerencia.</text>
+<rect x="1280.0" y="750.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1291.0" cy="759.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1286.6,766.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1330.0" y="782.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Conultar</text><text x="1330.0" y="794.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">tiempos de</text><text x="1330.0" y="806.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">reemplazo</text>
+<rect x="2330.0" y="330.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="2335.5" y="337.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M2335.5,337.0 L2341.0,342.0 L2346.5,337.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="2380.0" y="362.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Solicitar</text><text x="2380.0" y="374.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">reemplazo</text><text x="2380.0" y="386.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">devolución</text>
+<rect x="1760.0" y="420.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1771.0" cy="429.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1766.6,436.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1810.0" y="458.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recepcionar</text><text x="1810.0" y="470.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">insumos</text>
+<rect x="1840.0" y="290.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="1845.5" y="297.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M1845.5,297.0 L1851.0,302.0 L1856.5,297.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="1890.0" y="328.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Informar a</text><text x="1890.0" y="340.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">sucursal</text>
+<rect x="1670.0" y="750.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1681.0" cy="759.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1676.6,766.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1720.0" y="788.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Solicitar</text><text x="1720.0" y="800.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">devolucion</text>
+<rect x="840.0" y="1120.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="851.0" cy="1129.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M846.6,1136.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="890.0" y="1146.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar</text><text x="890.0" y="1158.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">opciones de</text><text x="890.0" y="1170.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">traspaso</text><text x="890.0" y="1182.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">intersucursal</text>
+<rect x="990.0" y="530.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="995.5" y="537.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M995.5,537.0 L1001.0,542.0 L1006.5,537.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="1040.0" y="568.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Informar a</text><text x="1040.0" y="580.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">sucursal</text>
+<rect x="1380.0" y="290.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1391.0" cy="299.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1386.6,306.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1430.0" y="322.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Seleccionar</text><text x="1430.0" y="334.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">proveedor para</text><text x="1430.0" y="346.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cada item</text>
+<circle cx="1120.0" cy="260.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1120.0" cy="260.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<rect x="1114.0" y="256.0" width="12" height="8" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M1114.0,256.0 L1120.0,261.0 L1126.0,256.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1570.0" cy="1160.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="1570.5" y="1196.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Transferencia</text><text x="1570.5" y="1208.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">satisfactoria</text>
+<circle cx="1300.0" cy="260.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<circle cx="2240.0" cy="250.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="2239.5" y="206.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Compra</text><text x="2239.5" y="218.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">completada</text>
+<circle cx="2030.0" cy="330.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="2030.0" cy="330.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<rect x="2024.0" y="326.0" width="12" height="8" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M2024.0,326.0 L2030.0,331.0 L2036.0,326.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1330.0" cy="700.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="1330.5" y="736.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Compra</text><text x="1330.5" y="748.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">completada</text>
+<circle cx="2520.0" cy="370.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="2520.5" y="406.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Devolucion</text><text x="2520.5" y="418.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">satisfactoria</text>
+<circle cx="1870.0" cy="790.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="1870.5" y="826.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Devolución</text><text x="1870.5" y="838.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">satisfactoria</text>
+<circle cx="200.0" cy="330.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="200.0" cy="330.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<rect x="194.0" y="326.0" width="12" height="8" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M194.0,326.0 L200.0,331.0 L206.0,326.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<text x="200.5" y="367.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recepción de</text><text x="200.5" y="379.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">requerimientos</text><text x="200.5" y="391.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de compra</text>
+<circle cx="1190.0" cy="570.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1190.0" cy="570.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<rect x="1184.0" y="566.0" width="12" height="8" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M1184.0,566.0 L1190.0,571.0 L1196.0,566.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<circle cx="1640.0" cy="500.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="1640.0" y="536.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Orden de compra</text><text x="1640.0" y="548.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">derivada</text>
+<polygon points="1690.0,305.0 1715.0,330.0 1690.0,355.0 1665.0,330.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1682.0,322.0 L1698.0,338.0 M1698.0,322.0 L1682.0,338.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1690.0" y="266.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Insumo es</text><text x="1690.0" y="278.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">despachado a</text><text x="1690.0" y="290.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cada</text><text x="1690.0" y="302.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">sucursal?</text>
+<polygon points="2110.0,345.0 2135.0,370.0 2110.0,395.0 2085.0,370.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M2102.0,362.0 L2118.0,378.0 M2118.0,362.0 L2102.0,378.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="1570.0,765.0 1595.0,790.0 1570.0,815.0 1545.0,790.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1559.0,790.0 L1581.0,790.0 M1570.0,779.0 L1570.0,801.0" stroke="#111" stroke-width="2.6" fill="none"/>
+<polygon points="870.0,305.0 895.0,330.0 870.0,355.0 845.0,330.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M862.0,322.0 L878.0,338.0 M878.0,322.0 L862.0,338.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="936.0" y="322.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Cantidades</text><text x="936.0" y="334.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">difieren de</text><text x="936.0" y="346.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">lo común?</text>
+<polygon points="1040.0,1135.0 1065.0,1160.0 1040.0,1185.0 1015.0,1160.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1032.0,1152.0 L1048.0,1168.0 M1048.0,1152.0 L1032.0,1168.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1099.5" y="1049.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Alguna</text><text x="1099.5" y="1061.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">sucursal tiene</text><text x="1099.5" y="1073.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">capacidad para</text><text x="1099.5" y="1085.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">gestionar</text><text x="1099.5" y="1097.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">préstamo?</text>
+<polygon points="1200.0,385.0 1225.0,410.0 1200.0,435.0 1175.0,410.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1192.0,402.0 L1208.0,418.0 M1208.0,402.0 L1192.0,418.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="410.0,305.0 435.0,330.0 410.0,355.0 385.0,330.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M402.0,322.0 L418.0,338.0 M418.0,322.0 L402.0,338.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="409.5" y="261.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Requerimiento</text><text x="409.5" y="273.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">es un proceso</text><text x="409.5" y="285.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de compra</text><text x="409.5" y="297.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">normal?</text>
+<polygon points="710.0,615.0 735.0,640.0 710.0,665.0 685.0,640.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M702.0,632.0 L718.0,648.0 M718.0,632.0 L702.0,648.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="1190.0,675.0 1215.0,700.0 1190.0,725.0 1165.0,700.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1182.0,692.0 L1198.0,708.0 M1198.0,692.0 L1182.0,708.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1150.0" y="733.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recepción</text><text x="1150.0" y="745.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">fue</text><text x="1150.0" y="757.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">satisfactoria?</text>
+<polygon points="1450.0,765.0 1475.0,790.0 1450.0,815.0 1425.0,790.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1442.0,782.0 L1458.0,798.0 M1458.0,782.0 L1442.0,798.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1449.5" y="714.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Tiempo de</text><text x="1449.5" y="726.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">despacho cumple</text><text x="1449.5" y="738.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">con lo</text><text x="1449.5" y="750.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">demandado?</text>
+<polygon points="1300.0,385.0 1325.0,410.0 1300.0,435.0 1275.0,410.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1292.0,402.0 L1308.0,418.0 M1308.0,402.0 L1292.0,418.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1400.0" y="405.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Compra corresponde a</text><text x="1400.0" y="417.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">equipamiento medico</text><text x="1400.0" y="429.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">o tiene alto valor</text><text x="1400.0" y="441.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">económico?</text>
+<polygon points="1200.0,235.0 1225.0,260.0 1200.0,285.0 1175.0,260.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1192.0,252.0 L1208.0,268.0 M1208.0,252.0 L1192.0,268.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1200.0" y="216.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Información</text><text x="1200.0" y="228.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">congruente?</text>
+<polygon points="710.0,715.0 735.0,740.0 710.0,765.0 685.0,740.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M702.0,732.0 L718.0,748.0 M718.0,732.0 L702.0,748.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="788.0" y="726.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Tiempo de</text><text x="788.0" y="738.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">despacho cumple</text><text x="788.0" y="750.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">con lo</text><text x="788.0" y="762.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">demandado?</text>
+<polygon points="410.0,715.0 435.0,740.0 410.0,765.0 385.0,740.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M402.0,732.0 L418.0,748.0 M418.0,732.0 L402.0,748.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="2240.0,345.0 2265.0,370.0 2240.0,395.0 2215.0,370.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M2232.0,362.0 L2248.0,378.0 M2248.0,362.0 L2232.0,378.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="2240.5" y="407.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recepción</text><text x="2240.5" y="419.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">fue</text><text x="2240.5" y="431.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">satisfactoria?</text>
+<path d="M1500.0,202.0 L1490.0,202.0 L1490.0,274.0 L1500.0,274.0" fill="none" stroke="#666" stroke-width="1.4"/>
+<text x="1498.0" y="225.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">Dependiendo del tipo de producto, las compras pueden</text><text x="1498.0" y="236.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">realizarse mediante órdenes de compra, solicitudes</text><text x="1498.0" y="247.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">por correo electrónico o compras directas a través de</text><text x="1498.0" y="258.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="start" fill="#333">plataformas web.</text>
+</svg>

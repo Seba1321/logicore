@@ -249,7 +249,7 @@ describe("deriveProcessStage", () => {
     orden: 1,
     updated_at: null,
   };
-  const bpmn = { id: 1, nombre: "b", descripcion: null, archivo_path: null, archivo_url: null, updated_at: null };
+  const bpmn = { id: 1, nombre: "b", descripcion: null, archivo_path: null, archivo_url: null, preview_path: null, preview_url: null, updated_at: null };
   const hallazgo = {
     id: 1,
     titulo: "h",

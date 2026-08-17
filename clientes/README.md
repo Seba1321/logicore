@@ -59,6 +59,8 @@ Reglas:
 - Cada BPMN debe estar asociado a un proceso en `procesos.json`.
 - `archivo_path` siempre es relativo a la carpeta del cliente.
 - `archivo_url` debe quedar `null` en Git, salvo que quieras forzar una URL externa.
+- `preview_path` es opcional: una miniatura SVG del diagrama para mostrarlo en el portal sin
+  montar el visor. Sin ella, el proceso igual publica el BPMN, pero como tarjeta de texto.
 
 Ejemplo:
 
@@ -73,11 +75,24 @@ Ejemplo:
       "nombre": "Ciclo de Vida del Personal",
       "descripcion": "Diagrama BPMN del proceso de personas.",
       "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal.bpmn",
-      "archivo_url": null
+      "archivo_url": null,
+      "preview_path": "bpmn/Ciclo-de-Vida-del-Personal-preview.svg",
+      "preview_url": null
     }
   ]
 }
 ```
+
+### Generar La Miniatura De Un BPMN
+
+El preview se genera desde el propio `.bpmn`, así que no hay que dibujarlo a mano:
+
+```bash
+python3 audit_bpmn.py <archivo.bpmn> --svg-dir <carpeta-destino>
+```
+
+Deja el resultado como `bpmn/<Nombre>-preview.svg`, junto a su diagrama, y decláralo en
+`preview_path`. La herramienta vive en el repositorio de trabajo del cliente, no en este.
 
 ## Etapa Del Proceso (Embudo)
 

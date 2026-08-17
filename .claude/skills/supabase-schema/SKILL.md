@@ -26,7 +26,7 @@ El frontend **solo usa RPCs** (`login_empresa`, `get_portal_empresa`, `logout_em
 | `proyectos` | proyecto por empresa (borrado y re-insertado en cada sync) | sync |
 | `proyecto_tareas` | tareas Gantt (desde `gantt.json`) | sync |
 | `procesos` | procesos levantados (desde `procesos.json`) | sync |
-| `proyecto_bpmn` | diagramas BPMN + `archivo_url` público; `proceso_id` liga al proceso | sync |
+| `proyecto_bpmn` | diagramas BPMN + `archivo_url` público y `preview_url` (miniatura SVG, opcional); `proceso_id` liga al proceso | sync |
 | `proceso_informes` | informes PDF finales por proceso | sync |
 | `proceso_hallazgos` | imágenes HAMMER por proceso (asociadas por `proceso_slug`) | sync |
 | `proceso_pendientes` | existe en el SQL pero **el pipeline actual no la alimenta** (estándar viejo) | — |

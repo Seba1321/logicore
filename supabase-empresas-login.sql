@@ -85,6 +85,12 @@ create table if not exists public.proyecto_bpmn (
 alter table public.proyecto_bpmn
 add column if not exists proceso_id bigint references public.procesos(id) on delete set null;
 
+-- Miniatura del diagrama: un SVG generado desde el .bpmn, para poder mostrarlo
+-- en el portal sin montar el visor.
+alter table public.proyecto_bpmn
+add column if not exists preview_path text,
+add column if not exists preview_url text;
+
 create table if not exists public.proceso_hallazgos (
   id bigint generated always as identity primary key,
   proceso_id bigint not null references public.procesos(id) on delete cascade,
@@ -288,10 +294,14 @@ begin
                       'descripcion', b.descripcion,
                       'archivo_path', b.archivo_path,
                       'archivo_url', b.archivo_url,
+                      'preview_path', b.preview_path,
+                      'preview_url', b.preview_url,
                       'proceso_id', b.proceso_id,
                       'updated_at', b.updated_at
                     )
-                    order by b.updated_at desc, b.id
+                    -- Por id, que es el orden en que se declararon en
+                    -- procesos.json. Por fecha saldrían en orden arbitrario.
+                    order by b.id
                   )
                   from public.proyecto_bpmn b
                   where b.proceso_id = pr.id
@@ -345,6 +355,8 @@ begin
                 'descripcion', b.descripcion,
                 'archivo_path', b.archivo_path,
                 'archivo_url', b.archivo_url,
+                'preview_path', b.preview_path,
+                'preview_url', b.preview_url,
                 'proceso_id', b.proceso_id,
                 'updated_at', b.updated_at
               )

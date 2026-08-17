@@ -44,7 +44,12 @@ referenciarlo en `procesos.json` y hacer push.
 Nada de esto se genera en este repositorio; acá solo se publica el resultado:
 
 - **BPMN**: `~/Desktop/Methodical/MauleMed-2026/BPMN/` (los de marketing vienen de
-  `Proceso Marketing / Encuestas / Reclamos v1.0.bpmn`).
+  `Proceso Marketing / Encuestas / Reclamos v1.0.bpmn`). Las miniaturas `-preview.svg` que
+  acompañan a cada uno se generan desde el propio diagrama con:
+  ```bash
+  cd ~/Desktop/Methodical/MauleMed-2026/BPMN
+  python3 tools/audit_bpmn.py <los .bpmn de este repo> --svg-dir <destino>
+  ```
 - **Matrices HAMMER**: `~/Desktop/Methodical/MauleMed-2026/Hammer/`, generadas con
   `tools/gen_hammer.py` (arma los .xlsx) y `tools/render_png.py` (los rasteriza a 200 DPI).
   El contenido de cada ficha vive en `tools/contenido_*.py`.
