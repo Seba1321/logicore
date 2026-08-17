@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PCF_v5_B" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PCF_B">
+    <participant id="P_B" name="Compras y pago a proveedores — MauleMed" processRef="Process_PCF_B" />
+    <participant id="P_PROV" name="Proveedores" />
+    <participant id="P_BANCO" name="Banco" />
+    <messageFlow id="m01" name="Orden de compra o pedido" sourceRef="EnviarPedido" targetRef="P_PROV" />
+    <messageFlow id="m02" name="Insumos" sourceRef="P_PROV" targetRef="RecepInsumos" />
+    <messageFlow id="m03" name="Factura del proveedor" sourceRef="P_PROV" targetRef="RecepFactura" />
+    <messageFlow id="m04" name="Cartola bancaria" sourceRef="P_BANCO" targetRef="RecepCartola" />
+  </collaboration>
+  <process id="Process_PCF_B" isExecutable="false">
+    <laneSet id="LaneSet_PCF_B">
+      <lane id="Lane_Sol" name="Sucursales (solicitantes)">
+        <flowNodeRef>StartCompra</flowNodeRef>
+        <flowNodeRef>EnviarSolicitud</flowNodeRef>
+      </lane>
+      <lane id="Lane_Liz" name="Liz Bravo — Jefa de Administración y Finanzas">
+        <flowNodeRef>GwRecurrente</flowNodeRef>
+        <flowNodeRef>DecidirSinPpto</flowNodeRef>
+        <flowNodeRef>MergeCompra</flowNodeRef>
+        <flowNodeRef>VistoBuenoSol</flowNodeRef>
+        <flowNodeRef>GwVB</flowNodeRef>
+        <flowNodeRef>EndRechazada</flowNodeRef>
+        <flowNodeRef>FechaPago</flowNodeRef>
+        <flowNodeRef>RevisarPagos</flowNodeRef>
+        <flowNodeRef>EndPagado</flowNodeRef>
+      </lane>
+      <lane id="Lane_Gab" name="Gabriela Morales — Compras y Tesorería">
+        <flowNodeRef>RevisarSolicitud</flowNodeRef>
+        <flowNodeRef>GwOC</flowNodeRef>
+        <flowNodeRef>OrdenCompra</flowNodeRef>
+        <flowNodeRef>MergeOC</flowNodeRef>
+        <flowNodeRef>EnviarPedido</flowNodeRef>
+        <flowNodeRef>GwQuiebre</flowNodeRef>
+        <flowNodeRef>CubrirQuiebre</flowNodeRef>
+        <flowNodeRef>EndQuiebre</flowNodeRef>
+        <flowNodeRef>RecepInsumos</flowNodeRef>
+        <flowNodeRef>VerificarRecepcion</flowNodeRef>
+        <flowNodeRef>DespacharInsumos</flowNodeRef>
+        <flowNodeRef>RecepFactura</flowNodeRef>
+        <flowNodeRef>VistoBuenoFactura</flowNodeRef>
+        <flowNodeRef>GwConforme</flowNodeRef>
+        <flowNodeRef>RequerirFaltantes</flowNodeRef>
+        <flowNodeRef>MergeConforme</flowNodeRef>
+        <flowNodeRef>EmitirCheque</flowNodeRef>
+        <flowNodeRef>RecepCartola</flowNodeRef>
+      </lane>
+      <lane id="Lane_Con" name="Contabilidad — Elvira Rojas y Meribet Escobar">
+        <flowNodeRef>RegistrarFactura</flowNodeRef>
+        <flowNodeRef>AprobarPago</flowNodeRef>
+        <flowNodeRef>ConciliarBanco</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartCompra" name="Surge la necesidad de un insumo o servicio">
+      <outgoing>f01</outgoing>
+    </startEvent>
+    <sendTask id="EnviarSolicitud" name="Enviar la solicitud de compra a tesorería">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+    </sendTask>
+    <userTask id="RevisarSolicitud" name="Revisar la solicitud de compra">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwRecurrente" name="¿Es una compra recurrente planificada?">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+      <outgoing>f05</outgoing>
+    </exclusiveGateway>
+    <manualTask id="DecidirSinPpto" name="Decidir la compra sin evaluación presupuestaria">
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+    </manualTask>
+    <exclusiveGateway id="MergeCompra" name="Solicitud lista para el visto bueno">
+      <incoming>f04</incoming>
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+    </exclusiveGateway>
+    <userTask id="VistoBuenoSol" name="Dar el visto bueno a la solicitud">
+      <incoming>f07</incoming>
+      <outgoing>f08</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwVB" name="¿La Jefatura da el visto bueno?">
+      <incoming>f08</incoming>
+      <outgoing>f09</outgoing>
+      <outgoing>f10</outgoing>
+    </exclusiveGateway>
+    <endEvent id="EndRechazada" name="Solicitud de compra rechazada">
+      <incoming>f09</incoming>
+    </endEvent>
+    <exclusiveGateway id="GwOC" name="¿El proveedor trabaja con orden de compra?">
+      <incoming>f10</incoming>
+      <outgoing>f11</outgoing>
+      <outgoing>f13</outgoing>
+    </exclusiveGateway>
+    <userTask id="OrdenCompra" name="Emitir la orden de compra">
+      <incoming>f11</incoming>
+      <outgoing>f12</outgoing>
+      <dataOutputAssociation id="DataOut_OC">
+        <targetRef>Data_OC</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <exclusiveGateway id="MergeOC" name="Pedido listo para enviar">
+      <incoming>f12</incoming>
+      <incoming>f13</incoming>
+      <outgoing>fw14</outgoing>
+    </exclusiveGateway>
+    <sendTask id="EnviarPedido" name="Enviar el pedido al proveedor por correo electrónico">
+      <incoming>fw14</incoming>
+      <outgoing>f15</outgoing>
+    </sendTask>
+    <exclusiveGateway id="GwQuiebre" name="¿Hay quiebre de stock mientras llega el pedido?">
+      <incoming>f15</incoming>
+      <outgoing>f16</outgoing>
+      <outgoing>f18</outgoing>
+    </exclusiveGateway>
+    <subProcess id="CubrirQuiebre" name="Cubrir el quiebre de stock">
+      <incoming>f16</incoming>
+      <outgoing>f17</outgoing>
+    </subProcess>
+    <endEvent id="EndQuiebre" name="Quiebre de stock cubierto">
+      <incoming>f17</incoming>
+    </endEvent>
+    <intermediateCatchEvent id="RecepInsumos" name="Recepción de los insumos en la central">
+      <incoming>f18</incoming>
+      <outgoing>f19</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_RecepInsumos" />
+    </intermediateCatchEvent>
+    <manualTask id="VerificarRecepcion" name="Verificar que llegue todo lo solicitado">
+      <incoming>f19</incoming>
+      <outgoing>f20</outgoing>
+    </manualTask>
+    <userTask id="DespacharInsumos" name="Despachar los insumos a las sucursales">
+      <incoming>f20</incoming>
+      <outgoing>f21</outgoing>
+    </userTask>
+    <intermediateCatchEvent id="RecepFactura" name="Recepción de la factura del proveedor">
+      <incoming>f21</incoming>
+      <outgoing>f22</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_RecepFactura" />
+    </intermediateCatchEvent>
+    <userTask id="VistoBuenoFactura" name="Dar el visto bueno a la factura">
+      <incoming>f22</incoming>
+      <outgoing>f23</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwConforme" name="¿La recepción y la factura están conformes?">
+      <incoming>f23</incoming>
+      <outgoing>f24</outgoing>
+      <outgoing>f26</outgoing>
+    </exclusiveGateway>
+    <sendTask id="RequerirFaltantes" name="Requerir los faltantes o solicitar la nota de crédito">
+      <incoming>f24</incoming>
+      <outgoing>f25</outgoing>
+    </sendTask>
+    <exclusiveGateway id="MergeConforme" name="Recepción y factura conformes">
+      <incoming>f25</incoming>
+      <incoming>f26</incoming>
+      <outgoing>f27</outgoing>
+    </exclusiveGateway>
+    <userTask id="RegistrarFactura" name="Registrar la factura en contabilidad">
+      <incoming>f27</incoming>
+      <outgoing>f28</outgoing>
+    </userTask>
+    <userTask id="AprobarPago" name="Aprobar el pago junto con tesorería">
+      <incoming>f28</incoming>
+      <outgoing>f29</outgoing>
+    </userTask>
+    <userTask id="FechaPago" name="Determinar y aprobar la fecha de pago">
+      <incoming>f29</incoming>
+      <outgoing>f30</outgoing>
+    </userTask>
+    <userTask id="EmitirCheque" name="Emitir el cheque al proveedor">
+      <incoming>f30</incoming>
+      <outgoing>f31</outgoing>
+    </userTask>
+    <intermediateCatchEvent id="RecepCartola" name="Recepción de la cartola bancaria">
+      <incoming>f31</incoming>
+      <outgoing>f32</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_RecepCartola" />
+    </intermediateCatchEvent>
+    <userTask id="ConciliarBanco" name="Registrar el pago y realizar la conciliación bancaria">
+      <incoming>f32</incoming>
+      <outgoing>f33</outgoing>
+    </userTask>
+    <userTask id="RevisarPagos" name="Revisar los pagos de todas las empresas">
+      <incoming>f33</incoming>
+      <outgoing>f34</outgoing>
+    </userTask>
+    <endEvent id="EndPagado" name="Pago realizado y conciliado">
+      <incoming>f34</incoming>
+    </endEvent>
+    <dataObjectReference id="Data_OC" name="Orden de compra" dataObjectRef="DataObject_OC" />
+    <dataObject id="DataObject_OC" />
+    <sequenceFlow id="f01" sourceRef="StartCompra" targetRef="EnviarSolicitud" />
+    <sequenceFlow id="f02" sourceRef="EnviarSolicitud" targetRef="RevisarSolicitud" />
+    <sequenceFlow id="f03" sourceRef="RevisarSolicitud" targetRef="GwRecurrente" />
+    <sequenceFlow id="f04" name="SÍ" sourceRef="GwRecurrente" targetRef="MergeCompra" />
+    <sequenceFlow id="f05" name="NO" sourceRef="GwRecurrente" targetRef="DecidirSinPpto" />
+    <sequenceFlow id="f06" sourceRef="DecidirSinPpto" targetRef="MergeCompra" />
+    <sequenceFlow id="f07" sourceRef="MergeCompra" targetRef="VistoBuenoSol" />
+    <sequenceFlow id="f08" sourceRef="VistoBuenoSol" targetRef="GwVB" />
+    <sequenceFlow id="f09" name="NO" sourceRef="GwVB" targetRef="EndRechazada" />
+    <sequenceFlow id="f10" name="SÍ" sourceRef="GwVB" targetRef="GwOC" />
+    <sequenceFlow id="f11" name="SÍ" sourceRef="GwOC" targetRef="OrdenCompra" />
+    <sequenceFlow id="f12" sourceRef="OrdenCompra" targetRef="MergeOC" />
+    <sequenceFlow id="f13" name="NO" sourceRef="GwOC" targetRef="MergeOC" />
+    <sequenceFlow id="fw14" sourceRef="MergeOC" targetRef="EnviarPedido" />
+    <sequenceFlow id="f15" sourceRef="EnviarPedido" targetRef="GwQuiebre" />
+    <sequenceFlow id="f16" name="SÍ" sourceRef="GwQuiebre" targetRef="CubrirQuiebre" />
+    <sequenceFlow id="f17" sourceRef="CubrirQuiebre" targetRef="EndQuiebre" />
+    <sequenceFlow id="f18" name="NO" sourceRef="GwQuiebre" targetRef="RecepInsumos" />
+    <sequenceFlow id="f19" sourceRef="RecepInsumos" targetRef="VerificarRecepcion" />
+    <sequenceFlow id="f20" sourceRef="VerificarRecepcion" targetRef="DespacharInsumos" />
+    <sequenceFlow id="f21" sourceRef="DespacharInsumos" targetRef="RecepFactura" />
+    <sequenceFlow id="f22" sourceRef="RecepFactura" targetRef="VistoBuenoFactura" />
+    <sequenceFlow id="f23" sourceRef="VistoBuenoFactura" targetRef="GwConforme" />
+    <sequenceFlow id="f24" name="NO" sourceRef="GwConforme" targetRef="RequerirFaltantes" />
+    <sequenceFlow id="f25" sourceRef="RequerirFaltantes" targetRef="MergeConforme" />
+    <sequenceFlow id="f26" name="SÍ" sourceRef="GwConforme" targetRef="MergeConforme" />
+    <sequenceFlow id="f27" sourceRef="MergeConforme" targetRef="RegistrarFactura" />
+    <sequenceFlow id="f28" sourceRef="RegistrarFactura" targetRef="AprobarPago" />
+    <sequenceFlow id="f29" sourceRef="AprobarPago" targetRef="FechaPago" />
+    <sequenceFlow id="f30" sourceRef="FechaPago" targetRef="EmitirCheque" />
+    <sequenceFlow id="f31" sourceRef="EmitirCheque" targetRef="RecepCartola" />
+    <sequenceFlow id="f32" sourceRef="RecepCartola" targetRef="ConciliarBanco" />
+    <sequenceFlow id="f33" sourceRef="ConciliarBanco" targetRef="RevisarPagos" />
+    <sequenceFlow id="f34" sourceRef="RevisarPagos" targetRef="EndPagado" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PCF_B">
+      <bpmndi:BPMNShape id="P_B_di" bpmnElement="P_B" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="3130" height="1170" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sol_di" bpmnElement="Lane_Sol" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="3100" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Liz_di" bpmnElement="Lane_Liz" isHorizontal="true">
+        <omgdc:Bounds x="190" y="290" width="3100" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Gab_di" bpmnElement="Lane_Gab" isHorizontal="true">
+        <omgdc:Bounds x="190" y="550" width="3100" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Con_di" bpmnElement="Lane_Con" isHorizontal="true">
+        <omgdc:Bounds x="190" y="1200" width="3100" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartCompra_di" bpmnElement="StartCompra">
+        <omgdc:Bounds x="282" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="251" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EnviarSolicitud_di" bpmnElement="EnviarSolicitud">
+        <omgdc:Bounds x="430" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RevisarSolicitud_di" bpmnElement="RevisarSolicitud">
+        <omgdc:Bounds x="430" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwRecurrente_di" bpmnElement="GwRecurrente" isMarkerVisible="true">
+        <omgdc:Bounds x="635" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DecidirSinPpto_di" bpmnElement="DecidirSinPpto">
+        <omgdc:Bounds x="610" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeCompra_di" bpmnElement="MergeCompra" isMarkerVisible="true">
+        <omgdc:Bounds x="815" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="VistoBuenoSol_di" bpmnElement="VistoBuenoSol">
+        <omgdc:Bounds x="970" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwVB_di" bpmnElement="GwVB" isMarkerVisible="true">
+        <omgdc:Bounds x="1175" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1134" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndRechazada_di" bpmnElement="EndRechazada">
+        <omgdc:Bounds x="1182" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1134" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwOC_di" bpmnElement="GwOC" isMarkerVisible="true">
+        <omgdc:Bounds x="1355" y="590" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="554" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OrdenCompra_di" bpmnElement="OrdenCompra">
+        <omgdc:Bounds x="1510" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeOC_di" bpmnElement="MergeOC" isMarkerVisible="true">
+        <omgdc:Bounds x="1715" y="590" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1674" y="554" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EnviarPedido_di" bpmnElement="EnviarPedido">
+        <omgdc:Bounds x="250" y="965" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwQuiebre_di" bpmnElement="GwQuiebre" isMarkerVisible="true">
+        <omgdc:Bounds x="455" y="980" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="944" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CubrirQuiebre_di" bpmnElement="CubrirQuiebre">
+        <omgdc:Bounds x="430" y="1095" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="1183" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndQuiebre_di" bpmnElement="EndQuiebre">
+        <omgdc:Bounds x="822" y="1117" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="1161" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RecepInsumos_di" bpmnElement="RecepInsumos">
+        <omgdc:Bounds x="642" y="987" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="1031" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="VerificarRecepcion_di" bpmnElement="VerificarRecepcion">
+        <omgdc:Bounds x="790" y="965" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DespacharInsumos_di" bpmnElement="DespacharInsumos">
+        <omgdc:Bounds x="970" y="965" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RecepFactura_di" bpmnElement="RecepFactura">
+        <omgdc:Bounds x="1182" y="987" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1134" y="1031" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="VistoBuenoFactura_di" bpmnElement="VistoBuenoFactura">
+        <omgdc:Bounds x="1330" y="965" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwConforme_di" bpmnElement="GwConforme" isMarkerVisible="true">
+        <omgdc:Bounds x="1535" y="980" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1494" y="944" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RequerirFaltantes_di" bpmnElement="RequerirFaltantes">
+        <omgdc:Bounds x="1510" y="1095" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeConforme_di" bpmnElement="MergeConforme" isMarkerVisible="true">
+        <omgdc:Bounds x="1715" y="980" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1674" y="944" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RegistrarFactura_di" bpmnElement="RegistrarFactura">
+        <omgdc:Bounds x="1870" y="1225" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AprobarPago_di" bpmnElement="AprobarPago">
+        <omgdc:Bounds x="2050" y="1225" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FechaPago_di" bpmnElement="FechaPago">
+        <omgdc:Bounds x="2230" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EmitirCheque_di" bpmnElement="EmitirCheque">
+        <omgdc:Bounds x="2410" y="965" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RecepCartola_di" bpmnElement="RecepCartola">
+        <omgdc:Bounds x="2622" y="987" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2574" y="1031" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ConciliarBanco_di" bpmnElement="ConciliarBanco">
+        <omgdc:Bounds x="2770" y="1225" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RevisarPagos_di" bpmnElement="RevisarPagos">
+        <omgdc:Bounds x="2950" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndPagado_di" bpmnElement="EndPagado">
+        <omgdc:Bounds x="3162" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="3114" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_OC_di" bpmnElement="Data_OC">
+        <omgdc:Bounds x="1902" y="720" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1873" y="776" width="94" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_PROV_di" bpmnElement="P_PROV" isHorizontal="true">
+        <omgdc:Bounds x="210" y="1364" width="1080" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_BANCO_di" bpmnElement="P_BANCO" isHorizontal="true">
+        <omgdc:Bounds x="2370" y="1364" width="540" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="225" />
+        <omgdi:waypoint x="430" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="480" y="265" />
+        <omgdi:waypoint x="480" y="575" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="530" y="615" />
+        <omgdi:waypoint x="582.5" y="615" />
+        <omgdi:waypoint x="582.5" y="355" />
+        <omgdi:waypoint x="635" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="685" y="355" />
+        <omgdi:waypoint x="815" y="355" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="736" y="333" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="660" y="380" />
+        <omgdi:waypoint x="660" y="445" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="669" y="404.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="710" y="485" />
+        <omgdi:waypoint x="840" y="485" />
+        <omgdi:waypoint x="840" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="865" y="355" />
+        <omgdi:waypoint x="970" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1070" y="355" />
+        <omgdi:waypoint x="1175" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="1200" y="380" />
+        <omgdi:waypoint x="1200" y="467" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1209" y="415.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="1225" y="355" />
+        <omgdi:waypoint x="1290" y="355" />
+        <omgdi:waypoint x="1290" y="615" />
+        <omgdi:waypoint x="1355" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1243.5" y="333" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="1380" y="640" />
+        <omgdi:waypoint x="1380" y="745" />
+        <omgdi:waypoint x="1510" y="745" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1389" y="684.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <omgdi:waypoint x="1610" y="745" />
+        <omgdi:waypoint x="1740" y="745" />
+        <omgdi:waypoint x="1740" y="640" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="1405" y="615" />
+        <omgdi:waypoint x="1715" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1546" y="593" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="fw14_di" bpmnElement="fw14">
+        <omgdi:waypoint x="1765" y="615" />
+        <omgdi:waypoint x="1855" y="615" />
+        <omgdi:waypoint x="1855" y="875" />
+        <omgdi:waypoint x="300" y="875" />
+        <omgdi:waypoint x="300" y="965" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="350" y="1005" />
+        <omgdi:waypoint x="455" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16_di" bpmnElement="f16">
+        <omgdi:waypoint x="480" y="1030" />
+        <omgdi:waypoint x="480" y="1095" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="489" y="1054.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17_di" bpmnElement="f17">
+        <omgdi:waypoint x="530" y="1135" />
+        <omgdi:waypoint x="822" y="1135" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f18_di" bpmnElement="f18">
+        <omgdi:waypoint x="505" y="1005" />
+        <omgdi:waypoint x="642" y="1005" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="559.5" y="983" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f19_di" bpmnElement="f19">
+        <omgdi:waypoint x="678" y="1005" />
+        <omgdi:waypoint x="790" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f20_di" bpmnElement="f20">
+        <omgdi:waypoint x="890" y="1005" />
+        <omgdi:waypoint x="970" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f21_di" bpmnElement="f21">
+        <omgdi:waypoint x="1070" y="1005" />
+        <omgdi:waypoint x="1182" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f22_di" bpmnElement="f22">
+        <omgdi:waypoint x="1218" y="1005" />
+        <omgdi:waypoint x="1330" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f23_di" bpmnElement="f23">
+        <omgdi:waypoint x="1430" y="1005" />
+        <omgdi:waypoint x="1535" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f24_di" bpmnElement="f24">
+        <omgdi:waypoint x="1560" y="1030" />
+        <omgdi:waypoint x="1560" y="1095" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1569" y="1054.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f25_di" bpmnElement="f25">
+        <omgdi:waypoint x="1610" y="1135" />
+        <omgdi:waypoint x="1740" y="1135" />
+        <omgdi:waypoint x="1740" y="1030" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f26_di" bpmnElement="f26">
+        <omgdi:waypoint x="1585" y="1005" />
+        <omgdi:waypoint x="1715" y="1005" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1636" y="983" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f27_di" bpmnElement="f27">
+        <omgdi:waypoint x="1765" y="1005" />
+        <omgdi:waypoint x="1817.5" y="1005" />
+        <omgdi:waypoint x="1817.5" y="1265" />
+        <omgdi:waypoint x="1870" y="1265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f28_di" bpmnElement="f28">
+        <omgdi:waypoint x="1970" y="1265" />
+        <omgdi:waypoint x="2050" y="1265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f29_di" bpmnElement="f29">
+        <omgdi:waypoint x="2150" y="1265" />
+        <omgdi:waypoint x="2190" y="1265" />
+        <omgdi:waypoint x="2190" y="355" />
+        <omgdi:waypoint x="2230" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f30_di" bpmnElement="f30">
+        <omgdi:waypoint x="2330" y="355" />
+        <omgdi:waypoint x="2370" y="355" />
+        <omgdi:waypoint x="2370" y="1005" />
+        <omgdi:waypoint x="2410" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f31_di" bpmnElement="f31">
+        <omgdi:waypoint x="2510" y="1005" />
+        <omgdi:waypoint x="2622" y="1005" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f32_di" bpmnElement="f32">
+        <omgdi:waypoint x="2658" y="1005" />
+        <omgdi:waypoint x="2714" y="1005" />
+        <omgdi:waypoint x="2714" y="1265" />
+        <omgdi:waypoint x="2770" y="1265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f33_di" bpmnElement="f33">
+        <omgdi:waypoint x="2870" y="1265" />
+        <omgdi:waypoint x="2910" y="1265" />
+        <omgdi:waypoint x="2910" y="355" />
+        <omgdi:waypoint x="2950" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f34_di" bpmnElement="f34">
+        <omgdi:waypoint x="3050" y="355" />
+        <omgdi:waypoint x="3162" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="300" y="1045" />
+        <omgdi:waypoint x="300" y="1364" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="147.6" y="1196.5" width="144.4" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m02_di" bpmnElement="m02">
+        <omgdi:waypoint x="660" y="1364" />
+        <omgdi:waypoint x="660" y="1023" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="668" y="1185.5" width="50" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m03_di" bpmnElement="m03">
+        <omgdi:waypoint x="1200" y="1364" />
+        <omgdi:waypoint x="1200" y="1023" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1208" y="1185.5" width="127.6" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m04_di" bpmnElement="m04">
+        <omgdi:waypoint x="2640" y="1364" />
+        <omgdi:waypoint x="2640" y="1023" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2532.4" y="1185.5" width="99.6" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_OC_di" bpmnElement="DataOut_OC">
+        <omgdi:waypoint x="1560" y="705" />
+        <omgdi:waypoint x="1920" y="770" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

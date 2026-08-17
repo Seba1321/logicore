@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PER_v5_C" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PER_C">
+    <participant id="P_C" name="Control de asistencia y cierre mensual — MauleMed" processRef="Process_PER_C" />
+    <participant id="P_TRAB" name="Trabajadores" />
+    <messageFlow id="m01" name="Liquidación de sueldo" sourceRef="FirmarLiq" targetRef="P_TRAB" />
+  </collaboration>
+  <process id="Process_PER_C" isExecutable="false">
+    <laneSet id="LaneSet_PER_C">
+      <lane id="Lane_Pat" name="Patricia Lobos — Encargada de Personas y RR.HH.">
+        <flowNodeRef>StartCierre</flowNodeRef>
+        <flowNodeRef>RevMarcaje</flowNodeRef>
+        <flowNodeRef>GwMarcaje</flowNodeRef>
+        <flowNodeRef>CorregirMarcaje</flowNodeRef>
+        <flowNodeRef>MergeMarcaje</flowNodeRef>
+        <flowNodeRef>VerifPermLic</flowNodeRef>
+        <flowNodeRef>RecargoDomFest</flowNodeRef>
+        <flowNodeRef>CalcHHEE</flowNodeRef>
+        <flowNodeRef>Viaticos</flowNodeRef>
+        <flowNodeRef>ArchHHEE</flowNodeRef>
+        <flowNodeRef>EnviarHHEE</flowNodeRef>
+      </lane>
+      <lane id="Lane_Liz" name="Liz Bravo — Jefa de Administración y Finanzas">
+        <flowNodeRef>IngresarRem</flowNodeRef>
+        <flowNodeRef>EmitirLiq</flowNodeRef>
+        <flowNodeRef>FirmarLiq</flowNodeRef>
+        <flowNodeRef>EndCierre</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartCierre" name="Día 24 o 25 de cada mes (cierre de asistencia)">
+      <outgoing>f01</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_StartCierre" />
+    </startEvent>
+    <manualTask id="RevMarcaje" name="Revisar marcaje por marcaje, empresa por empresa">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+      <dataOutputAssociation id="DataOut_Marcajes">
+        <targetRef>Data_Marcajes</targetRef>
+      </dataOutputAssociation>
+    </manualTask>
+    <exclusiveGateway id="GwMarcaje" name="¿El marcaje está correcto?">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+      <outgoing>f04</outgoing>
+    </exclusiveGateway>
+    <userTask id="CorregirMarcaje" name="Corregir y respaldar los marcajes erróneos">
+      <incoming>f03</incoming>
+      <outgoing>f05</outgoing>
+    </userTask>
+    <exclusiveGateway id="MergeMarcaje" name="Marcaje conforme">
+      <incoming>f04</incoming>
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+    </exclusiveGateway>
+    <userTask id="VerifPermLic" name="Verificar que permisos y licencias estén ingresados">
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+    </userTask>
+    <manualTask id="RecargoDomFest" name="Aplicar el recargo por trabajo en domingo y festivo">
+      <incoming>f07</incoming>
+      <outgoing>f08</outgoing>
+    </manualTask>
+    <manualTask id="CalcHHEE" name="Calcular las horas extraordinarias y sus recargos">
+      <incoming>f08</incoming>
+      <outgoing>fw09</outgoing>
+    </manualTask>
+    <userTask id="Viaticos" name="Incluir los viáticos y la movilización">
+      <incoming>fw09</incoming>
+      <outgoing>f10</outgoing>
+    </userTask>
+    <userTask id="ArchHHEE" name="Preparar el archivo mensual de horas extraordinarias">
+      <incoming>f10</incoming>
+      <outgoing>f11</outgoing>
+    </userTask>
+    <sendTask id="EnviarHHEE" name="Enviar el archivo a Remuneraciones">
+      <incoming>f11</incoming>
+      <outgoing>f12</outgoing>
+    </sendTask>
+    <userTask id="IngresarRem" name="Ingresar las horas extraordinarias a remuneraciones">
+      <incoming>f12</incoming>
+      <outgoing>f13</outgoing>
+    </userTask>
+    <userTask id="EmitirLiq" name="Emitir las liquidaciones de sueldo">
+      <incoming>f13</incoming>
+      <outgoing>f14</outgoing>
+    </userTask>
+    <userTask id="FirmarLiq" name="Recabar la firma de las liquidaciones">
+      <incoming>f14</incoming>
+      <outgoing>f15</outgoing>
+    </userTask>
+    <endEvent id="EndCierre" name="Asistencia y horas del mes cerradas">
+      <incoming>f15</incoming>
+    </endEvent>
+    <dataObjectReference id="Data_Marcajes" name="Marcajes del mes · reloj control" dataObjectRef="DataObject_Marcajes" />
+    <dataObject id="DataObject_Marcajes" />
+    <sequenceFlow id="f01" sourceRef="StartCierre" targetRef="RevMarcaje" />
+    <sequenceFlow id="f02" sourceRef="RevMarcaje" targetRef="GwMarcaje" />
+    <sequenceFlow id="f03" name="NO" sourceRef="GwMarcaje" targetRef="CorregirMarcaje" />
+    <sequenceFlow id="f04" name="SÍ" sourceRef="GwMarcaje" targetRef="MergeMarcaje" />
+    <sequenceFlow id="f05" sourceRef="CorregirMarcaje" targetRef="MergeMarcaje" />
+    <sequenceFlow id="f06" sourceRef="MergeMarcaje" targetRef="VerifPermLic" />
+    <sequenceFlow id="f07" sourceRef="VerifPermLic" targetRef="RecargoDomFest" />
+    <sequenceFlow id="f08" sourceRef="RecargoDomFest" targetRef="CalcHHEE" />
+    <sequenceFlow id="fw09" sourceRef="CalcHHEE" targetRef="Viaticos" />
+    <sequenceFlow id="f10" sourceRef="Viaticos" targetRef="ArchHHEE" />
+    <sequenceFlow id="f11" sourceRef="ArchHHEE" targetRef="EnviarHHEE" />
+    <sequenceFlow id="f12" sourceRef="EnviarHHEE" targetRef="IngresarRem" />
+    <sequenceFlow id="f13" sourceRef="IngresarRem" targetRef="EmitirLiq" />
+    <sequenceFlow id="f14" sourceRef="EmitirLiq" targetRef="FirmarLiq" />
+    <sequenceFlow id="f15" sourceRef="FirmarLiq" targetRef="EndCierre" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PER_C">
+      <bpmndi:BPMNShape id="P_C_di" bpmnElement="P_C" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="1510" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Pat_di" bpmnElement="Lane_Pat" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="1480" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Liz_di" bpmnElement="Lane_Liz" isHorizontal="true">
+        <omgdc:Bounds x="190" y="680" width="1480" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartCierre_di" bpmnElement="StartCierre">
+        <omgdc:Bounds x="282" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="251" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RevMarcaje_di" bpmnElement="RevMarcaje">
+        <omgdc:Bounds x="430" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwMarcaje_di" bpmnElement="GwMarcaje" isMarkerVisible="true">
+        <omgdc:Bounds x="635" y="200" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="164" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CorregirMarcaje_di" bpmnElement="CorregirMarcaje">
+        <omgdc:Bounds x="790" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeMarcaje_di" bpmnElement="MergeMarcaje" isMarkerVisible="true">
+        <omgdc:Bounds x="995" y="200" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="970.2" y="178" width="99.6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="VerifPermLic_di" bpmnElement="VerifPermLic">
+        <omgdc:Bounds x="1150" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RecargoDomFest_di" bpmnElement="RecargoDomFest">
+        <omgdc:Bounds x="1330" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CalcHHEE_di" bpmnElement="CalcHHEE">
+        <omgdc:Bounds x="1510" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Viaticos_di" bpmnElement="Viaticos">
+        <omgdc:Bounds x="250" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ArchHHEE_di" bpmnElement="ArchHHEE">
+        <omgdc:Bounds x="430" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EnviarHHEE_di" bpmnElement="EnviarHHEE">
+        <omgdc:Bounds x="610" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IngresarRem_di" bpmnElement="IngresarRem">
+        <omgdc:Bounds x="790" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EmitirLiq_di" bpmnElement="EmitirLiq">
+        <omgdc:Bounds x="970" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FirmarLiq_di" bpmnElement="FirmarLiq">
+        <omgdc:Bounds x="1150" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndCierre_di" bpmnElement="EndCierre">
+        <omgdc:Bounds x="1362" y="727" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="771" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Marcajes_di" bpmnElement="Data_Marcajes">
+        <omgdc:Bounds x="462" y="330" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="386" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_TRAB_di" bpmnElement="P_TRAB" isHorizontal="true">
+        <omgdc:Bounds x="1110" y="844" width="540" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="225" />
+        <omgdi:waypoint x="430" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="225" />
+        <omgdi:waypoint x="635" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="660" y="250" />
+        <omgdi:waypoint x="660" y="355" />
+        <omgdi:waypoint x="790" y="355" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="669" y="294.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="685" y="225" />
+        <omgdi:waypoint x="995" y="225" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="826" y="203" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="890" y="355" />
+        <omgdi:waypoint x="1020" y="355" />
+        <omgdi:waypoint x="1020" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1045" y="225" />
+        <omgdi:waypoint x="1150" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1250" y="225" />
+        <omgdi:waypoint x="1330" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1430" y="225" />
+        <omgdi:waypoint x="1510" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="fw09_di" bpmnElement="fw09">
+        <omgdi:waypoint x="1560" y="265" />
+        <omgdi:waypoint x="1560" y="485" />
+        <omgdi:waypoint x="300" y="485" />
+        <omgdi:waypoint x="300" y="575" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="350" y="615" />
+        <omgdi:waypoint x="430" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="530" y="615" />
+        <omgdi:waypoint x="610" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <omgdi:waypoint x="710" y="615" />
+        <omgdi:waypoint x="750" y="615" />
+        <omgdi:waypoint x="750" y="745" />
+        <omgdi:waypoint x="790" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="890" y="745" />
+        <omgdi:waypoint x="970" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <omgdi:waypoint x="1070" y="745" />
+        <omgdi:waypoint x="1150" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="1250" y="745" />
+        <omgdi:waypoint x="1362" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="1200" y="785" />
+        <omgdi:waypoint x="1200" y="844" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1208" y="806.5" width="127.6" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Marcajes_di" bpmnElement="DataOut_Marcajes">
+        <omgdi:waypoint x="480" y="265" />
+        <omgdi:waypoint x="480" y="330" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

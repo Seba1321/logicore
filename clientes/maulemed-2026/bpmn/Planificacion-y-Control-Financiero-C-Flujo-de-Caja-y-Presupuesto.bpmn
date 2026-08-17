@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PCF_v5_C" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PCF_C">
+    <participant id="P_C" name="Planificación y control financiero — MauleMed" processRef="Process_PCF_C" />
+  </collaboration>
+  <process id="Process_PCF_C" isExecutable="false">
+    <laneSet id="LaneSet_PCF_C">
+      <lane id="Lane_Liz" name="Liz Bravo — Jefa de Administración y Finanzas">
+        <flowNodeRef>StartFlujo</flowNodeRef>
+        <flowNodeRef>Cuadratura</flowNodeRef>
+        <flowNodeRef>ExtraerIngresos</flowNodeRef>
+        <flowNodeRef>SepararRS</flowNodeRef>
+        <flowNodeRef>RevisarCartolas</flowNodeRef>
+        <flowNodeRef>CostosFijos</flowNodeRef>
+        <flowNodeRef>GastosVariables</flowNodeRef>
+        <flowNodeRef>ConsolidarExcel</flowNodeRef>
+        <flowNodeRef>CompararPpto</flowNodeRef>
+        <flowNodeRef>EndConsolidado</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartFlujo" name="Cierre de la jornada (día por medio)">
+      <outgoing>f01</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_StartFlujo" />
+    </startEvent>
+    <userTask id="Cuadratura" name="Ingresar al RISPACS y hacer la cuadratura del día">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+    </userTask>
+    <userTask id="ExtraerIngresos" name="Descargar del RISPACS el reporte completo, filtrado solo por fecha">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+      <dataOutputAssociation id="DataOut_RIS">
+        <targetRef>Data_RIS</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <manualTask id="SepararRS" name="Filtrar y separar la información por razón social en el Excel">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+    </manualTask>
+    <userTask id="RevisarCartolas" name="Revisar en el banco las cartolas de créditos y leasing">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+      <dataOutputAssociation id="DataOut_Cartolas">
+        <targetRef>Data_Cartolas</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <manualTask id="CostosFijos" name="Cargar los costos fijos del mes">
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+    </manualTask>
+    <userTask id="GastosVariables" name="Obtener los gastos generales variables del sistema contable">
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+      <dataOutputAssociation id="DataOut_Compras">
+        <targetRef>Data_Compras</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <manualTask id="ConsolidarExcel" name="Consolidar en Excel ingresos, egresos y saldos por razón social">
+      <incoming>f07</incoming>
+      <outgoing>f08</outgoing>
+      <dataOutputAssociation id="DataOut_Excel">
+        <targetRef>Data_Excel</targetRef>
+      </dataOutputAssociation>
+    </manualTask>
+    <manualTask id="CompararPpto" name="Comparar el resultado contra el presupuesto de cada empresa">
+      <incoming>f08</incoming>
+      <outgoing>f09</outgoing>
+    </manualTask>
+    <endEvent id="EndConsolidado" name="Flujo de caja consolidado por razón social">
+      <incoming>f09</incoming>
+    </endEvent>
+    <dataObjectReference id="Data_RIS" name="Informe de caja y de producción · RISPACS" dataObjectRef="DataObject_RIS" />
+    <dataObject id="DataObject_RIS" />
+    <dataObjectReference id="Data_Cartolas" name="Cartolas de créditos y leasing · Banco" dataObjectRef="DataObject_Cartolas" />
+    <dataObject id="DataObject_Cartolas" />
+    <dataObjectReference id="Data_Compras" name="Registro de compras · Sistema contable" dataObjectRef="DataObject_Compras" />
+    <dataObject id="DataObject_Compras" />
+    <dataObjectReference id="Data_Excel" name="Flujo de caja y presupuesto · Excel" dataObjectRef="DataObject_Excel" />
+    <dataObject id="DataObject_Excel" />
+    <sequenceFlow id="f01" sourceRef="StartFlujo" targetRef="Cuadratura" />
+    <sequenceFlow id="f02" sourceRef="Cuadratura" targetRef="ExtraerIngresos" />
+    <sequenceFlow id="f03" sourceRef="ExtraerIngresos" targetRef="SepararRS" />
+    <sequenceFlow id="f04" sourceRef="SepararRS" targetRef="RevisarCartolas" />
+    <sequenceFlow id="f05" sourceRef="RevisarCartolas" targetRef="CostosFijos" />
+    <sequenceFlow id="f06" sourceRef="CostosFijos" targetRef="GastosVariables" />
+    <sequenceFlow id="f07" sourceRef="GastosVariables" targetRef="ConsolidarExcel" />
+    <sequenceFlow id="f08" sourceRef="ConsolidarExcel" targetRef="CompararPpto" />
+    <sequenceFlow id="f09" sourceRef="CompararPpto" targetRef="EndConsolidado" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PCF_C">
+      <bpmndi:BPMNShape id="P_C_di" bpmnElement="P_C" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="970" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Liz_di" bpmnElement="Lane_Liz" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="940" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartFlujo_di" bpmnElement="StartFlujo">
+        <omgdc:Bounds x="282" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Cuadratura_di" bpmnElement="Cuadratura">
+        <omgdc:Bounds x="430" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExtraerIngresos_di" bpmnElement="ExtraerIngresos">
+        <omgdc:Bounds x="610" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SepararRS_di" bpmnElement="SepararRS">
+        <omgdc:Bounds x="790" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RevisarCartolas_di" bpmnElement="RevisarCartolas">
+        <omgdc:Bounds x="970" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CostosFijos_di" bpmnElement="CostosFijos">
+        <omgdc:Bounds x="250" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GastosVariables_di" bpmnElement="GastosVariables">
+        <omgdc:Bounds x="430" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ConsolidarExcel_di" bpmnElement="ConsolidarExcel">
+        <omgdc:Bounds x="610" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CompararPpto_di" bpmnElement="CompararPpto">
+        <omgdc:Bounds x="790" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndConsolidado_di" bpmnElement="EndConsolidado">
+        <omgdc:Bounds x="1002" y="597" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="641" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_RIS_di" bpmnElement="Data_RIS">
+        <omgdc:Bounds x="642" y="200" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="256" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Cartolas_di" bpmnElement="Data_Cartolas">
+        <omgdc:Bounds x="1002" y="200" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="256" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Compras_di" bpmnElement="Data_Compras">
+        <omgdc:Bounds x="462" y="720" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="776" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Excel_di" bpmnElement="Data_Excel">
+        <omgdc:Bounds x="642" y="720" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="776" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="355" />
+        <omgdi:waypoint x="430" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="355" />
+        <omgdi:waypoint x="610" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="710" y="355" />
+        <omgdi:waypoint x="790" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="890" y="355" />
+        <omgdi:waypoint x="970" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="1020" y="395" />
+        <omgdi:waypoint x="1020" y="485" />
+        <omgdi:waypoint x="300" y="485" />
+        <omgdi:waypoint x="300" y="575" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="350" y="615" />
+        <omgdi:waypoint x="430" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="530" y="615" />
+        <omgdi:waypoint x="610" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="710" y="615" />
+        <omgdi:waypoint x="790" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="890" y="615" />
+        <omgdi:waypoint x="1002" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_RIS_di" bpmnElement="DataOut_RIS">
+        <omgdi:waypoint x="660" y="315" />
+        <omgdi:waypoint x="660" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Cartolas_di" bpmnElement="DataOut_Cartolas">
+        <omgdi:waypoint x="1020" y="315" />
+        <omgdi:waypoint x="1020" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Compras_di" bpmnElement="DataOut_Compras">
+        <omgdi:waypoint x="480" y="655" />
+        <omgdi:waypoint x="480" y="720" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Excel_di" bpmnElement="DataOut_Excel">
+        <omgdi:waypoint x="660" y="655" />
+        <omgdi:waypoint x="660" y="720" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

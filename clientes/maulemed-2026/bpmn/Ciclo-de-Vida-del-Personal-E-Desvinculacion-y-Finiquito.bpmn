@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PER_v5_E" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PER_E">
+    <participant id="P_E" name="Desvinculación y finiquito — MauleMed" processRef="Process_PER_E" />
+    <participant id="P_TRAB" name="Trabajador" />
+    <participant id="P_INST" name="Notaría, Dirección del Trabajo y seguro de cesantía" />
+    <messageFlow id="m01" name="Carta de aviso" sourceRef="NotificarTrab" targetRef="P_TRAB" />
+    <messageFlow id="m02" name="Finiquito a ratificar" sourceRef="Ratificar" targetRef="P_INST" />
+  </collaboration>
+  <process id="Process_PER_E" isExecutable="false">
+    <laneSet id="LaneSet_PER_E">
+      <lane id="Lane_Med" name="Dirección médica — Dr. Retamal y Dr. Valenzuela">
+        <flowNodeRef>StartTermino</flowNodeRef>
+      </lane>
+      <lane id="Lane_Pat" name="Patricia Lobos — Encargada de Personas y RR.HH.">
+        <flowNodeRef>Causal</flowNodeRef>
+        <flowNodeRef>Carta</flowNodeRef>
+        <flowNodeRef>NotificarTrab</flowNodeRef>
+        <flowNodeRef>CalcFiniquito</flowNodeRef>
+        <flowNodeRef>RevRUT</flowNodeRef>
+        <flowNodeRef>GwFiniquito</flowNodeRef>
+        <flowNodeRef>CorregirFiniquito</flowNodeRef>
+        <flowNodeRef>FirmasFiniq</flowNodeRef>
+        <flowNodeRef>Ratificar</flowNodeRef>
+        <flowNodeRef>Bustos</flowNodeRef>
+        <flowNodeRef>PagoFiniq</flowNodeRef>
+        <flowNodeRef>CierreDeFontana</flowNodeRef>
+        <flowNodeRef>Archivar</flowNodeRef>
+        <flowNodeRef>EndTermino</flowNodeRef>
+      </lane>
+      <lane id="Lane_Liz" name="Liz Bravo — Jefa de Administración y Finanzas">
+        <flowNodeRef>ValidarAFC</flowNodeRef>
+        <flowNodeRef>EmitirCheque</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartTermino" name="Se decide el término de la relación laboral">
+      <outgoing>f01</outgoing>
+    </startEvent>
+    <userTask id="Causal" name="Determinar la causal y los hechos que la fundan">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+    </userTask>
+    <userTask id="Carta" name="Redactar la carta de aviso">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+      <dataOutputAssociation id="DataOut_Carta">
+        <targetRef>Data_Carta</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <sendTask id="NotificarTrab" name="Notificar al trabajador dentro del plazo legal">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+    </sendTask>
+    <userTask id="CalcFiniquito" name="Calcular el finiquito según la causal">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+      <dataOutputAssociation id="DataOut_Finiquito">
+        <targetRef>Data_Finiquito</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <manualTask id="RevRUT" name="Revisar RUT, nombres y montos del finiquito">
+      <incoming>f05</incoming>
+      <incoming>f08</incoming>
+      <outgoing>f06</outgoing>
+    </manualTask>
+    <exclusiveGateway id="GwFiniquito" name="¿El finiquito está correcto?">
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+      <outgoing>f09</outgoing>
+    </exclusiveGateway>
+    <userTask id="CorregirFiniquito" name="Corregir el finiquito y rehacer el documento">
+      <incoming>f07</incoming>
+      <outgoing>f08</outgoing>
+    </userTask>
+    <userTask id="ValidarAFC" name="Validar el seguro de cesantía, descuentos y demás haberes">
+      <incoming>f09</incoming>
+      <outgoing>f10</outgoing>
+    </userTask>
+    <userTask id="EmitirCheque" name="Emitir el cheque del finiquito">
+      <incoming>f10</incoming>
+      <outgoing>f11</outgoing>
+    </userTask>
+    <userTask id="FirmasFiniq" name="Recabar las firmas del representante legal y del trabajador">
+      <incoming>f11</incoming>
+      <outgoing>f12</outgoing>
+    </userTask>
+    <userTask id="Ratificar" name="Ratificar el finiquito ante ministro de fe">
+      <incoming>f12</incoming>
+      <outgoing>f13</outgoing>
+    </userTask>
+    <userTask id="Bustos" name="Acreditar el pago de las cotizaciones previsionales">
+      <incoming>f13</incoming>
+      <outgoing>f14</outgoing>
+    </userTask>
+    <userTask id="PagoFiniq" name="Pagar el finiquito y entregar los comprobantes">
+      <incoming>f14</incoming>
+      <outgoing>f15</outgoing>
+    </userTask>
+    <userTask id="CierreDeFontana" name="Cerrar e inactivar al trabajador en DeFontana">
+      <incoming>f15</incoming>
+      <outgoing>f16</outgoing>
+    </userTask>
+    <userTask id="Archivar" name="Archivar el expediente y enviar copia a la Dirección del Trabajo">
+      <incoming>f16</incoming>
+      <outgoing>f17</outgoing>
+    </userTask>
+    <endEvent id="EndTermino" name="Relación laboral finalizada">
+      <incoming>f17</incoming>
+    </endEvent>
+    <dataObjectReference id="Data_Carta" name="Carta de aviso de término" dataObjectRef="DataObject_Carta" />
+    <dataObject id="DataObject_Carta" />
+    <dataObjectReference id="Data_Finiquito" name="Finiquito calculado" dataObjectRef="DataObject_Finiquito" />
+    <dataObject id="DataObject_Finiquito" />
+    <sequenceFlow id="f01" sourceRef="StartTermino" targetRef="Causal" />
+    <sequenceFlow id="f02" sourceRef="Causal" targetRef="Carta" />
+    <sequenceFlow id="f03" sourceRef="Carta" targetRef="NotificarTrab" />
+    <sequenceFlow id="f04" sourceRef="NotificarTrab" targetRef="CalcFiniquito" />
+    <sequenceFlow id="f05" sourceRef="CalcFiniquito" targetRef="RevRUT" />
+    <sequenceFlow id="f06" sourceRef="RevRUT" targetRef="GwFiniquito" />
+    <sequenceFlow id="f07" name="NO" sourceRef="GwFiniquito" targetRef="CorregirFiniquito" />
+    <sequenceFlow id="f08" sourceRef="CorregirFiniquito" targetRef="RevRUT" />
+    <sequenceFlow id="f09" name="SÍ" sourceRef="GwFiniquito" targetRef="ValidarAFC" />
+    <sequenceFlow id="f10" sourceRef="ValidarAFC" targetRef="EmitirCheque" />
+    <sequenceFlow id="f11" sourceRef="EmitirCheque" targetRef="FirmasFiniq" />
+    <sequenceFlow id="f12" sourceRef="FirmasFiniq" targetRef="Ratificar" />
+    <sequenceFlow id="f13" sourceRef="Ratificar" targetRef="Bustos" />
+    <sequenceFlow id="f14" sourceRef="Bustos" targetRef="PagoFiniq" />
+    <sequenceFlow id="f15" sourceRef="PagoFiniq" targetRef="CierreDeFontana" />
+    <sequenceFlow id="f16" sourceRef="CierreDeFontana" targetRef="Archivar" />
+    <sequenceFlow id="f17" sourceRef="Archivar" targetRef="EndTermino" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PER_E">
+      <bpmndi:BPMNShape id="P_E_di" bpmnElement="P_E" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="2950" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Med_di" bpmnElement="Lane_Med" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="2920" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Pat_di" bpmnElement="Lane_Pat" isHorizontal="true">
+        <omgdc:Bounds x="190" y="290" width="2920" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Liz_di" bpmnElement="Lane_Liz" isHorizontal="true">
+        <omgdc:Bounds x="190" y="550" width="2920" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartTermino_di" bpmnElement="StartTermino">
+        <omgdc:Bounds x="282" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="251" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Causal_di" bpmnElement="Causal">
+        <omgdc:Bounds x="430" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Carta_di" bpmnElement="Carta">
+        <omgdc:Bounds x="610" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="NotificarTrab_di" bpmnElement="NotificarTrab">
+        <omgdc:Bounds x="790" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CalcFiniquito_di" bpmnElement="CalcFiniquito">
+        <omgdc:Bounds x="970" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RevRUT_di" bpmnElement="RevRUT">
+        <omgdc:Bounds x="1150" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwFiniquito_di" bpmnElement="GwFiniquito" isMarkerVisible="true">
+        <omgdc:Bounds x="1355" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CorregirFiniquito_di" bpmnElement="CorregirFiniquito">
+        <omgdc:Bounds x="1330" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ValidarAFC_di" bpmnElement="ValidarAFC">
+        <omgdc:Bounds x="1510" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EmitirCheque_di" bpmnElement="EmitirCheque">
+        <omgdc:Bounds x="1690" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FirmasFiniq_di" bpmnElement="FirmasFiniq">
+        <omgdc:Bounds x="1870" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Ratificar_di" bpmnElement="Ratificar">
+        <omgdc:Bounds x="2050" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bustos_di" bpmnElement="Bustos">
+        <omgdc:Bounds x="2230" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="PagoFiniq_di" bpmnElement="PagoFiniq">
+        <omgdc:Bounds x="2410" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CierreDeFontana_di" bpmnElement="CierreDeFontana">
+        <omgdc:Bounds x="2590" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Archivar_di" bpmnElement="Archivar">
+        <omgdc:Bounds x="2770" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndTermino_di" bpmnElement="EndTermino">
+        <omgdc:Bounds x="2982" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2934" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Carta_di" bpmnElement="Data_Carta">
+        <omgdc:Bounds x="642" y="460" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="516" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Finiquito_di" bpmnElement="Data_Finiquito">
+        <omgdc:Bounds x="1002" y="460" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="961.8" y="516" width="116.4" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_TRAB_di" bpmnElement="P_TRAB" isHorizontal="true">
+        <omgdc:Bounds x="570" y="66" width="540" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_INST_di" bpmnElement="P_INST" isHorizontal="true">
+        <omgdc:Bounds x="1830" y="714" width="540" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="225" />
+        <omgdi:waypoint x="374" y="225" />
+        <omgdi:waypoint x="374" y="355" />
+        <omgdi:waypoint x="430" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="355" />
+        <omgdi:waypoint x="610" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="710" y="355" />
+        <omgdi:waypoint x="790" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="890" y="355" />
+        <omgdi:waypoint x="970" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="1070" y="355" />
+        <omgdi:waypoint x="1150" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1250" y="355" />
+        <omgdi:waypoint x="1355" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1380" y="380" />
+        <omgdi:waypoint x="1380" y="445" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1389" y="404.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1330" y="485" />
+        <omgdi:waypoint x="1200" y="485" />
+        <omgdi:waypoint x="1200" y="395" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="1405" y="355" />
+        <omgdi:waypoint x="1457.5" y="355" />
+        <omgdi:waypoint x="1457.5" y="615" />
+        <omgdi:waypoint x="1510" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1417.2" y="333" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="1610" y="615" />
+        <omgdi:waypoint x="1690" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="1790" y="615" />
+        <omgdi:waypoint x="1830" y="615" />
+        <omgdi:waypoint x="1830" y="355" />
+        <omgdi:waypoint x="1870" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <omgdi:waypoint x="1970" y="355" />
+        <omgdi:waypoint x="2050" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="2150" y="355" />
+        <omgdi:waypoint x="2230" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <omgdi:waypoint x="2330" y="355" />
+        <omgdi:waypoint x="2410" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="2510" y="355" />
+        <omgdi:waypoint x="2590" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16_di" bpmnElement="f16">
+        <omgdi:waypoint x="2690" y="355" />
+        <omgdi:waypoint x="2770" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17_di" bpmnElement="f17">
+        <omgdi:waypoint x="2870" y="355" />
+        <omgdi:waypoint x="2982" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="840" y="315" />
+        <omgdi:waypoint x="840" y="126" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="848" y="212.5" width="88.4" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m02_di" bpmnElement="m02">
+        <omgdi:waypoint x="2100" y="395" />
+        <omgdi:waypoint x="2100" y="714" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2108" y="546.5" width="127.6" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Carta_di" bpmnElement="DataOut_Carta">
+        <omgdi:waypoint x="660" y="395" />
+        <omgdi:waypoint x="660" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Finiquito_di" bpmnElement="DataOut_Finiquito">
+        <omgdi:waypoint x="1020" y="395" />
+        <omgdi:waypoint x="1020" y="460" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PCF_v5_A" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PCF_A">
+    <participant id="P_A" name="Facturación a instituciones — MauleMed" processRef="Process_PCF_A" />
+    <participant id="P_CAJA" name="Cierre y cuadratura de caja (proceso D)" />
+    <participant id="P_INST" name="FONASA, isapres e instituciones" />
+    <messageFlow id="m01" sourceRef="P_CAJA" targetRef="StartFact" />
+    <messageFlow id="m02" sourceRef="EmitirDocumento" targetRef="P_INST" />
+  </collaboration>
+  <process id="Process_PCF_A" isExecutable="false">
+    <laneSet id="LaneSet_PCF_A">
+      <lane id="Lane_Liz" name="Liz Bravo — Jefa de Administración y Finanzas">
+        <flowNodeRef>RevisarCobranza</flowNodeRef>
+        <flowNodeRef>GwCompleto</flowNodeRef>
+        <flowNodeRef>InstruirRegular</flowNodeRef>
+      </lane>
+      <lane id="Lane_Gab" name="Gabriela Morales — Tesorería y Facturación">
+        <flowNodeRef>StartFact</flowNodeRef>
+        <flowNodeRef>GwCanal</flowNodeRef>
+        <flowNodeRef>ExtraerNomina</flowNodeRef>
+        <flowNodeRef>ReunirBonos</flowNodeRef>
+        <flowNodeRef>CompararBonos</flowNodeRef>
+        <flowNodeRef>GwCuadra</flowNodeRef>
+        <flowNodeRef>VerificarDif</flowNodeRef>
+        <flowNodeRef>MergeCuadra</flowNodeRef>
+        <flowNodeRef>MergeCanal</flowNodeRef>
+        <flowNodeRef>DeterminarRS</flowNodeRef>
+        <flowNodeRef>EmitirDocumento</flowNodeRef>
+        <flowNodeRef>EndFacturado</flowNodeRef>
+        <flowNodeRef>EndPendiente</flowNodeRef>
+      </lane>
+      <lane id="Lane_Con" name="Contabilidad — Elvira Rojas y Meribet Escobar">
+        <flowNodeRef>RegistrarContab</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartFact" name="Caja validada y cobranza pendiente">
+      <outgoing>f01</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_StartFact" />
+    </startEvent>
+    <exclusiveGateway id="GwCanal" name="¿El cobro de esta prestación va por nómina FONASA o por bono u orden?">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+      <outgoing>f03</outgoing>
+    </exclusiveGateway>
+    <userTask id="ExtraerNomina" name="Extraer del RISPACS la nómina de cobranza FONASA">
+      <incoming>f02</incoming>
+      <outgoing>f10</outgoing>
+    </userTask>
+    <manualTask id="ReunirBonos" name="Reunir los bonos y órdenes manuales de isapres e instituciones">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+      <dataOutputAssociation id="DataOut_Bonos">
+        <targetRef>Data_Bonos</targetRef>
+      </dataOutputAssociation>
+    </manualTask>
+    <manualTask id="CompararBonos" name="Comparar los bonos y órdenes contra el registro del RISPACS">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+    </manualTask>
+    <exclusiveGateway id="GwCuadra" name="¿Cuadra la comparativa?">
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+      <outgoing>f07</outgoing>
+    </exclusiveGateway>
+    <manualTask id="VerificarDif" name="Verificar y corroborar las diferencias">
+      <incoming>f06</incoming>
+      <outgoing>f08</outgoing>
+    </manualTask>
+    <exclusiveGateway id="MergeCuadra" name="Comparativa resuelta">
+      <incoming>f07</incoming>
+      <incoming>f08</incoming>
+      <outgoing>f09</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="MergeCanal" name="Respaldo del cobro preparado">
+      <incoming>f09</incoming>
+      <incoming>f10</incoming>
+      <outgoing>f11</outgoing>
+    </exclusiveGateway>
+    <userTask id="DeterminarRS" name="Determinar la razón social y la resolución que corresponden">
+      <incoming>f11</incoming>
+      <outgoing>f12</outgoing>
+    </userTask>
+    <userTask id="EmitirDocumento" name="Emitir el documento tributario">
+      <incoming>f12</incoming>
+      <outgoing>f13</outgoing>
+    </userTask>
+    <endEvent id="EndFacturado" name="Facturación emitida y registrada">
+      <incoming>f17</incoming>
+    </endEvent>
+    <userTask id="RegistrarContab" name="Registrar la facturación y la cobranza en contabilidad">
+      <incoming>f13</incoming>
+      <outgoing>f14</outgoing>
+    </userTask>
+    <userTask id="RevisarCobranza" name="Revisar en el RISPACS que esté facturado y cobrado">
+      <incoming>f14</incoming>
+      <outgoing>f15</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwCompleto" name="¿Está todo facturado y cobrado?">
+      <incoming>f15</incoming>
+      <outgoing>f16</outgoing>
+      <outgoing>f17</outgoing>
+    </exclusiveGateway>
+    <sendTask id="InstruirRegular" name="Instruir la regularización a tesorería">
+      <incoming>f16</incoming>
+      <outgoing>f18</outgoing>
+    </sendTask>
+    <endEvent id="EndPendiente" name="Queda pendiente para la próxima revisión">
+      <incoming>f18</incoming>
+    </endEvent>
+    <dataObjectReference id="Data_Bonos" name="Bonos y órdenes de isapres e instituciones" dataObjectRef="DataObject_Bonos" />
+    <dataObject id="DataObject_Bonos" />
+    <sequenceFlow id="f01" sourceRef="StartFact" targetRef="GwCanal" />
+    <sequenceFlow id="f02" name="Nómina FONASA" sourceRef="GwCanal" targetRef="ExtraerNomina" />
+    <sequenceFlow id="f03" name="Bono u orden" sourceRef="GwCanal" targetRef="ReunirBonos" />
+    <sequenceFlow id="f04" sourceRef="ReunirBonos" targetRef="CompararBonos" />
+    <sequenceFlow id="f05" sourceRef="CompararBonos" targetRef="GwCuadra" />
+    <sequenceFlow id="f06" name="NO" sourceRef="GwCuadra" targetRef="VerificarDif" />
+    <sequenceFlow id="f07" name="SÍ" sourceRef="GwCuadra" targetRef="MergeCuadra" />
+    <sequenceFlow id="f08" sourceRef="VerificarDif" targetRef="MergeCuadra" />
+    <sequenceFlow id="f09" sourceRef="MergeCuadra" targetRef="MergeCanal" />
+    <sequenceFlow id="f10" sourceRef="ExtraerNomina" targetRef="MergeCanal" />
+    <sequenceFlow id="f11" sourceRef="MergeCanal" targetRef="DeterminarRS" />
+    <sequenceFlow id="f12" sourceRef="DeterminarRS" targetRef="EmitirDocumento" />
+    <sequenceFlow id="f13" sourceRef="EmitirDocumento" targetRef="RegistrarContab" />
+    <sequenceFlow id="f14" sourceRef="RegistrarContab" targetRef="RevisarCobranza" />
+    <sequenceFlow id="f15" sourceRef="RevisarCobranza" targetRef="GwCompleto" />
+    <sequenceFlow id="f16" name="NO" sourceRef="GwCompleto" targetRef="InstruirRegular" />
+    <sequenceFlow id="f17" name="SÍ" sourceRef="GwCompleto" targetRef="EndFacturado" />
+    <sequenceFlow id="f18" sourceRef="InstruirRegular" targetRef="EndPendiente" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PCF_A">
+      <bpmndi:BPMNShape id="P_A_di" bpmnElement="P_A" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="2230" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Liz_di" bpmnElement="Lane_Liz" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="2200" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Gab_di" bpmnElement="Lane_Gab" isHorizontal="true">
+        <omgdc:Bounds x="190" y="290" width="2200" height="390" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Con_di" bpmnElement="Lane_Con" isHorizontal="true">
+        <omgdc:Bounds x="190" y="680" width="2200" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartFact_di" bpmnElement="StartFact">
+        <omgdc:Bounds x="282" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwCanal_di" bpmnElement="GwCanal" isMarkerVisible="true">
+        <omgdc:Bounds x="455" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="518" width="132" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExtraerNomina_di" bpmnElement="ExtraerNomina">
+        <omgdc:Bounds x="790" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ReunirBonos_di" bpmnElement="ReunirBonos">
+        <omgdc:Bounds x="610" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CompararBonos_di" bpmnElement="CompararBonos">
+        <omgdc:Bounds x="790" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwCuadra_di" bpmnElement="GwCuadra" isMarkerVisible="true">
+        <omgdc:Bounds x="995" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="438" width="132" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="VerificarDif_di" bpmnElement="VerificarDif">
+        <omgdc:Bounds x="970" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeCuadra_di" bpmnElement="MergeCuadra" isMarkerVisible="true">
+        <omgdc:Bounds x="1175" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1139" y="438" width="122" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeCanal_di" bpmnElement="MergeCanal" isMarkerVisible="true">
+        <omgdc:Bounds x="1355" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="518" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DeterminarRS_di" bpmnElement="DeterminarRS">
+        <omgdc:Bounds x="1510" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EmitirDocumento_di" bpmnElement="EmitirDocumento">
+        <omgdc:Bounds x="1690" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndFacturado_di" bpmnElement="EndFacturado">
+        <omgdc:Bounds x="2082" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2034" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RegistrarContab_di" bpmnElement="RegistrarContab">
+        <omgdc:Bounds x="1870" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RevisarCobranza_di" bpmnElement="RevisarCobranza">
+        <omgdc:Bounds x="1870" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwCompleto_di" bpmnElement="GwCompleto" isMarkerVisible="true">
+        <omgdc:Bounds x="2075" y="200" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2034" y="164" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="InstruirRegular_di" bpmnElement="InstruirRegular">
+        <omgdc:Bounds x="2230" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndPendiente_di" bpmnElement="EndPendiente">
+        <omgdc:Bounds x="2262" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2214" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Bonos_di" bpmnElement="Data_Bonos">
+        <omgdc:Bounds x="642" y="590" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="646" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_CAJA_di" bpmnElement="P_CAJA" isHorizontal="true">
+        <omgdc:Bounds x="210" y="66" width="360" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_INST_di" bpmnElement="P_INST" isHorizontal="true">
+        <omgdc:Bounds x="1470" y="844" width="540" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="485" />
+        <omgdi:waypoint x="455" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="480" y="460" />
+        <omgdi:waypoint x="480" y="355" />
+        <omgdi:waypoint x="790" y="355" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="489" y="399.5" width="82.8" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="505" y="485" />
+        <omgdi:waypoint x="610" y="485" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="518.9" y="463" width="77.2" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="710" y="485" />
+        <omgdi:waypoint x="790" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="890" y="485" />
+        <omgdi:waypoint x="995" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1020" y="510" />
+        <omgdi:waypoint x="1020" y="575" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1029" y="534.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1045" y="485" />
+        <omgdi:waypoint x="1175" y="485" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1096" y="463" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1070" y="615" />
+        <omgdi:waypoint x="1200" y="615" />
+        <omgdi:waypoint x="1200" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="1225" y="485" />
+        <omgdi:waypoint x="1355" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="890" y="355" />
+        <omgdi:waypoint x="1380" y="355" />
+        <omgdi:waypoint x="1380" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="1405" y="485" />
+        <omgdi:waypoint x="1510" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <omgdi:waypoint x="1610" y="485" />
+        <omgdi:waypoint x="1690" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="1790" y="485" />
+        <omgdi:waypoint x="1830" y="485" />
+        <omgdi:waypoint x="1830" y="745" />
+        <omgdi:waypoint x="1870" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <omgdi:waypoint x="1920" y="705" />
+        <omgdi:waypoint x="1920" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="1970" y="225" />
+        <omgdi:waypoint x="2075" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16_di" bpmnElement="f16">
+        <omgdi:waypoint x="2125" y="225" />
+        <omgdi:waypoint x="2230" y="225" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2163.5" y="203" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17_di" bpmnElement="f17">
+        <omgdi:waypoint x="2100" y="250" />
+        <omgdi:waypoint x="2100" y="337" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2109" y="285.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f18_di" bpmnElement="f18">
+        <omgdi:waypoint x="2280" y="265" />
+        <omgdi:waypoint x="2280" y="337" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="300" y="126" />
+        <omgdi:waypoint x="300" y="467" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m02_di" bpmnElement="m02">
+        <omgdi:waypoint x="1740" y="525" />
+        <omgdi:waypoint x="1740" y="844" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Bonos_di" bpmnElement="DataOut_Bonos">
+        <omgdi:waypoint x="660" y="525" />
+        <omgdi:waypoint x="660" y="590" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

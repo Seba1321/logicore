@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1570" height="804" viewBox="0 0 1570 804">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#111"/></marker><marker id="mf" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0.5,0.5 L10,4.5 L0.5,8.5 z" fill="#fff" stroke="#555" stroke-width="1"/></marker></defs>
+<rect x="30.0" y="30.0" width="1510.0" height="650.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="30.0" width="30" height="650.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,355.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Control de asistencia y cierre mensual — MauleMed</text></g>
+<rect x="980.0" y="714.0" width="540.0" height="60.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="980.0" y="714.0" width="540.0" height="60.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<text x="1250.0" y="745.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#111">Trabajadores</text>
+<rect x="60.0" y="550.0" width="1480.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="550.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,615.0) rotate(-90)"><text x="0.0" y="-7.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Liz Bravo — Jefa de</text><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Administración y</text><text x="0.0" y="14.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Finanzas</text></g>
+<rect x="60.0" y="30.0" width="1480.0" height="520.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="30.0" width="30" height="520.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,290.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Patricia Lobos — Encargada de Personas y RR.HH.</text></g>
+<polyline points="350.0,135.0 350.0,200.0" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#mf)"/>
+<polyline points="188.0,95.0 300.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="400.0,95.0 505.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="530.0,120.0 530.0,225.0 660.0,225.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="542.6" y="164.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="553.0" y="176.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">NO</text>
+<polyline points="555.0,95.0 865.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="699.6" y="73.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="710.0" y="85.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
+<polyline points="760.0,225.0 890.0,225.0 890.0,120.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="915.0,95.0 1020.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1120.0,95.0 1200.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1300.0,95.0 1380.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="220.0,485.0 300.0,485.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="400.0,485.0 480.0,485.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="580.0,485.0 620.0,485.0 620.0,615.0 660.0,615.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="760.0,615.0 840.0,615.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="940.0,615.0 1020.0,615.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1120.0,615.0 1232.0,615.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1430.0,135.0 1430.0,355.0 170.0,355.0 170.0,445.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1070.0,655.0 1070.0,714.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<rect x="1070.6" y="676.5" width="142.4" height="14" fill="#fff" opacity="0.9"/>
+<text x="1141.8" y="688.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Liquidación de sueldo</text>
+<rect x="300.0" y="445.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="311.0" cy="454.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M306.6,461.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="350.0" y="471.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Preparar el</text><text x="350.0" y="483.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">archivo mensual</text><text x="350.0" y="495.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de horas</text><text x="350.0" y="507.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">extraordinarias</text>
+<rect x="1380.0" y="55.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1389.0,63.0 h7 M1389.0,66.0 h7 M1389.0,69.0 h7 M1389.0,63.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1430.0" y="81.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Calcular las</text><text x="1430.0" y="93.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">horas</text><text x="1430.0" y="105.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">extraordinarias</text><text x="1430.0" y="117.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">y sus recargos</text>
+<rect x="660.0" y="185.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="671.0" cy="194.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M666.6,201.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="710.0" y="211.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Corregir y</text><text x="710.0" y="223.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">respaldar los</text><text x="710.0" y="235.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">marcajes</text><text x="710.0" y="247.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">erróneos</text>
+<path d="M332.0,200.0 L358.0,200.0 L368.0,210.0 L368.0,250.0 L332.0,250.0 Z" fill="#fff" stroke="#111" stroke-width="1.4"/>
+<path d="M358.0,200.0 L358.0,210.0 L368.0,210.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<text x="350.0" y="268.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Marcajes del mes ·</text><text x="350.0" y="279.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">reloj control</text>
+<rect x="840.0" y="575.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="851.0" cy="584.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M846.6,591.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="890.0" y="607.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Emitir las</text><text x="890.0" y="619.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">liquidaciones</text><text x="890.0" y="631.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de sueldo</text>
+<circle cx="1250.0" cy="615.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="1250.0" y="653.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Asistencia y horas del</text><text x="1250.0" y="665.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">mes cerradas</text>
+<rect x="480.0" y="445.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="485.5" y="452.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M485.5,452.0 L491.0,457.0 L496.5,452.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="530.0" y="477.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Enviar el</text><text x="530.0" y="489.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">archivo a</text><text x="530.0" y="501.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Remuneraciones</text>
+<rect x="1020.0" y="575.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1031.0" cy="584.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1026.6,591.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1070.0" y="607.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recabar la</text><text x="1070.0" y="619.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">firma de las</text><text x="1070.0" y="631.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">liquidaciones</text>
+<polygon points="530.0,70.0 555.0,95.0 530.0,120.0 505.0,95.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M522.0,87.0 L538.0,103.0 M538.0,87.0 L522.0,103.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="530.0" y="46.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿El marcaje está</text><text x="530.0" y="58.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">correcto?</text>
+<rect x="660.0" y="575.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="671.0" cy="584.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M666.6,591.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="710.0" y="595.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Ingresar las</text><text x="710.0" y="607.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">horas</text><text x="710.0" y="619.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">extraordinarias</text><text x="710.0" y="631.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">a</text><text x="710.0" y="643.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">remuneraciones</text>
+<polygon points="890.0,70.0 915.0,95.0 890.0,120.0 865.0,95.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M882.0,87.0 L898.0,103.0 M898.0,87.0 L882.0,103.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="890.0" y="59.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Marcaje conforme</text>
+<rect x="1200.0" y="55.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1209.0,63.0 h7 M1209.0,66.0 h7 M1209.0,69.0 h7 M1209.0,63.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1250.0" y="75.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Aplicar el</text><text x="1250.0" y="87.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">recargo por</text><text x="1250.0" y="99.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">trabajo en</text><text x="1250.0" y="111.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">domingo y</text><text x="1250.0" y="123.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">festivo</text>
+<rect x="300.0" y="55.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M309.0,63.0 h7 M309.0,66.0 h7 M309.0,69.0 h7 M309.0,63.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="350.0" y="81.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar marcaje</text><text x="350.0" y="93.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">por marcaje,</text><text x="350.0" y="105.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">empresa por</text><text x="350.0" y="117.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">empresa</text>
+<circle cx="170.0" cy="95.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="170.0" cy="95.0" r="12.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M170.0,95.0 L170.0,89.0 M170.0,95.0 L174.0,97.0" stroke="#111" stroke-width="1.2"/>
+<text x="170.0" y="133.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Día 24 o 25 de cada mes</text><text x="170.0" y="145.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">(cierre de asistencia)</text>
+<rect x="1020.0" y="55.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1031.0" cy="64.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1026.6,71.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1070.0" y="81.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Verificar que</text><text x="1070.0" y="93.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">permisos y</text><text x="1070.0" y="105.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">licencias estén</text><text x="1070.0" y="117.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">ingresados</text>
+<rect x="120.0" y="445.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="131.0" cy="454.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M126.6,461.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="170.0" y="477.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Incluir los</text><text x="170.0" y="489.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">viáticos y la</text><text x="170.0" y="501.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">movilización</text>
+</svg>

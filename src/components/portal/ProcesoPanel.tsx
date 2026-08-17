@@ -145,12 +145,15 @@ const DiagramCard = ({
         BPMN van de 1.8:1 a 3.9:1, y con una altura fija los más anchos
         quedaban diminutos. */}
     {preview ? (
-      <div className="aspect-[2/1] border-b border-slate-200 bg-slate-50 p-3">
+      // La imagen va absoluta: en flujo normal, un diagrama menos ancho que la
+      // proporción estiraba la caja hasta su alto intrínseco y cada tarjeta de
+      // la fila terminaba de distinto tamaño.
+      <div className="relative aspect-[2/1] border-b border-slate-200 bg-slate-50">
         <img
           src={preview}
           alt=""
           loading="lazy"
-          className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.02]"
+          className="absolute inset-0 h-full w-full object-contain p-3 transition duration-500 group-hover:scale-[1.02]"
         />
       </div>
     ) : (
@@ -161,7 +164,9 @@ const DiagramCard = ({
     <div className="flex flex-1 flex-col p-4">
       <p className="font-display text-base font-semibold leading-snug text-slate-950">{titulo}</p>
       {descripcion && <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{descripcion}</p>}
-      <p className="mt-3 font-display text-[11px] font-semibold uppercase tracking-[0.08em] text-blue-600">
+      {/* Al pie de la tarjeta: las descripciones varían de largo y si no, el
+          enlace queda a distinta altura en cada columna de la fila. */}
+      <p className="mt-auto pt-3 font-display text-[11px] font-semibold uppercase tracking-[0.08em] text-blue-600">
         Ver diagrama →
       </p>
     </div>

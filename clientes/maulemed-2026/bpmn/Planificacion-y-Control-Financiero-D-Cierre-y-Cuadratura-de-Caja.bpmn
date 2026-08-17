@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PCF_v5_D" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PCF_D">
+    <participant id="P_D" name="Cierre y cuadratura de caja diaria — MauleMed" processRef="Process_PCF_D" />
+  </collaboration>
+  <process id="Process_PCF_D" isExecutable="false">
+    <laneSet id="LaneSet_PCF_D">
+      <lane id="Lane_Caj" name="Cajeras (mesón, todas las sucursales)">
+        <flowNodeRef>StartCaja</flowNodeRef>
+        <flowNodeRef>CerrarCaja</flowNodeRef>
+        <flowNodeRef>CorregirDatos</flowNodeRef>
+      </lane>
+      <lane id="Lane_Gab" name="Gabriela Morales — Tesorería">
+        <flowNodeRef>MergeCaja</flowNodeRef>
+        <flowNodeRef>ValidarCaja</flowNodeRef>
+        <flowNodeRef>GwCuadraCaja</flowNodeRef>
+        <flowNodeRef>InformarDif</flowNodeRef>
+        <flowNodeRef>VistoBuenoCaja</flowNodeRef>
+        <flowNodeRef>EndCajaValidada</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartCaja" name="Cierre de la jornada en el mesón">
+      <outgoing>f01</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_StartCaja" />
+    </startEvent>
+    <userTask id="CerrarCaja" name="Cerrar la caja del día en el RISPACS">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+      <dataOutputAssociation id="DataOut_InformeCaja">
+        <targetRef>Data_InformeCaja</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <userTask id="CorregirDatos" name="Corregir los datos de la caja en el RISPACS">
+      <incoming>f08</incoming>
+      <outgoing>f09</outgoing>
+    </userTask>
+    <exclusiveGateway id="MergeCaja" name="Reporte de caja por validar">
+      <incoming>f02</incoming>
+      <incoming>f09</incoming>
+      <outgoing>f03</outgoing>
+    </exclusiveGateway>
+    <userTask id="ValidarCaja" name="Validar el reporte de caja">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwCuadraCaja" name="¿Cuadra la caja?">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+      <outgoing>f06</outgoing>
+    </exclusiveGateway>
+    <sendTask id="InformarDif" name="Informar la diferencia a la caja correspondiente">
+      <incoming>f05</incoming>
+      <outgoing>f08</outgoing>
+    </sendTask>
+    <userTask id="VistoBuenoCaja" name="Dar el visto bueno al reporte de caja">
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+    </userTask>
+    <endEvent id="EndCajaValidada" name="Información de caja validada">
+      <incoming>f07</incoming>
+    </endEvent>
+    <dataObjectReference id="Data_InformeCaja" name="Informe de caja · RISPACS" dataObjectRef="DataObject_InformeCaja" />
+    <dataObject id="DataObject_InformeCaja" />
+    <sequenceFlow id="f01" sourceRef="StartCaja" targetRef="CerrarCaja" />
+    <sequenceFlow id="f02" sourceRef="CerrarCaja" targetRef="MergeCaja" />
+    <sequenceFlow id="f03" sourceRef="MergeCaja" targetRef="ValidarCaja" />
+    <sequenceFlow id="f04" sourceRef="ValidarCaja" targetRef="GwCuadraCaja" />
+    <sequenceFlow id="f05" name="NO" sourceRef="GwCuadraCaja" targetRef="InformarDif" />
+    <sequenceFlow id="f06" name="SÍ" sourceRef="GwCuadraCaja" targetRef="VistoBuenoCaja" />
+    <sequenceFlow id="f07" sourceRef="VistoBuenoCaja" targetRef="EndCajaValidada" />
+    <sequenceFlow id="f08" sourceRef="InformarDif" targetRef="CorregirDatos" />
+    <sequenceFlow id="f09" sourceRef="CorregirDatos" targetRef="MergeCaja" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PCF_D">
+      <bpmndi:BPMNShape id="P_D_di" bpmnElement="P_D" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="1330" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Caj_di" bpmnElement="Lane_Caj" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="1300" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Gab_di" bpmnElement="Lane_Gab" isHorizontal="true">
+        <omgdc:Bounds x="190" y="420" width="1300" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartCaja_di" bpmnElement="StartCaja">
+        <omgdc:Bounds x="282" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="251" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CerrarCaja_di" bpmnElement="CerrarCaja">
+        <omgdc:Bounds x="430" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CorregirDatos_di" bpmnElement="CorregirDatos">
+        <omgdc:Bounds x="1330" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeCaja_di" bpmnElement="MergeCaja" isMarkerVisible="true">
+        <omgdc:Bounds x="635" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="518" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ValidarCaja_di" bpmnElement="ValidarCaja">
+        <omgdc:Bounds x="790" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwCuadraCaja_di" bpmnElement="GwCuadraCaja" isMarkerVisible="true">
+        <omgdc:Bounds x="995" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="970.2" y="438" width="99.6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="InformarDif_di" bpmnElement="InformarDif">
+        <omgdc:Bounds x="1150" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="VistoBuenoCaja_di" bpmnElement="VistoBuenoCaja">
+        <omgdc:Bounds x="1150" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndCajaValidada_di" bpmnElement="EndCajaValidada">
+        <omgdc:Bounds x="1362" y="597" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="641" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_InformeCaja_di" bpmnElement="Data_InformeCaja">
+        <omgdc:Bounds x="462" y="330" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="386" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="225" />
+        <omgdi:waypoint x="430" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="225" />
+        <omgdi:waypoint x="582.5" y="225" />
+        <omgdi:waypoint x="582.5" y="485" />
+        <omgdi:waypoint x="635" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="685" y="485" />
+        <omgdi:waypoint x="790" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="890" y="485" />
+        <omgdi:waypoint x="995" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="1045" y="485" />
+        <omgdi:waypoint x="1150" y="485" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1083.5" y="463" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1020" y="510" />
+        <omgdi:waypoint x="1020" y="615" />
+        <omgdi:waypoint x="1150" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1029" y="554.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1250" y="615" />
+        <omgdi:waypoint x="1362" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1250" y="485" />
+        <omgdi:waypoint x="1290" y="485" />
+        <omgdi:waypoint x="1290" y="355" />
+        <omgdi:waypoint x="1330" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="1380" y="315" />
+        <omgdi:waypoint x="1380" y="225" />
+        <omgdi:waypoint x="660" y="225" />
+        <omgdi:waypoint x="660" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_InformeCaja_di" bpmnElement="DataOut_InformeCaja">
+        <omgdi:waypoint x="480" y="265" />
+        <omgdi:waypoint x="480" y="330" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

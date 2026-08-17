@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PER_v5_B" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PER_B">
+    <participant id="P_B" name="Contratación e incorporación de personal — MauleMed" processRef="Process_PER_B" />
+    <participant id="P_TRAB" name="Trabajador" />
+    <messageFlow id="m01" name="Contrato y anexos para firma" sourceRef="FirmaTrab" targetRef="P_TRAB" />
+  </collaboration>
+  <process id="Process_PER_B" isExecutable="false">
+    <laneSet id="LaneSet_PER_B">
+      <lane id="Lane_Med" name="Dirección médica — representante legal">
+        <flowNodeRef>FirmaRepLegal</flowNodeRef>
+      </lane>
+      <lane id="Lane_Pat" name="Patricia Lobos — Encargada de Personas y RR.HH.">
+        <flowNodeRef>StartSel</flowNodeRef>
+        <flowNodeRef>RecopilarDocs</flowNodeRef>
+        <flowNodeRef>DefSociedad</flowNodeRef>
+        <flowNodeRef>EnviarFicha</flowNodeRef>
+        <flowNodeRef>GenContrato</flowNodeRef>
+        <flowNodeRef>RegDeFontana</flowNodeRef>
+        <flowNodeRef>AnexoHHEE</flowNodeRef>
+        <flowNodeRef>OtrosAnexos</flowNodeRef>
+        <flowNodeRef>DAS</flowNodeRef>
+        <flowNodeRef>Reglamento</flowNodeRef>
+        <flowNodeRef>FirmaTrab</flowNodeRef>
+        <flowNodeRef>AFP</flowNodeRef>
+        <flowNodeRef>AFC</flowNodeRef>
+        <flowNodeRef>Mutual</flowNodeRef>
+        <flowNodeRef>Caja</flowNodeRef>
+        <flowNodeRef>ConfirmarPrevired</flowNodeRef>
+        <flowNodeRef>RelojControl</flowNodeRef>
+        <flowNodeRef>Tutor</flowNodeRef>
+        <flowNodeRef>EndOnboarding</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartSel" name="Candidato seleccionado para el cargo">
+      <outgoing>f01</outgoing>
+    </startEvent>
+    <userTask id="RecopilarDocs" name="Recopilar la documentación y completar la ficha de ingreso">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+      <dataOutputAssociation id="DataOut_Ficha">
+        <targetRef>Data_Ficha</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <userTask id="DefSociedad" name="Determinar la sociedad empleadora y la sucursal">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+    </userTask>
+    <sendTask id="EnviarFicha" name="Enviar la ficha de ingreso al control de gestión">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+    </sendTask>
+    <userTask id="GenContrato" name="Seleccionar el contrato tipo y generarlo">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+      <dataOutputAssociation id="DataOut_Contrato">
+        <targetRef>Data_Contrato</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <userTask id="RegDeFontana" name="Registrar el contrato en DeFontana y en la Dirección del Trabajo">
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+    </userTask>
+    <userTask id="AnexoHHEE" name="Generar el anexo de pacto de horas extraordinarias">
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+    </userTask>
+    <userTask id="OtrosAnexos" name="Generar los anexos adicionales que correspondan">
+      <incoming>f07</incoming>
+      <outgoing>f08</outgoing>
+    </userTask>
+    <userTask id="DAS" name="Emitir la obligación de informar los riesgos laborales">
+      <incoming>f08</incoming>
+      <outgoing>f09</outgoing>
+    </userTask>
+    <userTask id="Reglamento" name="Entregar el Reglamento Interno">
+      <incoming>f09</incoming>
+      <outgoing>f10</outgoing>
+    </userTask>
+    <userTask id="FirmaTrab" name="Recabar la firma del trabajador">
+      <incoming>f10</incoming>
+      <outgoing>f11</outgoing>
+      <dataOutputAssociation id="DataOut_Expediente">
+        <targetRef>Data_Expediente</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <manualTask id="FirmaRepLegal" name="Firmar el contrato como representante legal">
+      <incoming>f11</incoming>
+      <outgoing>fw12</outgoing>
+    </manualTask>
+    <userTask id="AFP" name="Afiliar en AFP y en salud (Fonasa o isapre)">
+      <incoming>fw12</incoming>
+      <outgoing>f13</outgoing>
+    </userTask>
+    <userTask id="AFC" name="Inscribir en el seguro de cesantía">
+      <incoming>f13</incoming>
+      <outgoing>f14</outgoing>
+    </userTask>
+    <userTask id="Mutual" name="Afiliar a la mutualidad">
+      <incoming>f14</incoming>
+      <outgoing>f15</outgoing>
+    </userTask>
+    <userTask id="Caja" name="Incorporar a la caja de compensación">
+      <incoming>f15</incoming>
+      <outgoing>f16</outgoing>
+    </userTask>
+    <userTask id="ConfirmarPrevired" name="Confirmar las altas previsionales en Previred">
+      <incoming>f16</incoming>
+      <outgoing>f17</outgoing>
+    </userTask>
+    <userTask id="RelojControl" name="Ingresar al control de asistencia y asignar el turno">
+      <incoming>f17</incoming>
+      <outgoing>f18</outgoing>
+    </userTask>
+    <userTask id="Tutor" name="Asignar una tutora de inducción por dos semanas">
+      <incoming>f18</incoming>
+      <outgoing>f19</outgoing>
+    </userTask>
+    <endEvent id="EndOnboarding" name="Trabajador incorporado">
+      <incoming>f19</incoming>
+    </endEvent>
+    <dataObjectReference id="Data_Ficha" name="Ficha de ingreso · Word" dataObjectRef="DataObject_Ficha" />
+    <dataObject id="DataObject_Ficha" />
+    <dataObjectReference id="Data_Contrato" name="Contrato y anexos · Word" dataObjectRef="DataObject_Contrato" />
+    <dataObject id="DataObject_Contrato" />
+    <dataObjectReference id="Data_Expediente" name="Expediente del trabajador · carpeta de la sociedad" dataObjectRef="DataObject_Expediente" />
+    <dataObject id="DataObject_Expediente" />
+    <sequenceFlow id="f01" sourceRef="StartSel" targetRef="RecopilarDocs" />
+    <sequenceFlow id="f02" sourceRef="RecopilarDocs" targetRef="DefSociedad" />
+    <sequenceFlow id="f03" sourceRef="DefSociedad" targetRef="EnviarFicha" />
+    <sequenceFlow id="f04" sourceRef="EnviarFicha" targetRef="GenContrato" />
+    <sequenceFlow id="f05" sourceRef="GenContrato" targetRef="RegDeFontana" />
+    <sequenceFlow id="f06" sourceRef="RegDeFontana" targetRef="AnexoHHEE" />
+    <sequenceFlow id="f07" sourceRef="AnexoHHEE" targetRef="OtrosAnexos" />
+    <sequenceFlow id="f08" sourceRef="OtrosAnexos" targetRef="DAS" />
+    <sequenceFlow id="f09" sourceRef="DAS" targetRef="Reglamento" />
+    <sequenceFlow id="f10" sourceRef="Reglamento" targetRef="FirmaTrab" />
+    <sequenceFlow id="f11" sourceRef="FirmaTrab" targetRef="FirmaRepLegal" />
+    <sequenceFlow id="fw12" sourceRef="FirmaRepLegal" targetRef="AFP" />
+    <sequenceFlow id="f13" sourceRef="AFP" targetRef="AFC" />
+    <sequenceFlow id="f14" sourceRef="AFC" targetRef="Mutual" />
+    <sequenceFlow id="f15" sourceRef="Mutual" targetRef="Caja" />
+    <sequenceFlow id="f16" sourceRef="Caja" targetRef="ConfirmarPrevired" />
+    <sequenceFlow id="f17" sourceRef="ConfirmarPrevired" targetRef="RelojControl" />
+    <sequenceFlow id="f18" sourceRef="RelojControl" targetRef="Tutor" />
+    <sequenceFlow id="f19" sourceRef="Tutor" targetRef="EndOnboarding" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PER_B">
+      <bpmndi:BPMNShape id="P_B_di" bpmnElement="P_B" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="2230" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Med_di" bpmnElement="Lane_Med" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="2200" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Pat_di" bpmnElement="Lane_Pat" isHorizontal="true">
+        <omgdc:Bounds x="190" y="290" width="2200" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartSel_di" bpmnElement="StartSel">
+        <omgdc:Bounds x="282" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RecopilarDocs_di" bpmnElement="RecopilarDocs">
+        <omgdc:Bounds x="430" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DefSociedad_di" bpmnElement="DefSociedad">
+        <omgdc:Bounds x="610" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EnviarFicha_di" bpmnElement="EnviarFicha">
+        <omgdc:Bounds x="790" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GenContrato_di" bpmnElement="GenContrato">
+        <omgdc:Bounds x="970" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RegDeFontana_di" bpmnElement="RegDeFontana">
+        <omgdc:Bounds x="1150" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AnexoHHEE_di" bpmnElement="AnexoHHEE">
+        <omgdc:Bounds x="1330" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OtrosAnexos_di" bpmnElement="OtrosAnexos">
+        <omgdc:Bounds x="1510" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DAS_di" bpmnElement="DAS">
+        <omgdc:Bounds x="1690" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Reglamento_di" bpmnElement="Reglamento">
+        <omgdc:Bounds x="1870" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FirmaTrab_di" bpmnElement="FirmaTrab">
+        <omgdc:Bounds x="2050" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FirmaRepLegal_di" bpmnElement="FirmaRepLegal">
+        <omgdc:Bounds x="2230" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AFP_di" bpmnElement="AFP">
+        <omgdc:Bounds x="250" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AFC_di" bpmnElement="AFC">
+        <omgdc:Bounds x="430" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Mutual_di" bpmnElement="Mutual">
+        <omgdc:Bounds x="610" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Caja_di" bpmnElement="Caja">
+        <omgdc:Bounds x="790" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ConfirmarPrevired_di" bpmnElement="ConfirmarPrevired">
+        <omgdc:Bounds x="970" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RelojControl_di" bpmnElement="RelojControl">
+        <omgdc:Bounds x="1150" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Tutor_di" bpmnElement="Tutor">
+        <omgdc:Bounds x="1330" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndOnboarding_di" bpmnElement="EndOnboarding">
+        <omgdc:Bounds x="1542" y="597" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1494" y="641" width="132" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Ficha_di" bpmnElement="Data_Ficha">
+        <omgdc:Bounds x="462" y="460" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="516" width="132" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Contrato_di" bpmnElement="Data_Contrato">
+        <omgdc:Bounds x="1002" y="460" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="516" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_Expediente_di" bpmnElement="Data_Expediente">
+        <omgdc:Bounds x="2082" y="460" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2034" y="516" width="132" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_TRAB_di" bpmnElement="P_TRAB" isHorizontal="true">
+        <omgdc:Bounds x="1830" y="66" width="540" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="355" />
+        <omgdi:waypoint x="430" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="355" />
+        <omgdi:waypoint x="610" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="710" y="355" />
+        <omgdi:waypoint x="790" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="890" y="355" />
+        <omgdi:waypoint x="970" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="1070" y="355" />
+        <omgdi:waypoint x="1150" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1250" y="355" />
+        <omgdi:waypoint x="1330" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1430" y="355" />
+        <omgdi:waypoint x="1510" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1610" y="355" />
+        <omgdi:waypoint x="1690" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="1790" y="355" />
+        <omgdi:waypoint x="1870" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="1970" y="355" />
+        <omgdi:waypoint x="2050" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="2150" y="355" />
+        <omgdi:waypoint x="2190" y="355" />
+        <omgdi:waypoint x="2190" y="225" />
+        <omgdi:waypoint x="2230" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="fw12_di" bpmnElement="fw12">
+        <omgdi:waypoint x="2280" y="265" />
+        <omgdi:waypoint x="2280" y="745" />
+        <omgdi:waypoint x="300" y="745" />
+        <omgdi:waypoint x="300" y="655" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="350" y="615" />
+        <omgdi:waypoint x="430" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <omgdi:waypoint x="530" y="615" />
+        <omgdi:waypoint x="610" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="710" y="615" />
+        <omgdi:waypoint x="790" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16_di" bpmnElement="f16">
+        <omgdi:waypoint x="890" y="615" />
+        <omgdi:waypoint x="970" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17_di" bpmnElement="f17">
+        <omgdi:waypoint x="1070" y="615" />
+        <omgdi:waypoint x="1150" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f18_di" bpmnElement="f18">
+        <omgdi:waypoint x="1250" y="615" />
+        <omgdi:waypoint x="1330" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f19_di" bpmnElement="f19">
+        <omgdi:waypoint x="1430" y="615" />
+        <omgdi:waypoint x="1542" y="615" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="2100" y="315" />
+        <omgdi:waypoint x="2100" y="126" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1942" y="212.5" width="150" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Ficha_di" bpmnElement="DataOut_Ficha">
+        <omgdi:waypoint x="480" y="395" />
+        <omgdi:waypoint x="480" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Contrato_di" bpmnElement="DataOut_Contrato">
+        <omgdi:waypoint x="1020" y="395" />
+        <omgdi:waypoint x="1020" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_Expediente_di" bpmnElement="DataOut_Expediente">
+        <omgdi:waypoint x="2100" y="395" />
+        <omgdi:waypoint x="2100" y="460" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

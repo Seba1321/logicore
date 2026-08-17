@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PER_v5_A" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PER_A">
+    <participant id="P_A" name="Reclutamiento y selección de personal — MauleMed" processRef="Process_PER_A" />
+    <participant id="P_TRAB" name="Postulantes" />
+    <messageFlow id="m01" name="Oferta de trabajo" sourceRef="PublicarOferta" targetRef="P_TRAB" />
+    <messageFlow id="m02" name="Postulación y currículum" sourceRef="P_TRAB" targetRef="RecepPost" />
+  </collaboration>
+  <process id="Process_PER_A" isExecutable="false">
+    <laneSet id="LaneSet_PER_A">
+      <lane id="Lane_Med" name="Dirección médica — Dr. Retamal y Dr. Valenzuela">
+        <flowNodeRef>EntrevistaMed</flowNodeRef>
+      </lane>
+      <lane id="Lane_Pat" name="Patricia Lobos — Encargada de Personas y RR.HH.">
+        <flowNodeRef>StartVacante</flowNodeRef>
+        <flowNodeRef>DefinirPerfil</flowNodeRef>
+        <flowNodeRef>PublicarOferta</flowNodeRef>
+        <flowNodeRef>RecepPost</flowNodeRef>
+        <flowNodeRef>FiltrarCV</flowNodeRef>
+        <flowNodeRef>Entrevista</flowNodeRef>
+        <flowNodeRef>GwPerfil</flowNodeRef>
+        <flowNodeRef>EndReabrir1</flowNodeRef>
+        <flowNodeRef>Terna</flowNodeRef>
+        <flowNodeRef>EvalPsico</flowNodeRef>
+        <flowNodeRef>GwTipo</flowNodeRef>
+        <flowNodeRef>MergeDest</flowNodeRef>
+        <flowNodeRef>DecidirConjunto</flowNodeRef>
+        <flowNodeRef>GwSeleccion</flowNodeRef>
+        <flowNodeRef>EndReabrir2</flowNodeRef>
+        <flowNodeRef>NotificarSel</flowNodeRef>
+        <flowNodeRef>EndSeleccionado</flowNodeRef>
+      </lane>
+      <lane id="Lane_Liz" name="Liz Bravo — Jefa de Administración y Finanzas">
+        <flowNodeRef>EntrevistaLiz</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartVacante" name="Surge la necesidad de contratación">
+      <outgoing>f01</outgoing>
+    </startEvent>
+    <userTask id="DefinirPerfil" name="Definir el perfil del cargo y aprobar la vacante">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+    </userTask>
+    <sendTask id="PublicarOferta" name="Publicar y difundir la oferta de trabajo">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+    </sendTask>
+    <intermediateCatchEvent id="RecepPost" name="Recepción de postulaciones">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_RecepPost" />
+    </intermediateCatchEvent>
+    <manualTask id="FiltrarCV" name="Revisar los currículums y filtrar por perfil">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+      <dataOutputAssociation id="DataOut_CV">
+        <targetRef>Data_CV</targetRef>
+      </dataOutputAssociation>
+    </manualTask>
+    <userTask id="Entrevista" name="Citar y realizar la entrevista de preselección">
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwPerfil" name="¿Hay candidatos que cumplan el perfil?">
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+      <outgoing>f08</outgoing>
+    </exclusiveGateway>
+    <endEvent id="EndReabrir1" name="Se reabre la convocatoria">
+      <incoming>f07</incoming>
+    </endEvent>
+    <userTask id="Terna" name="Conformar la terna de finalistas">
+      <incoming>f08</incoming>
+      <outgoing>f09</outgoing>
+    </userTask>
+    <userTask id="EvalPsico" name="Aplicar la evaluación psicolaboral cuando se requiere">
+      <incoming>f09</incoming>
+      <outgoing>f10</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwTipo" name="¿El cargo es clínico o administrativo?">
+      <incoming>f10</incoming>
+      <outgoing>f11</outgoing>
+      <outgoing>f12</outgoing>
+    </exclusiveGateway>
+    <exclusiveGateway id="MergeDest" name="Entrevista final realizada">
+      <incoming>f13</incoming>
+      <incoming>f14</incoming>
+      <outgoing>f15</outgoing>
+    </exclusiveGateway>
+    <userTask id="DecidirConjunto" name="Acordar la decisión final entre ambas partes">
+      <incoming>f15</incoming>
+      <outgoing>f16</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwSeleccion" name="¿Se selecciona a un candidato?">
+      <incoming>f16</incoming>
+      <outgoing>f17</outgoing>
+      <outgoing>f18</outgoing>
+    </exclusiveGateway>
+    <endEvent id="EndReabrir2" name="Se reabre la convocatoria">
+      <incoming>f17</incoming>
+    </endEvent>
+    <sendTask id="NotificarSel" name="Notificar la selección y citar para la contratación">
+      <incoming>f18</incoming>
+      <outgoing>f19</outgoing>
+    </sendTask>
+    <endEvent id="EndSeleccionado" name="Candidato seleccionado">
+      <incoming>f19</incoming>
+    </endEvent>
+    <userTask id="EntrevistaMed" name="Realizar la entrevista final al candidato clínico">
+      <incoming>f11</incoming>
+      <outgoing>f13</outgoing>
+    </userTask>
+    <userTask id="EntrevistaLiz" name="Realizar la entrevista final al candidato administrativo">
+      <incoming>f12</incoming>
+      <outgoing>f14</outgoing>
+    </userTask>
+    <dataObjectReference id="Data_CV" name="Currículums recibidos · correo" dataObjectRef="DataObject_CV" />
+    <dataObject id="DataObject_CV" />
+    <sequenceFlow id="f01" sourceRef="StartVacante" targetRef="DefinirPerfil" />
+    <sequenceFlow id="f02" sourceRef="DefinirPerfil" targetRef="PublicarOferta" />
+    <sequenceFlow id="f03" sourceRef="PublicarOferta" targetRef="RecepPost" />
+    <sequenceFlow id="f04" sourceRef="RecepPost" targetRef="FiltrarCV" />
+    <sequenceFlow id="f05" sourceRef="FiltrarCV" targetRef="Entrevista" />
+    <sequenceFlow id="f06" sourceRef="Entrevista" targetRef="GwPerfil" />
+    <sequenceFlow id="f07" name="NO" sourceRef="GwPerfil" targetRef="EndReabrir1" />
+    <sequenceFlow id="f08" name="SÍ" sourceRef="GwPerfil" targetRef="Terna" />
+    <sequenceFlow id="f09" sourceRef="Terna" targetRef="EvalPsico" />
+    <sequenceFlow id="f10" sourceRef="EvalPsico" targetRef="GwTipo" />
+    <sequenceFlow id="f11" name="Clínico" sourceRef="GwTipo" targetRef="EntrevistaMed" />
+    <sequenceFlow id="f12" name="Administrativo" sourceRef="GwTipo" targetRef="EntrevistaLiz" />
+    <sequenceFlow id="f13" sourceRef="EntrevistaMed" targetRef="MergeDest" />
+    <sequenceFlow id="f14" sourceRef="EntrevistaLiz" targetRef="MergeDest" />
+    <sequenceFlow id="f15" sourceRef="MergeDest" targetRef="DecidirConjunto" />
+    <sequenceFlow id="f16" sourceRef="DecidirConjunto" targetRef="GwSeleccion" />
+    <sequenceFlow id="f17" name="NO" sourceRef="GwSeleccion" targetRef="EndReabrir2" />
+    <sequenceFlow id="f18" name="SÍ" sourceRef="GwSeleccion" targetRef="NotificarSel" />
+    <sequenceFlow id="f19" sourceRef="NotificarSel" targetRef="EndSeleccionado" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PER_A">
+      <bpmndi:BPMNShape id="P_A_di" bpmnElement="P_A" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="2950" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Med_di" bpmnElement="Lane_Med" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="2920" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Pat_di" bpmnElement="Lane_Pat" isHorizontal="true">
+        <omgdc:Bounds x="190" y="290" width="2920" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Liz_di" bpmnElement="Lane_Liz" isHorizontal="true">
+        <omgdc:Bounds x="190" y="550" width="2920" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartVacante_di" bpmnElement="StartVacante">
+        <omgdc:Bounds x="282" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DefinirPerfil_di" bpmnElement="DefinirPerfil">
+        <omgdc:Bounds x="430" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="PublicarOferta_di" bpmnElement="PublicarOferta">
+        <omgdc:Bounds x="610" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RecepPost_di" bpmnElement="RecepPost">
+        <omgdc:Bounds x="822" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FiltrarCV_di" bpmnElement="FiltrarCV">
+        <omgdc:Bounds x="970" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Entrevista_di" bpmnElement="Entrevista">
+        <omgdc:Bounds x="1150" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwPerfil_di" bpmnElement="GwPerfil" isMarkerVisible="true">
+        <omgdc:Bounds x="1355" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndReabrir1_di" bpmnElement="EndReabrir1">
+        <omgdc:Bounds x="1362" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Terna_di" bpmnElement="Terna">
+        <omgdc:Bounds x="1510" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EvalPsico_di" bpmnElement="EvalPsico">
+        <omgdc:Bounds x="1690" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwTipo_di" bpmnElement="GwTipo" isMarkerVisible="true">
+        <omgdc:Bounds x="1895" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1955" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MergeDest_di" bpmnElement="MergeDest" isMarkerVisible="true">
+        <omgdc:Bounds x="2255" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2315" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DecidirConjunto_di" bpmnElement="DecidirConjunto">
+        <omgdc:Bounds x="2410" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwSeleccion_di" bpmnElement="GwSeleccion" isMarkerVisible="true">
+        <omgdc:Bounds x="2615" y="330" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2574" y="294" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndReabrir2_di" bpmnElement="EndReabrir2">
+        <omgdc:Bounds x="2622" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2574" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="NotificarSel_di" bpmnElement="NotificarSel">
+        <omgdc:Bounds x="2770" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndSeleccionado_di" bpmnElement="EndSeleccionado">
+        <omgdc:Bounds x="2982" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2934" y="381" width="132" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EntrevistaMed_di" bpmnElement="EntrevistaMed">
+        <omgdc:Bounds x="2050" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EntrevistaLiz_di" bpmnElement="EntrevistaLiz">
+        <omgdc:Bounds x="2050" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Data_CV_di" bpmnElement="Data_CV">
+        <omgdc:Bounds x="1002" y="460" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="516" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_TRAB_di" bpmnElement="P_TRAB" isHorizontal="true">
+        <omgdc:Bounds x="570" y="66" width="720" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="355" />
+        <omgdi:waypoint x="430" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="355" />
+        <omgdi:waypoint x="610" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="710" y="355" />
+        <omgdi:waypoint x="822" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="858" y="355" />
+        <omgdi:waypoint x="970" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="1070" y="355" />
+        <omgdi:waypoint x="1150" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1250" y="355" />
+        <omgdi:waypoint x="1355" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1380" y="380" />
+        <omgdi:waypoint x="1380" y="467" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1389" y="415.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1405" y="355" />
+        <omgdi:waypoint x="1510" y="355" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1443.5" y="333" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="1610" y="355" />
+        <omgdi:waypoint x="1690" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="1790" y="355" />
+        <omgdi:waypoint x="1895" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="1920" y="330" />
+        <omgdi:waypoint x="1920" y="225" />
+        <omgdi:waypoint x="2050" y="225" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1929" y="269.5" width="49.2" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <omgdi:waypoint x="1920" y="380" />
+        <omgdi:waypoint x="1920" y="615" />
+        <omgdi:waypoint x="2050" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1929" y="489.5" width="88.4" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="2150" y="225" />
+        <omgdi:waypoint x="2280" y="225" />
+        <omgdi:waypoint x="2280" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <omgdi:waypoint x="2150" y="615" />
+        <omgdi:waypoint x="2280" y="615" />
+        <omgdi:waypoint x="2280" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="2305" y="355" />
+        <omgdi:waypoint x="2410" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16_di" bpmnElement="f16">
+        <omgdi:waypoint x="2510" y="355" />
+        <omgdi:waypoint x="2615" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17_di" bpmnElement="f17">
+        <omgdi:waypoint x="2640" y="380" />
+        <omgdi:waypoint x="2640" y="467" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2649" y="415.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f18_di" bpmnElement="f18">
+        <omgdi:waypoint x="2665" y="355" />
+        <omgdi:waypoint x="2770" y="355" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2703.5" y="333" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f19_di" bpmnElement="f19">
+        <omgdi:waypoint x="2870" y="355" />
+        <omgdi:waypoint x="2982" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="660" y="315" />
+        <omgdi:waypoint x="660" y="126" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="668" y="212.5" width="105.2" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m02_di" bpmnElement="m02">
+        <omgdi:waypoint x="840" y="126" />
+        <omgdi:waypoint x="840" y="337" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="848" y="223.5" width="144.4" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOut_CV_di" bpmnElement="DataOut_CV">
+        <omgdi:waypoint x="1020" y="395" />
+        <omgdi:waypoint x="1020" y="460" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -38,7 +38,48 @@
       "responsable_cliente": "Patricia Lobos",
       "descripcion": "Ciclo de vida del personal en cinco subprocesos: reclutamiento, contratación, control de asistencia, permisos y licencias, y desvinculación.",
       "orden": 2,
-      "bpmn": [],
+      "bpmn": [
+        {
+          "nombre": "A · Reclutamiento y Selección",
+          "descripcion": "Desde la necesidad de contratar hasta la elección del postulante.",
+          "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-A-Reclutamiento-y-Seleccion.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Ciclo-de-Vida-del-Personal-A-Reclutamiento-y-Seleccion-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "B · Contratación e Incorporación",
+          "descripcion": "Desde la elección del postulante hasta su incorporación formal.",
+          "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-B-Contratacion-e-Incorporacion.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Ciclo-de-Vida-del-Personal-B-Contratacion-e-Incorporacion-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "C · Control de Asistencia y Cierre Mensual",
+          "descripcion": "Registro diario de asistencia y cierre mensual como insumo de remuneraciones.",
+          "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-C-Asistencia-y-Cierre-Mensual.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Ciclo-de-Vida-del-Personal-C-Asistencia-y-Cierre-Mensual-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "D · Permisos, Feriados y Licencias Médicas",
+          "descripcion": "Solicitud, autorización y registro de ausencias del personal.",
+          "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-D-Permisos-Feriados-y-Licencias.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Ciclo-de-Vida-del-Personal-D-Permisos-Feriados-y-Licencias-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "E · Desvinculación y Finiquito",
+          "descripcion": "Desde la decisión de término hasta el finiquito firmado y registrado.",
+          "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-E-Desvinculacion-y-Finiquito.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Ciclo-de-Vida-del-Personal-E-Desvinculacion-y-Finiquito-preview.svg",
+          "preview_url": null
+        }
+      ],
       "informes": [
         {
           "nombre": "Informe final — Ciclo de Vida del Personal",
@@ -127,13 +168,54 @@
       "slug": "planificacion-control-financiero-diario",
       "nombre": "Planificación y Control Financiero Diario",
       "area": "Administración y Finanzas",
-      "estado": "analisis",
+      "estado": "finalizado",
       "responsable_methodical": "José Tomás Robert",
       "responsable_cliente": "Liz Bravo",
       "descripcion": "Ciclo financiero en cuatro subprocesos: facturación a instituciones, compras y pago a proveedores, flujo de caja y control presupuestario, y cierre y cuadratura de caja diaria.",
       "orden": 5,
-      "bpmn": [],
-      "informes": []
+      "bpmn": [
+        {
+          "nombre": "A · Facturación a Instituciones",
+          "descripcion": "Cobro a FONASA, isapres e instituciones de las prestaciones realizadas.",
+          "archivo_path": "bpmn/Planificacion-y-Control-Financiero-A-Facturacion.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Planificacion-y-Control-Financiero-A-Facturacion-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "B · Compras y Pago a Proveedores",
+          "descripcion": "Desde el requerimiento de compra hasta el pago al proveedor.",
+          "archivo_path": "bpmn/Planificacion-y-Control-Financiero-B-Compras-y-Pagos.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Planificacion-y-Control-Financiero-B-Compras-y-Pagos-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "C · Flujo de Caja y Control Presupuestario",
+          "descripcion": "Elaboración del flujo de caja diario y control del presupuesto.",
+          "archivo_path": "bpmn/Planificacion-y-Control-Financiero-C-Flujo-de-Caja-y-Presupuesto.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Planificacion-y-Control-Financiero-C-Flujo-de-Caja-y-Presupuesto-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "D · Cierre y Cuadratura de Caja Diaria",
+          "descripcion": "Cierre de caja por sucursal, validación de tesorería y corrección de diferencias.",
+          "archivo_path": "bpmn/Planificacion-y-Control-Financiero-D-Cierre-y-Cuadratura-de-Caja.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Planificacion-y-Control-Financiero-D-Cierre-y-Cuadratura-de-Caja-preview.svg",
+          "preview_url": null
+        }
+      ],
+      "informes": [
+        {
+          "nombre": "Informe final — Planificación y Control Financiero",
+          "descripcion": "Capítulo 5 del informe: los cuatro subprocesos con SIPOC, RECI y BPMN propios, evaluación Hammer por subproceso y plan de transformación.",
+          "archivo_path": "informes/05-planificacion-financiera.pdf",
+          "archivo_url": null,
+          "orden": 1
+        }
+      ]
     }
   ]
 }

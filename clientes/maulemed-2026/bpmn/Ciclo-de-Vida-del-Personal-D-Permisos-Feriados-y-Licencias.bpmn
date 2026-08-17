@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PER_v5_D" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_PER_D">
+    <participant id="P_D" name="Permisos, feriados y licencias médicas — MauleMed" processRef="Process_PER_D" />
+    <participant id="P_INST" name="Isapres, Fonasa y caja de compensación" />
+    <messageFlow id="m01" name="Licencia a tramitar" sourceRef="TramitarLicencia" targetRef="P_INST" />
+  </collaboration>
+  <process id="Process_PER_D" isExecutable="false">
+    <laneSet id="LaneSet_PER_D">
+      <lane id="Lane_Pat" name="Patricia Lobos — Encargada de Personas y RR.HH.">
+        <flowNodeRef>StartPermiso</flowNodeRef>
+        <flowNodeRef>CoordinarCobertura</flowNodeRef>
+        <flowNodeRef>GwFeriado</flowNodeRef>
+        <flowNodeRef>VerificarSaldo</flowNodeRef>
+        <flowNodeRef>AutorizarFeriado</flowNodeRef>
+        <flowNodeRef>EndFeriado</flowNodeRef>
+        <flowNodeRef>AutorizarPermiso</flowNodeRef>
+        <flowNodeRef>EndPermiso</flowNodeRef>
+        <flowNodeRef>StartRevision</flowNodeRef>
+        <flowNodeRef>RevisarPlataformas</flowNodeRef>
+        <flowNodeRef>GwLicFalta</flowNodeRef>
+        <flowNodeRef>ContactarTrabajador</flowNodeRef>
+        <flowNodeRef>EndEspera</flowNodeRef>
+        <flowNodeRef>EndSinPendientes</flowNodeRef>
+        <flowNodeRef>StartLicencia</flowNodeRef>
+        <flowNodeRef>TramitarLicencia</flowNodeRef>
+        <flowNodeRef>RegistrarLicencia</flowNodeRef>
+        <flowNodeRef>EndLicencia</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="StartPermiso" name="Solicitud de permiso o feriado legal">
+      <outgoing>f01</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_StartPermiso" />
+    </startEvent>
+    <userTask id="CoordinarCobertura" name="Coordinar la cobertura del turno">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwFeriado" name="¿Es feriado legal?">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+      <outgoing>f04</outgoing>
+    </exclusiveGateway>
+    <manualTask id="VerificarSaldo" name="Verificar el saldo de feriado y los días progresivos">
+      <incoming>f03</incoming>
+      <outgoing>f05</outgoing>
+    </manualTask>
+    <userTask id="AutorizarFeriado" name="Autorizar y registrar el feriado">
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+    </userTask>
+    <endEvent id="EndFeriado" name="Feriado autorizado y registrado">
+      <incoming>f06</incoming>
+    </endEvent>
+    <userTask id="AutorizarPermiso" name="Autorizar y registrar el permiso">
+      <incoming>f04</incoming>
+      <outgoing>f07</outgoing>
+    </userTask>
+    <endEvent id="EndPermiso" name="Permiso autorizado y registrado">
+      <incoming>f07</incoming>
+    </endEvent>
+    <startEvent id="StartRevision" name="Tres veces por semana (revisión de licencias)">
+      <outgoing>f08</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_StartRevision" />
+    </startEvent>
+    <userTask id="RevisarPlataformas" name="Revisar las licencias en las plataformas del empleador">
+      <incoming>f08</incoming>
+      <outgoing>f09</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwLicFalta" name="¿Falta alguna licencia?">
+      <incoming>f09</incoming>
+      <outgoing>f10</outgoing>
+      <outgoing>f11</outgoing>
+    </exclusiveGateway>
+    <sendTask id="ContactarTrabajador" name="Contactar al trabajador">
+      <incoming>f10</incoming>
+      <outgoing>f12</outgoing>
+    </sendTask>
+    <endEvent id="EndEspera" name="Queda a la espera de la próxima revisión">
+      <incoming>f12</incoming>
+    </endEvent>
+    <endEvent id="EndSinPendientes" name="Sin licencias pendientes">
+      <incoming>f11</incoming>
+    </endEvent>
+    <startEvent id="StartLicencia" name="Recepción de una licencia médica">
+      <outgoing>f13</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_StartLicencia" />
+    </startEvent>
+    <sendTask id="TramitarLicencia" name="Tramitar la licencia ante la caja, la isapre o Fonasa">
+      <incoming>f13</incoming>
+      <outgoing>f14</outgoing>
+    </sendTask>
+    <userTask id="RegistrarLicencia" name="Registrar la licencia en el control de asistencia">
+      <incoming>f14</incoming>
+      <outgoing>f15</outgoing>
+    </userTask>
+    <endEvent id="EndLicencia" name="Licencia tramitada y registrada">
+      <incoming>f15</incoming>
+    </endEvent>
+    <sequenceFlow id="f01" sourceRef="StartPermiso" targetRef="CoordinarCobertura" />
+    <sequenceFlow id="f02" sourceRef="CoordinarCobertura" targetRef="GwFeriado" />
+    <sequenceFlow id="f03" name="SÍ" sourceRef="GwFeriado" targetRef="VerificarSaldo" />
+    <sequenceFlow id="f04" name="NO" sourceRef="GwFeriado" targetRef="AutorizarPermiso" />
+    <sequenceFlow id="f05" sourceRef="VerificarSaldo" targetRef="AutorizarFeriado" />
+    <sequenceFlow id="f06" sourceRef="AutorizarFeriado" targetRef="EndFeriado" />
+    <sequenceFlow id="f07" sourceRef="AutorizarPermiso" targetRef="EndPermiso" />
+    <sequenceFlow id="f08" sourceRef="StartRevision" targetRef="RevisarPlataformas" />
+    <sequenceFlow id="f09" sourceRef="RevisarPlataformas" targetRef="GwLicFalta" />
+    <sequenceFlow id="f10" name="SÍ" sourceRef="GwLicFalta" targetRef="ContactarTrabajador" />
+    <sequenceFlow id="f11" name="NO" sourceRef="GwLicFalta" targetRef="EndSinPendientes" />
+    <sequenceFlow id="f12" sourceRef="ContactarTrabajador" targetRef="EndEspera" />
+    <sequenceFlow id="f13" sourceRef="StartLicencia" targetRef="TramitarLicencia" />
+    <sequenceFlow id="f14" sourceRef="TramitarLicencia" targetRef="RegistrarLicencia" />
+    <sequenceFlow id="f15" sourceRef="RegistrarLicencia" targetRef="EndLicencia" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_PER_D">
+      <bpmndi:BPMNShape id="P_D_di" bpmnElement="P_D" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="1150" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Pat_di" bpmnElement="Lane_Pat" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="1120" height="650" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartPermiso_di" bpmnElement="StartPermiso">
+        <omgdc:Bounds x="282" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="251" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CoordinarCobertura_di" bpmnElement="CoordinarCobertura">
+        <omgdc:Bounds x="430" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwFeriado_di" bpmnElement="GwFeriado" isMarkerVisible="true">
+        <omgdc:Bounds x="635" y="200" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="604.6" y="178" width="110.8" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="VerificarSaldo_di" bpmnElement="VerificarSaldo">
+        <omgdc:Bounds x="790" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AutorizarFeriado_di" bpmnElement="AutorizarFeriado">
+        <omgdc:Bounds x="970" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndFeriado_di" bpmnElement="EndFeriado">
+        <omgdc:Bounds x="1182" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1134" y="251" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="AutorizarPermiso_di" bpmnElement="AutorizarPermiso">
+        <omgdc:Bounds x="790" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndPermiso_di" bpmnElement="EndPermiso">
+        <omgdc:Bounds x="1002" y="337" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="381" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartRevision_di" bpmnElement="StartRevision">
+        <omgdc:Bounds x="282" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RevisarPlataformas_di" bpmnElement="RevisarPlataformas">
+        <omgdc:Bounds x="430" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwLicFalta_di" bpmnElement="GwLicFalta" isMarkerVisible="true">
+        <omgdc:Bounds x="635" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="438" width="132" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ContactarTrabajador_di" bpmnElement="ContactarTrabajador">
+        <omgdc:Bounds x="790" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEspera_di" bpmnElement="EndEspera">
+        <omgdc:Bounds x="1002" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndSinPendientes_di" bpmnElement="EndSinPendientes">
+        <omgdc:Bounds x="822" y="597" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="641" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartLicencia_di" bpmnElement="StartLicencia">
+        <omgdc:Bounds x="282" y="727" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="771" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TramitarLicencia_di" bpmnElement="TramitarLicencia">
+        <omgdc:Bounds x="430" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RegistrarLicencia_di" bpmnElement="RegistrarLicencia">
+        <omgdc:Bounds x="610" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndLicencia_di" bpmnElement="EndLicencia">
+        <omgdc:Bounds x="822" y="727" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="771" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_INST_di" bpmnElement="P_INST" isHorizontal="true">
+        <omgdc:Bounds x="390" y="844" width="360" height="60" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="225" />
+        <omgdi:waypoint x="430" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="225" />
+        <omgdi:waypoint x="635" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="685" y="225" />
+        <omgdi:waypoint x="790" y="225" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="723.5" y="203" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="660" y="250" />
+        <omgdi:waypoint x="660" y="355" />
+        <omgdi:waypoint x="790" y="355" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="669" y="294.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="890" y="225" />
+        <omgdi:waypoint x="970" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1070" y="225" />
+        <omgdi:waypoint x="1182" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="890" y="355" />
+        <omgdi:waypoint x="1002" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="318" y="485" />
+        <omgdi:waypoint x="430" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="530" y="485" />
+        <omgdi:waypoint x="635" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="685" y="485" />
+        <omgdi:waypoint x="790" y="485" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="723.5" y="463" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="660" y="510" />
+        <omgdi:waypoint x="660" y="615" />
+        <omgdi:waypoint x="822" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="669" y="554.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <omgdi:waypoint x="890" y="485" />
+        <omgdi:waypoint x="1002" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="318" y="745" />
+        <omgdi:waypoint x="430" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <omgdi:waypoint x="530" y="745" />
+        <omgdi:waypoint x="610" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="710" y="745" />
+        <omgdi:waypoint x="822" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="480" y="785" />
+        <omgdi:waypoint x="480" y="844" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="488" y="806.5" width="116.4" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
