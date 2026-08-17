@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { CornerTicks, CountUp } from "@/components/portal/technical";
 import {
@@ -21,7 +21,7 @@ const STATUS_META: Record<
     label: "Completada",
     marker: "✓",
     segment: "bg-emerald-400",
-    node: "border-emerald-300 bg-emerald-400",
+    node: "bg-emerald-400 text-[#04102b] shadow-[0_0_0_4px_rgba(5,16,38,0.9)]",
     dot: "bg-emerald-400",
     text: "text-emerald-300",
   },
@@ -29,15 +29,17 @@ const STATUS_META: Record<
     label: "En curso",
     marker: "▸",
     segment: "bg-sky-300",
-    node: "border-sky-200 bg-sky-300 ring-4 ring-sky-300/25",
+    node: "bg-sky-300 text-[#04102b] shadow-[0_0_0_4px_rgba(5,16,38,0.9),0_0_18px_rgba(125,211,252,0.55)]",
     dot: "bg-sky-300",
     text: "text-sky-300",
   },
   proxima: {
     label: "Próxima",
     marker: "",
-    segment: "bg-white/20",
-    node: "border-white/40 bg-transparent",
+    // Hueco de verdad: el relleno es el mismo fondo del canal, así el chip lee
+    // como un hito todavía sin cumplir y no como un disco apagado.
+    segment: "bg-transparent",
+    node: "bg-[#050f26] text-blue-100/45 ring-1 ring-inset ring-white/20 shadow-[0_0_0_4px_rgba(5,16,38,0.9)]",
     dot: "bg-white/40",
     text: "text-blue-100/50",
   },
@@ -104,42 +106,40 @@ export const PlanTimeline = ({
         )}
       </div>
 
+      {/* El porcentaje es la lectura de la cápsula, así que va pegado a ella y
+          no en una barra propia al pie del panel. */}
+      <div className="mt-7 flex items-end gap-4">
+        <p className="font-display text-6xl font-semibold leading-none tabular-nums text-white">
+          <CountUp value={progress} suffix="%" />
+        </p>
+        <div className="pb-1">
+          <p className="font-display text-[11px] font-medium uppercase tracking-[0.12em] text-blue-100/70">
+            Avance según plan
+          </p>
+          {calendar?.todayInRange && (
+            <p className="mt-1 font-display text-[11px] font-medium uppercase tracking-[0.08em] text-blue-100/55">
+              Día {calendar.dayIndex} de {calendar.totalDays}
+            </p>
+          )}
+        </div>
+      </div>
+
       {calendar && phases.length > 0 && (
         <>
           <Ribbon range={calendar.range} phases={phases} todayPosition={calendar.todayPosition} />
           <PhaseLegend phases={phases} />
         </>
       )}
-
-      <div className="mt-8 flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex items-end gap-4">
-          <p className="font-display text-6xl font-semibold leading-none tabular-nums text-white">
-            <CountUp value={progress} suffix="%" />
-          </p>
-          <div className="pb-1">
-            <p className="font-display text-[11px] font-medium uppercase tracking-[0.12em] text-blue-100/70">
-              Avance según plan
-            </p>
-            {calendar?.todayInRange && (
-              <p className="mt-1 font-display text-[11px] font-medium uppercase tracking-[0.08em] text-blue-100/55">
-                Día {calendar.dayIndex} de {calendar.totalDays}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="h-1.5 w-full self-center rounded-full bg-white/15 sm:max-w-xs sm:self-end">
-          <motion.div
-            className="h-1.5 rounded-full bg-blue-400"
-            initial={{ width: 0 }}
-            whileInView={{ width: `${progress}%` }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-          />
-        </div>
-      </div>
     </div>
   );
 };
+
+// La cinta es una cápsula hundida: el riel vive en un canal más oscuro que el
+// panel, los tramos cumplidos lo rellenan y cada fase se marca con un chip que
+// se sienta encima. Los chips van al centro de su porcentaje, así que la
+// cápsula lleva padding lateral igual a su radio para que el primero y el
+// último no se salgan del canal.
+const NODE_RADIUS = "0.875rem"; // la mitad de un chip de 28px
 
 const Ribbon = ({
   range,
@@ -151,10 +151,11 @@ const Ribbon = ({
   todayPosition: number | null;
 }) => {
   const ticks = getMonthTicks(range);
+  const reduce = useReducedMotion();
 
   return (
-    <div className="mt-8">
-      {/* Ticks de meses */}
+    <div className="mt-8" style={{ paddingInline: NODE_RADIUS }}>
+      {/* Ticks de meses, alineados al mismo eje que los chips */}
       <div className="relative mb-3 h-3">
         {ticks.map((tick) => (
           <span
@@ -167,40 +168,83 @@ const Ribbon = ({
         ))}
       </div>
 
-      {/* Cinta: baseline + segmentos proporcionales + nodos + marcador de hoy */}
-      <div className="relative mx-1.5 h-4">
-        <div className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-white/10" />
+      <div
+        className="relative rounded-full bg-[#050f26] py-4 ring-1 ring-inset ring-white/[0.07]"
+        style={{ marginInline: `-${NODE_RADIUS}`, paddingInline: NODE_RADIUS }}
+      >
+        <div className="relative h-3.5">
+          {/* Canal vacío */}
+          <div className="absolute inset-x-0 top-1/2 h-3.5 -translate-y-1/2 rounded-full bg-white/[0.06]" />
 
-        {phases.map((phase, index) => {
-          const startPos = pct(phase.start, range);
-          const endPos = index < phases.length - 1 ? pct(phases[index + 1].start, range) : 100;
-          const meta = STATUS_META[phase.status];
-          return (
+          {/* Tramos cumplidos */}
+          {phases.map((phase, index) => {
+            const startPos = pct(phase.start, range);
+            const trackEnd = index < phases.length - 1 ? pct(phases[index + 1].start, range) : 100;
+            // La fase en curso se rellena solo hasta hoy: llenarla hasta el
+            // inicio de la siguiente declararía un avance que aún no ocurre.
+            const endPos =
+              phase.status === "en_curso" && todayPosition !== null
+                ? Math.min(trackEnd, Math.max(startPos, todayPosition))
+                : trackEnd;
+            const width = Math.max(0, endPos - startPos);
+            const meta = STATUS_META[phase.status];
+
+            if (phase.status === "proxima") return null;
+
+            return (
+              <motion.div
+                key={phase.fase}
+                className={`absolute top-1/2 h-3.5 -translate-y-1/2 rounded-full ${meta.segment}`}
+                style={{ left: `${startPos}%` }}
+                initial={reduce ? false : { width: 0 }}
+                whileInView={{ width: `${width}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: index * 0.09, ease: "easeOut" }}
+              >
+                {/* Cabeza brillante solo en el tramo que efectivamente llega a
+                    hoy. Cuando dos fases se traslapan, la que corta antes
+                    termina en un límite de fase, no en el avance real. */}
+                {phase.status === "en_curso" &&
+                  todayPosition !== null &&
+                  todayPosition <= trackEnd && (
+                    <span className="absolute right-0 top-1/2 h-3.5 w-1 -translate-y-1/2 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]" />
+                  )}
+              </motion.div>
+            );
+          })}
+
+          {/* Chips de fase */}
+          {phases.map((phase, index) => {
+            const meta = STATUS_META[phase.status];
+            return (
+              <motion.span
+                key={`node-${phase.fase}`}
+                aria-hidden
+                // Achicados en pantallas angostas: dos fases que empiezan con
+                // pocos días de diferencia quedan a milímetros en el eje.
+                className={`absolute top-1/2 z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full font-display text-[10px] font-bold leading-none sm:h-7 sm:w-7 sm:text-xs ${meta.node}`}
+                style={{ left: `${pct(phase.start, range)}%` }}
+                initial={reduce ? false : { scale: 0.4, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: 0.12 + index * 0.09, ease: "backOut" }}
+              >
+                {phase.status === "completada" ? "✓" : String(index + 1).padStart(2, "0")}
+              </motion.span>
+            );
+          })}
+
+          {/* "Hoy" se marca sobre el canal, no cruzándolo: dentro del canal ese
+              punto ya lo señala la cabeza brillante del tramo en curso. */}
+          {todayPosition !== null && (
             <div
-              key={phase.fase}
-              className={`absolute top-1/2 h-1 -translate-y-1/2 rounded-full ${meta.segment}`}
-              style={{ left: `${startPos}%`, width: `${Math.max(0, endPos - startPos)}%` }}
-            />
-          );
-        })}
-
-        {phases.map((phase) => {
-          const meta = STATUS_META[phase.status];
-          return (
-            <span
-              key={`node-${phase.fase}`}
-              className={`absolute top-1/2 z-10 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 ${meta.node}`}
-              style={{ left: `${pct(phase.start, range)}%` }}
-            />
-          );
-        })}
-
-        {todayPosition !== null && (
-          <div className="absolute -top-1 bottom-[-0.9rem] z-20" style={{ left: `${todayPosition}%` }}>
-            <div className="mx-auto h-full w-px bg-red-400/80" />
-            <span className="absolute -top-1 left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-red-400 ring-2 ring-red-400/30" />
-          </div>
-        )}
+              className="absolute bottom-full z-20 mb-1 h-3 w-px -translate-x-px bg-red-400/60"
+              style={{ left: `${todayPosition}%` }}
+            >
+              <span className="absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-red-400" />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

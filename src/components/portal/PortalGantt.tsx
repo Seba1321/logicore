@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { TIMING_META, TimingPill, EmptyPanel } from "@/components/portal/ui";
 import {
@@ -13,6 +13,7 @@ import {
 import type { PortalTask } from "@/lib/supabase";
 
 export const PortalGantt = ({ tasks, today }: { tasks: PortalTask[]; today: number }) => {
+  const reduce = useReducedMotion();
   const calendar = getPlanCalendar(tasks, today);
   const groupedTasks = tasks.reduce<Record<string, PortalTask[]>>((groups, task) => {
     const phase = task.fase || "General";
@@ -93,21 +94,26 @@ export const PortalGantt = ({ tasks, today }: { tasks: PortalTask[]; today: numb
                         {calendar.todayPosition !== null && (
                           <div className="absolute inset-y-0 w-px bg-red-500" style={{ left: `${calendar.todayPosition}%` }} />
                         )}
-                        <div className="relative h-10 rounded-sm bg-slate-50">
+                        {/* Mismo instrumento que la cápsula del plan: canal
+                            hundido y relleno redondeado. Sin la cabeza
+                            brillante de la cápsula: sobre un canal casi blanco
+                            no se vería, y el corte entre relleno y canal ya
+                            marca dónde va el avance. */}
+                        <div className="relative h-10">
                           <div
-                            className="absolute inset-y-1 overflow-hidden rounded-sm border border-slate-200 bg-slate-100"
+                            className="absolute inset-y-2 overflow-hidden rounded-full bg-slate-100 ring-1 ring-inset ring-slate-200/80"
                             style={{ left: `${position.left}%`, width: `${position.width}%` }}
                           >
                             {progress > 0 ? (
                               <motion.div
-                                className={`h-full rounded-sm ${meta.bar}`}
-                                initial={{ width: 0 }}
+                                className={`h-full rounded-full ${meta.bar}`}
+                                initial={reduce ? false : { width: 0 }}
                                 whileInView={{ width: `${progress}%` }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
                               />
                             ) : (
-                              <div className={`h-full w-2 rounded-sm ${meta.dot}`} />
+                              <div className={`h-full w-1.5 rounded-full ${meta.dot}`} />
                             )}
                           </div>
                         </div>
