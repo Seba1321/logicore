@@ -31,6 +31,18 @@ export const ProjectSection = ({ project, today }: { project: PortalProject; tod
   );
 };
 
+// Resumen de lo publicado en un proceso. Sin esto, uno con cinco diagramas se
+// ve idéntico a uno con uno solo.
+const summarizeDeliverables = (process: PortalProcess): string => {
+  const parts = [
+    (process.bpmn ?? []).length && `${process.bpmn.length} BPMN`,
+    (process.hallazgos ?? []).length && `${process.hallazgos.length} HAMMER`,
+    (process.informes ?? []).length && "Informe",
+  ].filter(Boolean);
+
+  return parts.length ? parts.join(" · ") : "Sin entregables publicados";
+};
+
 const ProcessList = ({ processes }: { processes: PortalProcess[] }) => (
   <section>
     <h3 className="font-display text-2xl font-semibold tracking-tight">Procesos levantados</h3>
@@ -42,6 +54,9 @@ const ProcessList = ({ processes }: { processes: PortalProcess[] }) => (
               <div>
                 <p className="font-semibold">{process.nombre}</p>
                 <p className="mt-1 text-xs text-slate-600">{process.area ?? "Sin área"}</p>
+                <p className="mt-2 font-display text-[11px] tracking-[0.08em] text-slate-500">
+                  {summarizeDeliverables(process)}
+                </p>
               </div>
               <ProcessStagePill stage={deriveProcessStage(process)} />
             </div>

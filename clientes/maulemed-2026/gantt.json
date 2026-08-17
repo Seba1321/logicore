@@ -30,112 +30,132 @@
       "fase": "Levantamiento",
       "titulo": "Sesiones de levantamiento con dueños de proceso",
       "descripcion": "Ejecución de sesiones con cada dueño de proceso para entender flujo actual, roles, entradas, salidas, sistemas, decisiones y principales puntos de dolor.",
-      "estado": "en_desarrollo",
+      "estado": "completada",
       "responsable": "Cliente + Methodical",
       "fecha_inicio": "2026-06-15",
       "fecha_fin": "2026-07-17",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 3,
       "orden": 2,
-      "dependencias": ["reunion-inicial-agenda"]
+      "dependencias": [
+        "reunion-inicial-agenda"
+      ]
     },
     {
       "id_git": "bpmn-iniciales",
       "fase": "Modelamiento BPMN y diagnóstico",
       "titulo": "Modelamiento BPMN inicial",
       "descripcion": "Construcción de los primeros diagramas BPMN a partir de las sesiones de levantamiento, incluyendo abastecimiento e inventario, ciclo de vida del personal y planificación financiera.",
-      "estado": "en_desarrollo",
+      "estado": "completada",
       "responsable": "Methodical",
       "fecha_inicio": "2026-07-06",
       "fecha_fin": "2026-07-24",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 2,
       "orden": 3,
-      "dependencias": ["sesiones-levantamiento-duenos"]
+      "dependencias": [
+        "sesiones-levantamiento-duenos"
+      ]
     },
     {
       "id_git": "analisis-hammer",
       "fase": "Modelamiento BPMN y diagnóstico",
       "titulo": "Análisis Hammer y diagnóstico de procesos",
       "descripcion": "Aplicación del enfoque Hammer de reingeniería para cuestionar supuestos, identificar quiebres, reprocesos, actividades sin valor y oportunidades de simplificación o rediseño.",
-      "estado": "pendiente",
+      "estado": "completada",
       "responsable": "Methodical",
       "fecha_inicio": "2026-07-06",
       "fecha_fin": "2026-08-07",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 2.5,
       "orden": 4,
-      "dependencias": ["sesiones-levantamiento-duenos"]
+      "dependencias": [
+        "sesiones-levantamiento-duenos"
+      ]
     },
     {
       "id_git": "modelamiento-procesos",
       "fase": "Modelamiento BPMN y diagnóstico",
       "titulo": "Modelamiento de procesos priorizados",
       "descripcion": "Modelamiento detallado de procesos priorizados, consolidando BPMN, roles, actividades, decisiones, puntos de control y hallazgos levantados con MauleMed.",
-      "estado": "pendiente",
+      "estado": "completada",
       "responsable": "Methodical",
       "fecha_inicio": "2026-07-06",
       "fecha_fin": "2026-08-07",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 3,
       "orden": 5,
-      "dependencias": ["sesiones-levantamiento-duenos", "bpmn-iniciales", "analisis-hammer"]
+      "dependencias": [
+        "sesiones-levantamiento-duenos",
+        "bpmn-iniciales",
+        "analisis-hammer"
+      ]
     },
     {
       "id_git": "feedback-bpmn",
       "fase": "Modelamiento BPMN y diagnóstico",
       "titulo": "Recepción y revisión de feedback BPMN",
       "descripcion": "Recepción de comentarios de MauleMed sobre los BPMN modelados y registro de ajustes requeridos para cada proceso.",
-      "estado": "pendiente",
+      "estado": "completada",
       "responsable": "Cliente + Methodical",
       "fecha_inicio": "2026-07-20",
       "fecha_fin": "2026-07-31",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 1,
       "orden": 6,
-      "dependencias": ["bpmn-iniciales"]
+      "dependencias": [
+        "bpmn-iniciales"
+      ]
     },
     {
       "id_git": "feedback-hammer",
       "fase": "Modelamiento BPMN y diagnóstico",
       "titulo": "Feedback del análisis Hammer",
       "descripcion": "Presentación de hallazgos Hammer, validación del diagnóstico y priorización de oportunidades de mejora con el cliente.",
-      "estado": "pendiente",
+      "estado": "completada",
       "responsable": "Cliente + Methodical",
       "fecha_inicio": "2026-07-27",
       "fecha_fin": "2026-08-07",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 1.5,
       "orden": 7,
-      "dependencias": ["analisis-hammer"]
+      "dependencias": [
+        "analisis-hammer"
+      ]
     },
     {
       "id_git": "ajustes-consolidacion",
       "fase": "Modelamiento BPMN y diagnóstico",
       "titulo": "Ajustes y consolidación del levantamiento",
       "descripcion": "Incorporación de feedback, cierre de pendientes, consolidación de BPMN, diagnóstico y preparación de insumos para el informe final.",
-      "estado": "pendiente",
+      "estado": "completada",
       "responsable": "Methodical",
       "fecha_inicio": "2026-08-03",
       "fecha_fin": "2026-08-07",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 1.5,
       "orden": 8,
-      "dependencias": ["modelamiento-procesos", "feedback-bpmn", "feedback-hammer"]
+      "dependencias": [
+        "modelamiento-procesos",
+        "feedback-bpmn",
+        "feedback-hammer"
+      ]
     },
     {
       "id_git": "entrega-informe-final",
       "fase": "Cierre",
       "titulo": "Elaboración y entrega de informe final",
       "descripcion": "Elaboración, revisión y entrega del informe final de levantamiento, modelamiento BPMN, análisis Hammer, diagnóstico y oportunidades detectadas.",
-      "estado": "pendiente",
+      "estado": "completada",
       "responsable": "Methodical",
       "fecha_inicio": "2026-08-10",
       "fecha_fin": "2026-08-14",
-      "progreso": 0,
+      "progreso": 100,
       "peso": 1.5,
       "orden": 9,
-      "dependencias": ["ajustes-consolidacion"]
+      "dependencias": [
+        "ajustes-consolidacion"
+      ]
     }
   ]
 }

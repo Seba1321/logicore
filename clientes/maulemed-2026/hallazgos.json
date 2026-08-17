@@ -1,18 +1,88 @@
 {
   "hallazgos": [
     {
+      "proceso_slug": "gestion-abastecimiento-inventario",
+      "titulo": "Matriz de madurez — Abastecimiento e Inventario",
+      "archivo_path": "hammer/abastecimiento-inventario.png",
+      "archivo_url": null,
+      "orden": 1
+    },
+    {
       "proceso_slug": "gestion-ciclo-vida-personal",
-      "titulo": "Matriz de madurez del proceso — Ciclo de Vida del Personal",
-      "archivo_path": "hammer/gestion-ciclo-vida-personal-madurez.png",
+      "titulo": "A · Reclutamiento y Selección",
+      "archivo_path": "hammer/ciclo-vida-personal-a-reclutamiento.png",
+      "archivo_url": null,
+      "orden": 1
+    },
+    {
+      "proceso_slug": "gestion-ciclo-vida-personal",
+      "titulo": "B · Contratación e Incorporación",
+      "archivo_path": "hammer/ciclo-vida-personal-b-contratacion.png",
+      "archivo_url": null,
+      "orden": 2
+    },
+    {
+      "proceso_slug": "gestion-ciclo-vida-personal",
+      "titulo": "C · Control de Asistencia y Cierre Mensual",
+      "archivo_path": "hammer/ciclo-vida-personal-c-asistencia.png",
+      "archivo_url": null,
+      "orden": 3
+    },
+    {
+      "proceso_slug": "gestion-ciclo-vida-personal",
+      "titulo": "D · Permisos, Feriados y Licencias Médicas",
+      "archivo_path": "hammer/ciclo-vida-personal-d-permisos.png",
+      "archivo_url": null,
+      "orden": 4
+    },
+    {
+      "proceso_slug": "gestion-ciclo-vida-personal",
+      "titulo": "E · Desvinculación y Finiquito",
+      "archivo_path": "hammer/ciclo-vida-personal-e-desvinculacion.png",
+      "archivo_url": null,
+      "orden": 5
+    },
+    {
+      "proceso_slug": "gestion-comercial-marketing-digital",
+      "titulo": "Matriz de madurez — Marketing, Encuestas y Reclamos",
+      "archivo_path": "hammer/marketing-digital.png",
+      "archivo_url": null,
+      "orden": 1
+    },
+    {
+      "proceso_slug": "control-informes-gestion-clinica",
+      "titulo": "Matriz de madurez — Control e Informes de Gestión Clínica",
+      "archivo_path": "hammer/control-informes-clinica.png",
       "archivo_url": null,
       "orden": 1
     },
     {
       "proceso_slug": "planificacion-control-financiero-diario",
-      "titulo": "Matriz de madurez del proceso — Planificación y Control Financiero",
-      "archivo_path": "hammer/planificacion-control-financiero-madurez.png",
+      "titulo": "A · Facturación a Instituciones",
+      "archivo_path": "hammer/planificacion-financiera-a-facturacion.png",
+      "archivo_url": null,
+      "orden": 1
+    },
+    {
+      "proceso_slug": "planificacion-control-financiero-diario",
+      "titulo": "B · Compras y Pago a Proveedores",
+      "archivo_path": "hammer/planificacion-financiera-b-compras.png",
       "archivo_url": null,
       "orden": 2
+    },
+    {
+      "proceso_slug": "planificacion-control-financiero-diario",
+      "titulo": "C · Flujo de Caja y Control Presupuestario",
+      "archivo_path": "hammer/planificacion-financiera-c-flujo-caja.png",
+      "archivo_url": null,
+      "orden": 3
+    },
+    {
+      "proceso_slug": "planificacion-control-financiero-diario",
+      "titulo": "D · Cierre y Cuadratura de Caja Diaria",
+      "archivo_path": "hammer/planificacion-financiera-d-cuadratura.png",
+      "archivo_url": null,
+      "orden": 4
     }
   ]
 }

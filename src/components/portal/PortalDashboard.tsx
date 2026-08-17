@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/portal/technical";
 import { SectionHeader } from "@/components/sections/shared";
-import { BpmnLibrary } from "@/components/portal/BpmnLibrary";
-import { HallazgoLibrary } from "@/components/portal/HallazgoLibrary";
-import { InformeLibrary } from "@/components/portal/InformeLibrary";
 import { PlanTimeline } from "@/components/portal/PlanTimeline";
+import { ProcesoPanel } from "@/components/portal/ProcesoPanel";
 import { ProjectSection } from "@/components/portal/ProjectSection";
 import { PulsePanel } from "@/components/portal/PulsePanel";
 import { EmptyPanel, MetricStrip } from "@/components/portal/ui";
@@ -27,17 +25,17 @@ export const PortalDashboard = ({
   const today = getTodayTime();
   const projects = data?.proyectos ?? [];
   const processes = projects.flatMap((project) => project.procesos ?? []);
-  const diagrams = projects.flatMap((project) => project.bpmn ?? []);
+  // Los diagramas se cuentan desde cada proceso, no desde el array a nivel de
+  // proyecto: ese último llega ordenado por updated_at y mezcla los procesos.
+  const diagrams = processes.flatMap((process) => process.bpmn ?? []);
   const tasks = projects.flatMap((project) => project.tareas ?? []);
   const findings = processes.flatMap((process) => process.hallazgos ?? []);
-  const informeEntries = processes.flatMap((process) =>
-    (process.informes ?? []).map((informe) => ({ process, informe }))
-  );
+  const informes = processes.flatMap((process) => process.informes ?? []);
   const overallProgress = getOverallProgress(projects, today);
   const processesWithDeliverables = processes.filter(
     (process) => deriveProcessStage(process) !== "por_levantar"
   ).length;
-  const hasDeliverables = diagrams.length > 0 || findings.length > 0 || informeEntries.length > 0;
+  const hasDeliverables = diagrams.length > 0 || findings.length > 0 || informes.length > 0;
 
   // Solo métricas con algo que contar: los entregables aparecen cuando existen.
   const metrics = [
@@ -45,11 +43,15 @@ export const PortalDashboard = ({
     {
       label: "Procesos",
       value: processes.length,
-      helper: processesWithDeliverables ? `${processesWithDeliverables} con BPMN` : "en levantamiento",
+      // "con BPMN" era incorrecto: processesWithDeliverables cuenta cualquier
+      // entregable publicado, no solo diagramas.
+      helper: processesWithDeliverables
+        ? `${processesWithDeliverables} con entregables`
+        : "en levantamiento",
     },
     { label: "BPMN", value: diagrams.length, helper: "diagramas publicados" },
     { label: "Hallazgos", value: findings.length, helper: "análisis HAMMER" },
-    { label: "Informes", value: informeEntries.length, helper: "finales publicados" },
+    { label: "Informes", value: informes.length, helper: "finales publicados" },
     { label: "Tareas", value: tasks.length, helper: "en el plan de trabajo" },
   ].filter((metric) => metric.value > 0);
 
@@ -108,23 +110,13 @@ export const PortalDashboard = ({
                   index="01"
                   eyebrow="Entregables"
                   title="Documentos del levantamiento"
-                  lead="BPMN, matrices del análisis HAMMER e informes finales, listos para revisar en pantalla completa y descargar."
+                  lead="Un panel por proceso con sus BPMN, sus matrices del análisis HAMMER y su informe final, listos para revisar en pantalla completa y descargar."
                 />
-                {diagrams.length > 0 && (
-                  <Reveal>
-                    <BpmnLibrary projects={projects} diagrams={diagrams} />
+                {processes.map((process, position) => (
+                  <Reveal key={process.id} delay={position * 0.05}>
+                    <ProcesoPanel process={process} index={position + 1} />
                   </Reveal>
-                )}
-                {findings.length > 0 && (
-                  <Reveal>
-                    <HallazgoLibrary projects={projects} findings={findings} />
-                  </Reveal>
-                )}
-                {informeEntries.length > 0 && (
-                  <Reveal>
-                    <InformeLibrary entries={informeEntries} />
-                  </Reveal>
-                )}
+                ))}
               </div>
             )}
 

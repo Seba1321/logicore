@@ -3,8 +3,8 @@
   "usuario": "Victor Retamal",
   "proyecto": {
     "nombre": "Levantamiento y modelamiento de procesos MauleMed 2026",
-    "descripcion": "Seguimiento del levantamiento, análisis Hammer, modelamiento de procesos y entrega del informe final.",
-    "estado": "en_desarrollo",
+    "descripcion": "Levantamiento, análisis Hammer, modelamiento BPMN y entrega del informe final de los cinco procesos identificados en MauleMed.",
+    "estado": "finalizado",
     "fecha_inicio": "2026-06-08",
     "fecha_fin": "2026-08-14"
   }
