@@ -2,7 +2,7 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_PCF_v5_A" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
   <collaboration id="Collaboration_PCF_A">
     <participant id="P_A" name="Facturación a instituciones — MauleMed" processRef="Process_PCF_A" />
-    <participant id="P_CAJA" name="Cierre y cuadratura de caja (proceso D)" />
+    <participant id="P_CAJA" name="Cierre y cuadratura de caja" />
     <participant id="P_INST" name="FONASA, isapres e instituciones" />
     <messageFlow id="m01" sourceRef="P_CAJA" targetRef="StartFact" />
     <messageFlow id="m02" sourceRef="EmitirDocumento" targetRef="P_INST" />
@@ -237,11 +237,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_CAJA_di" bpmnElement="P_CAJA" isHorizontal="true">
-        <omgdc:Bounds x="210" y="66" width="360" height="60" />
+        <omgdc:Bounds x="210" y="26" width="360" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_INST_di" bpmnElement="P_INST" isHorizontal="true">
-        <omgdc:Bounds x="1470" y="844" width="540" height="60" />
+        <omgdc:Bounds x="1470" y="844" width="540" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">

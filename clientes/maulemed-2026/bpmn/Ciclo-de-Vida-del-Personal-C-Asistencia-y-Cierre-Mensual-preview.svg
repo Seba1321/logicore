@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1570" height="804" viewBox="0 0 1570 804">
+<svg xmlns="http://www.w3.org/2000/svg" width="1570" height="844" viewBox="0 0 1570 844">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <defs><marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#111"/></marker><marker id="mf" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0.5,0.5 L10,4.5 L0.5,8.5 z" fill="#fff" stroke="#555" stroke-width="1"/></marker></defs>
 <rect x="30.0" y="30.0" width="1510.0" height="650.0" fill="#fff" stroke="#333" stroke-width="2"/>
 <rect x="30.0" y="30.0" width="30" height="650.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
 <g transform="translate(45.0,355.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Control de asistencia y cierre mensual — MauleMed</text></g>
-<rect x="980.0" y="714.0" width="540.0" height="60.0" fill="#fff" stroke="#333" stroke-width="2"/>
-<rect x="980.0" y="714.0" width="540.0" height="60.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
-<text x="1250.0" y="745.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#111">Trabajadores</text>
+<rect x="980.0" y="714.0" width="540.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="980.0" y="714.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(995.0,764.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Trabajadores</text></g>
 <rect x="60.0" y="550.0" width="1480.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
 <rect x="60.0" y="550.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
 <g transform="translate(75.0,615.0) rotate(-90)"><text x="0.0" y="-7.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Liz Bravo — Jefa de</text><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Administración y</text><text x="0.0" y="14.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Finanzas</text></g>

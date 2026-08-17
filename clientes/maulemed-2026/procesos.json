@@ -40,7 +40,7 @@
       "orden": 2,
       "bpmn": [
         {
-          "nombre": "A · Reclutamiento y Selección",
+          "nombre": "Reclutamiento y Selección",
           "descripcion": "Desde la necesidad de contratar hasta la elección del postulante.",
           "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-A-Reclutamiento-y-Seleccion.bpmn",
           "archivo_url": null,
@@ -48,7 +48,7 @@
           "preview_url": null
         },
         {
-          "nombre": "B · Contratación e Incorporación",
+          "nombre": "Contratación e Incorporación",
           "descripcion": "Desde la elección del postulante hasta su incorporación formal.",
           "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-B-Contratacion-e-Incorporacion.bpmn",
           "archivo_url": null,
@@ -56,7 +56,7 @@
           "preview_url": null
         },
         {
-          "nombre": "C · Control de Asistencia y Cierre Mensual",
+          "nombre": "Control de Asistencia y Cierre Mensual",
           "descripcion": "Registro diario de asistencia y cierre mensual como insumo de remuneraciones.",
           "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-C-Asistencia-y-Cierre-Mensual.bpmn",
           "archivo_url": null,
@@ -64,7 +64,7 @@
           "preview_url": null
         },
         {
-          "nombre": "D · Permisos, Feriados y Licencias Médicas",
+          "nombre": "Permisos, Feriados y Licencias Médicas",
           "descripcion": "Solicitud, autorización y registro de ausencias del personal.",
           "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-D-Permisos-Feriados-y-Licencias.bpmn",
           "archivo_url": null,
@@ -72,7 +72,7 @@
           "preview_url": null
         },
         {
-          "nombre": "E · Desvinculación y Finiquito",
+          "nombre": "Desvinculación y Finiquito",
           "descripcion": "Desde la decisión de término hasta el finiquito firmado y registrado.",
           "archivo_path": "bpmn/Ciclo-de-Vida-del-Personal-E-Desvinculacion-y-Finiquito.bpmn",
           "archivo_url": null,
@@ -175,7 +175,7 @@
       "orden": 5,
       "bpmn": [
         {
-          "nombre": "A · Facturación a Instituciones",
+          "nombre": "Facturación a Instituciones",
           "descripcion": "Cobro a FONASA, isapres e instituciones de las prestaciones realizadas.",
           "archivo_path": "bpmn/Planificacion-y-Control-Financiero-A-Facturacion.bpmn",
           "archivo_url": null,
@@ -183,7 +183,7 @@
           "preview_url": null
         },
         {
-          "nombre": "B · Compras y Pago a Proveedores",
+          "nombre": "Compras y Pago a Proveedores",
           "descripcion": "Desde el requerimiento de compra hasta el pago al proveedor.",
           "archivo_path": "bpmn/Planificacion-y-Control-Financiero-B-Compras-y-Pagos.bpmn",
           "archivo_url": null,
@@ -191,7 +191,7 @@
           "preview_url": null
         },
         {
-          "nombre": "C · Flujo de Caja y Control Presupuestario",
+          "nombre": "Flujo de Caja y Control Presupuestario",
           "descripcion": "Elaboración del flujo de caja diario y control del presupuesto.",
           "archivo_path": "bpmn/Planificacion-y-Control-Financiero-C-Flujo-de-Caja-y-Presupuesto.bpmn",
           "archivo_url": null,
@@ -199,7 +199,7 @@
           "preview_url": null
         },
         {
-          "nombre": "D · Cierre y Cuadratura de Caja Diaria",
+          "nombre": "Cierre y Cuadratura de Caja Diaria",
           "descripcion": "Cierre de caja por sucursal, validación de tesorería y corrección de diferencias.",
           "archivo_path": "bpmn/Planificacion-y-Control-Financiero-D-Cierre-y-Cuadratura-de-Caja.bpmn",
           "archivo_url": null,

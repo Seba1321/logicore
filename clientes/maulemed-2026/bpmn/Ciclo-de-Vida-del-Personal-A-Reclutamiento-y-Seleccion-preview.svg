@@ -1,116 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="3010" height="674" viewBox="0 0 3010 674">
+<svg xmlns="http://www.w3.org/2000/svg" width="3010" height="714" viewBox="0 0 3010 714">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <defs><marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#111"/></marker><marker id="mf" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0.5,0.5 L10,4.5 L0.5,8.5 z" fill="#fff" stroke="#555" stroke-width="1"/></marker></defs>
-<rect x="30.0" y="124.0" width="2950.0" height="520.0" fill="#fff" stroke="#333" stroke-width="2"/>
-<rect x="30.0" y="124.0" width="30" height="520.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
-<g transform="translate(45.0,384.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Reclutamiento y selección de personal — MauleMed</text></g>
-<rect x="440.0" y="30.0" width="720.0" height="60.0" fill="#fff" stroke="#333" stroke-width="2"/>
-<rect x="440.0" y="30.0" width="720.0" height="60.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
-<text x="800.0" y="61.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#111">Postulantes</text>
-<rect x="60.0" y="514.0" width="2920.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
-<rect x="60.0" y="514.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
-<g transform="translate(75.0,579.0) rotate(-90)"><text x="0.0" y="-7.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Liz Bravo — Jefa de</text><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Administración y</text><text x="0.0" y="14.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Finanzas</text></g>
-<rect x="60.0" y="124.0" width="2920.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
-<rect x="60.0" y="124.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
-<g transform="translate(75.0,189.0) rotate(-90)"><text x="0.0" y="-7.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Dirección médica — Dr.</text><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Retamal y Dr.</text><text x="0.0" y="14.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Valenzuela</text></g>
-<rect x="60.0" y="254.0" width="2920.0" height="260.0" fill="none" stroke="#333" stroke-width="1.4"/>
-<rect x="60.0" y="254.0" width="30" height="260.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
-<g transform="translate(75.0,384.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Patricia Lobos — Encargada de Personas y RR.HH.</text></g>
-<polyline points="890.0,359.0 890.0,424.0" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#mf)"/>
-<polyline points="188.0,319.0 300.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="400.0,319.0 480.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="580.0,319.0 692.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="728.0,319.0 840.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="940.0,319.0 1020.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="1120.0,319.0 1225.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="1250.0,344.0 1250.0,431.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<rect x="1262.6" y="379.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
-<text x="1273.0" y="391.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">NO</text>
-<polyline points="1275.0,319.0 1380.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<rect x="1317.1" y="297.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
-<text x="1327.5" y="309.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
-<polyline points="1480.0,319.0 1560.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="1660.0,319.0 1765.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="1790.0,294.0 1790.0,189.0 1920.0,189.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<rect x="1797.2" y="233.5" width="52.8" height="14" fill="#fff" opacity="0.9"/>
-<text x="1823.6" y="245.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Clínico</text>
-<polyline points="1790.0,344.0 1790.0,579.0 1920.0,579.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<rect x="1794.4" y="453.5" width="97.6" height="14" fill="#fff" opacity="0.9"/>
-<text x="1843.2" y="465.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Administrativo</text>
-<polyline points="2020.0,189.0 2150.0,189.0 2150.0,294.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="2020.0,579.0 2150.0,579.0 2150.0,344.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="2175.0,319.0 2280.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="2380.0,319.0 2485.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="2510.0,344.0 2510.0,431.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<rect x="2522.6" y="379.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
-<text x="2533.0" y="391.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">NO</text>
-<polyline points="2535.0,319.0 2640.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<rect x="2577.1" y="297.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
-<text x="2587.5" y="309.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
-<polyline points="2740.0,319.0 2852.0,319.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
-<polyline points="530.0,279.0 530.0,90.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
-<rect x="532.2" y="176.5" width="116.8" height="14" fill="#fff" opacity="0.9"/>
-<text x="590.6" y="188.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Oferta de trabajo</text>
-<polyline points="710.0,90.0 710.0,301.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
-<rect x="709.4" y="187.5" width="161.6" height="14" fill="#fff" opacity="0.9"/>
-<text x="790.2" y="199.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Postulación y currículum</text>
-<path d="M872.0,424.0 L898.0,424.0 L908.0,434.0 L908.0,474.0 L872.0,474.0 Z" fill="#fff" stroke="#111" stroke-width="1.4"/>
-<path d="M898.0,424.0 L898.0,434.0 L908.0,434.0" fill="none" stroke="#111" stroke-width="1.2"/>
-<text x="890.0" y="492.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Currículums recibidos ·</text><text x="890.0" y="503.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">correo</text>
-<rect x="2280.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="2291.0" cy="288.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M2286.6,295.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="2330.0" y="305.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Acordar la</text><text x="2330.0" y="317.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">decisión final</text><text x="2330.0" y="329.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entre ambas</text><text x="2330.0" y="341.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">partes</text>
-<rect x="300.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="311.0" cy="288.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M306.6,295.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="350.0" y="305.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Definir el</text><text x="350.0" y="317.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">perfil del</text><text x="350.0" y="329.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cargo y aprobar</text><text x="350.0" y="341.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">la vacante</text>
-<circle cx="1250.0" cy="449.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
-<text x="1250.0" y="487.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Se reabre la</text><text x="1250.0" y="499.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">convocatoria</text>
-<circle cx="2510.0" cy="449.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
-<text x="2510.0" y="487.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Se reabre la</text><text x="2510.0" y="499.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">convocatoria</text>
-<circle cx="2870.0" cy="319.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
-<text x="2870.0" y="356.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Candidato seleccionado</text>
-<rect x="1020.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="1031.0" cy="288.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1026.6,295.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="1070.0" y="305.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Citar y</text><text x="1070.0" y="317.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">realizar la</text><text x="1070.0" y="329.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entrevista de</text><text x="1070.0" y="341.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">preselección</text>
-<rect x="1920.0" y="539.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="1931.0" cy="548.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1926.6,555.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="1970.0" y="559.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Realizar la</text><text x="1970.0" y="571.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entrevista</text><text x="1970.0" y="583.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">final al</text><text x="1970.0" y="595.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">candidato</text><text x="1970.0" y="607.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">administrativo</text>
-<rect x="1920.0" y="149.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="1931.0" cy="158.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1926.6,165.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="1970.0" y="169.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Realizar la</text><text x="1970.0" y="181.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entrevista</text><text x="1970.0" y="193.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">final al</text><text x="1970.0" y="205.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">candidato</text><text x="1970.0" y="217.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">clínico</text>
-<rect x="1560.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="1571.0" cy="288.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1566.6,295.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="1610.0" y="299.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Aplicar la</text><text x="1610.0" y="311.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">evaluación</text><text x="1610.0" y="323.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">psicolaboral</text><text x="1610.0" y="335.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cuando se</text><text x="1610.0" y="347.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">requiere</text>
-<rect x="840.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<path d="M849.0,287.0 h7 M849.0,290.0 h7 M849.0,293.0 h7 M849.0,287.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="890.0" y="305.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar los</text><text x="890.0" y="317.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">currículums y</text><text x="890.0" y="329.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">filtrar por</text><text x="890.0" y="341.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">perfil</text>
-<polygon points="1250.0,294.0 1275.0,319.0 1250.0,344.0 1225.0,319.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<path d="M1242.0,311.0 L1258.0,327.0 M1258.0,311.0 L1242.0,327.0" stroke="#111" stroke-width="2.2" fill="none"/>
-<text x="1250.0" y="270.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Hay candidatos que</text><text x="1250.0" y="282.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cumplan el perfil?</text>
-<polygon points="2510.0,294.0 2535.0,319.0 2510.0,344.0 2485.0,319.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<path d="M2502.0,311.0 L2518.0,327.0 M2518.0,311.0 L2502.0,327.0" stroke="#111" stroke-width="2.2" fill="none"/>
-<text x="2510.0" y="270.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Se selecciona a un</text><text x="2510.0" y="282.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">candidato?</text>
-<polygon points="1790.0,294.0 1815.0,319.0 1790.0,344.0 1765.0,319.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<path d="M1782.0,311.0 L1798.0,327.0 M1798.0,311.0 L1782.0,327.0" stroke="#111" stroke-width="2.2" fill="none"/>
-<text x="1891.0" y="270.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿El cargo es clínico o</text><text x="1891.0" y="282.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">administrativo?</text>
-<polygon points="2150.0,294.0 2175.0,319.0 2150.0,344.0 2125.0,319.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<path d="M2142.0,311.0 L2158.0,327.0 M2158.0,311.0 L2142.0,327.0" stroke="#111" stroke-width="2.2" fill="none"/>
-<text x="2251.0" y="270.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Entrevista final</text><text x="2251.0" y="282.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">realizada</text>
-<rect x="2640.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<rect x="2645.5" y="286.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M2645.5,286.0 L2651.0,291.0 L2656.5,286.0" fill="none" stroke="#fff" stroke-width="1.1"/>
-<text x="2690.0" y="305.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Notificar la</text><text x="2690.0" y="317.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">selección y</text><text x="2690.0" y="329.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">citar para la</text><text x="2690.0" y="341.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">contratación</text>
-<rect x="480.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<rect x="485.5" y="286.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M485.5,286.0 L491.0,291.0 L496.5,286.0" fill="none" stroke="#fff" stroke-width="1.1"/>
-<text x="530.0" y="305.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Publicar y</text><text x="530.0" y="317.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">difundir la</text><text x="530.0" y="329.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">oferta de</text><text x="530.0" y="341.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">trabajo</text>
-<circle cx="710.0" cy="319.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="710.0" cy="319.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
-<rect x="704.0" y="315.0" width="12" height="8" fill="none" stroke="#111" stroke-width="1.2"/>
-<path d="M704.0,315.0 L710.0,320.0 L716.0,315.0" fill="none" stroke="#111" stroke-width="1.2"/>
-<text x="710.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recepción de</text><text x="710.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">postulaciones</text>
-<circle cx="170.0" cy="319.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<text x="170.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Surge la necesidad de</text><text x="170.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">contratación</text>
-<rect x="1380.0" y="279.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
-<circle cx="1391.0" cy="288.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1386.6,295.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
-<text x="1430.0" y="311.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Conformar la</text><text x="1430.0" y="323.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">terna de</text><text x="1430.0" y="335.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">finalistas</text>
+<rect x="30.0" y="164.0" width="2950.0" height="520.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="164.0" width="30" height="520.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,424.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Reclutamiento y selección de personal — MauleMed</text></g>
+<rect x="440.0" y="30.0" width="720.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="440.0" y="30.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(455.0,80.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Postulantes</text></g>
+<rect x="60.0" y="554.0" width="2920.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="554.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,619.0) rotate(-90)"><text x="0.0" y="-7.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Liz Bravo — Jefa de</text><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Administración y</text><text x="0.0" y="14.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Finanzas</text></g>
+<rect x="60.0" y="164.0" width="2920.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="164.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,229.0) rotate(-90)"><text x="0.0" y="-7.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Dirección médica — Dr.</text><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Retamal y Dr.</text><text x="0.0" y="14.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Valenzuela</text></g>
+<rect x="60.0" y="294.0" width="2920.0" height="260.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="294.0" width="30" height="260.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,424.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Patricia Lobos — Encargada de Personas y RR.HH.</text></g>
+<polyline points="890.0,399.0 890.0,464.0" fill="none" stroke="#888" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#mf)"/>
+<polyline points="188.0,359.0 300.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="400.0,359.0 480.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="580.0,359.0 692.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="728.0,359.0 840.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="940.0,359.0 1020.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1120.0,359.0 1225.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1250.0,384.0 1250.0,471.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1262.6" y="419.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1273.0" y="431.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">NO</text>
+<polyline points="1275.0,359.0 1380.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1317.1" y="337.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1327.5" y="349.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
+<polyline points="1480.0,359.0 1560.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1660.0,359.0 1765.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1790.0,334.0 1790.0,229.0 1920.0,229.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1797.2" y="273.5" width="52.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1823.6" y="285.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Clínico</text>
+<polyline points="1790.0,384.0 1790.0,619.0 1920.0,619.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1794.4" y="493.5" width="97.6" height="14" fill="#fff" opacity="0.9"/>
+<text x="1843.2" y="505.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Administrativo</text>
+<polyline points="2020.0,229.0 2150.0,229.0 2150.0,334.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2020.0,619.0 2150.0,619.0 2150.0,384.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2175.0,359.0 2280.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2380.0,359.0 2485.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2510.0,384.0 2510.0,471.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2522.6" y="419.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="2533.0" y="431.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">NO</text>
+<polyline points="2535.0,359.0 2640.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="2577.1" y="337.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="2587.5" y="349.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">SÍ</text>
+<polyline points="2740.0,359.0 2852.0,359.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="530.0,319.0 530.0,130.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<rect x="532.2" y="216.5" width="116.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="590.6" y="228.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Oferta de trabajo</text>
+<polyline points="710.0,130.0 710.0,341.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<rect x="709.4" y="227.5" width="161.6" height="14" fill="#fff" opacity="0.9"/>
+<text x="790.2" y="239.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Postulación y currículum</text>
+<path d="M872.0,464.0 L898.0,464.0 L908.0,474.0 L908.0,514.0 L872.0,514.0 Z" fill="#fff" stroke="#111" stroke-width="1.4"/>
+<path d="M898.0,464.0 L898.0,474.0 L908.0,474.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<text x="890.0" y="532.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Currículums recibidos ·</text><text x="890.0" y="543.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">correo</text>
+<rect x="2280.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="2291.0" cy="328.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M2286.6,335.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="2330.0" y="345.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Acordar la</text><text x="2330.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">decisión final</text><text x="2330.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entre ambas</text><text x="2330.0" y="381.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">partes</text>
+<rect x="300.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="311.0" cy="328.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M306.6,335.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="350.0" y="345.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Definir el</text><text x="350.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">perfil del</text><text x="350.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cargo y aprobar</text><text x="350.0" y="381.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">la vacante</text>
+<circle cx="1250.0" cy="489.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="1250.0" y="527.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Se reabre la</text><text x="1250.0" y="539.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">convocatoria</text>
+<circle cx="2510.0" cy="489.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="2510.0" y="527.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Se reabre la</text><text x="2510.0" y="539.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">convocatoria</text>
+<circle cx="2870.0" cy="359.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="2870.0" y="396.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Candidato seleccionado</text>
+<rect x="1020.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1031.0" cy="328.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1026.6,335.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1070.0" y="345.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Citar y</text><text x="1070.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">realizar la</text><text x="1070.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entrevista de</text><text x="1070.0" y="381.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">preselección</text>
+<rect x="1920.0" y="579.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1931.0" cy="588.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1926.6,595.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1970.0" y="599.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Realizar la</text><text x="1970.0" y="611.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entrevista</text><text x="1970.0" y="623.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">final al</text><text x="1970.0" y="635.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">candidato</text><text x="1970.0" y="647.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">administrativo</text>
+<rect x="1920.0" y="189.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1931.0" cy="198.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1926.6,205.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1970.0" y="209.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Realizar la</text><text x="1970.0" y="221.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entrevista</text><text x="1970.0" y="233.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">final al</text><text x="1970.0" y="245.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">candidato</text><text x="1970.0" y="257.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">clínico</text>
+<rect x="1560.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1571.0" cy="328.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1566.6,335.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1610.0" y="339.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Aplicar la</text><text x="1610.0" y="351.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">evaluación</text><text x="1610.0" y="363.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">psicolaboral</text><text x="1610.0" y="375.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cuando se</text><text x="1610.0" y="387.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">requiere</text>
+<rect x="840.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M849.0,327.0 h7 M849.0,330.0 h7 M849.0,333.0 h7 M849.0,327.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="890.0" y="345.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar los</text><text x="890.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">currículums y</text><text x="890.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">filtrar por</text><text x="890.0" y="381.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">perfil</text>
+<polygon points="1250.0,334.0 1275.0,359.0 1250.0,384.0 1225.0,359.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1242.0,351.0 L1258.0,367.0 M1258.0,351.0 L1242.0,367.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1250.0" y="310.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Hay candidatos que</text><text x="1250.0" y="322.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">cumplan el perfil?</text>
+<polygon points="2510.0,334.0 2535.0,359.0 2510.0,384.0 2485.0,359.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M2502.0,351.0 L2518.0,367.0 M2518.0,351.0 L2502.0,367.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="2510.0" y="310.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Se selecciona a un</text><text x="2510.0" y="322.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">candidato?</text>
+<polygon points="1790.0,334.0 1815.0,359.0 1790.0,384.0 1765.0,359.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1782.0,351.0 L1798.0,367.0 M1798.0,351.0 L1782.0,367.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1891.0" y="310.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿El cargo es clínico o</text><text x="1891.0" y="322.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">administrativo?</text>
+<polygon points="2150.0,334.0 2175.0,359.0 2150.0,384.0 2125.0,359.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M2142.0,351.0 L2158.0,367.0 M2158.0,351.0 L2142.0,367.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="2251.0" y="310.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Entrevista final</text><text x="2251.0" y="322.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">realizada</text>
+<rect x="2640.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="2645.5" y="326.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M2645.5,326.0 L2651.0,331.0 L2656.5,326.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="2690.0" y="345.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Notificar la</text><text x="2690.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">selección y</text><text x="2690.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">citar para la</text><text x="2690.0" y="381.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">contratación</text>
+<rect x="480.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<rect x="485.5" y="326.0" width="11" height="8" fill="#111" stroke="#111" stroke-width="1.1"/><path d="M485.5,326.0 L491.0,331.0 L496.5,326.0" fill="none" stroke="#fff" stroke-width="1.1"/>
+<text x="530.0" y="345.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Publicar y</text><text x="530.0" y="357.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">difundir la</text><text x="530.0" y="369.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">oferta de</text><text x="530.0" y="381.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">trabajo</text>
+<circle cx="710.0" cy="359.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="710.0" cy="359.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<rect x="704.0" y="355.0" width="12" height="8" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M704.0,355.0 L710.0,360.0 L716.0,355.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<text x="710.0" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Recepción de</text><text x="710.0" y="409.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">postulaciones</text>
+<circle cx="170.0" cy="359.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="170.0" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Surge la necesidad de</text><text x="170.0" y="409.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">contratación</text>
+<rect x="1380.0" y="319.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1391.0" cy="328.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1386.6,335.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1430.0" y="351.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Conformar la</text><text x="1430.0" y="363.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">terna de</text><text x="1430.0" y="375.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">finalistas</text>
 </svg>

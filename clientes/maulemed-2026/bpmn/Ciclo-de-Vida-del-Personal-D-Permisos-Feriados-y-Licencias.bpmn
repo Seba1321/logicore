@@ -216,7 +216,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_INST_di" bpmnElement="P_INST" isHorizontal="true">
-        <omgdc:Bounds x="390" y="844" width="360" height="60" />
+        <omgdc:Bounds x="390" y="844" width="360" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
