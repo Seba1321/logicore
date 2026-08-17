@@ -141,6 +141,16 @@ export const PlanTimeline = ({
 // último no se salgan del canal.
 const NODE_RADIUS = "0.875rem"; // la mitad de un chip de 28px
 
+// Como SVG y no como carácter "✓": el glifo depende de las métricas de la
+// fuente —y de si la fuente lo tiene— así que nunca queda centrado igual.
+const CheckMark = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-3.5 w-3.5 sm:h-4 sm:w-4">
+    {/* Subido un cuarto de unidad: el vértice inferior es un punto, así que la
+        marca centrada por caja se lee baja dentro del círculo. */}
+    <path d="M5 11.75 L9.75 16.5 L19 6.5" strokeWidth={3.2} strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const Ribbon = ({
   range,
   phases,
@@ -213,24 +223,35 @@ const Ribbon = ({
             );
           })}
 
-          {/* Chips de fase */}
+          {/* Chips de fase. El centrado vive en el contenedor y la animación en
+              el chip: framer-motion escribe `transform` en línea, así que si
+              ambos compartieran elemento la escala borraría el translate que
+              centra el chip sobre su fecha. */}
           {phases.map((phase, index) => {
             const meta = STATUS_META[phase.status];
             return (
-              <motion.span
+              <div
                 key={`node-${phase.fase}`}
-                aria-hidden
-                // Achicados en pantallas angostas: dos fases que empiezan con
-                // pocos días de diferencia quedan a milímetros en el eje.
-                className={`absolute top-1/2 z-10 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full font-display text-[10px] font-bold leading-none sm:h-7 sm:w-7 sm:text-xs ${meta.node}`}
+                className="absolute top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: `${pct(phase.start, range)}%` }}
-                initial={reduce ? false : { scale: 0.4, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: 0.12 + index * 0.09, ease: "backOut" }}
               >
-                {phase.status === "completada" ? "✓" : String(index + 1).padStart(2, "0")}
-              </motion.span>
+                <motion.span
+                  aria-hidden
+                  // Achicados en pantallas angostas: dos fases que empiezan con
+                  // pocos días de diferencia quedan a milímetros en el eje.
+                  className={`flex h-6 w-6 items-center justify-center rounded-full font-display text-[10px] font-bold leading-none sm:h-7 sm:w-7 sm:text-xs ${meta.node}`}
+                  initial={reduce ? false : { scale: 0.4, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.12 + index * 0.09, ease: "backOut" }}
+                >
+                  {phase.status === "completada" ? (
+                    <CheckMark />
+                  ) : (
+                    String(index + 1).padStart(2, "0")
+                  )}
+                </motion.span>
+              </div>
             );
           })}
 
