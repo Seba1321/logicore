@@ -416,11 +416,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_PROV_di" bpmnElement="P_PROV" isHorizontal="true">
-        <omgdc:Bounds x="210" y="1364" width="1080" height="100" />
+        <omgdc:Bounds x="160" y="1364" width="3130" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_BANCO_di" bpmnElement="P_BANCO" isHorizontal="true">
-        <omgdc:Bounds x="2370" y="1364" width="540" height="100" />
+        <omgdc:Bounds x="160" y="1498" width="3130" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
@@ -632,10 +632,10 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="m04_di" bpmnElement="m04">
-        <omgdi:waypoint x="2640" y="1364" />
+        <omgdi:waypoint x="2640" y="1498" />
         <omgdi:waypoint x="2640" y="1023" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="2532.4" y="1185.5" width="99.6" height="16" />
+          <omgdc:Bounds x="2532.4" y="1252.5" width="99.6" height="16" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOut_OC_di" bpmnElement="DataOut_OC">

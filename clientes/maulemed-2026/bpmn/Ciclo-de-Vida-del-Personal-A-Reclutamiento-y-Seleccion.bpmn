@@ -255,7 +255,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_TRAB_di" bpmnElement="P_TRAB" isHorizontal="true">
-        <omgdc:Bounds x="570" y="26" width="720" height="100" />
+        <omgdc:Bounds x="160" y="26" width="2950" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">

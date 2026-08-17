@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="3202" height="1364" viewBox="0 0 3202 1364">
+<svg xmlns="http://www.w3.org/2000/svg" width="3202" height="1498" viewBox="0 0 3202 1498">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <defs><marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#111"/></marker><marker id="mf" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0.5,0.5 L10,4.5 L0.5,8.5 z" fill="#fff" stroke="#555" stroke-width="1"/></marker></defs>
 <rect x="42.4" y="30.0" width="3130.0" height="1170.0" fill="#fff" stroke="#333" stroke-width="2"/>
 <rect x="42.4" y="30.0" width="30" height="1170.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
 <g transform="translate(57.4,615.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Compras y pago a proveedores — MauleMed</text></g>
-<rect x="2252.4" y="1234.0" width="540.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
-<rect x="2252.4" y="1234.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
-<g transform="translate(2267.4,1284.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Banco</text></g>
-<rect x="92.4" y="1234.0" width="1080.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
-<rect x="92.4" y="1234.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
-<g transform="translate(107.4,1284.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Proveedores</text></g>
+<rect x="42.4" y="1368.0" width="3130.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="42.4" y="1368.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(57.4,1418.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Banco</text></g>
+<rect x="42.4" y="1234.0" width="3130.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="42.4" y="1234.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(57.4,1284.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Proveedores</text></g>
 <rect x="72.4" y="1070.0" width="3100.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
 <rect x="72.4" y="1070.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
 <g transform="translate(87.4,1135.0) rotate(-90)"><text x="0.0" y="-2.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Contabilidad — Elvira</text><text x="0.0" y="9.0" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Rojas y Meribet Escobar</text></g>
@@ -87,9 +87,9 @@
 <polyline points="1082.4,1234.0 1082.4,893.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
 <rect x="1083.0" y="1055.5" width="142.4" height="14" fill="#fff" opacity="0.9"/>
 <text x="1154.2" y="1067.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Factura del proveedor</text>
-<polyline points="2522.4,1234.0 2522.4,893.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
-<rect x="2409.4" y="1055.5" width="110.4" height="14" fill="#fff" opacity="0.9"/>
-<text x="2464.6" y="1067.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Cartola bancaria</text>
+<polyline points="2522.4,1368.0 2522.4,893.0" fill="none" stroke="#555" stroke-width="1.6" stroke-dasharray="7,5" marker-end="url(#mf)"/>
+<rect x="2409.4" y="1122.5" width="110.4" height="14" fill="#fff" opacity="0.9"/>
+<text x="2464.6" y="1134.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Cartola bancaria</text>
 <rect x="1932.4" y="1095.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
 <circle cx="1943.4" cy="1104.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M1939.0,1111.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
 <text x="1982.4" y="1127.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Aprobar el pago</text><text x="1982.4" y="1139.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">junto con</text><text x="1982.4" y="1151.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">tesorería</text>

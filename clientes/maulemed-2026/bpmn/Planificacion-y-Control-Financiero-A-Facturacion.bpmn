@@ -237,11 +237,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_CAJA_di" bpmnElement="P_CAJA" isHorizontal="true">
-        <omgdc:Bounds x="210" y="26" width="360" height="100" />
+        <omgdc:Bounds x="160" y="26" width="2230" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_INST_di" bpmnElement="P_INST" isHorizontal="true">
-        <omgdc:Bounds x="1470" y="844" width="540" height="100" />
+        <omgdc:Bounds x="160" y="844" width="2230" height="100" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">

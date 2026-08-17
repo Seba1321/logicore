@@ -5,9 +5,9 @@
 <rect x="30.0" y="30.0" width="1510.0" height="650.0" fill="#fff" stroke="#333" stroke-width="2"/>
 <rect x="30.0" y="30.0" width="30" height="650.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
 <g transform="translate(45.0,355.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Control de asistencia y cierre mensual — MauleMed</text></g>
-<rect x="980.0" y="714.0" width="540.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
-<rect x="980.0" y="714.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
-<g transform="translate(995.0,764.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Trabajadores</text></g>
+<rect x="30.0" y="714.0" width="1510.0" height="100.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="714.0" width="30" height="100.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,764.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">Trabajadores</text></g>
 <rect x="60.0" y="550.0" width="1480.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
 <rect x="60.0" y="550.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
 <g transform="translate(75.0,615.0) rotate(-90)"><text x="0.0" y="-7.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Liz Bravo — Jefa de</text><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Administración y</text><text x="0.0" y="14.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Finanzas</text></g>
