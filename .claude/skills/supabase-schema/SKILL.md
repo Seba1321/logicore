@@ -15,6 +15,7 @@ El frontend **solo usa RPCs** (`login_empresa`, `get_portal_empresa`, `logout_em
 |---|---|
 | `supabase-empresas-login.sql` | Schema completo + RPCs. Ejecutar antes del primer sync. |
 | `supabase-crear-empresa.sql` | Alta/reset de una empresa (login del portal). |
+| `supabase-accesos.sql` | Delta de auditoría de accesos (ya incluido en el archivo de login; mantener ambos en sync). |
 | `clientes/<slug>/supabase-seed.sql` | Seed manual opcional por cliente (p. ej. maulemed-2026). |
 
 ## Tablas (`public`)
@@ -23,6 +24,7 @@ El frontend **solo usa RPCs** (`login_empresa`, `get_portal_empresa`, `logout_em
 |---|---|---|
 | `empresas` | login del portal (`empresa`, `usuario`, `password` bcrypt, `activo`) | manual (SQL) |
 | `empresa_sessions` | tokens de sesión con expiración | RPCs |
+| `empresa_accesos` | auditoría de logins al portal (exitosos y fallidos, con IP) — no se autopurga | RPC `login_empresa` |
 | `proyectos` | proyecto por empresa (borrado y re-insertado en cada sync) | sync |
 | `proyecto_tareas` | tareas Gantt (desde `gantt.json`) | sync |
 | `procesos` | procesos levantados (desde `procesos.json`) | sync |

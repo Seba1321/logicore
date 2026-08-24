@@ -20,6 +20,21 @@ create table if not exists public.empresa_sessions (
   expires_at timestamptz not null default (now() + interval '8 hours')
 );
 
+-- Auditoría de accesos al portal: guarda logins exitosos y fallidos.
+-- A diferencia de empresa_sessions (efímera, se purga al expirar), esta tabla
+-- no se borra sola. empresa_id queda null si el intento falló o si la empresa
+-- se borra; empresa_nombre conserva el nombre para que el histórico sobreviva.
+create table if not exists public.empresa_accesos (
+  id bigint generated always as identity primary key,
+  empresa_id bigint references public.empresas(id) on delete set null,
+  empresa_nombre varchar(255),
+  usuario_intentado varchar(255) not null,
+  exito boolean not null,
+  ip inet,
+  user_agent text,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists public.proyectos (
   id bigint generated always as identity primary key,
   empresa_id bigint not null references public.empresas(id) on delete cascade,
@@ -135,6 +150,7 @@ create table if not exists public.proceso_pendientes (
 );
 
 alter table public.empresa_sessions enable row level security;
+alter table public.empresa_accesos enable row level security;
 alter table public.proyectos enable row level security;
 alter table public.proyecto_tareas enable row level security;
 alter table public.procesos enable row level security;
@@ -145,6 +161,9 @@ alter table public.proceso_pendientes enable row level security;
 
 create index if not exists empresa_sessions_empresa_id_idx on public.empresa_sessions(empresa_id);
 create index if not exists empresa_sessions_expires_at_idx on public.empresa_sessions(expires_at);
+create index if not exists empresa_accesos_created_at_idx on public.empresa_accesos(created_at desc);
+create index if not exists empresa_accesos_empresa_id_idx on public.empresa_accesos(empresa_id);
+create index if not exists empresa_accesos_fallidos_idx on public.empresa_accesos(created_at desc) where exito is false;
 create index if not exists proyectos_empresa_id_idx on public.proyectos(empresa_id);
 create index if not exists proyecto_tareas_proyecto_id_idx on public.proyecto_tareas(proyecto_id);
 create unique index if not exists proyecto_tareas_proyecto_id_id_git_uidx on public.proyecto_tareas(proyecto_id, id_git) where id_git is not null;
@@ -155,6 +174,57 @@ create index if not exists proyecto_bpmn_proceso_id_idx on public.proyecto_bpmn(
 create index if not exists proceso_hallazgos_proceso_id_idx on public.proceso_hallazgos(proceso_id);
 create index if not exists proceso_informes_proceso_id_idx on public.proceso_informes(proceso_id);
 create index if not exists proceso_pendientes_proceso_id_idx on public.proceso_pendientes(proceso_id);
+
+-- Escribe una fila en empresa_accesos. Nunca lanza: un fallo de auditoría no
+-- puede bloquear un login legítimo. No se expone al frontend (sin grant a
+-- anon/authenticated); solo la llama login_empresa, que es security definer.
+create or replace function public.registrar_acceso_empresa(
+  p_empresa_id bigint,
+  p_empresa_nombre text,
+  p_usuario text,
+  p_exito boolean
+)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_headers jsonb;
+  v_ip_text text;
+  v_ip inet;
+begin
+  begin
+    v_headers := nullif(current_setting('request.headers', true), '')::jsonb;
+  exception when others then
+    v_headers := null;
+  end;
+
+  v_ip_text := nullif(btrim(split_part(coalesce(v_headers ->> 'x-forwarded-for', ''), ',', 1)), '');
+
+  begin
+    v_ip := v_ip_text::inet;
+  exception when others then
+    v_ip := null;
+  end;
+
+  begin
+    insert into public.empresa_accesos (
+      empresa_id, empresa_nombre, usuario_intentado, exito, ip, user_agent
+    )
+    values (
+      p_empresa_id,
+      left(p_empresa_nombre, 255),
+      left(coalesce(btrim(p_usuario), ''), 255),
+      p_exito,
+      v_ip,
+      nullif(left(coalesce(v_headers ->> 'user-agent', ''), 500), '')
+    );
+  exception when others then
+    null;
+  end;
+end;
+$$;
 
 -- Required because login_empresa changed its return shape to include a session.
 drop function if exists public.login_empresa(text, text);
@@ -192,6 +262,7 @@ begin
   limit 1;
 
   if not found then
+    perform public.registrar_acceso_empresa(null, null, p_usuario, false);
     return;
   end if;
 
@@ -199,6 +270,8 @@ begin
   values (v_empresa.id)
   returning token, empresa_sessions.expires_at
   into v_session;
+
+  perform public.registrar_acceso_empresa(v_empresa.id, v_empresa.empresa, p_usuario, true);
 
   return query
   select
@@ -390,6 +463,7 @@ $$;
 revoke all on function public.login_empresa(text, text) from public;
 revoke all on function public.get_portal_empresa(uuid) from public;
 revoke all on function public.logout_empresa(uuid) from public;
+revoke all on function public.registrar_acceso_empresa(bigint, text, text, boolean) from public;
 
 grant execute on function public.login_empresa(text, text) to anon, authenticated;
 grant execute on function public.get_portal_empresa(uuid) to anon, authenticated;
