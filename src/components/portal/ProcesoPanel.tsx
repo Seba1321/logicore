@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
@@ -134,44 +135,52 @@ const DiagramCard = ({
   titulo: string;
   descripcion: string | null;
   preview: string | null;
-}) => (
-  <Link
-    to={to}
-    target="_blank"
-    rel="noreferrer"
-    className="group flex flex-col overflow-hidden rounded-sm border border-slate-200 transition hover:border-blue-300"
-  >
-    {/* Proporción fija para que el diagrama llene el ancho de la tarjeta: los
-        BPMN van de 1.8:1 a 3.9:1, y con una altura fija los más anchos
-        quedaban diminutos. */}
-    {preview ? (
-      // La imagen va absoluta: en flujo normal, un diagrama menos ancho que la
-      // proporción estiraba la caja hasta su alto intrínseco y cada tarjeta de
-      // la fila terminaba de distinto tamaño.
-      <div className="relative aspect-[2/1] border-b border-slate-200 bg-slate-50">
-        <img
-          src={preview}
-          alt=""
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-contain p-3 transition duration-500 group-hover:scale-[1.02]"
-        />
+}) => {
+  // Si Storage no responde, la miniatura queda como una caja gris muda. Cayendo
+  // al mismo placeholder que cuando no hay preview, la tarjeta sigue diciendo
+  // qué es y su enlace sigue a la vista.
+  const [previewFallo, setPreviewFallo] = useState(false);
+
+  return (
+    <Link
+      to={to}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex flex-col overflow-hidden rounded-sm border border-slate-200 transition hover:border-blue-300"
+    >
+      {/* Proporción fija para que el diagrama llene el ancho de la tarjeta: los
+          BPMN van de 1.8:1 a 3.9:1, y con una altura fija los más anchos
+          quedaban diminutos. */}
+      {preview && !previewFallo ? (
+        // La imagen va absoluta: en flujo normal, un diagrama menos ancho que la
+        // proporción estiraba la caja hasta su alto intrínseco y cada tarjeta de
+        // la fila terminaba de distinto tamaño.
+        <div className="relative aspect-[2/1] border-b border-slate-200 bg-slate-50">
+          <img
+            src={preview}
+            alt=""
+            loading="lazy"
+            onError={() => setPreviewFallo(true)}
+            className="absolute inset-0 h-full w-full object-contain p-3 transition duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+      ) : (
+        <div className="flex aspect-[2/1] items-center justify-center border-b border-slate-200 bg-slate-50 text-xs text-slate-500">
+          Sin vista previa
+        </div>
+      )}
+      <div className="flex flex-1 flex-col p-4">
+        <p className="font-display text-base font-semibold leading-snug text-slate-950">{titulo}</p>
+        {descripcion && <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{descripcion}</p>}
+        {/* Al pie de la tarjeta: las descripciones varían de largo y si no, el
+            enlace queda a distinta altura en cada columna de la fila. */}
+        <p className="mt-auto pt-3 font-display text-[11px] font-semibold uppercase tracking-[0.08em] text-blue-600">
+          Ver diagrama →
+        </p>
       </div>
-    ) : (
-      <div className="flex aspect-[2/1] items-center justify-center border-b border-slate-200 bg-slate-50 text-xs text-slate-500">
-        Sin vista previa
-      </div>
-    )}
-    <div className="flex flex-1 flex-col p-4">
-      <p className="font-display text-base font-semibold leading-snug text-slate-950">{titulo}</p>
-      {descripcion && <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{descripcion}</p>}
-      {/* Al pie de la tarjeta: las descripciones varían de largo y si no, el
-          enlace queda a distinta altura en cada columna de la fila. */}
-      <p className="mt-auto pt-3 font-display text-[11px] font-semibold uppercase tracking-[0.08em] text-blue-600">
-        Ver diagrama →
-      </p>
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 // La matriz es un documento vertical: se recorta desde arriba, donde está la
 // banda de título que la identifica.
@@ -183,30 +192,35 @@ const MatrixCard = ({
   to: string;
   titulo: string;
   imagen: string | null;
-}) => (
-  <Link
-    to={to}
-    target="_blank"
-    rel="noreferrer"
-    className="group flex flex-col overflow-hidden rounded-sm border border-slate-200 transition hover:border-blue-300"
-  >
-    <div className="aspect-[4/3] overflow-hidden border-b border-slate-200 bg-slate-50">
-      {imagen ? (
-        <img
-          src={imagen}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
-        />
-      ) : (
-        <div className="flex h-full items-center justify-center text-xs text-slate-500">
-          Sin imagen
-        </div>
-      )}
-    </div>
-    <p className="p-3 font-display text-xs font-semibold leading-snug text-slate-950">{titulo}</p>
-  </Link>
-);
+}) => {
+  const [imagenFallo, setImagenFallo] = useState(false);
+
+  return (
+    <Link
+      to={to}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex flex-col overflow-hidden rounded-sm border border-slate-200 transition hover:border-blue-300"
+    >
+      <div className="aspect-[4/3] overflow-hidden border-b border-slate-200 bg-slate-50">
+        {imagen && !imagenFallo ? (
+          <img
+            src={imagen}
+            alt=""
+            loading="lazy"
+            onError={() => setImagenFallo(true)}
+            className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.02]"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-xs text-slate-500">
+            Sin imagen
+          </div>
+        )}
+      </div>
+      <p className="p-3 font-display text-xs font-semibold leading-snug text-slate-950">{titulo}</p>
+    </Link>
+  );
+};
 
 const InformeRow = ({
   titulo,
