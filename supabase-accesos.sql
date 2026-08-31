@@ -80,6 +80,9 @@ end;
 $$;
 
 revoke all on function public.registrar_acceso_empresa(bigint, text, text, boolean) from public;
+-- `revoke ... from public` no borra grants explicitos a roles: sin esta linea,
+-- cualquiera con la anon key puede falsificar filas en empresa_accesos.
+revoke execute on function public.registrar_acceso_empresa(bigint, text, text, boolean) from anon, authenticated;
 
 -- 3. login_empresa con auditoría ----------------------------------------------
 -- Idéntica a la versión anterior salvo los dos perform de registro.

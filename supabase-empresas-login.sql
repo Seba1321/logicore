@@ -464,6 +464,9 @@ revoke all on function public.login_empresa(text, text) from public;
 revoke all on function public.get_portal_empresa(uuid) from public;
 revoke all on function public.logout_empresa(uuid) from public;
 revoke all on function public.registrar_acceso_empresa(bigint, text, text, boolean) from public;
+-- `revoke ... from public` no borra grants explicitos a roles: sin esta linea,
+-- cualquiera con la anon key puede falsificar filas en empresa_accesos.
+revoke execute on function public.registrar_acceso_empresa(bigint, text, text, boolean) from anon, authenticated;
 
 grant execute on function public.login_empresa(text, text) to anon, authenticated;
 grant execute on function public.get_portal_empresa(uuid) to anon, authenticated;
