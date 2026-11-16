@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_IO_0" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_IO_0">
+    <participant id="P_IO" name="Informe de Obra semanal — Constructora Tocal" processRef="Process_IO_0" />
+    <participant id="P_MAND" name="Mandante y especialistas" />
+    <messageFlow id="m01" name="Respuestas a RDI" sourceRef="P_MAND" targetRef="SubB" />
+  </collaboration>
+  <process id="Process_IO_0" isExecutable="false">
+    <laneSet id="LaneSet_IO_0">
+      <lane id="Lane_Prev" name="Prevencionista">
+        <flowNodeRef>Start</flowNodeRef>
+        <flowNodeRef>SubA</flowNodeRef>
+      </lane>
+      <lane id="Lane_Adm" name="Administrador de Obra">
+        <flowNodeRef>SubB</flowNodeRef>
+      </lane>
+      <lane id="Lane_Ger" name="Gerente de Proyectos">
+        <flowNodeRef>SubC</flowNodeRef>
+        <flowNodeRef>GwVisita</flowNodeRef>
+        <flowNodeRef>SubD</flowNodeRef>
+        <flowNodeRef>EndVisita</flowNodeRef>
+        <flowNodeRef>EndSinVisita</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="Start" name="Cada semana de obra">
+      <outgoing>f01</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_Start" />
+    </startEvent>
+    <subProcess id="SubA" name="IO-A · Evaluación de prevención">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+    </subProcess>
+    <subProcess id="SubB" name="IO-B · Elaboración del informe">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+    </subProcess>
+    <subProcess id="SubC" name="IO-C · Revisión y reunión de gerencia">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+    </subProcess>
+    <exclusiveGateway id="GwVisita" name="¿Quedan temas por verificar en terreno?">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+      <outgoing>f07</outgoing>
+    </exclusiveGateway>
+    <subProcess id="SubD" name="IO-D · Visita a terreno y seguimiento">
+      <incoming>f05</incoming>
+      <outgoing>f06</outgoing>
+    </subProcess>
+    <endEvent id="EndVisita" name="Tareas de la visita cerradas">
+      <incoming>f06</incoming>
+    </endEvent>
+    <endEvent id="EndSinVisita" name="Estado de las obras revisado">
+      <incoming>f07</incoming>
+    </endEvent>
+    <sequenceFlow id="f01" sourceRef="Start" targetRef="SubA" />
+    <sequenceFlow id="f02" sourceRef="SubA" targetRef="SubB" />
+    <sequenceFlow id="f03" sourceRef="SubB" targetRef="SubC" />
+    <sequenceFlow id="f04" sourceRef="SubC" targetRef="GwVisita" />
+    <sequenceFlow id="f05" name="Sí" sourceRef="GwVisita" targetRef="SubD" />
+    <sequenceFlow id="f06" sourceRef="SubD" targetRef="EndVisita" />
+    <sequenceFlow id="f07" name="No" sourceRef="GwVisita" targetRef="EndSinVisita" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_IO_0">
+      <bpmndi:BPMNShape id="P_IO_di" bpmnElement="P_IO" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="1330" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Prev_di" bpmnElement="Lane_Prev" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="1300" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Adm_di" bpmnElement="Lane_Adm" isHorizontal="true">
+        <omgdc:Bounds x="190" y="290" width="1300" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Ger_di" bpmnElement="Lane_Ger" isHorizontal="true">
+        <omgdc:Bounds x="190" y="420" width="1300" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start">
+        <omgdc:Bounds x="282" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="241.8" y="251" width="116.4" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubA_di" bpmnElement="SubA" isExpanded="false">
+        <omgdc:Bounds x="430" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="414" y="273" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubB_di" bpmnElement="SubB" isExpanded="false">
+        <omgdc:Bounds x="610" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="594" y="403" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubC_di" bpmnElement="SubC" isExpanded="false">
+        <omgdc:Bounds x="790" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="533" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwVisita_di" bpmnElement="GwVisita" isMarkerVisible="true">
+        <omgdc:Bounds x="995" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="954" y="424" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubD_di" bpmnElement="SubD" isExpanded="false">
+        <omgdc:Bounds x="1150" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1134" y="533" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndVisita_di" bpmnElement="EndVisita">
+        <omgdc:Bounds x="1362" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndSinVisita_di" bpmnElement="EndSinVisita">
+        <omgdc:Bounds x="1182" y="597" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1134" y="641" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_MAND_di" bpmnElement="P_MAND" isHorizontal="true">
+        <omgdc:Bounds x="160" y="714" width="1330" height="100" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="225" />
+        <omgdi:waypoint x="430" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="225" />
+        <omgdi:waypoint x="570" y="225" />
+        <omgdi:waypoint x="570" y="355" />
+        <omgdi:waypoint x="610" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="710" y="355" />
+        <omgdi:waypoint x="750" y="355" />
+        <omgdi:waypoint x="750" y="485" />
+        <omgdi:waypoint x="790" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="890" y="485" />
+        <omgdi:waypoint x="995" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="1045" y="485" />
+        <omgdi:waypoint x="1150" y="485" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1083.5" y="463" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="1250" y="485" />
+        <omgdi:waypoint x="1362" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1020" y="510" />
+        <omgdi:waypoint x="1020" y="615" />
+        <omgdi:waypoint x="1182" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1029" y="554.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="m01_di" bpmnElement="m01">
+        <omgdi:waypoint x="660" y="714" />
+        <omgdi:waypoint x="660" y="395" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="668" y="546.5" width="99.6" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

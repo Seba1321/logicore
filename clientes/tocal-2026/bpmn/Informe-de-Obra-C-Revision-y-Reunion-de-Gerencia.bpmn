@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_IO_C" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.22.0">
+  <collaboration id="Collaboration_IO_C">
+    <participant id="P_C" name="IO-C · Revisión de informes y reunión de gerencia — Tocal" processRef="Process_IO_C" />
+  </collaboration>
+  <process id="Process_IO_C" isExecutable="false">
+    <laneSet id="LaneSet_IO_C">
+      <lane id="Lane_Ger" name="Gerente de Proyectos">
+        <flowNodeRef>Start</flowNodeRef>
+        <flowNodeRef>Fotos</flowNodeRef>
+        <flowNodeRef>Avance</flowNodeRef>
+        <flowNodeRef>GwDudas</flowNodeRef>
+        <flowNodeRef>Contrastar</flowNodeRef>
+        <flowNodeRef>GwDudasJoin</flowNodeRef>
+        <flowNodeRef>Lunes</flowNodeRef>
+        <flowNodeRef>LnkBandaCOut</flowNodeRef>
+        <flowNodeRef>LnkBandaCIn</flowNodeRef>
+        <flowNodeRef>Presentar</flowNodeRef>
+        <flowNodeRef>GwAtraso</flowNodeRef>
+        <flowNodeRef>Explicar</flowNodeRef>
+        <flowNodeRef>GwAtrasoJoin</flowNodeRef>
+        <flowNodeRef>Anotar</flowNodeRef>
+        <flowNodeRef>End</flowNodeRef>
+      </lane>
+      <lane id="Lane_JPR" name="Jefe de Prevención">
+        <flowNodeRef>Exponer</flowNodeRef>
+      </lane>
+      <lane id="Lane_Com" name="Reunión de gerencia">
+        <flowNodeRef>Comparar</flowNodeRef>
+        <flowNodeRef>GwBajo</flowNodeRef>
+        <flowNodeRef>Alerta</flowNodeRef>
+        <flowNodeRef>GwBajoJoin</flowNodeRef>
+        <flowNodeRef>Cuestionar</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="Start" name="Informes de obra recibidos (viernes o fin de semana)">
+      <outgoing>f01</outgoing>
+    </startEvent>
+    <userTask id="Fotos" name="Revisar fotos de la semana">
+      <incoming>f01</incoming>
+      <outgoing>f02</outgoing>
+    </userTask>
+    <userTask id="Avance" name="Revisar avance, ruta crítica y problemas">
+      <incoming>f02</incoming>
+      <outgoing>f03</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwDudas" name="¿Hay dudas sobre lo informado?">
+      <incoming>f03</incoming>
+      <outgoing>f04</outgoing>
+      <outgoing>f06</outgoing>
+    </exclusiveGateway>
+    <userTask id="Contrastar" name="Contrastar con MS Project">
+      <incoming>f04</incoming>
+      <outgoing>f05</outgoing>
+    </userTask>
+    <exclusiveGateway id="GwDudasJoin">
+      <incoming>f05</incoming>
+      <incoming>f06</incoming>
+      <outgoing>f07</outgoing>
+    </exclusiveGateway>
+    <intermediateCatchEvent id="Lunes" name="Lunes: reunión de gerencia">
+      <incoming>f07</incoming>
+      <outgoing>f08</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_Lunes" />
+    </intermediateCatchEvent>
+    <intermediateThrowEvent id="LnkBandaCOut" name="A">
+      <incoming>f08</incoming>
+      <linkEventDefinition id="LinkEventDefinition_LnkBandaCOut" name="A" />
+    </intermediateThrowEvent>
+    <intermediateCatchEvent id="LnkBandaCIn" name="A">
+      <outgoing>f09</outgoing>
+      <linkEventDefinition id="LinkEventDefinition_LnkBandaCIn" name="A" />
+    </intermediateCatchEvent>
+    <manualTask id="Exponer" name="Exponer novedades de prevención">
+      <incoming>f09</incoming>
+      <outgoing>f10</outgoing>
+    </manualTask>
+    <manualTask id="Comparar" name="Comparar prevención entre obras">
+      <incoming>f10</incoming>
+      <outgoing>f11</outgoing>
+    </manualTask>
+    <exclusiveGateway id="GwBajo" name="¿Alguna obra bajo el estándar?">
+      <incoming>f11</incoming>
+      <outgoing>f12</outgoing>
+      <outgoing>f14</outgoing>
+    </exclusiveGateway>
+    <manualTask id="Alerta" name="Levantar alerta de la obra">
+      <incoming>f12</incoming>
+      <outgoing>f13</outgoing>
+    </manualTask>
+    <exclusiveGateway id="GwBajoJoin">
+      <incoming>f13</incoming>
+      <incoming>f14</incoming>
+      <outgoing>f15</outgoing>
+    </exclusiveGateway>
+    <manualTask id="Presentar" name="Presentar avance y fotos de cada obra">
+      <incoming>f15</incoming>
+      <outgoing>f16</outgoing>
+    </manualTask>
+    <exclusiveGateway id="GwAtraso" name="¿La obra va atrasada?">
+      <incoming>f16</incoming>
+      <outgoing>f17</outgoing>
+      <outgoing>f19</outgoing>
+    </exclusiveGateway>
+    <manualTask id="Explicar" name="Explicar la causa de palabra">
+      <incoming>f17</incoming>
+      <outgoing>f18</outgoing>
+    </manualTask>
+    <exclusiveGateway id="GwAtrasoJoin">
+      <incoming>f18</incoming>
+      <incoming>f19</incoming>
+      <outgoing>f20</outgoing>
+    </exclusiveGateway>
+    <manualTask id="Cuestionar" name="Cuestionar fotos, atrasos y problemas">
+      <incoming>f20</incoming>
+      <outgoing>f21</outgoing>
+    </manualTask>
+    <manualTask id="Anotar" name="Anotar temas a revisar en terreno">
+      <incoming>f21</incoming>
+      <outgoing>f22</outgoing>
+    </manualTask>
+    <endEvent id="End" name="Obras revisadas; acuerdos sin registro">
+      <incoming>f22</incoming>
+    </endEvent>
+    <sequenceFlow id="f01" sourceRef="Start" targetRef="Fotos" />
+    <sequenceFlow id="f02" sourceRef="Fotos" targetRef="Avance" />
+    <sequenceFlow id="f03" sourceRef="Avance" targetRef="GwDudas" />
+    <sequenceFlow id="f04" name="Sí" sourceRef="GwDudas" targetRef="Contrastar" />
+    <sequenceFlow id="f05" sourceRef="Contrastar" targetRef="GwDudasJoin" />
+    <sequenceFlow id="f06" name="No" sourceRef="GwDudas" targetRef="GwDudasJoin" />
+    <sequenceFlow id="f07" sourceRef="GwDudasJoin" targetRef="Lunes" />
+    <sequenceFlow id="f08" sourceRef="Lunes" targetRef="LnkBandaCOut" />
+    <sequenceFlow id="f09" sourceRef="LnkBandaCIn" targetRef="Exponer" />
+    <sequenceFlow id="f10" sourceRef="Exponer" targetRef="Comparar" />
+    <sequenceFlow id="f11" sourceRef="Comparar" targetRef="GwBajo" />
+    <sequenceFlow id="f12" name="Sí" sourceRef="GwBajo" targetRef="Alerta" />
+    <sequenceFlow id="f13" sourceRef="Alerta" targetRef="GwBajoJoin" />
+    <sequenceFlow id="f14" name="No" sourceRef="GwBajo" targetRef="GwBajoJoin" />
+    <sequenceFlow id="f15" sourceRef="GwBajoJoin" targetRef="Presentar" />
+    <sequenceFlow id="f16" sourceRef="Presentar" targetRef="GwAtraso" />
+    <sequenceFlow id="f17" name="Sí" sourceRef="GwAtraso" targetRef="Explicar" />
+    <sequenceFlow id="f18" sourceRef="Explicar" targetRef="GwAtrasoJoin" />
+    <sequenceFlow id="f19" name="No" sourceRef="GwAtraso" targetRef="GwAtrasoJoin" />
+    <sequenceFlow id="f20" sourceRef="GwAtrasoJoin" targetRef="Cuestionar" />
+    <sequenceFlow id="f21" sourceRef="Cuestionar" targetRef="Anotar" />
+    <sequenceFlow id="f22" sourceRef="Anotar" targetRef="End" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_IO_C">
+      <bpmndi:BPMNShape id="P_C_di" bpmnElement="P_C" isHorizontal="true">
+        <omgdc:Bounds x="160" y="160" width="2410" height="910" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Ger_di" bpmnElement="Lane_Ger" isHorizontal="true">
+        <omgdc:Bounds x="190" y="160" width="2380" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_JPR_di" bpmnElement="Lane_JPR" isHorizontal="true">
+        <omgdc:Bounds x="190" y="680" width="2380" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Com_di" bpmnElement="Lane_Com" isHorizontal="true">
+        <omgdc:Bounds x="190" y="810" width="2380" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start">
+        <omgdc:Bounds x="282" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="234" y="251" width="132" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Fotos_di" bpmnElement="Fotos">
+        <omgdc:Bounds x="430" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Avance_di" bpmnElement="Avance">
+        <omgdc:Bounds x="610" y="185" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwDudas_di" bpmnElement="GwDudas" isMarkerVisible="true">
+        <omgdc:Bounds x="815" y="200" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="164" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Contrastar_di" bpmnElement="Contrastar">
+        <omgdc:Bounds x="970" y="315" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwDudasJoin_di" bpmnElement="GwDudasJoin" isMarkerVisible="true">
+        <omgdc:Bounds x="1175" y="200" width="50" height="50" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lunes_di" bpmnElement="Lunes">
+        <omgdc:Bounds x="1362" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1314" y="251" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LnkBandaCOut_di" bpmnElement="LnkBandaCOut">
+        <omgdc:Bounds x="1542" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1530" y="251" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LnkBandaCIn_di" bpmnElement="LnkBandaCIn">
+        <omgdc:Bounds x="282" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="270" y="511" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Exponer_di" bpmnElement="Exponer">
+        <omgdc:Bounds x="430" y="705" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Comparar_di" bpmnElement="Comparar">
+        <omgdc:Bounds x="610" y="835" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwBajo_di" bpmnElement="GwBajo" isMarkerVisible="true">
+        <omgdc:Bounds x="815" y="850" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="774" y="814" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Alerta_di" bpmnElement="Alerta">
+        <omgdc:Bounds x="970" y="965" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwBajoJoin_di" bpmnElement="GwBajoJoin" isMarkerVisible="true">
+        <omgdc:Bounds x="1175" y="850" width="50" height="50" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Presentar_di" bpmnElement="Presentar">
+        <omgdc:Bounds x="1330" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwAtraso_di" bpmnElement="GwAtraso" isMarkerVisible="true">
+        <omgdc:Bounds x="1535" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1496.2" y="438" width="127.6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Explicar_di" bpmnElement="Explicar">
+        <omgdc:Bounds x="1690" y="575" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GwAtrasoJoin_di" bpmnElement="GwAtrasoJoin" isMarkerVisible="true">
+        <omgdc:Bounds x="1895" y="460" width="50" height="50" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Cuestionar_di" bpmnElement="Cuestionar">
+        <omgdc:Bounds x="2050" y="835" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Anotar_di" bpmnElement="Anotar">
+        <omgdc:Bounds x="2230" y="445" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_di" bpmnElement="End">
+        <omgdc:Bounds x="2442" y="467" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2394" y="511" width="132" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f01_di" bpmnElement="f01">
+        <omgdi:waypoint x="318" y="225" />
+        <omgdi:waypoint x="430" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f02_di" bpmnElement="f02">
+        <omgdi:waypoint x="530" y="225" />
+        <omgdi:waypoint x="610" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f03_di" bpmnElement="f03">
+        <omgdi:waypoint x="710" y="225" />
+        <omgdi:waypoint x="815" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f04_di" bpmnElement="f04">
+        <omgdi:waypoint x="840" y="250" />
+        <omgdi:waypoint x="840" y="355" />
+        <omgdi:waypoint x="970" y="355" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="849" y="294.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f05_di" bpmnElement="f05">
+        <omgdi:waypoint x="1070" y="355" />
+        <omgdi:waypoint x="1200" y="355" />
+        <omgdi:waypoint x="1200" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f06_di" bpmnElement="f06">
+        <omgdi:waypoint x="865" y="225" />
+        <omgdi:waypoint x="1175" y="225" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1006" y="203" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f07_di" bpmnElement="f07">
+        <omgdi:waypoint x="1225" y="225" />
+        <omgdi:waypoint x="1362" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f08_di" bpmnElement="f08">
+        <omgdi:waypoint x="1398" y="225" />
+        <omgdi:waypoint x="1542" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f09_di" bpmnElement="f09">
+        <omgdi:waypoint x="318" y="485" />
+        <omgdi:waypoint x="374" y="485" />
+        <omgdi:waypoint x="374" y="745" />
+        <omgdi:waypoint x="430" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_di" bpmnElement="f10">
+        <omgdi:waypoint x="530" y="745" />
+        <omgdi:waypoint x="570" y="745" />
+        <omgdi:waypoint x="570" y="875" />
+        <omgdi:waypoint x="610" y="875" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_di" bpmnElement="f11">
+        <omgdi:waypoint x="710" y="875" />
+        <omgdi:waypoint x="815" y="875" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_di" bpmnElement="f12">
+        <omgdi:waypoint x="840" y="900" />
+        <omgdi:waypoint x="840" y="1005" />
+        <omgdi:waypoint x="970" y="1005" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="849" y="944.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_di" bpmnElement="f13">
+        <omgdi:waypoint x="1070" y="1005" />
+        <omgdi:waypoint x="1200" y="1005" />
+        <omgdi:waypoint x="1200" y="900" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_di" bpmnElement="f14">
+        <omgdi:waypoint x="865" y="875" />
+        <omgdi:waypoint x="1175" y="875" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1006" y="853" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15_di" bpmnElement="f15">
+        <omgdi:waypoint x="1225" y="875" />
+        <omgdi:waypoint x="1277.5" y="875" />
+        <omgdi:waypoint x="1277.5" y="485" />
+        <omgdi:waypoint x="1330" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16_di" bpmnElement="f16">
+        <omgdi:waypoint x="1430" y="485" />
+        <omgdi:waypoint x="1535" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17_di" bpmnElement="f17">
+        <omgdi:waypoint x="1560" y="510" />
+        <omgdi:waypoint x="1560" y="615" />
+        <omgdi:waypoint x="1690" y="615" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1569" y="554.5" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f18_di" bpmnElement="f18">
+        <omgdi:waypoint x="1790" y="615" />
+        <omgdi:waypoint x="1920" y="615" />
+        <omgdi:waypoint x="1920" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f19_di" bpmnElement="f19">
+        <omgdi:waypoint x="1585" y="485" />
+        <omgdi:waypoint x="1895" y="485" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1726" y="463" width="28" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f20_di" bpmnElement="f20">
+        <omgdi:waypoint x="1945" y="485" />
+        <omgdi:waypoint x="1997.5" y="485" />
+        <omgdi:waypoint x="1997.5" y="875" />
+        <omgdi:waypoint x="2050" y="875" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f21_di" bpmnElement="f21">
+        <omgdi:waypoint x="2150" y="875" />
+        <omgdi:waypoint x="2190" y="875" />
+        <omgdi:waypoint x="2190" y="485" />
+        <omgdi:waypoint x="2230" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f22_di" bpmnElement="f22">
+        <omgdi:waypoint x="2330" y="485" />
+        <omgdi:waypoint x="2442" y="485" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

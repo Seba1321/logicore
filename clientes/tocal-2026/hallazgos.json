@@ -1,3 +1,39 @@
 {
-  "hallazgos": []
+  "hallazgos": [
+    {
+      "proceso_slug": "informe-de-obra",
+      "titulo": "Matriz de madurez — Informe de Obra",
+      "archivo_path": "hammer/informe-de-obra.png",
+      "archivo_url": null,
+      "orden": 1
+    },
+    {
+      "proceso_slug": "informe-de-obra",
+      "titulo": "Evaluación de Prevención",
+      "archivo_path": "hammer/informe-de-obra-a-evaluacion-prevencion.png",
+      "archivo_url": null,
+      "orden": 2
+    },
+    {
+      "proceso_slug": "informe-de-obra",
+      "titulo": "Elaboración y Envío",
+      "archivo_path": "hammer/informe-de-obra-b-elaboracion-envio.png",
+      "archivo_url": null,
+      "orden": 3
+    },
+    {
+      "proceso_slug": "informe-de-obra",
+      "titulo": "Revisión y Reunión de Gerencia",
+      "archivo_path": "hammer/informe-de-obra-c-revision-reunion-gerencia.png",
+      "archivo_url": null,
+      "orden": 4
+    },
+    {
+      "proceso_slug": "informe-de-obra",
+      "titulo": "Visita a Terreno y Seguimiento",
+      "archivo_path": "hammer/informe-de-obra-d-visita-terreno-seguimiento.png",
+      "archivo_url": null,
+      "orden": 5
+    }
+  ]
 }

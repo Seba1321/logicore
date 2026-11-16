@@ -6,10 +6,51 @@
       "area": "Operaciones",
       "estado": "identificado",
       "responsable_methodical": null,
-      "responsable_cliente": null,
-      "descripcion": "Elaboración y entrega del informe de obra. Pendiente de levantamiento.",
+      "responsable_cliente": "Gonzalo Castillo",
+      "descripcion": "Elaboración semanal del informe de obra: evaluación de prevención, elaboración y envío por el administrador, revisión y reunión de gerencia, y visita a terreno con seguimiento.",
       "orden": 1,
-      "bpmn": []
+      "bpmn": [
+        {
+          "nombre": "Informe de Obra — Vista general",
+          "descripcion": "Macroproceso semanal con los cuatro subprocesos colapsados.",
+          "archivo_path": "bpmn/Informe-de-Obra.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Informe-de-Obra-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "IO-A · Evaluación de Prevención",
+          "descripcion": "Evaluación semanal de prevención de riesgos por el prevencionista de obra (jueves).",
+          "archivo_path": "bpmn/Informe-de-Obra-A-Evaluacion-de-Prevencion.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Informe-de-Obra-A-Evaluacion-de-Prevencion-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "IO-B · Elaboración y Envío",
+          "descripcion": "Preparación del informe por el administrador u oficina técnica: PDR, avance y curvas S, EDP y adicionales, RDI y fotografías (viernes).",
+          "archivo_path": "bpmn/Informe-de-Obra-B-Elaboracion-y-Envio.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Informe-de-Obra-B-Elaboracion-y-Envio-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "IO-C · Revisión y Reunión de Gerencia",
+          "descripcion": "Revisión del informe por el gerente de proyectos y reunión de gerencia de los lunes.",
+          "archivo_path": "bpmn/Informe-de-Obra-C-Revision-y-Reunion-de-Gerencia.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Informe-de-Obra-C-Revision-y-Reunion-de-Gerencia-preview.svg",
+          "preview_url": null
+        },
+        {
+          "nombre": "IO-D · Visita a Terreno y Seguimiento",
+          "descripcion": "Visitas a obra para verificar en terreno lo que el informe no muestra y seguimiento de tareas.",
+          "archivo_path": "bpmn/Informe-de-Obra-D-Visita-a-Terreno-y-Seguimiento.bpmn",
+          "archivo_url": null,
+          "preview_path": "bpmn/Informe-de-Obra-D-Visita-a-Terreno-y-Seguimiento-preview.svg",
+          "preview_url": null
+        }
+      ]
     },
     {
       "slug": "informe-de-prevencion",

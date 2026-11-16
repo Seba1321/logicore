@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2470" height="970" viewBox="0 0 2470 970">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><marker id="sf" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#111"/></marker><marker id="mf" markerWidth="11" markerHeight="9" refX="10" refY="4.5" orient="auto"><path d="M0.5,0.5 L10,4.5 L0.5,8.5 z" fill="#fff" stroke="#555" stroke-width="1"/></marker></defs>
+<rect x="30.0" y="30.0" width="2410.0" height="910.0" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="30.0" y="30.0" width="30" height="910.0" fill="#f4f4f4" stroke="#333" stroke-width="2"/>
+<g transform="translate(45.0,485.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#111">IO-C · Revisión de informes y reunión de gerencia — Tocal</text></g>
+<rect x="60.0" y="680.0" width="2380.0" height="260.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="680.0" width="30" height="260.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,810.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Reunión de gerencia</text></g>
+<rect x="60.0" y="30.0" width="2380.0" height="520.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="30.0" width="30" height="520.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,290.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Gerente de Proyectos</text></g>
+<rect x="60.0" y="550.0" width="2380.0" height="130.0" fill="none" stroke="#333" stroke-width="1.4"/>
+<rect x="60.0" y="550.0" width="30" height="130.0" fill="#fafafa" stroke="#333" stroke-width="1.4"/>
+<g transform="translate(75.0,615.0) rotate(-90)"><text x="0.0" y="3.5" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="normal" text-anchor="middle" fill="#111">Jefe de Prevención</text></g>
+<polyline points="188.0,95.0 300.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="400.0,95.0 480.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="580.0,95.0 685.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="710.0,120.0 710.0,225.0 840.0,225.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="722.6" y="164.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="733.0" y="176.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Sí</text>
+<polyline points="940.0,225.0 1070.0,225.0 1070.0,120.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="735.0,95.0 1045.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="879.6" y="73.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="890.0" y="85.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="1095.0,95.0 1232.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1268.0,95.0 1412.0,95.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="188.0,355.0 244.0,355.0 244.0,615.0 300.0,615.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="400.0,615.0 440.0,615.0 440.0,745.0 480.0,745.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="580.0,745.0 685.0,745.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="710.0,770.0 710.0,875.0 840.0,875.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="722.6" y="814.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="733.0" y="826.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Sí</text>
+<polyline points="940.0,875.0 1070.0,875.0 1070.0,770.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="735.0,745.0 1045.0,745.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="879.6" y="723.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="890.0" y="735.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="1095.0,745.0 1147.5,745.0 1147.5,355.0 1200.0,355.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1300.0,355.0 1405.0,355.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1430.0,380.0 1430.0,485.0 1560.0,485.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1442.6" y="424.5" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1453.0" y="436.5" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">Sí</text>
+<polyline points="1660.0,485.0 1790.0,485.0 1790.0,380.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="1455.0,355.0 1765.0,355.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="1599.6" y="333.0" width="20.8" height="14" fill="#fff" opacity="0.9"/>
+<text x="1610.0" y="345.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#000">No</text>
+<polyline points="1815.0,355.0 1867.5,355.0 1867.5,745.0 1920.0,745.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2020.0,745.0 2060.0,745.0 2060.0,355.0 2100.0,355.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<polyline points="2200.0,355.0 2312.0,355.0" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#sf)"/>
+<rect x="840.0" y="835.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M849.0,843.0 h7 M849.0,846.0 h7 M849.0,849.0 h7 M849.0,843.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="890.0" y="873.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Levantar alerta</text><text x="890.0" y="885.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de la obra</text>
+<rect x="2100.0" y="315.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M2109.0,323.0 h7 M2109.0,326.0 h7 M2109.0,329.0 h7 M2109.0,323.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="2150.0" y="347.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Anotar temas a</text><text x="2150.0" y="359.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">revisar en</text><text x="2150.0" y="371.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">terreno</text>
+<rect x="480.0" y="55.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="491.0" cy="64.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M486.6,71.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="530.0" y="87.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar avance,</text><text x="530.0" y="99.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">ruta crítica y</text><text x="530.0" y="111.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">problemas</text>
+<rect x="480.0" y="705.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M489.0,713.0 h7 M489.0,716.0 h7 M489.0,719.0 h7 M489.0,713.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="530.0" y="737.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Comparar</text><text x="530.0" y="749.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">prevención</text><text x="530.0" y="761.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">entre obras</text>
+<rect x="840.0" y="185.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="851.0" cy="194.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M846.6,201.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="890.0" y="223.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Contrastar con</text><text x="890.0" y="235.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">MS Project</text>
+<rect x="1920.0" y="705.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1929.0,713.0 h7 M1929.0,716.0 h7 M1929.0,719.0 h7 M1929.0,713.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1970.0" y="737.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Cuestionar</text><text x="1970.0" y="749.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">fotos, atrasos</text><text x="1970.0" y="761.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">y problemas</text>
+<circle cx="2330.0" cy="355.0" r="18.0" fill="#fff" stroke="#111" stroke-width="3.2"/>
+<text x="2330.0" y="393.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Obras revisadas;</text><text x="2330.0" y="405.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">acuerdos sin registro</text>
+<rect x="1560.0" y="445.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1569.0,453.0 h7 M1569.0,456.0 h7 M1569.0,459.0 h7 M1569.0,453.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1610.0" y="477.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Explicar la</text><text x="1610.0" y="489.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">causa de</text><text x="1610.0" y="501.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">palabra</text>
+<rect x="300.0" y="575.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M309.0,583.0 h7 M309.0,586.0 h7 M309.0,589.0 h7 M309.0,583.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="350.0" y="607.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Exponer</text><text x="350.0" y="619.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">novedades de</text><text x="350.0" y="631.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">prevención</text>
+<rect x="300.0" y="55.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="311.0" cy="64.0" r="2.6" fill="none" stroke="#111" stroke-width="1.1"/><path d="M306.6,71.5 a4.4,4.4 0 0 1 8.8,0" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="350.0" y="93.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Revisar fotos</text><text x="350.0" y="105.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de la semana</text>
+<polygon points="1430.0,330.0 1455.0,355.0 1430.0,380.0 1405.0,355.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1422.0,347.0 L1438.0,363.0 M1438.0,347.0 L1422.0,363.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="1430.0" y="319.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿La obra va atrasada?</text>
+<polygon points="1790.0,330.0 1815.0,355.0 1790.0,380.0 1765.0,355.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1782.0,347.0 L1798.0,363.0 M1798.0,347.0 L1782.0,363.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="710.0,720.0 735.0,745.0 710.0,770.0 685.0,745.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M702.0,737.0 L718.0,753.0 M718.0,737.0 L702.0,753.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="710.0" y="696.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Alguna obra bajo el</text><text x="710.0" y="708.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">estándar?</text>
+<polygon points="1070.0,720.0 1095.0,745.0 1070.0,770.0 1045.0,745.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1062.0,737.0 L1078.0,753.0 M1078.0,737.0 L1062.0,753.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<polygon points="710.0,70.0 735.0,95.0 710.0,120.0 685.0,95.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M702.0,87.0 L718.0,103.0 M718.0,87.0 L702.0,103.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<text x="710.0" y="46.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">¿Hay dudas sobre lo</text><text x="710.0" y="58.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">informado?</text>
+<polygon points="1070.0,70.0 1095.0,95.0 1070.0,120.0 1045.0,95.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1062.0,87.0 L1078.0,103.0 M1078.0,87.0 L1062.0,103.0" stroke="#111" stroke-width="2.2" fill="none"/>
+<circle cx="170.0" cy="355.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="170.0" cy="355.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<path d="M164.0,352.5 L171.5,352.5 L171.5,349.5 L176.5,355.0 L171.5,360.5 L171.5,357.5 Z" fill="none" stroke="#111" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="170.0" y="392.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">A</text>
+<circle cx="1430.0" cy="95.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1430.0" cy="95.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<path d="M1424.0,92.5 L1431.5,92.5 L1431.5,89.5 L1436.5,95.0 L1431.5,100.5 L1431.5,97.5 Z" fill="#111" stroke="#111" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="1430.0" y="132.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">A</text>
+<circle cx="1250.0" cy="95.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<circle cx="1250.0" cy="95.0" r="15.0" fill="none" stroke="#111" stroke-width="1.4"/>
+<circle cx="1250.0" cy="95.0" r="12.0" fill="none" stroke="#111" stroke-width="1.2"/>
+<path d="M1250.0,95.0 L1250.0,89.0 M1250.0,95.0 L1254.0,97.0" stroke="#111" stroke-width="1.2"/>
+<text x="1250.0" y="133.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Lunes: reunión de</text><text x="1250.0" y="145.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">gerencia</text>
+<rect x="1200.0" y="315.0" width="100.0" height="80.0" rx="9" ry="9" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<path d="M1209.0,323.0 h7 M1209.0,326.0 h7 M1209.0,329.0 h7 M1209.0,323.0 a3,3 0 0 0 0,6" fill="none" stroke="#111" stroke-width="1.1"/>
+<text x="1250.0" y="347.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Presentar</text><text x="1250.0" y="359.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">avance y fotos</text><text x="1250.0" y="371.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">de cada obra</text>
+<circle cx="170.0" cy="95.0" r="18.0" fill="#fff" stroke="#111" stroke-width="1.8"/>
+<text x="170.0" y="134.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">Informes de obra</text><text x="170.0" y="146.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">recibidos (viernes o</text><text x="170.0" y="158.0" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">fin de semana)</text>
+</svg>
