@@ -81,17 +81,50 @@ export type PortalProcess = {
   informes: PortalInforme[];
 };
 
+export type ModuloEtapa = "por_desarrollar" | "en_desarrollo" | "en_pruebas" | "entregado";
+
+export type PortalModulo = {
+  id: number;
+  slug: string | null;
+  nombre: string;
+  grupo: string | null;
+  descripcion: string | null;
+  etapa: ModuloEtapa;
+  /** Ventana del plan en que se trabaja el módulo. Con ella, la etapa se deriva del calendario. */
+  fecha_inicio: string | null;
+  fecha_fin: string | null;
+  orden: number;
+};
+
+export type PortalDocumento = {
+  id: number;
+  nombre: string;
+  descripcion: string | null;
+  archivo_path: string | null;
+  archivo_url: string | null;
+  orden: number;
+  updated_at: string | null;
+};
+
+/** El levantamiento de procesos y el desarrollo de software se muestran en vistas separadas. */
+export type ProjectTipo = "levantamiento" | "desarrollo";
+
 export type PortalProject = {
   id: number;
   nombre: string;
   descripcion: string | null;
   estado: string;
+  tipo: ProjectTipo;
+  /** Enlace al sistema desplegado; solo proyectos de desarrollo. */
+  sistema_url: string | null;
   fecha_inicio: string | null;
   fecha_fin: string | null;
   updated_at: string | null;
   tareas: PortalTask[];
   procesos: PortalProcess[];
   bpmn: PortalBpmn[];
+  modulos: PortalModulo[];
+  documentos: PortalDocumento[];
 };
 
 export type PortalData = {

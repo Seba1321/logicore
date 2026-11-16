@@ -1,5 +1,6 @@
 import { CornerTicks, CountUp } from "@/components/portal/technical";
 import type { ProcessStage, TaskTiming } from "@/lib/portal-progress";
+import type { ModuloEtapa } from "@/lib/supabase";
 
 // Vocabulario visual del portal. Solo tres estados de tarea de cara al cliente:
 // nada se muestra como atrasado.
@@ -14,6 +15,23 @@ export const PROCESS_STAGE_META: Record<ProcessStage, { label: string; pill: str
   construyendo_bpmn: { label: "Construyendo BPMN", pill: "bg-blue-50 text-blue-700 ring-blue-200", dot: "bg-blue-500" },
   analisis_hammer: { label: "Análisis HAMMER", pill: "bg-amber-50 text-amber-700 ring-amber-200", dot: "bg-amber-500" },
   informe_final: { label: "Informe final", pill: "bg-emerald-50 text-emerald-700 ring-emerald-200", dot: "bg-emerald-500" },
+};
+
+export const MODULO_ETAPA_META: Record<ModuloEtapa, { label: string; pill: string; dot: string }> = {
+  por_desarrollar: { label: "Por desarrollar", pill: "bg-slate-50 text-slate-700 ring-slate-200", dot: "bg-slate-400" },
+  en_desarrollo: { label: "En desarrollo", pill: "bg-blue-50 text-blue-700 ring-blue-200", dot: "bg-blue-500" },
+  en_pruebas: { label: "En pruebas", pill: "bg-amber-50 text-amber-700 ring-amber-200", dot: "bg-amber-500" },
+  entregado: { label: "Entregado", pill: "bg-emerald-50 text-emerald-700 ring-emerald-200", dot: "bg-emerald-500" },
+};
+
+export const ModuloEtapaPill = ({ etapa }: { etapa: ModuloEtapa }) => {
+  const meta = MODULO_ETAPA_META[etapa];
+  return (
+    <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-sm px-2 py-0.5 text-[11px] font-semibold ring-1 ${meta.pill}`}>
+      <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
+      {meta.label}
+    </span>
+  );
 };
 
 export const TimingPill = ({ timing }: { timing: TaskTiming }) => {

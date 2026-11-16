@@ -63,6 +63,22 @@ create table if not exists public.proyecto_tareas (
   updated_at timestamptz not null default now()
 );
 
+-- tipo separa el levantamiento de procesos del desarrollo de software: el
+-- portal muestra una vista por tipo. sistema_url es el enlace al sistema
+-- desplegado (solo proyectos de desarrollo; null = sin botón).
+alter table public.proyectos
+add column if not exists tipo varchar(30) not null default 'levantamiento',
+add column if not exists sistema_url text;
+
+do $$
+begin
+  if not exists (select 1 from pg_constraint where conname = 'proyectos_tipo_check') then
+    alter table public.proyectos
+    add constraint proyectos_tipo_check check (tipo in ('levantamiento', 'desarrollo'));
+  end if;
+end;
+$$;
+
 alter table public.proyecto_tareas
 add column if not exists id_git text,
 add column if not exists fase varchar(120),
@@ -149,6 +165,40 @@ create table if not exists public.proceso_pendientes (
   updated_at timestamptz not null default now()
 );
 
+-- Módulos del sistema en un proyecto de desarrollo, con su etapa.
+create table if not exists public.proyecto_modulos (
+  id bigint generated always as identity primary key,
+  proyecto_id bigint not null references public.proyectos(id) on delete cascade,
+  slug varchar(180),
+  nombre varchar(255) not null,
+  grupo varchar(120),
+  descripcion text,
+  etapa varchar(30) not null default 'por_desarrollar'
+    check (etapa in ('por_desarrollar', 'en_desarrollo', 'en_pruebas', 'entregado')),
+  orden integer not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- Ventana del plan en que se trabaja el módulo. Con fechas, el portal deriva
+-- la etapa del calendario; sin ellas, muestra `etapa` tal cual.
+alter table public.proyecto_modulos
+add column if not exists fecha_inicio date,
+add column if not exists fecha_fin date;
+
+-- Documentos de un proyecto de desarrollo (requisitos, manuales, actas).
+create table if not exists public.proyecto_documentos (
+  id bigint generated always as identity primary key,
+  proyecto_id bigint not null references public.proyectos(id) on delete cascade,
+  nombre varchar(255) not null,
+  descripcion text,
+  archivo_path text,
+  archivo_url text,
+  orden integer not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 alter table public.empresa_sessions enable row level security;
 alter table public.empresa_accesos enable row level security;
 alter table public.proyectos enable row level security;
@@ -158,6 +208,8 @@ alter table public.proyecto_bpmn enable row level security;
 alter table public.proceso_hallazgos enable row level security;
 alter table public.proceso_informes enable row level security;
 alter table public.proceso_pendientes enable row level security;
+alter table public.proyecto_modulos enable row level security;
+alter table public.proyecto_documentos enable row level security;
 
 create index if not exists empresa_sessions_empresa_id_idx on public.empresa_sessions(empresa_id);
 create index if not exists empresa_sessions_expires_at_idx on public.empresa_sessions(expires_at);
@@ -174,6 +226,8 @@ create index if not exists proyecto_bpmn_proceso_id_idx on public.proyecto_bpmn(
 create index if not exists proceso_hallazgos_proceso_id_idx on public.proceso_hallazgos(proceso_id);
 create index if not exists proceso_informes_proceso_id_idx on public.proceso_informes(proceso_id);
 create index if not exists proceso_pendientes_proceso_id_idx on public.proceso_pendientes(proceso_id);
+create index if not exists proyecto_modulos_proyecto_id_idx on public.proyecto_modulos(proyecto_id);
+create index if not exists proyecto_documentos_proyecto_id_idx on public.proyecto_documentos(proyecto_id);
 
 -- Escribe una fila en empresa_accesos. Nunca lanza: un fallo de auditoría no
 -- puede bloquear un login legítimo. No se expone al frontend (sin grant a
@@ -321,6 +375,8 @@ begin
           'nombre', p.nombre,
           'descripcion', p.descripcion,
           'estado', p.estado,
+          'tipo', p.tipo,
+          'sistema_url', p.sistema_url,
           'fecha_inicio', p.fecha_inicio,
           'fecha_fin', p.fecha_fin,
           'updated_at', p.updated_at,
@@ -437,6 +493,40 @@ begin
             )
             from public.proyecto_bpmn b
             where b.proyecto_id = p.id
+          ), '[]'::jsonb),
+          'modulos', coalesce((
+            select jsonb_agg(
+              jsonb_build_object(
+                'id', m.id,
+                'slug', m.slug,
+                'nombre', m.nombre,
+                'grupo', m.grupo,
+                'descripcion', m.descripcion,
+                'etapa', m.etapa,
+                'fecha_inicio', m.fecha_inicio,
+                'fecha_fin', m.fecha_fin,
+                'orden', m.orden
+              )
+              order by m.orden, m.id
+            )
+            from public.proyecto_modulos m
+            where m.proyecto_id = p.id
+          ), '[]'::jsonb),
+          'documentos', coalesce((
+            select jsonb_agg(
+              jsonb_build_object(
+                'id', d.id,
+                'nombre', d.nombre,
+                'descripcion', d.descripcion,
+                'archivo_path', d.archivo_path,
+                'archivo_url', d.archivo_url,
+                'orden', d.orden,
+                'updated_at', d.updated_at
+              )
+              order by d.orden, d.id
+            )
+            from public.proyecto_documentos d
+            where d.proyecto_id = p.id
           ), '[]'::jsonb)
         )
         order by p.fecha_inicio nulls last, p.id

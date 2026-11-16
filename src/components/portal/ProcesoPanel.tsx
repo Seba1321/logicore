@@ -222,7 +222,7 @@ const MatrixCard = ({
   );
 };
 
-const InformeRow = ({
+export const InformeRow = ({
   titulo,
   descripcion,
   archivo,

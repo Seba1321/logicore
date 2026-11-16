@@ -262,6 +262,25 @@ clientes/maulemed-2026/supabase-seed.sql
 
 Ese seed recrea el proyecto de MauleMed y sus tareas. No modifica credenciales.
 
+## Proyecto De Desarrollo De Software
+
+Una empresa puede tener, además del levantamiento, un proyecto de desarrollo de software. Va en **otra carpeta** con la misma `empresa` (p. ej. `clientes/maulemed-2026-software/`) y el portal lo muestra en una vista aparte: si la empresa tiene proyectos de los dos tipos, aparece un selector arriba ("Desarrollo de software" / "Levantamiento de procesos") que abre en Desarrollo.
+
+`project.json` declara el tipo y, opcionalmente, el enlace al sistema (`null` = sin botón):
+
+```json
+"proyecto": {
+  "nombre": "Desarrollo de software MauleMed 2026",
+  "tipo": "desarrollo",
+  "sistema_url": "https://..."
+}
+```
+
+Sin `tipo`, el proyecto es `levantamiento`. La carpeta no necesita `gantt.json` ni `procesos.json`; en su lugar:
+
+- `modulos.json` → `{ "modulos": [ { "slug", "nombre", "grupo", "descripcion", "etapa", "orden" } ] }`. `etapa` es `por_desarrollar`, `en_desarrollo`, `en_pruebas` o `entregado`. El portal agrupa los módulos por `grupo` en el orden en que aparecen.
+- `documentos.json` → `{ "documentos": [ { "nombre", "descripcion", "archivo_path": "documentos/x.pdf", "archivo_url": null } ] }`. El sync sube cada PDF de `documentos/` a Storage.
+
 ## Sincronización
 
 El portal lee desde Supabase. Git es la fuente administrativa. Al hacer push a `main`, GitHub Actions ejecuta:

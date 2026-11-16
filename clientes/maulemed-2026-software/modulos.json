@@ -1,0 +1,194 @@
+{
+  "modulos": [
+    {
+      "slug": "organizacion",
+      "nombre": "Organización",
+      "grupo": "H1 · Organización y seguridad",
+      "descripcion": "Las 15 razones sociales, sus sucursales y centros de costo.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-11-30",
+      "fecha_fin": "2026-12-04",
+      "orden": 0
+    },
+    {
+      "slug": "usuarios-roles",
+      "nombre": "Usuarios y roles",
+      "grupo": "H1 · Organización y seguridad",
+      "descripcion": "Cuentas, roles con alcance y matriz de permisos.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-11-30",
+      "fecha_fin": "2026-12-04",
+      "orden": 1
+    },
+    {
+      "slug": "auditoria",
+      "nombre": "Auditoría",
+      "grupo": "H1 · Organización y seguridad",
+      "descripcion": "Bitácora de operaciones, con usuario y origen.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-11-30",
+      "fecha_fin": "2026-12-04",
+      "orden": 2
+    },
+    {
+      "slug": "compras",
+      "nombre": "Compras",
+      "grupo": "H2 · Abastecimiento",
+      "descripcion": "Solicitudes, aprobación por monto, órdenes y recepciones.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-11-23",
+      "fecha_fin": "2026-12-29",
+      "orden": 3
+    },
+    {
+      "slug": "inventario",
+      "nombre": "Inventario",
+      "grupo": "H2 · Abastecimiento",
+      "descripcion": "Stock por bodega, lotes con vencimiento y movimientos.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-11-23",
+      "fecha_fin": "2026-12-29",
+      "orden": 4
+    },
+    {
+      "slug": "traspasos",
+      "nombre": "Traspasos",
+      "grupo": "H2 · Abastecimiento",
+      "descripcion": "Movimiento de existencias entre sucursales y préstamos.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-11-23",
+      "fecha_fin": "2026-12-29",
+      "orden": 5
+    },
+    {
+      "slug": "productos",
+      "nombre": "Productos",
+      "grupo": "H2 · Abastecimiento",
+      "descripcion": "Catálogo, parámetros por sucursal e historial de precios.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-12-07",
+      "fecha_fin": "2026-12-14",
+      "orden": 6
+    },
+    {
+      "slug": "proveedores",
+      "nombre": "Proveedores",
+      "grupo": "H2 · Abastecimiento",
+      "descripcion": "Maestro de proveedores, precios y plazos de pago.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-12-07",
+      "fecha_fin": "2026-12-14",
+      "orden": 7
+    },
+    {
+      "slug": "notificaciones",
+      "nombre": "Notificaciones",
+      "grupo": "H2 · Abastecimiento",
+      "descripcion": "Avisos en aplicación y alerta de stock bajo mínimo.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-12-07",
+      "fecha_fin": "2026-12-29",
+      "orden": 8
+    },
+    {
+      "slug": "finanzas",
+      "nombre": "Finanzas",
+      "grupo": "H3 · Finanzas",
+      "descripcion": "Facturas, pagos y presupuesto por sociedad, sucursal, centro de costo y línea.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-12-30",
+      "fecha_fin": "2027-01-13",
+      "orden": 9
+    },
+    {
+      "slug": "ingresos",
+      "nombre": "Ingresos",
+      "grupo": "H3 · Finanzas",
+      "descripcion": "Libro de ingresos, cobranza institucional y recaudación.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2027-01-14",
+      "fecha_fin": "2027-01-20",
+      "orden": 10
+    },
+    {
+      "slug": "tablero",
+      "nombre": "Tablero",
+      "grupo": "H3 · Finanzas",
+      "descripcion": "Indicadores ejecutivos con comparación y exportación histórica.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2027-01-14",
+      "fecha_fin": "2027-01-20",
+      "orden": 11
+    },
+    {
+      "slug": "reportes",
+      "nombre": "Reportes",
+      "grupo": "H3 · Finanzas",
+      "descripcion": "Reportes de stock, compras y consumo, con exportación.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2027-01-14",
+      "fecha_fin": "2027-01-20",
+      "orden": 12
+    },
+    {
+      "slug": "documentos",
+      "nombre": "Documentos",
+      "grupo": "H4 · Gestión clínica",
+      "descripcion": "Carga y análisis de exportaciones del sistema clínico.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2027-01-21",
+      "fecha_fin": "2027-01-27",
+      "orden": 13
+    },
+    {
+      "slug": "produccion-clinica",
+      "nombre": "Producción clínica",
+      "grupo": "H4 · Gestión clínica",
+      "descripcion": "Prestaciones RIS/PACS por modalidad, equipo, sucursal, sociedad y médico.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-12-30",
+      "fecha_fin": "2027-01-27",
+      "orden": 14
+    },
+    {
+      "slug": "no-show",
+      "nombre": "No show",
+      "grupo": "H4 · Gestión clínica",
+      "descripcion": "Inasistencias calculadas desde la agenda y los eventos del RIS.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2027-01-28",
+      "fecha_fin": "2027-02-03",
+      "orden": 15
+    },
+    {
+      "slug": "codesud",
+      "nombre": "Extracción Codesud",
+      "grupo": "H4 · Gestión clínica",
+      "descripcion": "Extracción automática y trazable desde Codesud.",
+      "etapa": "por_desarrollar",
+      "fecha_inicio": "2026-12-30",
+      "fecha_fin": "2027-02-10",
+      "orden": 16
+    },
+    {
+      "slug": "evaluaciones",
+      "nombre": "Evaluaciones",
+      "grupo": "Transversal",
+      "descripcion": "Formularios de desempeño y sus respuestas.",
+      "etapa": "en_pruebas",
+      "fecha_inicio": null,
+      "fecha_fin": null,
+      "orden": 17
+    },
+    {
+      "slug": "asistente",
+      "nombre": "Asistente",
+      "grupo": "Transversal",
+      "descripcion": "Consulta en lenguaje natural del contexto permitido.",
+      "etapa": "en_pruebas",
+      "fecha_inicio": null,
+      "fecha_fin": null,
+      "orden": 18
+    }
+  ]
+}

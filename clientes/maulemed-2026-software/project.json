@@ -1,0 +1,13 @@
+{
+  "empresa": "MauleMed",
+  "usuario": "Victor Retamal",
+  "proyecto": {
+    "nombre": "Desarrollo de software MauleMed 2026",
+    "descripcion": "Implementación de la Plataforma de Gestión MauleMed en 13 semanas: correcciones, 15 sociedades, abastecimiento, finanzas, gestión clínica RIS/PACS y extracción automática desde Codesud.",
+    "estado": "en_desarrollo",
+    "tipo": "desarrollo",
+    "sistema_url": null,
+    "fecha_inicio": "2026-11-23",
+    "fecha_fin": "2027-02-24"
+  }
+}

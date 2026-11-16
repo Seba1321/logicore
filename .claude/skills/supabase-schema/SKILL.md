@@ -25,12 +25,14 @@ El frontend **solo usa RPCs** (`login_empresa`, `get_portal_empresa`, `logout_em
 | `empresas` | login del portal (`empresa`, `usuario`, `password` bcrypt, `activo`) | manual (SQL) |
 | `empresa_sessions` | tokens de sesión con expiración | RPCs |
 | `empresa_accesos` | auditoría de logins al portal (exitosos y fallidos, con IP) — no se autopurga | RPC `login_empresa` |
-| `proyectos` | proyecto por empresa (borrado y re-insertado en cada sync) | sync |
+| `proyectos` | proyecto por empresa (borrado y re-insertado en cada sync); `tipo` = `levantamiento` \| `desarrollo` decide la vista del portal; `sistema_url` = enlace al sistema (solo desarrollo) | sync |
 | `proyecto_tareas` | tareas Gantt (desde `gantt.json`) | sync |
 | `procesos` | procesos levantados (desde `procesos.json`) | sync |
 | `proyecto_bpmn` | diagramas BPMN + `archivo_url` público y `preview_url` (miniatura SVG, opcional); `proceso_id` liga al proceso | sync |
 | `proceso_informes` | informes PDF finales por proceso | sync |
 | `proceso_hallazgos` | imágenes HAMMER por proceso (asociadas por `proceso_slug`) | sync |
+| `proyecto_modulos` | módulos de un proyecto de desarrollo con `grupo` y `etapa` (`por_desarrollar`/`en_desarrollo`/`en_pruebas`/`entregado`) | sync |
+| `proyecto_documentos` | PDFs de un proyecto de desarrollo (requisitos, manuales, actas) | sync |
 | `proceso_pendientes` | existe en el SQL pero **el pipeline actual no la alimenta** (estándar viejo) | — |
 
 Borrar una empresa cascadea a sus proyectos.

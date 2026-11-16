@@ -75,10 +75,12 @@ export const PlanTimeline = ({
   tasks,
   today,
   progress,
+  label = "Plan del levantamiento",
 }: {
   tasks: PortalTask[];
   today: number;
   progress: number;
+  label?: string;
 }) => {
   const calendar = getPlanCalendar(tasks, today);
   const phases = getPlanPhases(tasks, today);
@@ -89,7 +91,7 @@ export const PlanTimeline = ({
 
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <p className="font-display text-[11px] font-medium uppercase tracking-[0.14em] text-blue-100/70">
-          Plan del levantamiento
+          {label}
         </p>
         {calendar && (
           <p className="flex items-baseline gap-3 font-display text-[11px] font-medium uppercase tracking-[0.08em] text-blue-100/50">

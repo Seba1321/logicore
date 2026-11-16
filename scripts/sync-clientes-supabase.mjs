@@ -120,6 +120,9 @@ const syncClient = async (clientSlug) => {
   const ganttConfig = await readJson(path.join(clientDir, "gantt.json"), { tareas: [] });
   const procesosConfig = await readJson(path.join(clientDir, "procesos.json"), { procesos: [] });
   const hallazgosConfig = await readJson(path.join(clientDir, "hallazgos.json"), { hallazgos: [] });
+  // Solo los proyectos de desarrollo de software traen módulos y documentos.
+  const modulosConfig = await readJson(path.join(clientDir, "modulos.json"), { modulos: [] });
+  const documentosConfig = await readJson(path.join(clientDir, "documentos.json"), { documentos: [] });
 
   if (!projectConfig.empresa || !projectConfig.proyecto?.nombre) {
     throw new Error(`Invalid project.json for ${clientSlug}`);
@@ -143,6 +146,8 @@ const syncClient = async (clientSlug) => {
       nombre: proyecto.nombre,
       descripcion: proyecto.descripcion ?? null,
       estado: proyecto.estado ?? "planificacion",
+      tipo: proyecto.tipo ?? "levantamiento",
+      sistema_url: proyecto.sistema_url ?? null,
       fecha_inicio: proyecto.fecha_inicio ?? null,
       fecha_fin: proyecto.fecha_fin ?? null,
     })
@@ -261,6 +266,39 @@ const syncClient = async (clientSlug) => {
   }
 
   await insertRows("proceso_hallazgos", hallazgoRows);
+
+  await insertRows(
+    "proyecto_modulos",
+    (modulosConfig.modulos ?? []).map((modulo, index) => ({
+      proyecto_id: proyectoId,
+      slug: modulo.slug ?? null,
+      nombre: modulo.nombre,
+      grupo: modulo.grupo ?? null,
+      descripcion: modulo.descripcion ?? null,
+      etapa: modulo.etapa ?? "por_desarrollar",
+      fecha_inicio: modulo.fecha_inicio ?? null,
+      fecha_fin: modulo.fecha_fin ?? null,
+      orden: modulo.orden ?? index,
+    }))
+  );
+
+  const documentoRows = [];
+  for (const [index, documento] of (documentosConfig.documentos ?? []).entries()) {
+    const archivoUrl = documento.archivo_path
+      ? await uploadFile(clientSlug, clientDir, documento.archivo_path)
+      : documento.archivo_url ?? null;
+
+    documentoRows.push({
+      proyecto_id: proyectoId,
+      nombre: documento.nombre,
+      descripcion: documento.descripcion ?? null,
+      archivo_path: documento.archivo_path ?? null,
+      archivo_url: archivoUrl,
+      orden: documento.orden ?? index,
+    });
+  }
+
+  await insertRows("proyecto_documentos", documentoRows);
 
   console.log(`Synced ${clientSlug}: ${proyecto.nombre}`);
 };

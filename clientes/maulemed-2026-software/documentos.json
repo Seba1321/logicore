@@ -1,0 +1,18 @@
+{
+  "documentos": [
+    {
+      "nombre": "Acuerdo de nivel de servicio (SLA)",
+      "descripcion": "SLA-MAULEMED-001: disponibilidad, soporte, respaldo y tratamiento de datos de la plataforma en producción.",
+      "archivo_path": "documentos/sla-maulemed-001.pdf",
+      "archivo_url": null,
+      "orden": 0
+    },
+    {
+      "nombre": "Documento de requisitos",
+      "descripcion": "Requisitos funcionales del sistema y alcance acordado.",
+      "archivo_path": "documentos/requisitos-maulemed.pdf",
+      "archivo_url": null,
+      "orden": 1
+    }
+  ]
+}

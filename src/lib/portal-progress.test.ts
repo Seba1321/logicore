@@ -42,12 +42,16 @@ const makeProject = (tareas: PortalTask[]): PortalProject => ({
   nombre: "Proyecto",
   descripcion: null,
   estado: "en_desarrollo",
+  tipo: "levantamiento",
+  sistema_url: null,
   fecha_inicio: "2026-06-08",
   fecha_fin: "2026-08-14",
   updated_at: null,
   tareas,
   procesos: [],
   bpmn: [],
+  modulos: [],
+  documentos: [],
 });
 
 describe("parsePortalDate", () => {

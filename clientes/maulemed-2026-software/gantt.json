@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "periodo": {
+    "fecha_inicio": "2026-11-23",
+    "fecha_fin": "2027-02-24",
+    "zona_horaria": "America/Santiago"
+  },
+  "calculo_avance": {
+    "metodo": "promedio_ponderado",
+    "formula": "sum(tarea.progreso * tarea.peso) / sum(tarea.peso)",
+    "nota": "Plan de trabajo de 13 semanas (Plan_Trabajo_MauleMed, noviembre 2026). Cada semana son 5 días hábiles: los feriados legales (8-dic, 25-dic, 1-ene) no cuentan como tiempo productivo. El portal muestra el avance según calendario."
+  },
+  "tareas": [
+    {
+      "id_git": "correcciones-criticas",
+      "fase": "Correcciones y organización",
+      "titulo": "Semana 1 · Correcciones críticas y arranque técnico",
+      "descripcion": "Guardas de estado en solicitudes, órdenes, traspasos y recepciones; idempotencia en movimientos de stock y pruebas de doble envío.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-11-23",
+      "fecha_fin": "2026-11-27",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 1,
+      "dependencias": []
+    },
+    {
+      "id_git": "sociedades-permisos",
+      "fase": "Correcciones y organización",
+      "titulo": "Semana 2 · Sociedades, permisos y auditoría",
+      "descripcion": "Las 15 razones sociales con sucursales y centros de costo, matriz de roles y autorizaciones, bitácora y reunión técnica RIS/Codesud.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2026-11-30",
+      "fecha_fin": "2026-12-04",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 2,
+      "dependencias": [
+        "correcciones-criticas"
+      ]
+    },
+    {
+      "id_git": "catalogos-inventario",
+      "fase": "Abastecimiento",
+      "titulo": "Semana 3 · Catálogos, proveedores e inventario",
+      "descripcion": "Maestros de productos y proveedores, bodegas, lotes y vencimientos, umbrales de stock editables y factibilidad de Codesud.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2026-12-07",
+      "fecha_fin": "2026-12-14",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 3,
+      "dependencias": [
+        "sociedades-permisos"
+      ]
+    },
+    {
+      "id_git": "solicitudes-ordenes",
+      "fase": "Abastecimiento",
+      "titulo": "Semana 4 · Solicitudes y órdenes de compra",
+      "descripcion": "Aprobación por monto y tipo de compra, motivos de rechazo, transiciones autorizadas y filtros por sociedad, sucursal y período.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-12-15",
+      "fecha_fin": "2026-12-21",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 4,
+      "dependencias": [
+        "catalogos-inventario"
+      ]
+    },
+    {
+      "id_git": "recepciones-traspasos",
+      "fase": "Abastecimiento",
+      "titulo": "Semana 5 · Recepciones, traspasos y préstamos",
+      "descripcion": "Recepciones parciales y con incidencia, cierre sin dobles movimientos, traspasos y préstamos; demostración del circuito completo.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2026-12-22",
+      "fecha_fin": "2026-12-29",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 5,
+      "dependencias": [
+        "solicitudes-ordenes"
+      ]
+    },
+    {
+      "id_git": "facturas-pagos",
+      "fase": "Finanzas y preparación clínica",
+      "titulo": "Semana 6 · Facturas y pagos; preparación clínica",
+      "descripcion": "Factura de proveedor por ítem ligada a la orden, imputación por sociedad y centro de costo, pagos parciales y modelo de datos RIS.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2026-12-30",
+      "fecha_fin": "2027-01-06",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 6,
+      "dependencias": [
+        "recepciones-traspasos"
+      ]
+    },
+    {
+      "id_git": "presupuesto-multidimensional",
+      "fase": "Finanzas y preparación clínica",
+      "titulo": "Semana 7 · Presupuesto multidimensional (HU-W-050)",
+      "descripcion": "Presupuesto por razón social, sucursal, centro de costo y línea, integrado con órdenes y facturas.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2027-01-07",
+      "fecha_fin": "2027-01-13",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 7,
+      "dependencias": [
+        "facturas-pagos"
+      ]
+    },
+    {
+      "id_git": "ingresos-reporteria",
+      "fase": "Finanzas y preparación clínica",
+      "titulo": "Semana 8 · Ingresos, cobranza y reportería histórica",
+      "descripcion": "Libro de ingresos, recaudación y cuentas por cobrar; comparación y exportación histórica del tablero.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2027-01-14",
+      "fecha_fin": "2027-01-20",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 8,
+      "dependencias": [
+        "presupuesto-multidimensional"
+      ]
+    },
+    {
+      "id_git": "produccion-clinica",
+      "fase": "Integraciones clínicas",
+      "titulo": "Semana 9 · Producción clínica RIS/PACS",
+      "descripcion": "Prestaciones por modalidad, equipo, sucursal, sociedad y médico, conciliadas contra los reportes de MauleMed.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2027-01-21",
+      "fecha_fin": "2027-01-27",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 9,
+      "dependencias": [
+        "ingresos-reporteria"
+      ]
+    },
+    {
+      "id_git": "no-show",
+      "fase": "Integraciones clínicas",
+      "titulo": "Semana 10 · No show desde agenda y eventos RIS",
+      "descripcion": "Tasa de inasistencia con reglas acordadas, sin contar canceladas ni reagendadas, contrastada con casos reales.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2027-01-28",
+      "fecha_fin": "2027-02-03",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 10,
+      "dependencias": [
+        "produccion-clinica"
+      ]
+    },
+    {
+      "id_git": "extraccion-codesud",
+      "fase": "Integraciones clínicas",
+      "titulo": "Semana 11 · Extracción Codesud e integración",
+      "descripcion": "Extracción incremental automatizada con reintentos, bitácora y alertas; demostración integrada.",
+      "estado": "pendiente",
+      "responsable": "Methodical",
+      "fecha_inicio": "2027-02-04",
+      "fecha_fin": "2027-02-10",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 11,
+      "dependencias": [
+        "no-show"
+      ]
+    },
+    {
+      "id_git": "pruebas-marcha-blanca",
+      "fase": "Aceptación y puesta en producción",
+      "titulo": "Semana 12 · Pruebas integrales y marcha blanca",
+      "descripcion": "Regresión completa, pruebas de seguridad, rendimiento y respaldo, y marcha blanca guiada con usuarios clave.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2027-02-11",
+      "fecha_fin": "2027-02-17",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 12,
+      "dependencias": [
+        "extraccion-codesud"
+      ]
+    },
+    {
+      "id_git": "capacitacion-entrega",
+      "fase": "Aceptación y puesta en producción",
+      "titulo": "Semana 13 · Capacitación, estabilización y entrega",
+      "descripcion": "Capacitación por área, manuales, despliegue productivo y acta de puesta en producción.",
+      "estado": "pendiente",
+      "responsable": "Cliente + Methodical",
+      "fecha_inicio": "2027-02-18",
+      "fecha_fin": "2027-02-24",
+      "progreso": 0,
+      "peso": 1,
+      "orden": 13,
+      "dependencias": [
+        "pruebas-marcha-blanca"
+      ]
+    }
+  ]
+}

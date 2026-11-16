@@ -1,4 +1,4 @@
-import type { PortalProcess, PortalProject, PortalTask } from "@/lib/supabase";
+import type { ModuloEtapa, PortalModulo, PortalProcess, PortalProject, PortalTask } from "@/lib/supabase";
 
 // Modelo de avance del portal: el portal refleja SOLO el plan (calendario).
 // No existe avance "real" reportado ni estados negativos de cara al cliente:
@@ -139,6 +139,25 @@ export const deriveProcessStage = (process: PortalProcess): ProcessStage => {
   if ((process.hallazgos ?? []).length) return "analisis_hammer";
   if ((process.bpmn ?? []).length) return "construyendo_bpmn";
   return "por_levantar";
+};
+
+// La etapa de un módulo sigue al plan, igual que el avance: en desarrollo
+// durante su ventana, en pruebas después de ella hasta la entrega del proyecto,
+// entregado al cierre. Un módulo sin ventana muestra la etapa declarada.
+export const deriveModuloEtapa = (
+  modulo: PortalModulo,
+  projectEnd: string | null,
+  today: number
+): ModuloEtapa => {
+  const start = toTime(modulo.fecha_inicio);
+  const end = toTime(modulo.fecha_fin);
+  if (start === null || end === null) return modulo.etapa;
+
+  const projectEndTime = toTime(projectEnd);
+  if (projectEndTime !== null && today > projectEndTime) return "entregado";
+  if (today > end) return "en_pruebas";
+  if (today >= start) return "en_desarrollo";
+  return "por_desarrollar";
 };
 
 // --- Calendario del plan (la "regla" del proyecto) ---
