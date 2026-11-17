@@ -141,3 +141,30 @@ export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseKey);
 export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseKey)
   : null;
+
+export type VitrinaTipo = "web" | "demo" | "video" | "imagen" | "documento";
+export type VitrinaEstado = "en_diseno" | "en_desarrollo" | "en_revision" | "listo";
+
+export type VitrinaItem = {
+  id: number;
+  grupo: string | null;
+  tipo: VitrinaTipo;
+  titulo: string;
+  descripcion: string | null;
+  estado: VitrinaEstado | null;
+  url: string | null;
+  captura_url: string | null;
+  /** Falso cuando el sitio bloquea iframes: solo se ofrece abrir en pestaña nueva. */
+  embeber: boolean;
+  nota: string | null;
+  fecha: string | null;
+};
+
+/** Página pública sin login (/ver/:token) con avances, demos y diseños. */
+export type Vitrina = {
+  cliente: string | null;
+  titulo: string;
+  mensaje: string | null;
+  updated_at: string | null;
+  items: VitrinaItem[];
+};

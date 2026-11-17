@@ -12,8 +12,10 @@ on:
       - main
     paths:
       - "clientes/**"
+      - "vitrinas/**"
       - "scripts/sync-clientes-supabase.mjs"
       - "supabase-empresas-login.sql"
+      - "supabase-vitrinas.sql"
 
 jobs:
   sync:

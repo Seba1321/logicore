@@ -1,0 +1,36 @@
+{
+  "cliente": "Empresa Demo",
+  "titulo": "Avances de tu proyecto",
+  "mensaje": "Aquí vas a encontrar las versiones que vamos publicando. Puedes revisarlas cuando quieras y comentarnos lo que veas.",
+  "activo": true,
+  "items": [
+    {
+      "grupo": "Sitio web",
+      "tipo": "web",
+      "titulo": "Home — propuesta 2",
+      "descripcion": "Nueva portada con el formulario de contacto arriba.",
+      "estado": "en_revision",
+      "url": "https://preview.example.com",
+      "captura_path": "capturas/home.png",
+      "embeber": true,
+      "fecha": "2026-11-17"
+    },
+    {
+      "grupo": "Sistema",
+      "tipo": "demo",
+      "titulo": "Módulo de compras",
+      "descripcion": "Solicitudes y aprobación por monto.",
+      "estado": "en_desarrollo",
+      "url": "https://demo.example.com",
+      "nota": "Usuario: demo · Clave: demo2026",
+      "embeber": false
+    },
+    {
+      "grupo": "Sistema",
+      "tipo": "video",
+      "titulo": "Recorrido del flujo de aprobación",
+      "url": "https://www.loom.com/share/xxxxxxxx",
+      "estado": "listo"
+    }
+  ]
+}

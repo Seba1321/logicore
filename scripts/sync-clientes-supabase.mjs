@@ -5,6 +5,7 @@ import process from "node:process";
 
 const rootDir = process.cwd();
 const clientesDir = path.join(rootDir, "clientes");
+const vitrinasDir = path.join(rootDir, "vitrinas");
 const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const bucketName = process.env.SUPABASE_BPMN_BUCKET ?? "bpmn";
@@ -56,8 +57,14 @@ const ensureBucket = async () => {
   }
 };
 
-const listClientSlugs = async () => {
-  const entries = await fs.readdir(clientesDir, { withFileTypes: true });
+const listSlugs = async (dir) => {
+  let entries;
+  try {
+    entries = await fs.readdir(dir, { withFileTypes: true });
+  } catch (error) {
+    if (error.code === "ENOENT") return [];
+    throw error;
+  }
   return entries
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
@@ -70,15 +77,18 @@ const getContentType = (filePath) => {
   if (filePath.endsWith(".png")) return "image/png";
   if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) return "image/jpeg";
   if (filePath.endsWith(".webp")) return "image/webp";
+  if (filePath.endsWith(".gif")) return "image/gif";
+  if (filePath.endsWith(".mp4")) return "video/mp4";
+  if (filePath.endsWith(".webm")) return "video/webm";
   // Sin esto el SVG saldría como octet-stream y el navegador lo descargaría en
   // vez de pintarlo en un <img>.
   if (filePath.endsWith(".svg")) return "image/svg+xml";
   return "application/octet-stream";
 };
 
-const uploadFile = async (clientSlug, clientDir, archivoPath) => {
-  const localPath = path.join(clientDir, archivoPath);
-  const storagePath = `${clientSlug}/${archivoPath}`.replaceAll("\\", "/");
+const uploadFile = async (storagePrefix, baseDir, archivoPath) => {
+  const localPath = path.join(baseDir, archivoPath);
+  const storagePath = `${storagePrefix}/${archivoPath}`.replaceAll("\\", "/");
   const fileBuffer = await fs.readFile(localPath);
 
   const { error } = await supabase.storage.from(bucketName).upload(storagePath, fileBuffer, {
@@ -303,11 +313,77 @@ const syncClient = async (clientSlug) => {
   console.log(`Synced ${clientSlug}: ${proyecto.nombre}`);
 };
 
+// Una vitrina se identifica por su slug; el token del enlace lo genera la base
+// en el primer insert y el upsert no lo toca, así el enlace enviado al cliente
+// sobrevive a cada sync. No se imprime: los logs del Action son públicos.
+const syncVitrina = async (vitrinaSlug) => {
+  const vitrinaDir = path.join(vitrinasDir, vitrinaSlug);
+  const config = await readJson(path.join(vitrinaDir, "vitrina.json"));
+
+  if (!config.titulo) throw new Error(`Invalid vitrina.json for ${vitrinaSlug}: falta titulo`);
+
+  const { data: vitrina, error: vitrinaError } = await supabase
+    .from("vitrinas")
+    .upsert(
+      {
+        slug: vitrinaSlug,
+        cliente: config.cliente ?? null,
+        titulo: config.titulo,
+        mensaje: config.mensaje ?? null,
+        activo: config.activo ?? true,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "slug" }
+    )
+    .select("id")
+    .single();
+
+  if (vitrinaError) throw vitrinaError;
+
+  const { error: deleteError } = await supabase.from("vitrina_items").delete().eq("vitrina_id", vitrina.id);
+  if (deleteError) throw deleteError;
+
+  const storagePrefix = `vitrinas/${vitrinaSlug}`;
+  const itemRows = [];
+  for (const [index, item] of (config.items ?? []).entries()) {
+    const url = item.archivo_path
+      ? await uploadFile(storagePrefix, vitrinaDir, item.archivo_path)
+      : item.url ?? null;
+    const capturaUrl = item.captura_path
+      ? await uploadFile(storagePrefix, vitrinaDir, item.captura_path)
+      : item.captura_url ?? null;
+
+    itemRows.push({
+      vitrina_id: vitrina.id,
+      grupo: item.grupo ?? null,
+      tipo: item.tipo ?? "web",
+      titulo: item.titulo,
+      descripcion: item.descripcion ?? null,
+      estado: item.estado ?? null,
+      url,
+      captura_url: capturaUrl,
+      embeber: item.embeber ?? true,
+      nota: item.nota ?? null,
+      fecha: item.fecha ?? null,
+      orden: item.orden ?? index,
+    });
+  }
+
+  await insertRows("vitrina_items", itemRows);
+
+  console.log(`Synced vitrina ${vitrinaSlug}: ${itemRows.length} items`);
+};
+
 await ensureBucket();
 
-const requestedClients = process.argv.slice(2);
-const clientSlugs = requestedClients.length ? requestedClients : await listClientSlugs();
+const requested = process.argv.slice(2);
+const clientSlugs = await listSlugs(clientesDir);
+const vitrinaSlugs = await listSlugs(vitrinasDir);
 
-for (const clientSlug of clientSlugs) {
+for (const clientSlug of requested.length ? requested.filter((slug) => clientSlugs.includes(slug)) : clientSlugs) {
   await syncClient(clientSlug);
+}
+
+for (const vitrinaSlug of requested.length ? requested.filter((slug) => vitrinaSlugs.includes(slug)) : vitrinaSlugs) {
+  await syncVitrina(vitrinaSlug);
 }
