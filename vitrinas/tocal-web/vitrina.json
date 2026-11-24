@@ -7,10 +7,19 @@
     {
       "grupo": "Sitio web",
       "tipo": "web",
-      "titulo": "Sitio corporativo Tocal",
+      "titulo": "Sitio corporativo Tocal — propuesta 1",
       "descripcion": "Versión en construcción: inicio, empresa, servicios, proyectos y contacto. Se actualiza sola con cada cambio que publicamos.",
       "estado": "en_desarrollo",
       "url": "https://methodicalchile.github.io/tocal-simple/",
+      "embeber": true
+    },
+    {
+      "grupo": "Sitio web",
+      "tipo": "web",
+      "titulo": "Sitio corporativo Tocal — propuesta 2",
+      "descripcion": "Otra idea de diseño para el mismo sitio, para comparar con la propuesta 1. Se actualiza sola con cada cambio que publicamos.",
+      "estado": "en_desarrollo",
+      "url": "https://methodicalchile.github.io/tocal-simple/propuesta-2/",
       "embeber": true
     }
   ]
