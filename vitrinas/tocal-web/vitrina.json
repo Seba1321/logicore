@@ -21,6 +21,16 @@
       "estado": "en_desarrollo",
       "url": "https://methodicalchile.github.io/tocal-simple/propuesta-2/",
       "embeber": true
+    },
+    {
+      "grupo": "Sitio web",
+      "tipo": "web",
+      "titulo": "Sitio corporativo Tocal — propuesta 3",
+      "descripcion": "Diseño tipo ficha técnica: video de obras con su ficha, mapa 3D de Chile con las 40 obras, fichas de obra y solicitud de cotización. Se actualiza sola con cada cambio que publicamos.",
+      "estado": "en_desarrollo",
+      "url": "https://methodicalchile.github.io/tocal-simple/propuesta-3/",
+      "embeber": true,
+      "fecha": "2026-11-27"
     }
   ]
 }
